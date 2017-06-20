@@ -85,7 +85,7 @@ class NetworkUtilities(object):
         def date_filter(x):
             return self.date_filter_(x[0], "0000-00-00", end_date)
 
-        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x)).cache()
+        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(date_filter)
         '''    
         .filter(lambda x:x[4] == 'F')
     

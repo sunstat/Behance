@@ -9,34 +9,24 @@ import os, sys
 import operator
 
 
+
 '''
-import from Utility 
+global directory 
 '''
-from NetworkUtility import init_spark
-from NetworkUtility import extractNeighborsFromUsersNetwork
-'''
-import from Utility 
-'''
+behanceDataDir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
+action_file = os.path.join(behanceDataDir, "action", "actionDataTrimNoView-csv")
+owners_file = os.path.join(behanceDataDir, "owners-csv")
 
 
 
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
-run_local  = False
-
-
-
-if run_local:
-    action_file = "/Users/yimsun/PycharmProjects/Behance/TinyData/action/actionDataTrimNoView-csv"
-    owners_file = "/Users/yimsun/PycharmProjects/Behance/TinyData/owners-csv"
-else:
-    behanceDataDir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
-    action_file = os.path.join(behanceDataDir, "action", "actionDataTrimNoView-csv")
-    owners_file = os.path.join(behanceDataDir, "owners-csv")
+from NetworkUtilities import  NetworkUtilities
 
 
 
 
-sc, sqlContext = init_spark('build Cycle', 40)
 
-print "gogogo"
-extractNeighborsFromUsersNetwork(sc, '2016-06-30')
+if __name__ == "__main__":
+    utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config')
+    followMap, uidSet = utilities.extract_neighbors_from_users_network()
+
+    

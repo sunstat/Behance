@@ -59,7 +59,10 @@ class NetworkUtilities(object):
 
     def extract_neighbors_from_users_network(self):
         end_date = self.arguments_dict['end_day']
+        print("===================================")
         print(end_date)
+        print("===================================")
+        print("===================================")
         def date_filter(x):
             return self.date_filter_(x[0], "0000-00-00", end_date)
 

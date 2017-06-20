@@ -19,7 +19,7 @@ if run_local:
 else:
     behanceDataDir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
     action_file = os.path.join(behanceDataDir, "action", "actionDataTrimNoView-csv")
-    owners_file = os.path.join(behanceDataDir, "onwers-csv")
+    owners_file = os.path.join(behanceDataDir, "owners-csv")
 
 
 

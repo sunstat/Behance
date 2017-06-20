@@ -34,6 +34,8 @@ def init_spark(name, max_excutors):
     sqlContext = HiveContext(sc)
     return sc, sqlContext
 
+
+
 def extractParametersFromConfig():
     arguments_arr = []
     with open('config', 'r') as f:
@@ -57,10 +59,6 @@ def dateCompare(date1, date2):
 
 def dateFilter(date, start_date, end_date):
     return dateCompare(start_date, date) and dateCompare(date, end_date)
-
-
-
-
 
 
 
@@ -124,7 +122,7 @@ def handleUidPid(end_date, uidSet):
     build field map 
     '''
 
-    rdd_owners = sc.textFile(owners_file).map(lambda x: x.split(',')).cache()
+    rdd_owners = sc.textFile(owners_file).map(lambda x: x.split(',')).filter(lambda x: date_filter_(x)).cache()
 
     '''
     rdd_owners = sc.textFile(owners_file).map(lambda x:x.split(',')).filter(lambda x: date_filter_(x))\
@@ -144,13 +142,6 @@ def handleUidPid(end_date, uidSet):
     owners_map = rdd_owners.map(lambda x: (x[0],x[1])).collectAsMap()
 
     sc.stop()
-
-
-def containedInAuthorCycle(owner, ownerSet):
-    return owner in ownerSet
-
-
-
 
 
 

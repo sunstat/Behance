@@ -74,9 +74,10 @@ def extractNeighborsFromUsersNetwork(sc, end_date):
     def date_filter_(x):
         return dateFilter(x[0], "0000-00-00", end_date)
 
-    rdd = sc.textFile(action_file)
+    rdd = sc.textFile(action_file).map(lambda x:x.split(',')).filter(lambda x : date_filter_(x))
+
     '''    
-    .map(lambda x:x.split(',')).filter(lambda x : date_filter_(x)).filter(lambda x:x[4] == 'F')\
+        .filter(lambda x:x[4] == 'F')\
         .map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a,b : a+b).cache()
     '''
     print (rdd.take(5))

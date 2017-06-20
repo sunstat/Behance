@@ -57,19 +57,17 @@ class NetworkUtilities(object):
         self.arguments_dict = {}
         self.arguments_dict['end_day'] = arguments_arr[0]
 
-
-
     def extract_neighbors_from_users_network(self):
         end_date = self.arguments_dict['end_day']
-
+        print(end_date)
         def date_filter(x):
             return self.date_filter_(x[0], "0000-00-00", end_date)
 
-        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x)).filter(lambda x:x[4] == 'F')\
+        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x)).filter(lambda x:x[4] == 'F')
+        '''
             .map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a,b : a+b).cache()
         '''
         print (rdd.take(5))
-        '''
         follow_map = rdd.collectAsMap()
         uid_set = set()
         count=0

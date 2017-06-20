@@ -85,6 +85,8 @@ def extractNeighborsFromUsersNetwork(end_date):
         uidSet.add(key)
         uidSet |= set(value)
 
+
+    sc.stop()
     return followMap, uidSet
 
 '''
@@ -142,6 +144,8 @@ def handleUidPid(end_date, uidSet):
     """
     owner file
     """
+    
+    sc.stop()
 
 
 def containedInAuthorCycle(owner, ownerSet):

@@ -51,28 +51,27 @@ class NetworkUtilities(object):
         self.sc, self.sqlContext = self.init_spark_(program_name, max_executors)
         self.config_file = config_file
 
-
-    def extract_neighbors_from_users_network(self, sc, end_date):
+    def extract_neighbors_from_users_network(self, end_date):
         def date_filter(x):
             return self.date_filter_(x[0], "0000-00-00", end_date)
 
-        rdd = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x)).filter(lambda x:x[4] == 'F')\
+        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x)).filter(lambda x:x[4] == 'F')\
             .map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a,b : a+b).cache()
         '''
         print (rdd.take(5))
         '''
-        followMap = rdd.collectAsMap()
-        uidSet = set()
-        count = 0
+        follow_map = rdd.collectAsMap()
+        uid_set = set()
+        count=0
         for key, value in followMap.items():
             count+=1
             if count<5:
                 print('key is {} and corresponding value is {}'.format(key, value))
-            uidSet.add(key)
-            uidSet |= set(value)
-        return followMap, uidSet
+            uid_set.add(key)
+            uid_set |= set(value)
+        return follow_map, uid_set
 
-    def handle_uid_pid(self, sc, end_date, uid_set):
+    def handle_uid_pid(self, end_date, uid_set):
         '''
         help functions
         '''
@@ -85,17 +84,17 @@ class NetworkUtilities(object):
             return (x, count)
 
         def filter_uid_inCycle_(x):
-            return x[2] in uidSet_broad
+            return x[2] in uid_set_broad
 
-        count = sc.accumulator(1)
+        count = self.sc.accumulator(1)
 
-        uid_set_broad = sc.broadcast(uid_set)
+        uid_set_broad = self.sc.broadcast(uid_set)
 
         '''
         build field map 
         '''
 
-        rdd_owners = sc.textFile(self.owners_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x)).cache()
+        rdd_owners = self.sc.textFile(self.owners_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x)).cache()
 
         '''
         rdd_owners = sc.textFile(owners_file).map(lambda x:x.split(',')).filter(lambda x: date_filter_(x))\
@@ -112,5 +111,6 @@ class NetworkUtilities(object):
 
         owners_map = rdd_owners.map(lambda x: (x[0], x[1])).collectAsMap()
 
-
+    def close_utilities(self):
+        self.sc.stop()
 

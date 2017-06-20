@@ -39,4 +39,4 @@ else:
 sc, sqlContext = init_spark('build Cycle', 40)
 
 print "gogogo"
-a,b = extractNeighborsFromUsersNetwork(sc, '2016-06-30')
+extractNeighborsFromUsersNetwork(sc, '2016-06-30')

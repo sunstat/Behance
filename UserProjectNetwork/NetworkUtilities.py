@@ -95,6 +95,7 @@ class NetworkUtilities(object):
             .map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a,b : a+b).cache()
         '''
         print (rdd.take(5))
+        print (date_filter(rdd.take(5)[0]))
 
         follow_map = rdd.collectAsMap()
         uid_set = set()

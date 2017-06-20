@@ -3,6 +3,10 @@
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
+from NetworkUtility import extractNeighborsFromUsersNetwork
+
+
+
 import pyspark.sql.functions as F
 from pyspark.sql.types import StructField, StructType, StringType, LongType, DoubleType, IntegerType
 import os, sys
@@ -35,5 +39,4 @@ def init_spark(name, max_excutors):
     return sc, sqlContext
 
 
-
-class BuildNetwork(end_day):
+a,b = extractNeighborsFromUsersNetwork('2016-06-30')

@@ -70,7 +70,6 @@ def extractNeighborsFromUsersNetwork(end_date):
     def date_filter_(x):
         return dateFilter(x[0], "0000-00-00", end_date)
 
-    sc, sqlContex = init_spark('userID', 40)
     rdd = sc.textFile(action_file).map(lambda x:x.split(',')).filter(lambda x : date_filter_(x)).filter(lambda x:x[4] == 'F')\
         .map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a,b : a+b).cache()
     followMap = rdd.collectAsMap()
@@ -84,7 +83,6 @@ def extractNeighborsFromUsersNetwork(end_date):
         uidSet |= set(value)
 
 
-    sc.stop()
     return followMap, uidSet
 
 '''
@@ -164,8 +162,10 @@ if __name__ == "__main__":
     arguements_arr = extractParametersFromConfig()
     end_day = arguements_arr[0]
     print end_day
+    sc, sqlContex = init_spark('userID', 40)
     followMap, uidSet = extractNeighborsFromUsersNetwork(end_day)
-    handleUidPid(end_day, uidSet)
+    sc.stop()
+    #handleUidPid(end_day, uidSet)
 
 
 

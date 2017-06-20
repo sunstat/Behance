@@ -50,12 +50,23 @@ class NetworkUtilities(object):
         self.owner_file = owner_file
         self.sc, self.sqlContext = self.init_spark_(program_name, max_executors)
         self.config_file = config_file
+
+        print("==============================")
+        print("now building the utilities\n")
+        print("actionfile is {}\n".format(self.action_file))
+        print("owners_file is {}\n".format(self.owner_file))
+        print("==============================")
+
         '''
         arguments dictionary
         '''
         arguments_arr = self.extract_parameters_()
-        self.arguments_dict = {}
+        self.arguments_dict = dict()
         self.arguments_dict['end_day'] = arguments_arr[0]
+
+    '''
+    extract neighbors in user network and uids set which involved in the network built 
+    '''
 
     def extract_neighbors_from_users_network(self):
         end_date = self.arguments_dict['end_day']
@@ -66,8 +77,11 @@ class NetworkUtilities(object):
         def date_filter(x):
             return self.date_filter_(x[0], "0000-00-00", end_date)
 
-        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x)).filter(lambda x:x[4] == 'F')
-        '''
+        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(','))\
+
+        '''       
+        .filter(lambda x: date_filter(x)).filter(lambda x:x[4] == 'F')
+    
             .map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a,b : a+b).cache()
         '''
         print (rdd.take(5))
@@ -82,6 +96,10 @@ class NetworkUtilities(object):
             uid_set |= set(value)
         return follow_map, uid_set
 
+
+    '''
+    extract uid, pid and fields map 
+    '''
     def handle_uid_pid(self, uid_set):
         '''
         help functions

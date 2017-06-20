@@ -124,27 +124,25 @@ def handleUidPid(end_date, uidSet):
     build field map 
     '''
 
+    rdd_owners = sc.textFile(owners_file).map(lambda x: x.split(',')).cache()
+
+    '''
     rdd_owners = sc.textFile(owners_file).map(lambda x:x.split(',')).filter(lambda x: date_filter_(x))\
         .filter(filterUidInCycle_).cache()
+    '''
 
     print(rdd_owners.take(5))
 
 
-    fieldsMap = rdd_owners.flatMap(lambda x: (x[3],x[4],x[5])).map(mapFromFieldToCount_).collectAsMap()
-    sort_fieldsMap = sorted(fieldsMap.items(), key=operator.itemgetter(1))
-    '''
-    write to intermediate file
-    '''
-
-    '''
-    pid_file
-    '''
+    fields_map = rdd_owners.flatMap(lambda x: (x[3],x[4],x[5])).map(mapFromFieldToCount_).collectAsMap()
 
 
     """
-    owner file
+    Pid Uid pair in owner file
     """
-    
+
+    owners_map = rdd_owners.map(lambda x: (x[0],x[1])).collectAsMap()
+
     sc.stop()
 
 

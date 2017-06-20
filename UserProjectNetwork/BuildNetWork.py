@@ -3,14 +3,22 @@
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
-from NetworkUtility import extractNeighborsFromUsersNetwork
-
-
-
 import pyspark.sql.functions as F
 from pyspark.sql.types import StructField, StructType, StringType, LongType, DoubleType, IntegerType
 import os, sys
 import operator
+
+
+'''
+import from Utility 
+'''
+from NetworkUtility import init_spark
+from NetworkUtility import extractNeighborsFromUsersNetwork
+'''
+import from Utility 
+'''
+
+
 
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 run_local  = False
@@ -28,18 +36,7 @@ else:
 
 
 
-def init_spark(name, max_excutors):
-    conf = (SparkConf().setAppName(name)
-            .set("spark.dynamicAllocation.enabled", "false")
-            .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
-            .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer"))
-    sc = SparkContext(conf=conf)
-    sc.setLogLevel('ERROR')
-    sqlContext = HiveContext(sc)
-    return sc, sqlContext
-
-
-
-
 sc, sqlContext = init_spark('build Cycle', 40)
-a,b = extractNeighborsFromUsersNetwork(sc, '2016-06-30')
+
+
+#a,b = extractNeighborsFromUsersNetwork(sc, '2016-06-30')

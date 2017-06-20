@@ -110,7 +110,6 @@ def handleUidPid(end_date, uidSet):
 
 
 
-    sc, sqlContex = init_spark('owner', 40)
     count = sc.accumulator(1)
 
     uidSet_broad = sc.broadcast(uidSet)
@@ -139,7 +138,6 @@ def handleUidPid(end_date, uidSet):
 
     owners_map = rdd_owners.map(lambda x: (x[0],x[1])).collectAsMap()
 
-    sc.stop()
 
 
 
@@ -165,7 +163,7 @@ if __name__ == "__main__":
     sc, sqlContex = init_spark('userID', 40)
     followMap, uidSet = extractNeighborsFromUsersNetwork(end_day)
     sc.stop()
-    #handleUidPid(end_day, uidSet)
+    handleUidPid(end_day, uidSet)
 
 
 

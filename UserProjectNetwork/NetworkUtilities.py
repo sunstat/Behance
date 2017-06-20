@@ -77,10 +77,10 @@ class NetworkUtilities(object):
         def date_filter(x):
             return self.date_filter_(x[0], "0000-00-00", end_date)
 
-        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(','))\
+        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x))
 
-        '''       
-        .filter(lambda x: date_filter(x)).filter(lambda x:x[4] == 'F')
+        '''    
+        .filter(lambda x:x[4] == 'F')
     
             .map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a,b : a+b).cache()
         '''

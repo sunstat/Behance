@@ -41,8 +41,8 @@
       <file leaf-file-name="NetworkUtilities.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="133" column="0" lean-forward="true" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+            <state relative-caret-position="353">
+              <caret line="79" column="109" lean-forward="true" selection-start-line="79" selection-start-column="109" selection-end-line="79" selection-end-column="109" />
               <folding>
                 <element signature="e#79#122#0" expanded="true" />
               </folding>
@@ -661,8 +661,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="133" column="0" lean-forward="true" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+        <state relative-caret-position="353">
+          <caret line="79" column="109" lean-forward="true" selection-start-line="79" selection-start-column="109" selection-end-line="79" selection-end-column="109" />
           <folding>
             <element signature="e#79#122#0" expanded="true" />
           </folding>

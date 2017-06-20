@@ -79,6 +79,9 @@ def extractNeighborsFromUsersNetwork(sc, end_date):
 
     rdd = sc.textFile(action_file).map(lambda x:x.split(',')).filter(lambda x : date_filter_(x)).filter(lambda x:x[4] == 'F')\
         .map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a,b : a+b).cache()
+
+    print (rdd.take(5))
+    '''
     followMap = rdd.collectAsMap()
     uidSet = set()
     count = 0
@@ -89,8 +92,9 @@ def extractNeighborsFromUsersNetwork(sc, end_date):
         uidSet.add(key)
         uidSet |= set(value)
 
-
+    
     return followMap, uidSet
+    '''
 
 '''
 build fields map 
@@ -112,9 +116,6 @@ def handleUidPid(sc, end_date, uidSet):
 
     def filterUidInCycle_(x):
         return x[2] in uidSet_broad
-
-
-
 
 
     count = sc.accumulator(1)
@@ -144,16 +145,6 @@ def handleUidPid(sc, end_date, uidSet):
     """
 
     owners_map = rdd_owners.map(lambda x: (x[0],x[1])).collectAsMap()
-
-
-
-
-
-
-def collectOwnersInTheCylce():
-    pass
-
-
 
 
 

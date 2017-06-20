@@ -22,7 +22,9 @@ else:
     owners_file = os.path.join(behanceDataDir, "owners-csv")
 
 
-
+'''
+help functions
+'''
 
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
@@ -60,13 +62,18 @@ def dateCompare(date1, date2):
 def dateFilter(date, start_date, end_date):
     return dateCompare(start_date, date) and dateCompare(date, end_date)
 
+'''
+end of help functions 
+'''
+
+
 
 
 
 '''
 extract users
 '''
-def extractNeighborsFromUsersNetwork(end_date):
+def extractNeighborsFromUsersNetwork(sc, end_date):
     def date_filter_(x):
         return dateFilter(x[0], "0000-00-00", end_date)
 
@@ -89,7 +96,7 @@ def extractNeighborsFromUsersNetwork(end_date):
 build fields map 
 '''
 
-def handleUidPid(end_date, uidSet):
+def handleUidPid(sc, end_date, uidSet):
     '''
     help functions
     '''

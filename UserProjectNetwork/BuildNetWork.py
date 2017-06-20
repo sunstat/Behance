@@ -42,4 +42,4 @@ def init_spark(name, max_excutors):
 
 
 sc, sqlContext = init_spark('build Cycle', 40)
-a,b = extractNeighborsFromUsersNetwork('2016-06-30')
+a,b = extractNeighborsFromUsersNetwork(sc, '2016-06-30')

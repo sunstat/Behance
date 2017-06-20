@@ -168,9 +168,9 @@ if __name__ == "__main__":
     end_day = arguements_arr[0]
     print end_day
     sc, sqlContex = init_spark('userID', 40)
-    followMap, uidSet = extractNeighborsFromUsersNetwork(end_day)
+    followMap, uidSet = extractNeighborsFromUsersNetwork(sc, end_day)
     sc.stop()
-    handleUidPid(end_day, uidSet)
+    #handleUidPid(end_day, uidSet)
 
 
 

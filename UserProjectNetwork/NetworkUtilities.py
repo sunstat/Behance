@@ -85,18 +85,16 @@ class NetworkUtilities(object):
         def date_filter(x):
             return self.date_filter_(x[0], "0000-00-00", end_date)
 
-        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(','))
-        '''    
-        .filter(lambda x: date_filter(x)).cache()
-        '''
+        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x)).cache()
         '''    
         .filter(lambda x:x[4] == 'F')
     
             .map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a,b : a+b).cache()
         '''
         print (rdd.take(5))
-        print (date_filter(rdd.take(5)[0]))
 
+
+        '''
         follow_map = rdd.collectAsMap()
         uid_set = set()
         count=0
@@ -107,6 +105,7 @@ class NetworkUtilities(object):
             uid_set.add(key)
             uid_set |= set(value)
         return follow_map, uid_set
+        '''
 
 
     '''

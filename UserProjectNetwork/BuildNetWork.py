@@ -24,6 +24,6 @@ from NetworkUtilities import  NetworkUtilities
 
 if __name__ == "__main__":
     utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config')
-    followMap, uidSet = utilities.extract_neighbors_from_users_network()
+    utilities.extract_neighbors_from_users_network()
 
     utilities.close_utilities()

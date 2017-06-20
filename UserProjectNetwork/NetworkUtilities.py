@@ -50,8 +50,18 @@ class NetworkUtilities(object):
         self.owner_file = owner_file
         self.sc, self.sqlContext = self.init_spark_(program_name, max_executors)
         self.config_file = config_file
+        '''
+        arguments dictionary
+        '''
+        arguments_arr = self.extract_parameters_()
+        self.arguments_dict = {}
+        self.arguments_dict['end_day'] = arguments_arr[0]
 
-    def extract_neighbors_from_users_network(self, end_date):
+
+
+    def extract_neighbors_from_users_network(self):
+        end_date = self.arguments_dict['end_day']
+
         def date_filter(x):
             return self.date_filter_(x[0], "0000-00-00", end_date)
 
@@ -63,7 +73,7 @@ class NetworkUtilities(object):
         follow_map = rdd.collectAsMap()
         uid_set = set()
         count=0
-        for key, value in followMap.items():
+        for key, value in follow_map.items():
             count+=1
             if count<5:
                 print('key is {} and corresponding value is {}'.format(key, value))
@@ -71,10 +81,12 @@ class NetworkUtilities(object):
             uid_set |= set(value)
         return follow_map, uid_set
 
-    def handle_uid_pid(self, end_date, uid_set):
+    def handle_uid_pid(self, uid_set):
         '''
         help functions
         '''
+        end_date = self.arguments_dict['end_day']
+
         def date_filter(x):
             return self.date_filter_(x[2], "2015-12-31", end_date)
 

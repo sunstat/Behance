@@ -9,6 +9,13 @@ import os, sys
 import operator
 
 
+
+
+behanceDataDir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
+action_file = os.path.join(behanceDataDir, "action", "actionDataTrimNoView-csv")
+owners_file = os.path.join(behanceDataDir, "owners-csv")
+
+
 class NetworkUtilities(object):
     '''
     methods used only within in this class
@@ -78,7 +85,7 @@ class NetworkUtilities(object):
         def date_filter(x):
             return self.date_filter_(x[0], "0000-00-00", end_date)
 
-        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x))
+        rdd = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter(x)).cache()
 
         '''    
         .filter(lambda x:x[4] == 'F')
@@ -86,6 +93,7 @@ class NetworkUtilities(object):
             .map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a,b : a+b).cache()
         '''
         print (rdd.take(5))
+
         follow_map = rdd.collectAsMap()
         uid_set = set()
         count=0
@@ -148,5 +156,6 @@ class NetworkUtilities(object):
 
 
 if __name__ == "__main__":
-
+    utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config')
+    print utilities.date_filter_("2016-01-30", "0000-00-00", "2016-01-10")
 

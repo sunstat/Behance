@@ -191,8 +191,7 @@ class NetworkUtilities(object):
         print(rdd_owners.take(5))
         print(rdd_owners.count())
 
-        fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(lambda x: x).distinct()\
-            .zipWithIndex().collectAsMap()
+        fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(lambda x: x).distinct().zipWithIndex().collectAsMap()
 
         '''
         .map(map_field_to_count_).collectAsMap()
@@ -286,7 +285,7 @@ if __name__ == "__main__":
     print (len(fields_index_map))
 
     user_network = utilities.create_user_network()
-    print(user_network)
+
     pid_map_num_comments, pid_map_num_appreciations, pid_map_popularity = utilities.create_popularity()
 
     utilities.close_utilities()

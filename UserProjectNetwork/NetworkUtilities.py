@@ -101,25 +101,27 @@ class NetworkUtilities(object):
     extract neighbors in user network and uids set which involved in the network built 
     '''
 
+    @staticmethod
+    def date_filer_help_(date1, date2):
+        date1_arr = date1.split("-")
+        date2_arr = date2.split("-")
+        for i in range(len(date1_arr)):
+            if int(date1_arr[i]) < int(date2_arr[i]):
+                return True
+            elif int(date1_arr[i]) > int(date2_arr[i]):
+                return False
+        return True
+
+    @staticmethod
+    def date_filter_(prev_date, date, end_date):
+        return NetworkUtilities.date_filer_help_(prev_date, date) and NetworkUtilities.date_filer_help_(date, end_date)
+
+
     def extract_neighbors_from_users_network(self):
         end_date = self.arguments_dict['end_day']
-        print("===================================")
-        print(end_date)
-        print("===================================")
-        print("===================================")
 
-        def date_filter_(date, end_date):
-            date_end_arr = end_date.split("-")
-            date_arr = date.split("-")
-            for i in range(len(date_arr)):
-                if int(date_arr[i]) < int(date_end_arr[i]):
-                    return True
-                elif int(date_arr[i]) > int(date_end_arr[i]):
-                    return False
-            return True
-
-        rdd = self.sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter_(x[0], end_date)).filter(lambda x: x[4] == 'F') \
-            .map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a, b: a + b).cache()
+        rdd = self.sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkUtilities.date_filter_("0000-00-00", x[0], end_date))\
+            .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], [x[2]])).reduceByKey(lambda a, b: a + b).cache()
         '''
         print (rdd.take(5))
         '''
@@ -159,18 +161,6 @@ class NetworkUtilities(object):
 
         end_date = self.arguments_dict['end_day']
 
-        def date_filter_(date, end_date):
-            def date_filter_help(date, date1):
-                date_arr = date.split("-")
-                date1_arr = date1.split("-")
-                for i in range(len(date_arr)):
-                    if int(date_arr[i]) < int(date1_arr[i]):
-                        return True
-                    elif int(date_arr[i]) > int(date1_arr[i]):
-                        return False
-                return True
-            return date_filter_help("2013-01-01", date) and date_filter_help(date, end_date)
-
         def filter_uid_inCycle_(uid):
             return uid in uid_set_broad.value
 
@@ -181,7 +171,8 @@ class NetworkUtilities(object):
         '''
 
         rdd_owners = self.sc.textFile(self.owners_file).map(lambda x: x.split(','))\
-            .filter(lambda x: date_filter_(x[2], end_date)).filter(lambda x: filter_uid_inCycle_(x[1])).cache()
+            .filter(lambda x: NetworkUtilities.date_filter_("0000-00-00", x[2], end_date))\
+            .filter(lambda x: filter_uid_inCycle_(x[1])).cache()
 
         '''
         rdd_owners = sc.textFile(owners_file).map(lambda x:x.split(',')).filter(lambda x: date_filter_(x))
@@ -226,7 +217,6 @@ class NetworkUtilities(object):
         self.user_network = csr_matrix((num_users, num_users))
         for uid1, uids in self.follow_map.items():
             for uid2 in uids:
-                print self.uid_map_index[uid1], self.uid_map_index[uid2]
                 self.user_network[self.uid_map_index[uid1], self.uid_map_index[uid2]] = 1
         return self.user_network
 
@@ -254,15 +244,16 @@ class NetworkUtilities(object):
         for pid in self.pid_map_index:
             popularity = 0
             if pid in self.pid_map_num_comments:
-                popularity += self.pid_map_num_comments[pid]
+                popularity += self.comment_weight*self.pid_map_num_comments[pid]
             if pid in self.pid_map_num_appreciations:
-                popularity += self.pid_map_num_appreciations[pid]
+                popularity += self.appreciation_weight*self.pid_map_num_appreciations[pid]
             self.pid_map_popularity[pid] = popularity
 
         return self.pid_map_num_comments, self.pid_map_num_appreciations, self.pid_map_popularity
 
     def writeToIntermediateDirectory(self):
         end_date = self.arguments_dict['end_day']
+
         if local_run:
             Process = Popen('./%s %s' % ('createIntermediateDateDirLocally.sh', intermediateResultDir, end_date), shell=True)
         else:
@@ -285,6 +276,7 @@ if __name__ == "__main__":
     print (len(fields_index_map))
 
     user_network = utilities.create_user_network()
+    print(user_network.nonzero())
 
     pid_map_num_comments, pid_map_num_appreciations, pid_map_popularity = utilities.create_popularity()
 

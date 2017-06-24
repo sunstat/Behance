@@ -15,6 +15,8 @@ from subprocess import Popen
 
 local_run = True
 
+
+
 if local_run:
     action_file = "/Users/yimsun/PycharmProjects/Data/TinyData/action/actionDataTrimNoView-csv"
     owners_file = "/Users/yimsun/PycharmProjects/Data/TinyData/owners-csv"
@@ -31,12 +33,12 @@ class NetworkUtilities(object):
     help functions for printing
     '''
 
-
-
     '''
     methods used only within in this class
     '''
 
+
+    @staticmethod
     def init_spark_(self, name, max_excutors):
         conf = (SparkConf().setAppName(name)
                 .set("spark.dynamicAllocation.enabled", "false")
@@ -57,12 +59,14 @@ class NetworkUtilities(object):
     # compare two date strings "2016-12-01"
 
     def __init__(self, action_file, owner_file, program_name, max_executors, config_file, comment_weight, appreciation_weight):
+
         self.action_file = action_file
         self.owners_file = owner_file
-        self.sc, self.sqlContext = self.init_spark_(program_name, max_executors)
+        self.sc, self.sqlContext = NetworkUtilities.init_spark_(program_name, max_executors)
         self.config_file = config_file
         self.comment_weight = comment_weight
         self.appreciation_weight = appreciation_weight
+        NetworkUtilities.shell_dir = "../EditData/ShellEdit"
 
         '''
         properties needed to be filled
@@ -76,7 +80,8 @@ class NetworkUtilities(object):
         self.user_network = None
         self.pid_map_num_comments = None
         self.pid_map_num_appreciations = None
-        self.pid_map_popularity = None
+        self.pid_map_popularity = dict()
+
 
         '''
         properties needed to be filled 
@@ -238,9 +243,9 @@ class NetworkUtilities(object):
             return pid in pid_map_index_broad.value
 
         rdd_pids = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter_(x[0], end_date))\
-            .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).collect()
-        self.pid_map_num_comments = rdd_pids.filter(lambda x: x[4] == 'C').roupByKey().mapValues(len).collectAsMap()
-        self.pid_map_num_appreciations = rdd_pids.filter(lambda x: x[4] == 'A').roupByKey().mapValues(len).collectAsMap()
+            .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
+        self.pid_map_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len).collectAsMap()
+        self.pid_map_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len).collectAsMap()
         for pid in self.pid_map_index:
             popularity = 0
             if pid in self.pid_map_num_comments:
@@ -253,11 +258,27 @@ class NetworkUtilities(object):
 
     def writeToIntermediateDirectory(self):
         end_date = self.arguments_dict['end_day']
-
         if local_run:
-            Process = Popen('./%s %s' % ('createIntermediateDateDirLocally.sh', intermediateResultDir, end_date), shell=True)
+            shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirLocally.sh')
+            process = Popen('./%s %s %s' % (shell_file, intermediateResultDir, end_date, ), shell=True)
         else:
-            Process = Popen('./%s %s' % ('createIntermediateDateDirLocally.sh', intermediateResultDir, end_date), shell=True)
+            shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
+            process = Popen('./%s %s %s' % (shell_file, intermediateResultDir, end_date, ), shell=True)
+        '''
+        self.extract_neighbors_from_users_network()
+        self.handle_uid_pid(self.uid_set)
+        #self.create_user_network()
+        self.create_popularity()
+        '''
+
+
+        '''
+        now writing data to the intermediate direction
+        '''
+
+        '''
+        IOutilities.printDicttoFile(self.follow_map, follow_map-csv)
+        '''
 
 
     def close_utilities(self):
@@ -265,7 +286,10 @@ class NetworkUtilities(object):
 
 
 if __name__ == "__main__":
-    utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config',1 ,2)
+    utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1 ,2)
+    utilities.writeToIntermediateDirectory()
+
+    '''
     follow_map, uid_set, uid_map_index = utilities.extract_neighbors_from_users_network()
 
     print len(follow_map)
@@ -275,9 +299,6 @@ if __name__ == "__main__":
 
     print (len(fields_index_map))
 
-    user_network = utilities.create_user_network()
-    print(user_network.nonzero())
-
     pid_map_num_comments, pid_map_num_appreciations, pid_map_popularity = utilities.create_popularity()
-
+    '''
     utilities.close_utilities()

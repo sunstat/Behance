@@ -10,7 +10,7 @@ from subprocess import Popen
 
 
 class IOutilities(object):
-
+    shell_dir = "../EditData/ShellEdit"
     @staticmethod
     def to_string(x):
         return ",".join([str(y) for y in x])
@@ -29,7 +29,6 @@ class IOutilities(object):
 
     def __init__(self):
         sc, _ = IOutilities.init_spark_('io_example', 2)
-        shell_dir = "../EditData/ShellEdit"
 
     @staticmethod
     def printDict(my_dict, num_elements):
@@ -43,19 +42,37 @@ class IOutilities(object):
                 break
 
     @staticmethod
-    def printDicttoFile(my_dict, local_intermediate_dir, filename, azure_intermediate_dir = None):
-        local_file = os.path.join(local_intermediate_dir, filename)
-        f = open(os.path.join(local_intermediate_dir, filename), 'w')
+    def print_dict_to_file_help(my_dict, filename):
+        f = open(filename, 'w')
         for key, value in my_dict.items():
-            f.write("{},{}\n".format(key, value))
+            f.write("{}".format(key))
+            if isinstance(value, list):
+                f.write("\t")
+                ls = []
+                for value_item in value:
+                    ls.append(value_item)
+                f.write(','.join(ls))
+            else:
+                f.write(",{}".format(value))
+            f.write("\n")
+
+    @staticmethod
+    def print_dict_to_file(my_dict, local_intermediate_dir, filename, azure_intermediate_dir = None):
+        local_file = os.path.join(local_intermediate_dir, filename)
+        delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
+        delete_shell_local = os.path.join(IOutilities.shell_dir, 'deleteLocal.sh')
+        if os.path.exists(local_file):
+            Popen('./%s %s' % (delete_shell_local, local_file,), shell=True)
+        IOutilities.print_dict_to_file_help(my_dict, local_file)
         if azure_intermediate_dir:
+            output_file = os.path.join(azure_intermediate_dir, filename)
+            if os.path.exists(output_file):
+                Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)
             IOutilities.sc.SparkContext(appName="transfering to Azure")
             rdd_dict = IOutilities.sc.textFile(local_file).map(lambda x: x.split(',')).cache()
-            output_file = os.path.join(azure_intermediate_dir, filename)
-            rdd_dict.map(IOutilities.to_string)..saveAsTextFile(output_file)
+            rdd_dict.map(IOutilities.to_string).saveAsTextFile(output_file)
             #now delete the original file
-            shell_file = os.path.join(IOutilities.shell_dir, 'delete.sh')
-            Popen('./%s %s' % (shell_file, local_file,), shell=True)
+            Popen('./%s %s' % (delete_shell_local, local_file,), shell=True)
 
     @staticmethod
     def close():

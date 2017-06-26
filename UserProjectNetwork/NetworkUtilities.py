@@ -39,7 +39,7 @@ class NetworkUtilities(object):
 
 
     @staticmethod
-    def init_spark_(self, name, max_excutors):
+    def init_spark_(name, max_excutors):
         conf = (SparkConf().setAppName(name)
                 .set("spark.dynamicAllocation.enabled", "false")
                 .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
@@ -67,6 +67,9 @@ class NetworkUtilities(object):
         self.comment_weight = comment_weight
         self.appreciation_weight = appreciation_weight
         NetworkUtilities.shell_dir = "../EditData/ShellEdit"
+        NetworkUtilities.local_intermediate_dir = "../IntermediateDir"
+        NetworkUtilities.behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
+        NetworkUtilities.azure_intermediate_dir = os.path.join(NetworkUtilities.behance_data_dir, "IntermediateDir")
 
         '''
         properties needed to be filled
@@ -86,13 +89,6 @@ class NetworkUtilities(object):
         '''
         properties needed to be filled 
         '''
-
-
-        print("==============================")
-        print("now building the utilities\n")
-        print("actionfile is {}\n".format(self.action_file))
-        print("owners_file is {}\n".format(self.owners_file))
-        print("==============================")
 
         '''
         arguments dictionary
@@ -258,27 +254,38 @@ class NetworkUtilities(object):
 
     def writeToIntermediateDirectory(self):
         end_date = self.arguments_dict['end_day']
+        local_dir = os.path.join(NetworkUtilities.local_intermediate_dir, end_date)
         if local_run:
             shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirLocally.sh')
             process = Popen('./%s %s %s' % (shell_file, intermediateResultDir, end_date, ), shell=True)
         else:
             shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
             process = Popen('./%s %s %s' % (shell_file, intermediateResultDir, end_date, ), shell=True)
-        '''
+
         self.extract_neighbors_from_users_network()
         self.handle_uid_pid(self.uid_set)
         #self.create_user_network()
         self.create_popularity()
-        '''
-
 
         '''
         now writing data to the intermediate direction
         '''
-
-        '''
-        IOutilities.printDicttoFile(self.follow_map, follow_map-csv)
-        '''
+        print("now building follow map from uid to uid")
+        if local_run:
+            IOutilities.print_dict_to_file(self.follow_map, local_dir, 'follow_map')
+            IOutilities.print_dict_to_file(self.uid_map_index, local_dir, 'uid_map_index')
+            IOutilities.print_dict_to_file(self.owners_map, local_dir, 'owners_map')
+            IOutilities.print_dict_to_file(self.pid_map_index, local_dir, 'pid_map_index')
+            IOutilities.print_dict_to_file(self.pid_map_popularity, local_dir, 'pid_map_popularity')
+        else:
+            IOutilities.print_dict_to_file(self.follow_map, local_dir, 'follow_map',
+                                           os.path.join(NetworkUtilities.azure_intermediate_dir,end_date))
+            IOutilities.print_dict_to_file(self.uid_map_index, local_dir, 'uid_map_index',
+                                           os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
+            IOutilities.print_dict_to_file(self.owners_map, local_dir, 'owners_map',
+                                           os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
+            IOutilities.print_dict_to_file(self.pid_map_popularity, local_dir, 'pid_map_popularity',
+                                           os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
 
 
     def close_utilities(self):

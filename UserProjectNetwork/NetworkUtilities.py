@@ -11,10 +11,7 @@ from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
 
-
-
-local_run = True
-
+local_run = False
 
 
 if local_run:
@@ -85,7 +82,6 @@ class NetworkUtilities(object):
         self.pid_map_num_appreciations = None
         self.pid_map_popularity = dict()
 
-
         '''
         properties needed to be filled 
         '''
@@ -116,7 +112,6 @@ class NetworkUtilities(object):
     @staticmethod
     def date_filter_(prev_date, date, end_date):
         return NetworkUtilities.date_filer_help_(prev_date, date) and NetworkUtilities.date_filer_help_(date, end_date)
-
 
     def extract_neighbors_from_users_network(self):
         end_date = self.arguments_dict['end_day']
@@ -156,6 +151,7 @@ class NetworkUtilities(object):
     extract uid, pid and fields map 
     '''
     def handle_uid_pid(self, uid_set):
+
         '''
         help functions
         '''
@@ -189,7 +185,7 @@ class NetworkUtilities(object):
         .map(map_field_to_count_).collectAsMap()
         '''
 
-        IOutilities.printDict(fields_map_index, 5)
+        IOutilities.print_dict(fields_map_index, 5)
         print ("field_map_index is with size {}".format(len(fields_map_index)))
 
         """
@@ -202,10 +198,14 @@ class NetworkUtilities(object):
         #pid map to index
         index = 0
         pid_map_index = dict()
-        for uid, pid in owners_map.items():
+        for pid, uid in owners_map.items():
             if pid not in pid_map_index:
+                #print pid, index
                 pid_map_index[pid] = index
                 index += 1
+
+
+        IOutilities.print_dict(pid_map_index, 20)
 
         self.fields_map_index = fields_map_index
         self.owners_map = owners_map
@@ -250,9 +250,10 @@ class NetworkUtilities(object):
                 popularity += self.appreciation_weight*self.pid_map_num_appreciations[pid]
             self.pid_map_popularity[pid] = popularity
 
+        IOutilities.print_dict(self.pid_map_num_appreciations, 20)
         return self.pid_map_num_comments, self.pid_map_num_appreciations, self.pid_map_popularity
 
-    def writeToIntermediateDirectory(self):
+    def write_to_intermediate_directory(self):
         end_date = self.arguments_dict['end_day']
         local_dir = os.path.join(NetworkUtilities.local_intermediate_dir, end_date)
         if local_run:
@@ -286,7 +287,6 @@ class NetworkUtilities(object):
                                            os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
             IOutilities.print_dict_to_file(self.pid_map_popularity, local_dir, 'pid_map_popularity',
                                            os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
-
 
     def close_utilities(self):
         self.sc.stop()

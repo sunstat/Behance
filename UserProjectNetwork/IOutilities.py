@@ -10,7 +10,12 @@ from subprocess import Popen
 
 
 class IOutilities(object):
+    '''
+    static memebers
+    '''
     shell_dir = "../EditData/ShellEdit"
+
+
     @staticmethod
     def to_string(x):
         return ",".join([str(y) for y in x])
@@ -26,12 +31,11 @@ class IOutilities(object):
         sqlContext = HiveContext(sc)
         return sc, sqlContext
 
-
     def __init__(self):
-        sc, _ = IOutilities.init_spark_('io_example', 2)
+        pass
 
     @staticmethod
-    def printDict(my_dict, num_elements):
+    def print_dict(my_dict, num_elements):
         print('the size of the dict is {}'.format(len(my_dict)))
         print('now printing first {} key value pairs of dict passed in'.format(num_elements))
         count = 0
@@ -65,20 +69,15 @@ class IOutilities(object):
             Popen('./%s %s' % (delete_shell_local, local_file,), shell=True)
         IOutilities.print_dict_to_file_help(my_dict, local_file)
         if azure_intermediate_dir:
+            sc, _ = IOutilities.init_spark_('io_example', 2)
             output_file = os.path.join(azure_intermediate_dir, filename)
             if os.path.exists(output_file):
                 Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)
-            IOutilities.sc.SparkContext(appName="transfering to Azure")
-            rdd_dict = IOutilities.sc.textFile(local_file).map(lambda x: x.split(',')).cache()
+            sc.SparkContext(appName="transfering to Azure")
+            rdd_dict = sc.textFile(local_file).map(lambda x: x.split(',')).cache()
             rdd_dict.map(IOutilities.to_string).saveAsTextFile(output_file)
             #now delete the original file
             Popen('./%s %s' % (delete_shell_local, local_file,), shell=True)
-
-    @staticmethod
-    def close():
-        IOutilities.sc.stop()
-
-
-
+            sc.stop()
 
 

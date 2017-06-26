@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EditData/ShellEdit/deleteLocal.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EditData/ShellEdit/createIntermediateDateDirHdfs.sh" afterPath="$PROJECT_DIR$/EditData/ShellEdit/createIntermediateDateDirHdfs.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EditData/ShellEdit/createIntermediateDateDirLocally.sh" afterPath="$PROJECT_DIR$/EditData/ShellEdit/createIntermediateDateDirLocally.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IntermediateDir/2016-06-30/pid_map_index" afterPath="$PROJECT_DIR$/IntermediateDir/2016-06-30/pid_map_index" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IntermediateDir/2016-06-30/pid_map_popularity" afterPath="$PROJECT_DIR$/IntermediateDir/2016-06-30/pid_map_popularity" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserProjectNetwork/IOutilities.py" afterPath="$PROJECT_DIR$/UserProjectNetwork/IOutilities.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" afterPath="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" />
     </list>
@@ -19,11 +18,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="BuildNetWork.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/BuildNetWork.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="21" column="29" lean-forward="false" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="IOutilities.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+            <state relative-caret-position="1360">
+              <caret line="80" column="20" lean-forward="true" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -31,24 +40,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NetworkUtilities.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1042">
-              <caret line="211" column="42" lean-forward="false" selection-start-line="211" selection-start-column="29" selection-end-line="211" selection-end-column="42" />
-              <folding>
-                <element signature="e#79#122#0" expanded="true" />
-              </folding>
+      <file leaf-file-name="pid_map_index" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/pid_map_index">
+          <provider selected="true" editor-type-id="LargeFileEditor">
+            <state relative-caret-position="350">
+              <caret line="292" column="9" lean-forward="false" selection-start-line="292" selection-start-column="9" selection-end-line="292" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pid_map_index" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/pid_map_index">
+      <file leaf-file-name="pid_map_popularity" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/pid_map_popularity">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="5455" column="14" lean-forward="true" selection-start-line="5455" selection-start-column="14" selection-end-line="5455" selection-end-column="14" />
+            <state relative-caret-position="-230174">
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="8" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NetworkUtilities.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4300">
+              <caret line="255" column="39" lean-forward="false" selection-start-line="255" selection-start-column="8" selection-end-line="255" selection-end-column="39" />
+              <folding>
+                <element signature="e#79#122#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -58,6 +76,26 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="truncate.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/EditData/ShellEdit/truncate.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="follow_map" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/follow_map">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -75,6 +113,10 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>date</find>
+      <find>printDict</find>
+      <find>print</find>
+      <find>pid_map_index</find>
+      <find>IOutilities</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -103,9 +145,9 @@
         <option value="$PROJECT_DIR$/UserProjectNetwork/createIntermediateDateDirHdfs.sh" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/createIntermediateDateDirLocally.sh" />
         <option value="$PROJECT_DIR$/EditData/ShellEdit/deleteLocal.sh" />
-        <option value="$PROJECT_DIR$/UserProjectNetwork/IOutilities.py" />
         <option value="$PROJECT_DIR$/EditData/ShellEdit/createIntermediateDateDirLocally.sh" />
         <option value="$PROJECT_DIR$/EditData/ShellEdit/createIntermediateDateDirHdfs.sh" />
+        <option value="$PROJECT_DIR$/UserProjectNetwork/IOutilities.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" />
       </list>
     </option>
@@ -462,7 +504,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TinyData/action/action_data_trim.csv" />
     <entry file="file://$PROJECT_DIR$/EditFIlePyspark/EditData/PySparkEdit/deleteRow.py" />
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/Node.py" />
     <entry file="file://$PROJECT_DIR$/TinyData/action/action_data_20161.csv000" />
@@ -471,13 +512,6 @@
     <entry file="file://$PROJECT_DIR$/EditFIlePyspark/EditData/delete.sh" />
     <entry file="file://$PROJECT_DIR$/EditFIlePyspark/EditData/PySparkEdit/owners.py" />
     <entry file="file://$PROJECT_DIR$/EditFIlePyspark/EditData/PySparkEdit/image-url.py" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TinyData/published_project_data.csv" />
     <entry file="file://$PROJECT_DIR$/TinyData/image-urls-20170321.tsv" />
     <entry file="file://$PROJECT_DIR$/EditFIlePyspark/EditData/PySparkEdit/replaceRow.py" />
@@ -579,24 +613,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/BuildNetWork.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="21" column="29" lean-forward="false" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
-          <folding>
-            <element signature="e#79#122#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EditData/ShellEdit/truncate.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/EditData/PySparkEdit/owners.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -627,14 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/follow_map">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-321995">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -687,34 +695,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/uid_map_index">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5839">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/pid_map_popularity">
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/BuildNetWork.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-56531">
+        <state relative-caret-position="272">
+          <caret line="21" column="29" lean-forward="false" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/uid_map_index">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2104">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/owners_map">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="550">
+          <caret line="76538" column="0" lean-forward="false" selection-start-line="76538" selection-start-column="0" selection-end-line="76538" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EditData/ShellEdit/truncate.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/follow_map">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/pid_map_index">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="350">
+          <caret line="292" column="9" lean-forward="false" selection-start-line="292" selection-start-column="9" selection-end-line="292" selection-end-column="9" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="101" column="0" lean-forward="true" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/pid_map_popularity">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="5455" column="14" lean-forward="true" selection-start-line="5455" selection-start-column="14" selection-end-line="5455" selection-end-column="14" />
+        <state relative-caret-position="-230174">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+        <state relative-caret-position="1360">
+          <caret line="80" column="20" lean-forward="true" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
@@ -723,8 +775,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1042">
-          <caret line="211" column="42" lean-forward="false" selection-start-line="211" selection-start-column="29" selection-end-line="211" selection-end-column="42" />
+        <state relative-caret-position="4300">
+          <caret line="255" column="39" lean-forward="false" selection-start-line="255" selection-start-column="8" selection-end-line="255" selection-end-column="39" />
           <folding>
             <element signature="e#79#122#0" expanded="true" />
           </folding>

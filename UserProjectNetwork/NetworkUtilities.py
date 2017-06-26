@@ -11,7 +11,10 @@ from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
 
+
+
 local_run = False
+
 
 
 if local_run:
@@ -151,7 +154,6 @@ class NetworkUtilities(object):
     extract uid, pid and fields map 
     '''
     def handle_uid_pid(self, uid_set):
-
         '''
         help functions
         '''
@@ -294,7 +296,7 @@ class NetworkUtilities(object):
 
 if __name__ == "__main__":
     utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1 ,2)
-    utilities.writeToIntermediateDirectory()
+    utilities.write_to_intermediate_directory()
 
     '''
     follow_map, uid_set, uid_map_index = utilities.extract_neighbors_from_users_network()

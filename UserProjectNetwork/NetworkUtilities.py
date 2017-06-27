@@ -13,14 +13,14 @@ from subprocess import Popen
 
 
 
-local_run = False
+local_run = True
 
 
 
 if local_run:
     action_file = "/Users/yimsun/PycharmProjects/Data/TinyData/action/actionDataTrimNoView-csv"
     owners_file = "/Users/yimsun/PycharmProjects/Data/TinyData/owners-csv"
-    intermediate_result_dir = '/Users/yimsun/PycharmProjects/Behance/IntermediateDir'
+    intermediate_result_dir = '../IntermediateDir'
 else:
     behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
     action_file = os.path.join(behance_data_dir, "action", "actionDataTrimNoView-csv")
@@ -114,14 +114,15 @@ class NetworkUtilities(object):
         return True
 
     @staticmethod
-    def date_filter_(prev_date, date, end_date):
+    def __date_filter(prev_date, date, end_date):
         return NetworkUtilities.date_filer_help_(prev_date, date) and NetworkUtilities.date_filer_help_(date, end_date)
 
     def extract_neighbors_from_users_network(self):
         end_date = self.arguments_dict['end_day']
 
-        rdd = self.sc.textFile(action_file).map(lambda x: x.split(','))
-
+        rdd = self.sc.textFile(action_file).map(lambda x: x.split(','))\
+            .filter(lambda x: NetworkUtilities.__date_filter("0000-00-00", x[0], end_date))\
+            .filter(lambda x: x[4] == 'F').map(lambda x: (x[1],[x[2]])).reduceByKey(lambda x, y : x+y)
         print (rdd.take(5))
 
         follow_map = rdd.collectAsMap()
@@ -169,13 +170,8 @@ class NetworkUtilities(object):
         '''
 
         rdd_owners = self.sc.textFile(self.owners_file).map(lambda x: x.split(','))\
-            .filter(lambda x: NetworkUtilities.date_filter_("0000-00-00", x[2], end_date))\
+            .filter(lambda x: NetworkUtilities.__date_filter("0000-00-00", x[2], end_date))\
             .filter(lambda x: filter_uid_inCycle_(x[1])).cache()
-
-        '''
-        rdd_owners = sc.textFile(owners_file).map(lambda x:x.split(',')).filter(lambda x: date_filter_(x))
-            .filter(filterUidInCycle_).cache()
-        '''
 
         print(rdd_owners.take(5))
         print(rdd_owners.count())
@@ -224,22 +220,13 @@ class NetworkUtilities(object):
 
     def create_popularity(self):
         end_date = self.arguments_dict['end_day']
-        def date_filter_(date, end_date):
-            date_end_arr = end_date.split("-")
-            date_arr = date.split("-")
-            for i in range(len(date_arr)):
-                if int(date_arr[i]) < int(date_end_arr[i]):
-                    return True
-                elif int(date_arr[i]) > int(date_end_arr[i]):
-                    return False
-            return True
 
         pid_map_index_broad = self.sc.broadcast(self.pid_map_index)
 
         def pid_filter(pid):
             return pid in pid_map_index_broad.value
 
-        rdd_pids = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: date_filter_(x[0], end_date))\
+        rdd_pids = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkUtilities.__date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
         self.pid_map_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len).collectAsMap()
         self.pid_map_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len).collectAsMap()
@@ -255,13 +242,18 @@ class NetworkUtilities(object):
         return self.pid_map_num_comments, self.pid_map_num_appreciations, self.pid_map_popularity
 
     def write_to_intermediate_directory(self):
+        self.extract_neighbors_from_users_network()
+        self.handle_uid_pid(self.uid_set)
+        self.create_popularity()
+
         end_date = self.arguments_dict['end_day']
+        local_dir = os.path.join("../IntermediateDir", end_date)
         if local_run:
             shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirLocally.sh')
-            process = Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date, ), shell=True)
+            Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date, ), shell=True)
         else:
             shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-            process = Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date, ), shell=True)
+            Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date, ), shell=True)
 
         self.extract_neighbors_from_users_network()
         self.handle_uid_pid(self.uid_set)
@@ -294,18 +286,7 @@ class NetworkUtilities(object):
 
 if __name__ == "__main__":
     utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1 ,2)
+
     utilities.write_to_intermediate_directory()
 
-    '''
-    follow_map, uid_set, uid_map_index = utilities.extract_neighbors_from_users_network()
-
-    print len(follow_map)
-    print len(uid_set)
-
-    fields_index_map, owners_map, pid_map_index = utilities.handle_uid_pid(uid_set)
-
-    print (len(fields_index_map))
-
-    pid_map_num_comments, pid_map_num_appreciations, pid_map_popularity = utilities.create_popularity()
-    '''
     utilities.close_utilities()

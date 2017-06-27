@@ -135,7 +135,6 @@ class NetworkUtilities(object):
         def date_filter(prev_date, date, end_date):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
 
-
         def __filter_uid_incycle(uid):
             return uid in uid_set_broad.value
 
@@ -150,7 +149,7 @@ class NetworkUtilities(object):
             .filter(lambda x: __filter_uid_incycle(x[1])).cache()
 
         print(rdd_owners.take(5))
-        print(rdd_owners.count())
+        print("rdd.owners count :{}".format(rdd_owners.count()))
 
         fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(
             lambda x: x).distinct().zipWithIndex().collectAsMap()
@@ -162,7 +161,10 @@ class NetworkUtilities(object):
         Pid Uid pair in owner file
         """
 
-        owners_map = rdd_owners.map(lambda x: (x[0], x[1])).collectAsMap()
+        rdd_owners_map = rdd_owners.map(lambda x: (x[0], x[1])).cache()
+        print(rdd_owners_map.take(5))
+
+        owners_map = rdd_owners_map.collectAsMap()
 
         # pid map to index
         index = 0

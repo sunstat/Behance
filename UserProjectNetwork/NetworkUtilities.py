@@ -114,13 +114,13 @@ class NetworkUtilities(object):
         return True
 
     @staticmethod
-    def __date_filter(prev_date, date, end_date):
+    def date_filter(prev_date, date, end_date):
         return NetworkUtilities.date_filer_help_(prev_date, date) and NetworkUtilities.date_filer_help_(date, end_date)
 
     def extract_neighbors_from_users_network(self):
         end_date = self.arguments_dict['end_day']
 
-        rdd = self.sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkUtilities.__date_filter("0000-00-00", x[0], end_date))
+        rdd = self.sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkUtilities.date_filter("0000-00-00", x[0], end_date))
     
         '''
         .filter(lambda x: x[4] == 'F').map(lambda x: (x[1],[x[2]])).reduceByKey(lambda x, y : x+y)
@@ -228,7 +228,7 @@ class NetworkUtilities(object):
         def pid_filter(pid):
             return pid in pid_map_index_broad.value
 
-        rdd_pids = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkUtilities.__date_filter("0000-00-00", x[0], end_date))\
+        rdd_pids = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkUtilities.date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
         self.pid_map_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len).collectAsMap()
         self.pid_map_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len).collectAsMap()

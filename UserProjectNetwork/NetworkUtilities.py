@@ -10,8 +10,6 @@ import operator
 from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
-from dateUtilities import date_filter
-from pyspark.sql.functions import udf
 
 
 
@@ -33,29 +31,10 @@ else:
 class NetworkUtilities(object):
 
     '''
-    help functions for printing
-    '''
-
-    @staticmethod
-    def date_filer_help(date1, date2):
-        date1_arr = date1.split("-")
-        date2_arr = date2.split("-")
-        for i in range(len(date1_arr)):
-            if int(date1_arr[i]) < int(date2_arr[i]):
-                return True
-            elif int(date1_arr[i]) > int(date2_arr[i]):
-                return False
-        return True
-
-    @staticmethod
-    def date_filter(prev_date, date, end_date):
-        return DateUtilities.date_filer_help(prev_date, date) and DateUtilities.date_filer_help(date, end_date)
-
-    '''
     methods used only within in this class
     '''
 
-    def extract_parameters_(self):
+    def __extract_parameters(self):
         arguments_arr = []
         with open(self.config_file, 'r') as f:
             for line in f:
@@ -95,20 +74,14 @@ class NetworkUtilities(object):
         properties needed to be filled 
         '''
 
-        '''
-        arguments dictionary
-        '''
-        arguments_arr = self.extract_parameters_()
-        self.arguments_dict = dict()
-        self.arguments_dict['end_day'] = arguments_arr[0]
-        print self.arguments_dict['end_day'].split("-")
+        self.arguments_arr = self.__extract_parameters()
 
     '''
     extract neighbors in user network and uids set which involved in the network built 
     '''
 
 
-    def extract_neighbors_from_users_network(self, sc):
+    def extract_neighbors_from_users_network(self, sc, end_date):
 
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
@@ -122,9 +95,6 @@ class NetworkUtilities(object):
 
         def date_filter(prev_date, date, end_date):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
-
-
-        end_date = self.arguments_dict['end_day']
 
 
         rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
@@ -151,7 +121,7 @@ class NetworkUtilities(object):
 
         return follow_map, uid_set, uid_map_index
 
-    def handle_uid_pid(self, sc, uid_set):
+    def handle_uid_pid(self, sc, uid_set, end_date):
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
             date2_arr = date2.split("-")
@@ -165,9 +135,8 @@ class NetworkUtilities(object):
         def date_filter(prev_date, date, end_date):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
 
-        end_date = self.arguments_dict['end_day']
 
-        def filter_uid_inCycle_(uid):
+        def __filter_uid_incycle(uid):
             return uid in uid_set_broad.value
 
         uid_set_broad = sc.broadcast(uid_set)
@@ -178,14 +147,13 @@ class NetworkUtilities(object):
 
         rdd_owners = sc.textFile(self.owners_file).map(lambda x: x.split(',')) \
             .filter(lambda x: date_filter("0000-00-00", x[2], end_date)) \
-            .filter(lambda x: filter_uid_inCycle_(x[1])).cache()
+            .filter(lambda x: __filter_uid_incycle(x[1])).cache()
 
         print(rdd_owners.take(5))
         print(rdd_owners.count())
 
         fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(
             lambda x: x).distinct().zipWithIndex().collectAsMap()
-
 
         IOutilities.print_dict(fields_map_index, 5)
         print ("field_map_index is with size {}".format(len(fields_map_index)))
@@ -221,7 +189,7 @@ class NetworkUtilities(object):
                 self.user_network[self.uid_map_index[uid1], self.uid_map_index[uid2]] = 1
         return self.user_network
 
-    def create_popularity(self,sc):
+    def create_popularity(self,sc, end_date):
 
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
@@ -235,8 +203,6 @@ class NetworkUtilities(object):
 
         def date_filter(prev_date, date, end_date):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
-
-        end_date = self.arguments_dict['end_day']
 
         pid_map_index_broad = sc.broadcast(self.pid_map_index)
 
@@ -260,38 +226,39 @@ class NetworkUtilities(object):
         IOutilities.print_dict(self.pid_map_num_appreciations, 20)
         return self.pid_map_num_comments, self.pid_map_num_appreciations, self.pid_map_popularity
 
-    def write_to_intermediate_directory(self,sc):
-        self.extract_neighbors_from_users_network(sc)
-        self.handle_uid_pid(sc, self.uid_set)
-        self.create_popularity(sc)
+    def write_to_intermediate_directory(self, sc):
+        for end_date in self.arguments_arr:
+            self.extract_neighbors_from_users_network(sc, end_date)
+            self.handle_uid_pid(sc, self.uid_set, end_date)
+            self.create_popularity(sc, end_date)
 
-        end_date = self.arguments_dict['end_day']
-        local_dir = os.path.join("../IntermediateDir", end_date)
-        if local_run:
-            shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirLocally.sh')
-            Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
-        else:
-            shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-            Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
+            end_date = self.arguments_dict['end_day']
+            local_dir = os.path.join("../IntermediateDir", end_date)
+            if local_run:
+                shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirLocally.sh')
+                Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
+            else:
+                shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
+                Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
 
 
-        '''
-        now writing data to the intermediate direction
-        '''
-        print("now building follow map from uid to uid")
-        if local_run:
-            IOutilities.print_dict_to_file(self.follow_map, local_dir, 'follow_map')
-            IOutilities.print_dict_to_file(self.uid_map_index, local_dir, 'uid_map_index')
-            IOutilities.print_dict_to_file(self.owners_map, local_dir, 'owners_map')
-            IOutilities.print_dict_to_file(self.pid_map_index, local_dir, 'pid_map_index')
-            IOutilities.print_dict_to_file(self.pid_map_popularity, local_dir, 'pid_map_popularity')
-        else:
-            IOutilities.print_dict_to_file(self.follow_map, local_dir, 'follow_map',
-                                           os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
-            IOutilities.print_dict_to_file(self.uid_map_index, local_dir, 'uid_map_index',
-                                           os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
-            IOutilities.print_dict_to_file(self.owners_map, local_dir, 'owners_map',
-                                           os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
-            IOutilities.print_dict_to_file(self.pid_map_popularity, local_dir, 'pid_map_popularity',
-                                           os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
+            '''
+            now writing data to the intermediate direction
+            '''
+            print("now building follow map from uid to uid")
+            if local_run:
+                IOutilities.print_dict_to_file(self.follow_map, local_dir, 'follow_map')
+                IOutilities.print_dict_to_file(self.uid_map_index, local_dir, 'uid_map_index')
+                IOutilities.print_dict_to_file(self.owners_map, local_dir, 'owners_map')
+                IOutilities.print_dict_to_file(self.pid_map_index, local_dir, 'pid_map_index')
+                IOutilities.print_dict_to_file(self.pid_map_popularity, local_dir, 'pid_map_popularity')
+            else:
+                IOutilities.print_dict_to_file(self.follow_map, local_dir, 'follow_map',
+                                               os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
+                IOutilities.print_dict_to_file(self.uid_map_index, local_dir, 'uid_map_index',
+                                               os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
+                IOutilities.print_dict_to_file(self.owners_map, local_dir, 'owners_map',
+                                               os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
+                IOutilities.print_dict_to_file(self.pid_map_popularity, local_dir, 'pid_map_popularity',
+                                               os.path.join(NetworkUtilities.azure_intermediate_dir, end_date))
 

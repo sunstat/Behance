@@ -1,7 +1,6 @@
 class DateUtilities():
 
-    @staticmethod
-    def date_filer_help(date1, date2):
+    def date_filer_help(self,date1, date2):
         date1_arr = date1.split("-")
         date2_arr = date2.split("-")
         for i in range(len(date1_arr)):
@@ -11,8 +10,7 @@ class DateUtilities():
                 return False
         return True
 
-    @staticmethod
-    def date_filter(prev_date, date, end_date):
+    def date_filter(self,prev_date, date, end_date):
         return DateUtilities.date_filer_help(prev_date, date) and DateUtilities.date_filer_help(date, end_date)
 
     def __init__(self):

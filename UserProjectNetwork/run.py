@@ -10,7 +10,7 @@ from subprocess import Popen
 from dateUtilities import DateUtilities
 from NetworkUtilities import NetworkUtilities
 
-local_run = False
+local_run = True
 
 if local_run:
     action_file = "/Users/yimsun/PycharmProjects/Data/TinyData/action/actionDataTrimNoView-csv"

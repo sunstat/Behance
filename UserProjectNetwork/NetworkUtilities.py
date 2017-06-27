@@ -13,9 +13,26 @@ from subprocess import Popen
 from dateUtilities import DateUtilities
 
 
-local_run = False
+def date_filer_help(date1, date2):
+    date1_arr = date1.split("-")
+    date2_arr = date2.split("-")
+    for i in range(len(date1_arr)):
+        if int(date1_arr[i]) < int(date2_arr[i]):
+            return True
+        elif int(date1_arr[i]) > int(date2_arr[i]):
+            return False
+    return True
 
 
+def date_filter(prev_date, date, end_date):
+    return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
+
+
+
+
+
+
+local_run = True
 
 if local_run:
     action_file = "/Users/yimsun/PycharmProjects/Data/TinyData/action/actionDataTrimNoView-csv"
@@ -107,9 +124,13 @@ class NetworkUtilities(object):
 
     def extract_neighbors_from_users_network(self, sc):
         end_date = self.arguments_dict['end_day']
+        date_utilities = DateUtilities()
+        date_utilities_broad = sc.broadcast(date_utilities)
 
-        rdd = sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkUtilities.date_filer_help( "0000-00-00" , x[0]))\
-            .filter(lambda x: x[4] == 'F').map(lambda x: (x[1],[x[2]])).reduceByKey(lambda x, y : x+y)
+
+        rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
+            .filter(lambda x: date_filter("0000-00-00", x[0], "2016-06-30"))\
+            .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], [x[2]])).reduceByKey(lambda x, y: x + y)
         print(rdd.take(5))
 
         follow_map = rdd.collectAsMap()

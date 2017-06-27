@@ -10,10 +10,10 @@ import operator
 from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
+from dateUtilities import DateUtilities
 
 
-
-local_run = False
+local_run = True
 
 
 
@@ -102,25 +102,11 @@ class NetworkUtilities(object):
     extract neighbors in user network and uids set which involved in the network built 
     '''
 
-    @staticmethod
-    def date_filer_help_(date1, date2):
-        date1_arr = date1.split("-")
-        date2_arr = date2.split("-")
-        for i in range(len(date1_arr)):
-            if int(date1_arr[i]) < int(date2_arr[i]):
-                return True
-            elif int(date1_arr[i]) > int(date2_arr[i]):
-                return False
-        return True
-
-    @staticmethod
-    def date_filter(prev_date, date, end_date):
-        return NetworkUtilities.date_filer_help_(prev_date, date) and NetworkUtilities.date_filer_help_(date, end_date)
 
     def extract_neighbors_from_users_network(self):
         end_date = self.arguments_dict['end_day']
 
-        rdd = self.sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkUtilities.date_filter("0000-00-00", x[0], end_date))\
+        rdd = self.sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: DateUtilities.date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1],[x[2]])).reduceByKey(lambda x, y : x+y)
         print (rdd.take(5))
 
@@ -169,7 +155,7 @@ class NetworkUtilities(object):
         '''
 
         rdd_owners = self.sc.textFile(self.owners_file).map(lambda x: x.split(','))\
-            .filter(lambda x: NetworkUtilities.date_filter("0000-00-00", x[2], end_date))\
+            .filter(lambda x: DateUtilities.date_filter("0000-00-00", x[2], end_date))\
             .filter(lambda x: filter_uid_inCycle_(x[1])).cache()
 
         print(rdd_owners.take(5))
@@ -225,7 +211,7 @@ class NetworkUtilities(object):
         def pid_filter(pid):
             return pid in pid_map_index_broad.value
 
-        rdd_pids = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkUtilities.date_filter("0000-00-00", x[0], end_date))\
+        rdd_pids = self.sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: DateUtilities.date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
         self.pid_map_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len).collectAsMap()
         self.pid_map_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len).collectAsMap()

@@ -10,7 +10,7 @@ import operator
 from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
-from dateUtilities import DateUtilities
+from dateUtilities import date_filter
 from pyspark.sql.functions import udf
 
 
@@ -18,7 +18,7 @@ from pyspark.sql.functions import udf
 
 
 
-local_run = False
+local_run = True
 
 if local_run:
     action_file = "/Users/yimsun/PycharmProjects/Data/TinyData/action/actionDataTrimNoView-csv"
@@ -110,6 +110,8 @@ class NetworkUtilities(object):
 
     def extract_neighbors_from_users_network(self, sc):
 
+        ''''
+
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
             date2_arr = date2.split("-")
@@ -122,11 +124,10 @@ class NetworkUtilities(object):
 
         def date_filter(prev_date, date, end_date):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
+        '''
 
 
         end_date = self.arguments_dict['end_day']
-        date_utilities = DateUtilities()
-        date_utilities_broad = sc.broadcast(date_utilities)
 
 
         rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
@@ -172,7 +173,7 @@ class NetworkUtilities(object):
         def filter_uid_inCycle_(uid):
             return uid in uid_set_broad.value
 
-        uid_set_broad = self.sc.broadcast(uid_set)
+        uid_set_broad = sc.broadcast(uid_set)
 
         '''
         build field map
@@ -214,3 +215,4 @@ class NetworkUtilities(object):
         self.pid_map_index = pid_map_index
 
         return fields_map_index, owners_map, pid_map_index
+

@@ -40,6 +40,7 @@ if __name__ == "__main__":
     sc, _ = init_spark('olivia', 20)
     network_utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1, 2)
     network_utilities.extract_neighbors_from_users_network(sc)
+    network_utilities.handle_uid_pid(sc, network_utilities.uid_set)
     sc.stop()
 
 

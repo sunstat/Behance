@@ -152,3 +152,65 @@ class NetworkUtilities(object):
         self.uid_map_index = uid_map_index
 
         return follow_map, uid_set, uid_map_index
+
+    def handle_uid_pid(self, sc, uid_set):
+        def date_filer_help(date1, date2):
+            date1_arr = date1.split("-")
+            date2_arr = date2.split("-")
+            for i in range(len(date1_arr)):
+                if int(date1_arr[i]) < int(date2_arr[i]):
+                    return True
+                elif int(date1_arr[i]) > int(date2_arr[i]):
+                    return False
+            return True
+
+        def date_filter(prev_date, date, end_date):
+            return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
+
+        end_date = self.arguments_dict['end_day']
+
+        def filter_uid_inCycle_(uid):
+            return uid in uid_set_broad.value
+
+        uid_set_broad = self.sc.broadcast(uid_set)
+
+        '''
+        build field map
+        '''
+
+        rdd_owners = sc.textFile(self.owners_file).map(lambda x: x.split(',')) \
+            .filter(lambda x: date_filter("0000-00-00", x[2], end_date)) \
+            .filter(lambda x: filter_uid_inCycle_(x[1])).cache()
+
+        print(rdd_owners.take(5))
+        print(rdd_owners.count())
+
+        fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(
+            lambda x: x).distinct().zipWithIndex().collectAsMap()
+
+
+        IOutilities.print_dict(fields_map_index, 5)
+        print ("field_map_index is with size {}".format(len(fields_map_index)))
+
+        """
+        Pid Uid pair in owner file
+        """
+
+        owners_map = rdd_owners.map(lambda x: (x[0], x[1])).collectAsMap()
+
+        # pid map to index
+        index = 0
+        pid_map_index = dict()
+        for pid, uid in owners_map.items():
+            if pid not in pid_map_index:
+                # print pid, index
+                pid_map_index[pid] = index
+                index += 1
+
+        IOutilities.print_dict(pid_map_index, 20)
+
+        self.fields_map_index = fields_map_index
+        self.owners_map = owners_map
+        self.pid_map_index = pid_map_index
+
+        return fields_map_index, owners_map, pid_map_index

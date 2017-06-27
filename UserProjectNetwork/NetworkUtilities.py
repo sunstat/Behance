@@ -172,7 +172,7 @@ class NetworkUtilities(object):
         '''
 
         rdd_owners = self.sc.textFile(self.owners_file).map(lambda x: x.split(','))\
-            .filter(lambda x: NetworkUtilities.__date_filter("0000-00-00", x[2], end_date))\
+            .filter(lambda x: NetworkUtilities.date_filter("0000-00-00", x[2], end_date))\
             .filter(lambda x: filter_uid_inCycle_(x[1])).cache()
 
         print(rdd_owners.take(5))

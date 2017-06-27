@@ -13,7 +13,7 @@ from subprocess import Popen
 from dateUtilities import DateUtilities
 
 
-local_run = True
+local_run = False
 
 
 

@@ -13,7 +13,7 @@ from subprocess import Popen
 from dateUtilities import DateUtilities
 
 
-local_run = False
+local_run = True
 
 
 
@@ -93,9 +93,9 @@ class NetworkUtilities(object):
     def extract_neighbors_from_users_network(self,sc):
         end_date = self.arguments_dict['end_day']
 
-        rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
+        rdd = sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: DateUtilities.date_filer_help( "0000-00-00" , x[0]))\
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1],[x[2]])).reduceByKey(lambda x, y : x+y)
-        print (rdd.take(5))
+        print(rdd.take(5))
 
         follow_map = rdd.collectAsMap()
         uid_set = set()

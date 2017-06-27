@@ -33,6 +33,21 @@ class NetworkUtilities(object):
     help functions for printing
     '''
 
+    @staticmethod
+    def date_filer_help(date1, date2):
+        date1_arr = date1.split("-")
+        date2_arr = date2.split("-")
+        for i in range(len(date1_arr)):
+            if int(date1_arr[i]) < int(date2_arr[i]):
+                return True
+            elif int(date1_arr[i]) > int(date2_arr[i]):
+                return False
+        return True
+
+    @staticmethod
+    def date_filter(prev_date, date, end_date):
+        return DateUtilities.date_filer_help(prev_date, date) and DateUtilities.date_filer_help(date, end_date)
+
     '''
     methods used only within in this class
     '''
@@ -90,10 +105,10 @@ class NetworkUtilities(object):
     '''
 
 
-    def extract_neighbors_from_users_network(self,sc):
+    def extract_neighbors_from_users_network(self, sc):
         end_date = self.arguments_dict['end_day']
 
-        rdd = sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: DateUtilities.date_filer_help( "0000-00-00" , x[0]))\
+        rdd = sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkUtilities.date_filer_help( "0000-00-00" , x[0]))\
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1],[x[2]])).reduceByKey(lambda x, y : x+y)
         print(rdd.take(5))
 

@@ -125,8 +125,7 @@ class NetworkUtilities(object):
         '''
         .filter(lambda x: x[4] == 'F').map(lambda x: (x[1],[x[2]])).reduceByKey(lambda x, y : x+y)
         '''
-
-        print (rdd.take(5))
+        print (rdd.count())
 
         follow_map = rdd.collectAsMap()
         uid_set = set()

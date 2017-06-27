@@ -80,9 +80,7 @@ class NetworkUtilities(object):
     extract neighbors in user network and uids set which involved in the network built 
     '''
 
-
     def extract_neighbors_from_users_network(self, sc, end_date):
-
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
             date2_arr = date2.split("-")
@@ -96,9 +94,8 @@ class NetworkUtilities(object):
         def date_filter(prev_date, date, end_date):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
 
-
         rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
-            .filter(lambda x: date_filter("0000-00-00", x[0], "2016-06-30"))\
+            .filter(lambda x: date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], [x[2]])).reduceByKey(lambda x, y: x + y)
         print(rdd.take(5))
 
@@ -231,7 +228,9 @@ class NetworkUtilities(object):
     def write_to_intermediate_directory(self, sc):
         for end_date in self.arguments_arr:
             self.extract_neighbors_from_users_network(sc, end_date)
+            print("now implementing uid and pid")
             self.handle_uid_pid(sc, self.uid_set, end_date)
+            print("now creating popularity")
             self.create_popularity(sc, end_date)
 
             end_date = self.arguments_dict['end_day']

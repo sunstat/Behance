@@ -18,7 +18,7 @@ from pyspark.sql.functions import udf
 
 
 
-local_run = True
+local_run = False
 
 if local_run:
     action_file = "/Users/yimsun/PycharmProjects/Data/TinyData/action/actionDataTrimNoView-csv"

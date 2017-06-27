@@ -120,9 +120,12 @@ class NetworkUtilities(object):
     def extract_neighbors_from_users_network(self):
         end_date = self.arguments_dict['end_day']
 
-        rdd = self.sc.textFile(action_file).map(lambda x: x.split(','))\
-            .filter(lambda x: NetworkUtilities.__date_filter("0000-00-00", x[0], end_date))\
-            .filter(lambda x: x[4] == 'F').map(lambda x: (x[1],[x[2]])).reduceByKey(lambda x, y : x+y)
+        rdd = self.sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkUtilities.__date_filter("0000-00-00", x[0], end_date))
+
+        '''
+        .filter(lambda x: x[4] == 'F').map(lambda x: (x[1],[x[2]])).reduceByKey(lambda x, y : x+y)
+        '''
+
         print (rdd.take(5))
 
         follow_map = rdd.collectAsMap()

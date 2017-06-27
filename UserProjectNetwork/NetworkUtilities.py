@@ -143,10 +143,10 @@ class NetworkUtilities(object):
 
         rdd_owners = sc.textFile(self.owners_file).map(lambda x: x.split(',')) \
             .filter(lambda x: date_filter("0000-00-00", x[2], end_date)) \
-            .filter(lambda x: __filter_uid_incycle(x[1])).cache()
+            .filter(lambda x: __filter_uid_incycle(x[1])).persist()
 
         print(rdd_owners.take(5))
-        print("rdd.owners count :{}".format(rdd_owners.count()))
+        #print("rdd.owners count :{}".format(rdd_owners.count()))
 
         fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(
             lambda x: x).distinct().zipWithIndex().collectAsMap()
@@ -158,7 +158,7 @@ class NetworkUtilities(object):
         Pid Uid pair in owner file
         """
 
-        rdd_owners_map = rdd_owners.map(lambda x: (x[0], x[1])).cache()
+        rdd_owners_map = rdd_owners.map(lambda x: (x[0], x[1])).distinct().persist()
         print(rdd_owners_map.take(5))
 
         owners_map = rdd_owners_map.collectAsMap()

@@ -20,12 +20,12 @@ local_run = False
 if local_run:
     action_file = "/Users/yimsun/PycharmProjects/Data/TinyData/action/actionDataTrimNoView-csv"
     owners_file = "/Users/yimsun/PycharmProjects/Data/TinyData/owners-csv"
-    intermediateResultDir = '/Users/yimsun/PycharmProjects/Behance/IntermediateDir'
+    intermediate_result_dir = '/Users/yimsun/PycharmProjects/Behance/IntermediateDir'
 else:
-    behanceDataDir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
-    action_file = os.path.join(behanceDataDir, "action", "actionDataTrimNoView-csv")
-    owners_file = os.path.join(behanceDataDir, "owners-csv")
-    intermediateResultDir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
+    behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
+    action_file = os.path.join(behance_data_dir, "action", "actionDataTrimNoView-csv")
+    owners_file = os.path.join(behance_data_dir, "owners-csv")
+    intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
 
 class NetworkUtilities(object):
 
@@ -68,8 +68,9 @@ class NetworkUtilities(object):
         self.appreciation_weight = appreciation_weight
         NetworkUtilities.shell_dir = "../EditData/ShellEdit"
         NetworkUtilities.local_intermediate_dir = "../IntermediateDir"
+        NetworkUtilities.behance_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance"
         NetworkUtilities.behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
-        NetworkUtilities.azure_intermediate_dir = os.path.join(NetworkUtilities.behance_data_dir, "IntermediateDir")
+        NetworkUtilities.azure_intermediate_dir = os.path.join(NetworkUtilities.behance_dir, "IntermediateDir")
 
         '''
         properties needed to be filled
@@ -120,7 +121,7 @@ class NetworkUtilities(object):
         end_date = self.arguments_dict['end_day']
 
         rdd = self.sc.textFile(action_file).map(lambda x: x.split(','))
-            
+
         print (rdd.take(5))
 
         follow_map = rdd.collectAsMap()
@@ -255,13 +256,12 @@ class NetworkUtilities(object):
 
     def write_to_intermediate_directory(self):
         end_date = self.arguments_dict['end_day']
-        local_dir = os.path.join(NetworkUtilities.local_intermediate_dir, end_date)
         if local_run:
             shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirLocally.sh')
-            process = Popen('./%s %s %s' % (shell_file, intermediateResultDir, end_date, ), shell=True)
+            process = Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date, ), shell=True)
         else:
             shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-            process = Popen('./%s %s %s' % (shell_file, intermediateResultDir, end_date, ), shell=True)
+            process = Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date, ), shell=True)
 
         self.extract_neighbors_from_users_network()
         self.handle_uid_pid(self.uid_set)

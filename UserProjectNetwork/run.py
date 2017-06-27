@@ -24,19 +24,20 @@ else:
 
 
 
-def init_spark_(name, max_excutors):
+def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
             .set("spark.dynamicAllocation.enabled", "false")
             .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
             .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer"))
-    sc = SparkContext(conf=conf)
+
+    sc = SparkContext.getOrCreate(conf)
     sc.setLogLevel('ERROR')
     sqlContext = HiveContext(sc)
     return sc, sqlContext
 
 
 if __name__ == "__main__":
-    sc, _ = init_spark_('olivia', 20)
+    sc, _ = init_spark('olivia', 20)
     network_utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1, 2)
     network_utilities.extract_neighbors_from_users_network(sc)
     sc.stop()

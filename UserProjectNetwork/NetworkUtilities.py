@@ -32,7 +32,7 @@ def date_filter(prev_date, date, end_date):
 
 
 
-local_run = True
+local_run = False
 
 if local_run:
     action_file = "/Users/yimsun/PycharmProjects/Data/TinyData/action/actionDataTrimNoView-csv"

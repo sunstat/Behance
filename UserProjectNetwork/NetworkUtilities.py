@@ -13,7 +13,7 @@ from subprocess import Popen
 
 
 
-local_run = True
+local_run = False
 
 
 

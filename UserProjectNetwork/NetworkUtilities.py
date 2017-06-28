@@ -60,7 +60,6 @@ class NetworkUtilities(object):
         two intermediate results for 
         '''
         self.uid_set = None
-        self.pid_set = None
         '''
         ===============================
         '''
@@ -162,7 +161,6 @@ class NetworkUtilities(object):
         output_file = os.path.join(output_dir, 'pid_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
 
-        self.pid_set = set(rdd_pid_index.map(lambda x: x[0]).collect())
 
     '''
     def create_user_network(self):
@@ -175,6 +173,7 @@ class NetworkUtilities(object):
     '''
 
     def create_popularity(self,sc, end_date, output_dir):
+
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
             date2_arr = date2.split("-")
@@ -196,17 +195,21 @@ class NetworkUtilities(object):
             else:
                 return appreciation_weight*num_appreciations+comment_weight*num_comments
 
-        pid_set_broad = sc.broadcast(self.pid_set)
-
-        def pid_filter(pid):
-            return pid in pid_set_broad.value
-
         rdd_popularity_base = sc.textFile(os.path.join(output_dir, 'pid_2_index')).map(lambda x: x.split(',')) \
             .filter(lambda x: (x[0], 0))
+
+        print(rdd_popularity_base.take(10))
+
+        pid_set = set(rdd_popularity_base.map(lambda x:x[0]).collect())
 
         rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
             lambda x: date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
+
+        pid_set_broad = sc.broadcast(pid_set)
+
+        def pid_filter(pid):
+            return pid in pid_set_broad.value
 
         rdd_pid_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len)
         rdd_pid_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len)
@@ -214,17 +217,33 @@ class NetworkUtilities(object):
         temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations)
         rdd_appreciations = temp_left.union(temp_right).distinct()
         rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x[1][0],x[1][1],self.comment_weight,self.appreciation_weight)))
+        print(rdd_popularity.take(10))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.reduceByKey(lambda x,y: x+y)
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
         IOutilities.print_dict_to_file(rdd_popularity, output_file, 'csv')
 
+
+    def calculate_increase_popularity(self, sc, output_dir, base_date, cur_date):
+
+
+
+
+
     def write_to_intermediate_directory(self, sc):
-        for end_date in self.arguments_arr:
-            shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-            Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
-            output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
-            self.extract_neighbors_from_users_network(sc, end_date, output_dir)
-            self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
-            self.create_popularity(sc, end_date, output_dir)
+        end_date = self.arguments_arr[0]
+        shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
+        Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
+        output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
+        self.extract_neighbors_from_users_network(sc, end_date, output_dir)
+        self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
+        self.create_popularity(sc, end_date, output_dir)
+
+        base_date = self.arguments_arr[0]
+        for i in range(len(self.arguments_arr)-1):
+            prev_date = self.arguments_arr[i]
+            next_date = self.arguments_arr[i+1]
+
+
+
 

@@ -80,4 +80,15 @@ class IOutilities(object):
             Popen('./%s %s' % (delete_shell_local, local_file,), shell=True)
             sc.stop()
 
+    @staticmethod
+    def print_rdd_to_file(rdd, output_file, output_format):
+        delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
+        sc, _ = IOutilities.init_spark_('io_example', 2)
+        if os.path.exists(output_file):
+            Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)
+        if output_format == 'csv':
+            rdd.map(lambda x: ",".join(x)).saveAsTextFile(output_file)
+        elif output_format == 'tsv':
+            rdd.map(lambda x: x[0]+"\t"+(",".join(x[1]))).saveAsTextFile(output_file)
+
 

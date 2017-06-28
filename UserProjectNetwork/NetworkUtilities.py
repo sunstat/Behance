@@ -164,6 +164,7 @@ class NetworkUtilities(object):
 
         self.pid_set = set(rdd_pid_index.map(lambda x: x[0]).collect())
 
+    '''
     def create_user_network(self):
         num_users = len(self.uid_set)
         self.user_network = csr_matrix((num_users, num_users))
@@ -171,6 +172,7 @@ class NetworkUtilities(object):
             for uid2 in uids:
                 self.user_network[self.uid_map_index[uid1], self.uid_map_index[uid2]] = 1
         return self.user_network
+    '''
 
     def create_popularity(self,sc, end_date):
         def date_filer_help(date1, date2):
@@ -186,10 +188,10 @@ class NetworkUtilities(object):
         def date_filter(prev_date, date, end_date):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
 
-        pid_map_index_broad = sc.broadcast(self.pid_map_index)
+        pid_set_broad = sc.broadcast(self.pid_set)
 
         def pid_filter(pid):
-            return pid in pid_map_index_broad.value
+            return pid in pid_set_broad.value
 
         rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
             lambda x: date_filter("0000-00-00", x[0], end_date)) \
@@ -214,7 +216,7 @@ class NetworkUtilities(object):
             Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
             output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
             self.extract_neighbors_from_users_network(sc, end_date, output_dir)
-
+            self.handle_uid_pid(self, sc, self.uid_set, end_date, output_dir)
             '''
             print("now implementing uid and pid")
             self.handle_uid_pid(sc, self.uid_set, end_date)

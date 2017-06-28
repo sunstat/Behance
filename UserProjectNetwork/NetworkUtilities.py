@@ -155,7 +155,7 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_owners_map, output_file, 'csv')
 
         '''
-        print pid_2_index
+        print pid_2_index-csv
         '''
         rdd_pid_index = rdd_owners.map(lambda x: x[0]).distinct().zipWithIndex().cache()
         output_file = os.path.join(output_dir, 'pid_2_index-csv')
@@ -195,7 +195,7 @@ class NetworkUtilities(object):
             else:
                 return appreciation_weight*num_appreciations+comment_weight*num_comments
 
-        rdd_popularity_base = sc.textFile(os.path.join(output_dir, 'pid_2_index')).map(lambda x: x.split(',')) \
+        rdd_popularity_base = sc.textFile(os.path.join(output_dir, 'pid_2_index-csv')).map(lambda x: x.split(',')) \
             .filter(lambda x: (x[0], 0))
 
         print(rdd_popularity_base.take(10))

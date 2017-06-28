@@ -97,7 +97,8 @@ class NetworkUtilities(object):
         '''
         follow_map
         '''
-        output_file = os.path.join(output_dir, 'follow_map')
+        output_file = os.path.join(output_dir, 'follow_map-csv')
+        print output_file
 
         rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
             .filter(lambda x: date_filter("0000-00-00", x[0], end_date))\
@@ -110,6 +111,7 @@ class NetworkUtilities(object):
         uid_index
         '''
         output_file = os.path.join(output_dir, 'uid_2_index')
+
         rdd_uid_index = rdd.flatMap(lambda x: [x[1],x[2]]).distinct().zipWithIndex().cache()
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 
@@ -150,9 +152,8 @@ class NetworkUtilities(object):
         #print("rdd.owners count :{}".format(rdd_owners.count()))
 
         fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(
-            lambda x: x).distinct().zipWithIndex().collectAsMap()
+            lambda x: x).distinct().zipWithIndex().cache()
 
-        IOutilities.print_dict(fields_map_index, 5)
         print ("field_map_index is with size {}".format(len(fields_map_index)))
 
         """

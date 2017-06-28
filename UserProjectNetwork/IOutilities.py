@@ -16,10 +16,6 @@ class IOutilities(object):
     shell_dir = "../EditData/ShellEdit"
 
 
-    @staticmethod
-    def to_string(x):
-        return ",".join([str(y) for y in x])
-
     def __init__(self):
         pass
 
@@ -70,12 +66,14 @@ class IOutilities(object):
 
     @staticmethod
     def print_rdd_to_file(rdd, output_file, output_format):
+        def to_string(x):
+            return ",".join([str(y) for y in x])
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
         if os.path.exists(output_file):
             Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)
         if output_format == 'csv':
-            rdd.map(lambda x: ",".join(x)).saveAsTextFile(output_file)
+            rdd.map(lambda x: to_string(x)).saveAsTextFile(output_file)
         elif output_format == 'tsv':
-            rdd.map(lambda x: x[0]+"\t"+(",".join(x[1]))).saveAsTextFile(output_file)
+            rdd.map(lambda x: str(x[0])+"\t"+(to_string(x[1]))).saveAsTextFile(output_file)
 
 

@@ -226,20 +226,22 @@ class NetworkUtilities(object):
         IOutilities.print_dict_to_file(rdd_popularity, output_file, 'csv')
 
 
-    def calculate_increase_popularity(self, sc, output_dir, base_date, cur_date):
-        pass
 
-
-
-
+    def calculate_increase_popularity(self, sc, intermediate_dir, base_date, cur_date):
+        popularity_base_file = os.path.join(intermediate_dir, base_date, 'pid_2_popularity-csv')
+        popularity_cur_file = os.path.join(intermediate_dir, base_date, 'pid_2_popularity-csv')
+        rdd_popularity_base = sc.textFile(popularity_base_file).map(lambda x: x.split(','))
+        pid_set = set(rdd_popularity_base.map(lambda x: x[0]).collect())
 
     def write_to_intermediate_directory(self, sc):
         end_date = self.arguments_arr[0]
+        '''
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
+        '''
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
-        self.extract_neighbors_from_users_network(sc, end_date, output_dir)
-        self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
+        #self.extract_neighbors_from_users_network(sc, end_date, output_dir)
+        #self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
         self.create_popularity(sc, end_date, output_dir)
 
         '''
@@ -247,6 +249,7 @@ class NetworkUtilities(object):
         for i in range(len(self.arguments_arr)-1):
             prev_date = self.arguments_arr[i]
             next_date = self.arguments_arr[i+1]
+            
         '''
 
 

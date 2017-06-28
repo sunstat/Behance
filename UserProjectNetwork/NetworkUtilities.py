@@ -160,7 +160,7 @@ class NetworkUtilities(object):
         '''
         rdd_pid_index = rdd_owners.map(lambda x: x[0]).distinct().zipWithIndex().cache()
         output_file = os.path.join(output_dir, 'pid_2_index-csv')
-        IOutilities.print_rdd_to_fil(rdd_pid_index, output_file, 'csv')
+        IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
 
         self.pid_set = set(rdd_pid_index.map(lambda x: x[0]).collect())
 
@@ -199,16 +199,16 @@ class NetworkUtilities(object):
         pid_map_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len).collectAsMap()
         pid_map_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(
             len).collectAsMap()
-        for pid in self.pid_map_index:
+        pid_map_popularity = dict()
+        for pid in self.pid_set:
             popularity = 0
             if pid in pid_map_num_comments:
                 popularity += self.comment_weight * pid_map_num_comments[pid]
             if pid in pid_map_num_appreciations:
                 popularity += self.appreciation_weight * pid_map_num_appreciations[pid]
-            self.pid_map_popularity[pid] = popularity
+            pid_map_popularity[pid] = popularity
 
-        IOutilities.print_dict(pid_map_num_appreciations, 20)
-        return self.pid_map_num_comments, self.pid_map_num_appreciations, self.pid_map_popularity
+        IOutilities.print_dict_to_file(sc, pid_map_popularity, local_intermediate_dir, filename, azure_intermediate_dir = None)
 
     def write_to_intermediate_directory(self, sc):
         for end_date in self.arguments_arr:

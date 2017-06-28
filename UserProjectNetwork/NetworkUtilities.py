@@ -57,22 +57,14 @@ class NetworkUtilities(object):
         NetworkUtilities.azure_intermediate_dir = os.path.join(NetworkUtilities.behance_dir, "IntermediateResult")
 
         '''
-        properties needed to be filled
+        two intermediate results for 
         '''
-        self.follow_map = None
         self.uid_set = None
-        self.uid_map_index = None
-        self.fields_map_index = None
-        self.owners_map = None
-        self.pid_map_index = None
-        self.user_network = None
-        self.pid_map_num_comments = None
-        self.pid_map_num_appreciations = None
-        self.pid_map_popularity = dict()
+        self.pid_set = None
+        '''
+        ===============================
+        '''
 
-        '''
-        properties needed to be filled 
-        '''
 
         self.arguments_arr = self.__extract_parameters()
 
@@ -95,11 +87,9 @@ class NetworkUtilities(object):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
 
         '''
-        follow_map
+        print follow_map to intermediate directory 
         '''
         output_file = os.path.join(output_dir, 'follow_map-csv')
-        print output_file
-
         rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
             .filter(lambda x: date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: x[4] == 'F').cache()
@@ -108,9 +98,9 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_follow, output_file, 'tsv')
 
         '''
-        uid_index
+        print uid_index to intermediate directory
         '''
-        output_file = os.path.join(output_dir, 'uid_2_index')
+        output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
         rdd_uid_index = rdd.flatMap(lambda x: [x[1],x[2]]).distinct().zipWithIndex().cache()
         print (rdd_uid_index.take(5))
@@ -121,8 +111,7 @@ class NetworkUtilities(object):
 
         self.uid_set = uid_set
 
-
-    def handle_uid_pid(self, sc, uid_set, end_date):
+    def handle_uid_pid(self, sc, uid_set, end_date, output_dir):
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
             date2_arr = date2.split("-")
@@ -142,7 +131,7 @@ class NetworkUtilities(object):
         uid_set_broad = sc.broadcast(uid_set)
 
         '''
-        build field map
+        print field_2_index to intermediate diretory
         '''
 
         rdd_owners = sc.textFile(self.owners_file).map(lambda x: x.split(',')) \
@@ -152,36 +141,28 @@ class NetworkUtilities(object):
         print(rdd_owners.take(5))
         #print("rdd.owners count :{}".format(rdd_owners.count()))
 
-        fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(
+        rdd_fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(
             lambda x: x).distinct().zipWithIndex().cache()
 
-        print ("field_map_index is with size {}".format(len(fields_map_index)))
+        output_file = os.path.join(output_dir, 'fields_2_index-csv')
+        IOutilities.print_rdd_to_file(rdd_fields_map_index, output_file, 'csv')
 
-        """
-        Pid Uid pair in owner file
-        """
+        '''
+        print owners_map to intermediate directory
+        '''
 
         rdd_owners_map = rdd_owners.map(lambda x: (x[0], x[1])).distinct().persist()
-        print(rdd_owners_map.take(5))
+        output_file = os.path.join(output_dir, 'owners_map-csv')
+        IOutilities.print_rdd_to_fil(rdd_owners_map, output_file, 'csv')
 
-        owners_map = rdd_owners_map.collectAsMap()
+        '''
+        print pid_2_index
+        '''
+        rdd_pid_index = rdd_owners.map(lambda x: x[0]).distinct().zipWithIndex().cache()
+        output_file = os.path.join(output_dir, 'pid_2_index-csv')
+        IOutilities.print_rdd_to_fil(rdd_pid_index, output_file, 'csv')
 
-        # pid map to index
-        index = 0
-        pid_map_index = dict()
-        for pid, uid in owners_map.items():
-            if pid not in pid_map_index:
-                # print pid, index
-                pid_map_index[pid] = index
-                index += 1
-
-        IOutilities.print_dict(pid_map_index, 20)
-
-        self.fields_map_index = fields_map_index
-        self.owners_map = owners_map
-        self.pid_map_index = pid_map_index
-
-        return fields_map_index, owners_map, pid_map_index
+        self.pid_set = set(rdd_pid_index.map(lambda x: x[0]).collect())
 
     def create_user_network(self):
         num_users = len(self.uid_set)
@@ -192,7 +173,6 @@ class NetworkUtilities(object):
         return self.user_network
 
     def create_popularity(self,sc, end_date):
-
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
             date2_arr = date2.split("-")
@@ -214,18 +194,18 @@ class NetworkUtilities(object):
         rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
             lambda x: date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
-        self.pid_map_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len).collectAsMap()
-        self.pid_map_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(
+        pid_map_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len).collectAsMap()
+        pid_map_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(
             len).collectAsMap()
         for pid in self.pid_map_index:
             popularity = 0
-            if pid in self.pid_map_num_comments:
-                popularity += self.comment_weight * self.pid_map_num_comments[pid]
-            if pid in self.pid_map_num_appreciations:
-                popularity += self.appreciation_weight * self.pid_map_num_appreciations[pid]
+            if pid in pid_map_num_comments:
+                popularity += self.comment_weight * pid_map_num_comments[pid]
+            if pid in pid_map_num_appreciations:
+                popularity += self.appreciation_weight * pid_map_num_appreciations[pid]
             self.pid_map_popularity[pid] = popularity
 
-        IOutilities.print_dict(self.pid_map_num_appreciations, 20)
+        IOutilities.print_dict(pid_map_num_appreciations, 20)
         return self.pid_map_num_comments, self.pid_map_num_appreciations, self.pid_map_popularity
 
     def write_to_intermediate_directory(self, sc):

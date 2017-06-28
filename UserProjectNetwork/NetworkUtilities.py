@@ -195,6 +195,8 @@ class NetworkUtilities(object):
             else:
                 return appreciation_weight*num_appreciations+comment_weight*num_comments
 
+
+        print(os.path.join(output_dir, 'pid_2_index-csv'))
         rdd_popularity_base = sc.textFile(os.path.join(output_dir, 'pid_2_index-csv')).map(lambda x: x.split(',')) \
             .filter(lambda x: (x[0], 0))
 

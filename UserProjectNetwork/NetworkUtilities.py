@@ -225,6 +225,7 @@ class NetworkUtilities(object):
 
 
     def calculate_increase_popularity(self, sc, output_dir, base_date, cur_date):
+        pass
 
 
 

@@ -20,17 +20,6 @@ class IOutilities(object):
     def to_string(x):
         return ",".join([str(y) for y in x])
 
-    @staticmethod
-    def __init_spark(name, max_excutors):
-        conf = (SparkConf().setAppName(name)
-                .set("spark.dynamicAllocation.enabled", "false")
-                .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
-                .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer"))
-        sc = SparkContext(conf=conf)
-        sc.setLogLevel('ERROR')
-        sqlContext = HiveContext(sc)
-        return sc, sqlContext
-
     def __init__(self):
         pass
 
@@ -46,7 +35,7 @@ class IOutilities(object):
                 break
 
     @staticmethod
-    def print_dict_to_file_help(my_dict, filename):
+    def print_dict_to_file_help(sc, my_dict, filename):
         f = open(filename, 'w')
         for key, value in my_dict.items():
             f.write("{}".format(key))
@@ -61,7 +50,7 @@ class IOutilities(object):
             f.write("\n")
 
     @staticmethod
-    def print_dict_to_file(my_dict, local_intermediate_dir, filename, azure_intermediate_dir = None):
+    def print_dict_to_file(sc, my_dict, local_intermediate_dir, filename, azure_intermediate_dir = None):
         local_file = os.path.join(local_intermediate_dir, filename)
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
         delete_shell_local = os.path.join(IOutilities.shell_dir, 'deleteLocal.sh')
@@ -69,7 +58,6 @@ class IOutilities(object):
             Popen('./%s %s' % (delete_shell_local, local_file,), shell=True)
         IOutilities.print_dict_to_file_help(my_dict, local_file)
         if azure_intermediate_dir:
-            sc, _ = IOutilities.init_spark_('io_example', 2)
             output_file = os.path.join(azure_intermediate_dir, filename)
             if os.path.exists(output_file):
                 Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)
@@ -83,7 +71,6 @@ class IOutilities(object):
     @staticmethod
     def print_rdd_to_file(rdd, output_file, output_format):
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
-        sc, _ = IOutilities.__init_spark('io_example', 2)
         if os.path.exists(output_file):
             Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)
         if output_format == 'csv':

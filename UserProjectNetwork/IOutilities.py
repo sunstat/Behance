@@ -21,7 +21,7 @@ class IOutilities(object):
         return ",".join([str(y) for y in x])
 
     @staticmethod
-    def init_spark_(self, name, max_excutors):
+    def __init_spark(name, max_excutors):
         conf = (SparkConf().setAppName(name)
                 .set("spark.dynamicAllocation.enabled", "false")
                 .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
@@ -83,7 +83,7 @@ class IOutilities(object):
     @staticmethod
     def print_rdd_to_file(rdd, output_file, output_format):
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
-        sc, _ = IOutilities.init_spark_('io_example', 2)
+        sc, _ = IOutilities.__init_spark('io_example', 2)
         if os.path.exists(output_file):
             Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)
         if output_format == 'csv':

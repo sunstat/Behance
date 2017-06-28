@@ -94,11 +94,9 @@ class NetworkUtilities(object):
         def date_filter(prev_date, date, end_date):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
 
-
         '''
         follow_map
         '''
-
         output_file = os.path.join(output_dir, 'follow_map')
 
         rdd = sc.textFile(action_file).map(lambda x: x.split(','))\

@@ -174,7 +174,7 @@ class NetworkUtilities(object):
         return self.user_network
     '''
 
-    def create_popularity(self,sc, end_date):
+    def create_popularity(self,sc, end_date, output_dir):
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
             date2_arr = date2.split("-")
@@ -185,30 +185,39 @@ class NetworkUtilities(object):
                     return False
             return True
 
-        def date_filter(prev_date, date, end_date):
-            return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
+        def date_filter(prev_date, date, end_date_filter):
+            return date_filer_help(prev_date, date) and date_filer_help(date, end_date_filter)
+
+        def calculate_popularity(num_comments, num_appreciations, comment_weight, appreciation_weight):
+            if not num_comments:
+                return appreciation_weight*num_appreciations
+            elif not num_appreciations:
+                return comment_weight*num_comments
+            else:
+                return appreciation_weight*num_appreciations+comment_weight*num_comments
 
         pid_set_broad = sc.broadcast(self.pid_set)
 
         def pid_filter(pid):
             return pid in pid_set_broad.value
 
+        rdd_popularity_base = sc.textFile(os.path.join(output_dir, 'pid_2_index')).map(lambda x: x.split(',')) \
+            .filter(lambda x: (x[0], 0))
+
         rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
             lambda x: date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
-        pid_map_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len).collectAsMap()
-        pid_map_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(
-            len).collectAsMap()
-        pid_map_popularity = dict()
-        for pid in self.pid_set:
-            popularity = 0
-            if pid in pid_map_num_comments:
-                popularity += self.comment_weight * pid_map_num_comments[pid]
-            if pid in pid_map_num_appreciations:
-                popularity += self.appreciation_weight * pid_map_num_appreciations[pid]
-            pid_map_popularity[pid] = popularity
 
-        IOutilities.print_dict_to_file(sc, pid_map_popularity, local_intermediate_dir, filename, azure_intermediate_dir = None)
+        rdd_pid_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len)
+        rdd_pid_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len)
+        temp_left = rdd_pid_num_comments.leftOuterJoin(rdd_pid_num_appreciations)
+        temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations)
+        rdd_appreciations = temp_left.union(temp_right).distinct()
+        rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x[1][0],x[1][1],self.comment_weight,self.appreciation_weight)))
+        rdd_popularity = rdd_popularity.union(rdd_popularity_base)
+        rdd_popularity = rdd_popularity.reduceByKey(lambda x,y: x+y)
+        output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
+        IOutilities.print_dict_to_file(rdd_popularity, output_file, 'csv')
 
     def write_to_intermediate_directory(self, sc):
         for end_date in self.arguments_arr:
@@ -217,19 +226,5 @@ class NetworkUtilities(object):
             output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
             self.extract_neighbors_from_users_network(sc, end_date, output_dir)
             self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
-            '''
-            print("now implementing uid and pid")
-            self.handle_uid_pid(sc, self.uid_set, end_date)
-            print("now creating popularity")
-            self.create_popularity(sc, end_date)
-
-            end_date = self.arguments_dict['end_day']
-            local_dir = os.path.join("../IntermediateDir", end_date)
-            if local_run:
-                shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirLocally.sh')
-                Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
-            else:
-                shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-                Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
-            '''
+            self.create_popularity(sc, end_date, output_dir)
 

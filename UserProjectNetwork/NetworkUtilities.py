@@ -54,7 +54,7 @@ class NetworkUtilities(object):
         NetworkUtilities.local_intermediate_dir = "../IntermediateDir"
         NetworkUtilities.behance_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance"
         NetworkUtilities.behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
-        NetworkUtilities.azure_intermediate_dir = os.path.join(NetworkUtilities.behance_dir, "IntermediateDir")
+        NetworkUtilities.azure_intermediate_dir = os.path.join(NetworkUtilities.behance_dir, "IntermediateResult")
 
         '''
         properties needed to be filled
@@ -113,6 +113,7 @@ class NetworkUtilities(object):
         output_file = os.path.join(output_dir, 'uid_2_index')
 
         rdd_uid_index = rdd.flatMap(lambda x: [x[1],x[2]]).distinct().zipWithIndex().cache()
+        print (rdd_uid_index.take(5))
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 
         ls = rdd_uid_index.map(lambda x: x[0]).collect()

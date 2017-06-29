@@ -13,7 +13,6 @@ class pageRank():
             for url in urls:
                 yield (url, rank / num_urls)
 
-
         rdd_neighbors_base = sc.textFile(self.uid_2_index_file).map(lambda x: (x[0],[]))
         rdd_neighbors =  sc.textFile(self.follow_file).map(lambda x: x.split('\t')).map(lambda x: (x[0], x[1].split(",")))
         rdd_neighbors = rdd_neighbors.union(rdd_neighbors_base).distinct().reduceByKey(lambda x, y : x+y)

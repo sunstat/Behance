@@ -119,9 +119,8 @@ class NetworkUtilities(object):
         output_file = os.path.join(output_dir, 'fields_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_fields_map_index, output_file, 'csv')
 
-
         '''
-        build pid-2-fields 
+        build pid-2-fields-index
         '''
 
         fields_2_index = rdd_fields_map_index.collectAsMap()
@@ -190,8 +189,8 @@ class NetworkUtilities(object):
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
         '''
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
-        #self.extract_neighbors_from_users_network(sc, end_date, output_dir)
-        #self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
+        self.extract_neighbors_from_users_network(sc, end_date, output_dir)
+        self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
         self.create_popularity(sc, end_date, output_dir)
 
 

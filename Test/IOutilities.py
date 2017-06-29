@@ -64,9 +64,6 @@ class IOutilities(object):
             Popen('./%s %s' % (delete_shell_local, local_file,), shell=True)
             sc.stop()
 
-
-
-
     @staticmethod
     def print_rdd_to_file(rdd, output_file, output_format):
         def to_string(x):

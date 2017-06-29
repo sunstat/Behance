@@ -36,9 +36,10 @@ def init_spark(name, max_excutors):
     sqlContext = HiveContext(sc)
     return sc, sqlContext
 
-sc, _ = init_spark('olivia', 10)
+sc, _ = init_spark('olivia', 20)
 sc.addFile('/home/yiming/Behance/Test/test1.py')
 sc.addFile('/home/yiming/Behance/Test/NetworkHelpFunctions.py')
 network_utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1, 2)
 network_utilities.extract_neighbors_from_users_network(sc, "2016-06-30")
 sc.stop()
+

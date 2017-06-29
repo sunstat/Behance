@@ -172,7 +172,7 @@ class NetworkUtilities(object):
         return self.user_network
     '''
 
-    def create_popularity(self,sc, end_date, output_dir):
+    def create_popularity(self, sc, end_date, output_dir):
 
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
@@ -186,9 +186,6 @@ class NetworkUtilities(object):
 
         def date_filter(prev_date, date, end_date_filter):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date_filter)
-
-
-
 
         def calculate_popularity(num_comments, num_appreciations, comment_weight, appreciation_weight):
             if not num_comments:
@@ -222,8 +219,8 @@ class NetworkUtilities(object):
         temp_left = rdd_pid_num_comments.leftOuterJoin(rdd_pid_num_appreciations)
         temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations)
         rdd_appreciations = temp_left.union(temp_right).distinct()
+        print(rdd_appreciations.take(10))
         rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x[1][0],x[1][1],self.comment_weight,self.appreciation_weight)))
-        print(rdd_popularity.take(10))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.reduceByKey(lambda x,y: x+y)
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
@@ -232,11 +229,33 @@ class NetworkUtilities(object):
 
 
     def calculate_increase_popularity(self, sc, intermediate_dir, base_date, cur_date):
+        def date_filer_help(date1, date2):
+            date1_arr = date1.split("-")
+            date2_arr = date2.split("-")
+            for i in range(len(date1_arr)):
+                if int(date1_arr[i]) < int(date2_arr[i]):
+                    return True
+                elif int(date1_arr[i]) > int(date2_arr[i]):
+                    return False
+            return True
+
+        def date_filter(prev_date, date, end_date_filter):
+            return date_filer_help(prev_date, date) and date_filer_help(date, end_date_filter)
+
+        def calculate_popularity(num_comments, num_appreciations, comment_weight, appreciation_weight):
+            if not num_comments:
+                return appreciation_weight*num_appreciations
+            elif not num_appreciations:
+                return comment_weight*num_comments
+            else:
+                return appreciation_weight*num_appreciations+comment_weight*num_comments
+
         popularity_base_file = os.path.join(intermediate_dir, base_date, 'pid_2_popularity-csv')
-        popularity_cur_file = os.path.join(intermediate_dir, base_date, 'pid_2_popularity-csv')
         rdd_popularity_base = sc.textFile(popularity_base_file).map(lambda x: x.split(','))
         pid_set = set(rdd_popularity_base.map(lambda x: x[0]).collect())
-        rdd_popularity = sc.textFile(popularity_cur_file).map(lambda x: x.split(','))
+        pid_set_broad = sc.broadcast(pid_set)
+
+
 
     def write_to_intermediate_directory(self, sc):
         end_date = self.arguments_arr[0]

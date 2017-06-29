@@ -1,4 +1,5 @@
 class NetworkHelpFunctions():
+
     @staticmethod
     def date_filer_help(date1, date2):
         date1_arr = date1.split("-")
@@ -15,7 +16,7 @@ class NetworkHelpFunctions():
         return NetworkHelpFunctions.date_filer_help(prev_date, date) and NetworkHelpFunctions.date_filer_help(date, end_date)
 
     @staticmethod
-    def changeNoneToZero(x):
+    def change_none_to_zero(x):
         if not x:
             return 0
         return x

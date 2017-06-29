@@ -29,7 +29,6 @@ else:
     intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
 
 class NetworkUtilities(object):
-
     '''
     methods used only within in this class
     '''
@@ -97,18 +96,6 @@ class NetworkUtilities(object):
         self.uid_set = uid_set
 
     def handle_uid_pid(self, sc, uid_set, end_date, output_dir):
-        def date_filer_help(date1, date2):
-            date1_arr = date1.split("-")
-            date2_arr = date2.split("-")
-            for i in range(len(date1_arr)):
-                if int(date1_arr[i]) < int(date2_arr[i]):
-                    return True
-                elif int(date1_arr[i]) > int(date2_arr[i]):
-                    return False
-            return True
-
-        def date_filter(prev_date, date, end_date):
-            return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
 
         def __filter_uid_incycle(uid):
             return uid in uid_set_broad.value
@@ -120,7 +107,7 @@ class NetworkUtilities(object):
         '''
 
         rdd_owners = sc.textFile(self.owners_file).map(lambda x: x.split(',')) \
-            .filter(lambda x: date_filter("0000-00-00", x[2], end_date)) \
+            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[2], end_date)) \
             .filter(lambda x: __filter_uid_incycle(x[1])).persist()
 
         print(rdd_owners.take(5))
@@ -129,6 +116,8 @@ class NetworkUtilities(object):
         rdd_fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(
             lambda x: x).distinct().zipWithIndex().cache()
 
+        fields_2_index = rdd_fields_map_index.collectAsMap()
+
         output_file = os.path.join(output_dir, 'fields_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_fields_map_index, output_file, 'csv')
 
@@ -136,6 +125,7 @@ class NetworkUtilities(object):
         '''
         build pid-2-fields 
         '''
+
 
 
 
@@ -155,30 +145,6 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
 
     def create_popularity(self, sc, end_date, output_dir):
-        def changeNoneToZero(x):
-            if not x:
-                return 0
-            return x
-
-        def date_filer_help(date1, date2):
-            date1_arr = date1.split("-")
-            date2_arr = date2.split("-")
-            for i in range(len(date1_arr)):
-                if int(date1_arr[i]) < int(date2_arr[i]):
-                    return True
-                elif int(date1_arr[i]) > int(date2_arr[i]):
-                    return False
-            return True
-
-        def date_filter(prev_date, date, end_date_filter):
-            return date_filer_help(prev_date, date) and date_filer_help(date, end_date_filter)
-
-        def calculate_popularity(num_comments, num_appreciations, comment_weight, appreciation_weight):
-            if not num_comments:
-                return appreciation_weight*num_appreciations
-            elif not num_appreciations:
-                return comment_weight* num_comments
-            return appreciation_weight * num_appreciations + comment_weight * num_comments
 
         rdd_popularity_base = sc.textFile(os.path.join(output_dir, 'pid_2_index-csv')).map(lambda x: x.split(',')) \
             .map(lambda x: (x[0], (0, 0)))
@@ -193,7 +159,7 @@ class NetworkUtilities(object):
             return pid in pid_set_broad.value
 
         rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
-            lambda x: date_filter("0000-00-00", x[0], end_date)) \
+            lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
 
         rdd_pid_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len)
@@ -202,7 +168,7 @@ class NetworkUtilities(object):
         print(temp_left.take(10))
         temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations).filter(lambda x: not x[1][0])
         print(temp_right.take(10))
-        rdd_popularity = temp_left.union(temp_right).distinct().map(lambda x: (x[0], (changeNoneToZero(x[1][0]), changeNoneToZero(x[1][1]))))
+        rdd_popularity = temp_left.union(temp_right).distinct().map(lambda x: (x[0], (NetworkHelpFunctions.change_none_to_zero(x[1][0]), NetworkHelpFunctions.change_none_to_zero(x[1][1]))))
         print("================")
         print(rdd_popularity.take(10))
         print("==================")

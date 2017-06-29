@@ -123,9 +123,14 @@ class NetworkUtilities(object):
         '''
         build pid-2-fields 
         '''
+
         fields_2_index = rdd_fields_map_index.collectAsMap()
+        fields_2_index_broad = sc.broadcast(fields_2_index)
 
+        def trim_str_array(str_arr):
+            return [fields_2_index_broad.value[x] for x in str_arr if x]
 
+        rdd_owners.map(lambda x: (x[0], trim_str_array(x[3:])))
 
 
         '''

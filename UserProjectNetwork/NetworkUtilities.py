@@ -174,7 +174,7 @@ class NetworkUtilities(object):
         rdd_popularity = temp_left.union(temp_right).distinct()\
             .map(lambda x: (x[0], (NetworkHelpFunctions.change_none_to_zero(x[1][0]), NetworkHelpFunctions.change_none_to_zero(x[1][1]))))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
-        rdd_popularity = rdd_popularity.map(lambda x: (x[0], NetworkHelpFunctions.calculate_popularity(x[1][0],x[1][1],1, 2)))
+        rdd_popularity = rdd_popularity.map(lambda x: (x[0], NetworkHelpFunctions.calculate_popularity(x[1][0],x[1][1], 1, 2)))
         print("======================")
         print(rdd_popularity.take(5))
         print("======================")
@@ -184,10 +184,8 @@ class NetworkUtilities(object):
 
     def write_to_intermediate_directory(self, sc):
         end_date = self.arguments_arr[0]
-        '''
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
-        '''
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
         self.extract_neighbors_from_users_network(sc, end_date, output_dir)
         self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)

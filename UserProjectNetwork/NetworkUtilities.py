@@ -63,8 +63,6 @@ class NetworkUtilities(object):
         '''
         ===============================
         '''
-
-
         self.arguments_arr = self.__extract_parameters()
 
     '''
@@ -213,7 +211,6 @@ class NetworkUtilities(object):
             lambda x: date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
 
-
         rdd_pid_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len)
         rdd_pid_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len)
         temp_left = rdd_pid_num_comments.leftOuterJoin(rdd_pid_num_appreciations)
@@ -224,7 +221,7 @@ class NetworkUtilities(object):
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.reduceByKey(lambda x,y: x+y)
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
-        IOutilities.print_dict_to_file(rdd_popularity, output_file, 'csv')
+        IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')
 
 
 
@@ -254,6 +251,15 @@ class NetworkUtilities(object):
         rdd_popularity_base = sc.textFile(popularity_base_file).map(lambda x: x.split(','))
         pid_set = set(rdd_popularity_base.map(lambda x: x[0]).collect())
         pid_set_broad = sc.broadcast(pid_set)
+
+        def pid_filter(pid):
+            return pid in pid_set_broad.value
+
+        rdd_popularity_cur = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
+            lambda x: date_filter("0000-00-00", x[0], cur_date)) \
+            .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
+
+        rdd_popularity_base.join(rdd_popularity_cur)
 
 
 

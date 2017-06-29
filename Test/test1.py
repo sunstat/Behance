@@ -98,18 +98,12 @@ class NetworkUtilities(object):
         '''
         print follow_map to intermediate directory 
         '''
-        output_file = os.path.join(output_dir, 'follow_map-csv')
         rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
             .filter(lambda x: NetworkUtilities.date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: x[4] == 'F').cache()
         rdd_follow = rdd.map(lambda x: (x[1], [x[2]])).reduceByKey(lambda x, y: x + y).cache()
         print(rdd_follow.take(5))
-        IOutilities.print_rdd_to_file(rdd_follow, output_file, 'tsv')
 
-        '''
-        print uid_index to intermediate directory
-        '''
-        output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
         rdd_uid_index = rdd.flatMap(lambda x: [x[1],x[2]]).distinct().zipWithIndex().cache()
         print (rdd_uid_index.take(5))

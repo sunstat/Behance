@@ -10,7 +10,7 @@ import operator
 from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
-
+from NetworkHelpFunctions import NetworkHelpFunctions
 
 
 
@@ -70,25 +70,13 @@ class NetworkUtilities(object):
     '''
 
     def extract_neighbors_from_users_network(self, sc, end_date, output_dir):
-        def date_filer_help(date1, date2):
-            date1_arr = date1.split("-")
-            date2_arr = date2.split("-")
-            for i in range(len(date1_arr)):
-                if int(date1_arr[i]) < int(date2_arr[i]):
-                    return True
-                elif int(date1_arr[i]) > int(date2_arr[i]):
-                    return False
-            return True
-
-        def date_filter(prev_date, date, end_date):
-            return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
 
         '''
         print follow_map to intermediate directory 
         '''
         output_file = os.path.join(output_dir, 'follow_map-csv')
         rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
-            .filter(lambda x: date_filter("0000-00-00", x[0], end_date))\
+            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: x[4] == 'F').cache()
         rdd_follow = rdd.map(lambda x: (x[1], [x[2]])).reduceByKey(lambda x, y: x + y).cache()
         print(rdd_follow.take(5))
@@ -166,11 +154,7 @@ class NetworkUtilities(object):
         output_file = os.path.join(output_dir, 'pid_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
 
-
-
     def create_popularity(self, sc, end_date, output_dir):
-
-
         def changeNoneToZero(x):
             if not x:
                 return 0
@@ -222,7 +206,7 @@ class NetworkUtilities(object):
         print("================")
         print(rdd_popularity.take(10))
         print("==================")
-        rdd_popularity = rdd_popularity.map(lambda x: (x[0],x[1][0]+x[1][1]))
+        rdd_popularity = rdd_popularity.map(lambda x: [x[0],x[1][0]+x[1][1]])
         print("======================")
         print(rdd_popularity.take(5))
         print("======================")

@@ -13,3 +13,17 @@ class NetworkHelpFunctions():
     @staticmethod
     def date_filter(prev_date, date, end_date):
         return NetworkHelpFunctions.date_filer_help(prev_date, date) and NetworkHelpFunctions.date_filer_help(date, end_date)
+
+    @staticmethod
+    def changeNoneToZero(x):
+        if not x:
+            return 0
+        return x
+
+    @staticmethod
+    def calculate_popularity(num_comments, num_appreciations, comment_weight, appreciation_weight):
+        if not num_comments:
+            return appreciation_weight * num_appreciations
+        elif not num_appreciations:
+            return comment_weight * num_comments
+        return appreciation_weight * num_appreciations + comment_weight * num_comments

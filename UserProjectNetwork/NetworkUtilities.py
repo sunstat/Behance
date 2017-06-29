@@ -116,8 +116,6 @@ class NetworkUtilities(object):
         rdd_fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(
             lambda x: x).distinct().zipWithIndex().cache()
 
-        fields_2_index = rdd_fields_map_index.collectAsMap()
-
         output_file = os.path.join(output_dir, 'fields_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_fields_map_index, output_file, 'csv')
 
@@ -125,6 +123,7 @@ class NetworkUtilities(object):
         '''
         build pid-2-fields 
         '''
+        fields_2_index = rdd_fields_map_index.collectAsMap()
 
 
 

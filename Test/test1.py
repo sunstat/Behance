@@ -45,6 +45,22 @@ class NetworkUtilities(object):
 
     # compare two date strings "2016-12-01"
 
+
+    @staticmethod
+    def date_filer_help(date1, date2):
+        date1_arr = date1.split("-")
+        date2_arr = date2.split("-")
+        for i in range(len(date1_arr)):
+            if int(date1_arr[i]) < int(date2_arr[i]):
+                return True
+            elif int(date1_arr[i]) > int(date2_arr[i]):
+                return False
+        return True
+
+    @staticmethod
+    def date_filter(prev_date, date, end_date):
+        return NetworkUtilities.date_filer_help(prev_date, date) and NetworkUtilities.date_filer_help(date, end_date)
+
     def __init__(self, action_file, owner_file, program_name, max_executors, config_file, comment_weight, appreciation_weight):
 
         self.action_file = action_file
@@ -62,20 +78,6 @@ class NetworkUtilities(object):
     extract neighbors in user network and uids set which involved in the network built 
     '''
 
-    staticmethod
-    def date_filer_help(date1, date2):
-        date1_arr = date1.split("-")
-        date2_arr = date2.split("-")
-        for i in range(len(date1_arr)):
-            if int(date1_arr[i]) < int(date2_arr[i]):
-                return True
-            elif int(date1_arr[i]) > int(date2_arr[i]):
-                return False
-        return True
-
-    staticmethod
-    def date_filter(prev_date, date, end_date):
-        return NetworkUtilities.date_filer_help(prev_date, date) and NetworkUtilities.date_filer_help(date, end_date)
 
     def extract_neighbors_from_users_network(self, sc, end_date):
 

@@ -28,15 +28,14 @@ def init_spark(name, max_excutors):
             .set("spark.dynamicAllocation.enabled", "false")
             .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
             .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer"))
-
-    sc = SparkContext.getOrCreate(conf)
+    sc = SparkContext(conf=conf)
     sc.setLogLevel('ERROR')
     sqlContext = HiveContext(sc)
     return sc, sqlContext
 
 
 if __name__ == "__main__":
-    sc, _ = init_spark('olivia', 20)
+    sc, _ = init_spark('olivia', 10)
     network_utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1, 2)
     network_utilities.write_to_intermediate_directory(sc)
     #network_utilities.handle_uid_pid(sc, network_utilities.uid_set)

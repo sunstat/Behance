@@ -173,7 +173,24 @@ class NetworkUtilities(object):
 
 
     def __calculate_popularity(self, rdd):
-        pass
+        def calculate_popularity(num_comments, num_appreciations, comment_weight, appreciation_weight):
+            if not num_comments:
+                return appreciation_weight*num_appreciations
+            elif not num_appreciations:
+                return comment_weight*num_comments
+            else:
+                return appreciation_weight*num_appreciations+comment_weight*num_comments
+
+        rdd_pid_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len)
+        rdd_pid_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len)
+        temp_left = rdd_pid_num_comments.leftOuterJoin(rdd_pid_num_appreciations)
+        print(temp_left.take(10))
+        temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations)
+        print(temp_right.take(10))
+        rdd_appreciations = temp_left.union(temp_right).distinct()
+        print(rdd_appreciations.take(10))
+        rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x[1][0], x[1][1],
+            self.comment_weight, self.appreciation_weight)))
 
 
     def create_popularity(self, sc, end_date, output_dir):
@@ -226,6 +243,8 @@ class NetworkUtilities(object):
         rdd_appreciations = temp_left.union(temp_right).distinct()
         print(rdd_appreciations.take(10))
         rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x[1][0],x[1][1],self.comment_weight,self.appreciation_weight)))
+        print(" ============== ")
+        print(rdd_popularity.take(5))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.reduceByKey(lambda x,y: x+y)
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')

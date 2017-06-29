@@ -218,8 +218,10 @@ class NetworkUtilities(object):
         print("================")
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.map(lambda x: (x[0], calculate_popularity(x[1][0], x[1][1], self.comment_weight, self.appreciation_weight)))
-        print(rdd_popularity)
         rdd_popularity.reduceByKey(lambda x, y: x+y)
+        print("======================")
+        print(rdd_popularity.take(5))
+        print("======================")
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
         IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')
 
@@ -256,8 +258,6 @@ class NetworkUtilities(object):
         rdd_cur = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
             lambda x: date_filter("0000-00-00", x[0], cur_date)) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
-
-
 
     def write_to_intermediate_directory(self, sc):
         end_date = self.arguments_arr[0]

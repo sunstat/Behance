@@ -12,4 +12,4 @@ class NetworkHelpFunctions():
 
     @staticmethod
     def date_filter(prev_date, date, end_date):
-        return NetworkUtilities.date_filer_help(prev_date, date) and NetworkUtilities.date_filer_help(date, end_date)
+        return NetworkHelpFunctions.date_filer_help(prev_date, date) and NetworkHelpFunctions.date_filer_help(date, end_date)

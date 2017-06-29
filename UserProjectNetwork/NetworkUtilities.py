@@ -244,7 +244,7 @@ class NetworkUtilities(object):
         print("================")
         print(rdd_appreciations.take(10))
         print(" ============== ")
-        rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x, self.comment_weight, self.appreciation_weight)))
+        rdd_popularity = rdd_appreciations.map(lambda x: calculate_popularity(x, self.comment_weight, self.appreciation_weight))
         print(rdd_popularity.take(5))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.reduceByKey(lambda x,y: x+y)

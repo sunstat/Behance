@@ -187,6 +187,9 @@ class NetworkUtilities(object):
         def date_filter(prev_date, date, end_date_filter):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date_filter)
 
+
+
+
         def calculate_popularity(num_comments, num_appreciations, comment_weight, appreciation_weight):
             if not num_comments:
                 return appreciation_weight*num_appreciations
@@ -204,14 +207,15 @@ class NetworkUtilities(object):
 
         pid_set = set(rdd_popularity_base.map(lambda x:x[0]).collect())
 
-        rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
-            lambda x: date_filter("0000-00-00", x[0], end_date)) \
-            .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
-
         pid_set_broad = sc.broadcast(pid_set)
 
         def pid_filter(pid):
             return pid in pid_set_broad.value
+
+        rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
+            lambda x: date_filter("0000-00-00", x[0], end_date)) \
+            .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
+
 
         rdd_pid_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len)
         rdd_pid_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len)
@@ -232,6 +236,7 @@ class NetworkUtilities(object):
         popularity_cur_file = os.path.join(intermediate_dir, base_date, 'pid_2_popularity-csv')
         rdd_popularity_base = sc.textFile(popularity_base_file).map(lambda x: x.split(','))
         pid_set = set(rdd_popularity_base.map(lambda x: x[0]).collect())
+        rdd_popularity = sc.textFile(popularity_cur_file).map(lambda x: x.split(','))
 
     def write_to_intermediate_directory(self, sc):
         end_date = self.arguments_arr[0]

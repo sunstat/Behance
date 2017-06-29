@@ -207,16 +207,17 @@ class NetworkUtilities(object):
         def date_filter(prev_date, date, end_date_filter):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date_filter)
 
-        def calculate_popularity(num_comments, num_appreciations, comment_weight, appreciation_weight):
+        def calculate_popularity(x, comment_weight, appreciation_weight):
+            num_comments = x[1][0]
+            num_appreciations = x[1][1]
             if not num_comments:
-                return appreciation_weight*num_appreciations
+                return x[0], appreciation_weight*num_appreciations
             elif not num_appreciations:
-                return comment_weight*num_comments
+                return x[0], comment_weight* num_comments
             else:
-                return appreciation_weight*num_appreciations+comment_weight*num_comments
+                return x[0], appreciation_weight * num_appreciations + comment_weight * num_comments
 
 
-        print(os.path.join(output_dir, 'pid_2_index-csv'))
         rdd_popularity_base = sc.textFile(os.path.join(output_dir, 'pid_2_index-csv')).map(lambda x: x.split(',')) \
             .map(lambda x: (x[0], 0))
 
@@ -243,7 +244,7 @@ class NetworkUtilities(object):
         print("================")
         print(rdd_appreciations.take(10))
         print(" ============== ")
-        rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x[1][0],x[1][1],self.comment_weight,self.appreciation_weight)))
+        rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x, self.comment_weight, self.appreciation_weight)))
         print(rdd_popularity.take(5))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.reduceByKey(lambda x,y: x+y)

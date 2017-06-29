@@ -37,7 +37,7 @@ def init_spark(name, max_excutors):
     return sc, sqlContext
 
 sc, _ = init_spark('olivia', 10)
-sc.addFile('/home/yiming/Behance/Test/test1.py', '/home/yiming/Behance/Test/NetworkHelpFunctions.py')
+sc.addFile(['/home/yiming/Behance/Test/test1.py', '/home/yiming/Behance/Test/NetworkHelpFunctions.py'])
 network_utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1, 2)
 network_utilities.extract_neighbors_from_users_network(sc, "2016-06-30")
 sc.stop()

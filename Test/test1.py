@@ -75,7 +75,6 @@ class NetworkUtilities(object):
         print follow_map to intermediate directory 
         '''
         rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
-            .filter(lambda x: NetworkUtilities.date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: x[4] == 'F').cache()
         rdd_follow = rdd.map(lambda x: (x[1], [x[2]])).reduceByKey(lambda x, y: x + y).cache()
         print(rdd_follow.take(5))

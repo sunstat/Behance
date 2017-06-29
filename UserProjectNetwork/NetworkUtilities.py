@@ -129,9 +129,9 @@ class NetworkUtilities(object):
 
         def trim_str_array(str_arr):
             return [fields_2_index_broad.value[x] for x in str_arr if x]
-
-        rdd_owners.map(lambda x: (x[0], trim_str_array(x[3:])))
-
+        rdd = rdd_owners.map(lambda x: (x[0], trim_str_array(x[3:])))
+        output_file = os.path.join(output_dir, 'pid_2_fields_index-csv')
+        IOutilities.print_rdd_to_file(rdd, output_file, 'tsv')
 
         '''
         print owners_map to intermediate directory
@@ -175,7 +175,7 @@ class NetworkUtilities(object):
         rdd_popularity = temp_left.union(temp_right).distinct()\
             .map(lambda x: (x[0], (NetworkHelpFunctions.change_none_to_zero(x[1][0]), NetworkHelpFunctions.change_none_to_zero(x[1][1]))))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
-        rdd_popularity = rdd_popularity.map(lambda x: (x[0], NetworkHelpFunctions.calculate_popularity(x[1][0],x[1][1],self.comment_weight, self.appreciation_weight)))
+        rdd_popularity = rdd_popularity.map(lambda x: (x[0], NetworkHelpFunctions.calculate_popularity(x[1][0],x[1][1],1, 2)))
         print("======================")
         print(rdd_popularity.take(5))
         print("======================")

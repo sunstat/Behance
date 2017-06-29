@@ -23,8 +23,4 @@ class NetworkHelpFunctions():
 
     @staticmethod
     def calculate_popularity(num_comments, num_appreciations, comment_weight, appreciation_weight):
-        if not num_comments:
-            return appreciation_weight * num_appreciations
-        elif not num_appreciations:
-            return comment_weight * num_comments
         return appreciation_weight * num_appreciations + comment_weight * num_comments

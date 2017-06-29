@@ -38,6 +38,7 @@ if __name__ == "__main__":
     sc, _ = init_spark('olivia', 10)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
+    sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     network_utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1, 2)
     network_utilities.write_to_intermediate_directory(sc)
     #network_utilities.handle_uid_pid(sc, network_utilities.uid_set)

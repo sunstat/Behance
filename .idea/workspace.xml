@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Test/IOutilities.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" afterPath="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IOutilities.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IOutilities.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test/IOutilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1275">
-              <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+            <state relative-caret-position="527">
+              <caret line="41" column="41" lean-forward="true" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -64,12 +64,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NetworkUtilities.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NetworkUtilities.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="383">
+              <caret line="218" column="67" lean-forward="false" selection-start-line="218" selection-start-column="67" selection-end-line="218" selection-end-column="67" />
+              <folding>
+                <element signature="e#79#122#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -185,8 +187,8 @@
         <option value="$PROJECT_DIR$/UserProjectNetwork/run.py" />
         <option value="$PROJECT_DIR$/Model/pageRank.py" />
         <option value="$PROJECT_DIR$/Test/test1.py" />
-        <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" />
         <option value="$PROJECT_DIR$/Test/IOutilities.py" />
+        <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" />
       </list>
     </option>
   </component>
@@ -829,14 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="516">
@@ -847,9 +841,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Test/IOutilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+        <state relative-caret-position="527">
+          <caret line="41" column="41" lean-forward="true" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="218" column="67" lean-forward="false" selection-start-line="218" selection-start-column="67" selection-end-line="218" selection-end-column="67" />
+          <folding>
+            <element signature="e#79#122#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

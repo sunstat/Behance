@@ -189,9 +189,8 @@ class NetworkUtilities(object):
         print(temp_right.take(10))
         rdd_appreciations = temp_left.union(temp_right).distinct()
         print(rdd_appreciations.take(10))
-        rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x[1][0], x[1][1],
-            self.comment_weight, self.appreciation_weight)))
-
+        rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x[1][0], x[1][1],self.comment_weight, self.appreciation_weight)))
+        return rdd_popularity
 
     def create_popularity(self, sc, end_date, output_dir):
 
@@ -241,15 +240,15 @@ class NetworkUtilities(object):
         temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations)
         print(temp_right.take(10))
         rdd_appreciations = temp_left.union(temp_right).distinct()
+        print("================")
         print(rdd_appreciations.take(10))
-        rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x[1][0],x[1][1],self.comment_weight,self.appreciation_weight)))
         print(" ============== ")
+        rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x[1][0],x[1][1],self.comment_weight,self.appreciation_weight)))
         print(rdd_popularity.take(5))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.reduceByKey(lambda x,y: x+y)
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
         IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')
-
 
 
     def calculate_increase_popularity(self, sc, intermediate_dir, base_date, cur_date):

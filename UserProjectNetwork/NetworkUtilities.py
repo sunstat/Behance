@@ -167,15 +167,6 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
 
 
-    '''
-    def create_user_network(self):
-        num_users = len(self.uid_set)
-        self.user_network = csr_matrix((num_users, num_users))
-        for uid1, uids in self.follow_map.items():
-            for uid2 in uids:
-                self.user_network[self.uid_map_index[uid1], self.uid_map_index[uid2]] = 1
-        return self.user_network
-    '''
 
     def create_popularity(self, sc, end_date, output_dir):
 

@@ -168,7 +168,8 @@ class NetworkUtilities(object):
         print(temp_left.take(10))
         temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations).filter(lambda x: not x[1][0])
         print(temp_right.take(10))
-        rdd_popularity = temp_left.union(temp_right).distinct().map(lambda x: (x[0], (NetworkHelpFunctions.change_none_to_zero(x[1][0]), NetworkHelpFunctions.change_none_to_zero(x[1][1]))))
+        rdd_popularity = temp_left.union(temp_right).distinct()\
+            .map(lambda x: (x[0], (NetworkHelpFunctions.change_none_to_zero(x[1][0]), NetworkHelpFunctions.change_none_to_zero(x[1][1]))))
         print("================")
         print(rdd_popularity.take(10))
         print("==================")
@@ -179,7 +180,6 @@ class NetworkUtilities(object):
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
         print(output_file)
         IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')
-
 
     def write_to_intermediate_directory(self, sc):
         end_date = self.arguments_arr[0]

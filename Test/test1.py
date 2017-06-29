@@ -24,6 +24,19 @@ else:
     owners_file = os.path.join(behance_data_dir, "owners-csv")
     intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
 
+
+
+
+def init_spark(name, max_excutors):
+    conf = (SparkConf().setAppName(name)
+            .set("spark.dynamicAllocation.enabled", "false")
+            .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
+            .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer"))
+    sc = SparkContext(conf=conf)
+    sc.setLogLevel('ERROR')
+    sqlContext = HiveContext(sc)
+    return sc, sqlContext
+
 class NetworkUtilities(object):
 
     '''
@@ -80,9 +93,7 @@ class NetworkUtilities(object):
     def date_filter(prev_date, date, end_date):
         return NetworkUtilities.date_filer_help(prev_date, date) and NetworkUtilities.date_filer_help(date, end_date)
 
-
-
-    def extract_neighbors_from_users_network(self, sc, end_date, output_dir):
+    def extract_neighbors_from_users_network(self, sc, end_date):
 
         '''
         print follow_map to intermediate directory 
@@ -102,7 +113,7 @@ class NetworkUtilities(object):
 
         rdd_uid_index = rdd.flatMap(lambda x: [x[1],x[2]]).distinct().zipWithIndex().cache()
         print (rdd_uid_index.take(5))
-        IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
+        #IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 
         ls = rdd_uid_index.map(lambda x: x[0]).collect()
         uid_set = set(ls)
@@ -110,4 +121,6 @@ class NetworkUtilities(object):
         self.uid_set = uid_set
 
 if __name__ == "__main__":
-
+    sc, _ = init_spark('olivia', 10)
+    network_utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1, 2)
+    network_utilities.extract_neighbors_from_users_network(sc, "2016-06-30")

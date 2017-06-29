@@ -43,13 +43,6 @@ class NetworkUtilities(object):
     methods used only within in this class
     '''
 
-    def __extract_parameters(self):
-        arguments_arr = []
-        with open(self.config_file, 'r') as f:
-            for line in f:
-                arguments_arr.append(line.strip())
-        return arguments_arr
-
     # compare two date strings "2016-12-01"
 
     def __init__(self, action_file, owner_file, program_name, max_executors, config_file, comment_weight, appreciation_weight):
@@ -64,15 +57,6 @@ class NetworkUtilities(object):
         NetworkUtilities.behance_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance"
         NetworkUtilities.behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
         NetworkUtilities.azure_intermediate_dir = os.path.join(NetworkUtilities.behance_dir, "IntermediateResult")
-
-        '''
-        two intermediate results for 
-        '''
-        self.uid_set = None
-        '''
-        ===============================
-        '''
-        self.arguments_arr = self.__extract_parameters()
 
     '''
     extract neighbors in user network and uids set which involved in the network built 
@@ -110,9 +94,7 @@ class NetworkUtilities(object):
         #IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 
         ls = rdd_uid_index.map(lambda x: x[0]).collect()
-        uid_set = set(ls)
 
-        self.uid_set = uid_set
 
 if __name__ == "__main__":
     sc, _ = init_spark('olivia', 10)

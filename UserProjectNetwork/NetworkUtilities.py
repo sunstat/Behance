@@ -169,10 +169,8 @@ class NetworkUtilities(object):
         print(temp_right.take(10))
         rdd_popularity = temp_left.union(temp_right).distinct()\
             .map(lambda x: (x[0], (NetworkHelpFunctions.change_none_to_zero(x[1][0]), NetworkHelpFunctions.change_none_to_zero(x[1][1]))))
-        print("================")
-        print(rdd_popularity.take(10))
-        print("==================")
-        rdd_popularity = rdd_popularity.map(lambda x: [x[0],x[1][0]+x[1][1]])
+        rdd_popularity = rdd_popularity.union(rdd_popularity_base)
+        rdd_popularity = rdd_popularity.map(lambda x: (x[0], NetworkHelpFunctions.calculate_popularity(x[1][0],x[1][1],self.comment_weight, self.appreciation_weight)))
         print("======================")
         print(rdd_popularity.take(5))
         print("======================")

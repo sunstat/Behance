@@ -4,7 +4,8 @@ class pageRank():
         self.uid_2_index_file = uid_2_index_file
         self.num_iters = num_iters
 
-    def run(self):
+    def run(self, sc):
+        sc.
 
 
 

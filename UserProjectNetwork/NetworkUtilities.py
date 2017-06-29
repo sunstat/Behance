@@ -188,7 +188,7 @@ class NetworkUtilities(object):
         def calculate_popularity(x, comment_weight, appreciation_weight):
             num_comments = x[1][0]
             num_appreciations = x[1][1]
-            return x[0], x[1][0] 
+            return x[0], x[1][0]
             '''
             if not num_comments:
                 return x[0], appreciation_weight*num_appreciations
@@ -225,7 +225,7 @@ class NetworkUtilities(object):
         print("================")
         print(rdd_appreciations.take(10))
         print(" ============== ")
-        rdd_popularity = rdd_appreciations.map(lambda x: calculate_popularity(x, self.comment_weight, self.appreciation_weight)).persist()
+        rdd_popularity = rdd_appreciations.map(lambda x: x[0]).persist()
         print(rdd_popularity.take(5))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.reduceByKey(lambda x,y: x+y)

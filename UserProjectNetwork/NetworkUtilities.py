@@ -185,22 +185,15 @@ class NetworkUtilities(object):
         def date_filter(prev_date, date, end_date_filter):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date_filter)
 
-        def calculate_popularity(x, comment_weight, appreciation_weight):
-            num_comments = x[1][0]
-            num_appreciations = x[1][1]
-            return x[0], x[1][0]
-            '''
+        def calculate_popularity(num_comments, num_appreciations, comment_weight, appreciation_weight):
             if not num_comments:
-                return x[0], appreciation_weight*num_appreciations
+                return appreciation_weight*num_appreciations
             elif not num_appreciations:
-                return x[0], comment_weight* num_comments
-            else:
-                return x[0], appreciation_weight * num_appreciations + comment_weight * num_comments
-            '''
-
+                return comment_weight* num_comments
+            return appreciation_weight * num_appreciations + comment_weight * num_comments
 
         rdd_popularity_base = sc.textFile(os.path.join(output_dir, 'pid_2_index-csv')).map(lambda x: x.split(',')) \
-            .map(lambda x: (x[0], 0))
+            .map(lambda x: (x[0], (0, 0)))
 
         print(rdd_popularity_base.take(10))
 
@@ -219,7 +212,7 @@ class NetworkUtilities(object):
         rdd_pid_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len)
         temp_left = rdd_pid_num_comments.leftOuterJoin(rdd_pid_num_appreciations)
         print(temp_left.take(10))
-        temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations)
+        temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations).filter(lambda x: not x[1][0])
         print(temp_right.take(10))
         rdd_appreciations = temp_left.union(temp_right).distinct()
         print("================")
@@ -229,10 +222,9 @@ class NetworkUtilities(object):
         print(rdd_popularity.take(5))
         print("flower flower")
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
-        rdd_popularity = rdd_popularity.reduceByKey(lambda x,y: x+y)
+        rdd_popularity = rdd_popularity.map(lambda x: (x[0], calculate_popularity(x[1][0], x[1][1], self.comment_weight, self.appreciation_weight)))
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
         IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')
-
 
     def calculate_increase_popularity(self, sc, intermediate_dir, base_date, cur_date):
         def date_filer_help(date1, date2):
@@ -280,15 +272,6 @@ class NetworkUtilities(object):
         #self.extract_neighbors_from_users_network(sc, end_date, output_dir)
         #self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
         self.create_popularity(sc, end_date, output_dir)
-
-        '''
-        base_date = self.arguments_arr[0]
-        for i in range(len(self.arguments_arr)-1):
-            prev_date = self.arguments_arr[i]
-            next_date = self.arguments_arr[i+1]
-            
-        '''
-
 
 
 

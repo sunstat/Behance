@@ -217,12 +217,13 @@ class NetworkUtilities(object):
         print(rdd_popularity.take(10))
         print("==================")
         #rdd_popularity = rdd_popularity.union(rdd_popularity_base)
-        rdd_popularity = rdd_popularity.map(lambda x: (x[0],x[1][0]))
+        rdd_popularity = rdd_popularity.map(lambda x: (x[0],x[1][0]+x[1][1]))
         #rdd_popularity.reduceByKey(lambda x, y: x+y)
         print("======================")
         print(rdd_popularity.take(5))
         print("======================")
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
+        print(output_file)
         IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')
 
 

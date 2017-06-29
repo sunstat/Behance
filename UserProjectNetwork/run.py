@@ -36,6 +36,7 @@ def init_spark(name, max_excutors):
 
 if __name__ == "__main__":
     sc, _ = init_spark('olivia', 10)
+    sc.addFile()
     network_utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1, 2)
     network_utilities.write_to_intermediate_directory(sc)
     #network_utilities.handle_uid_pid(sc, network_utilities.uid_set)

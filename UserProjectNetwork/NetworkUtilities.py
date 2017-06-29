@@ -227,6 +227,7 @@ class NetworkUtilities(object):
         print(" ============== ")
         rdd_popularity = rdd_appreciations.map(lambda x: x[0]).persist()
         print(rdd_popularity.take(5))
+        print("flower flower")
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.reduceByKey(lambda x,y: x+y)
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')

@@ -170,6 +170,12 @@ class NetworkUtilities(object):
         return self.user_network
     '''
 
+
+
+    def __calculate_popularity(self, rdd):
+        pass
+
+
     def create_popularity(self, sc, end_date, output_dir):
 
         def date_filer_help(date1, date2):
@@ -214,7 +220,9 @@ class NetworkUtilities(object):
         rdd_pid_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len)
         rdd_pid_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len)
         temp_left = rdd_pid_num_comments.leftOuterJoin(rdd_pid_num_appreciations)
+        print(temp_left.take(10))
         temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations)
+        print(temp_right.take(10))
         rdd_appreciations = temp_left.union(temp_right).distinct()
         print(rdd_appreciations.take(10))
         rdd_popularity = rdd_appreciations.map(lambda x: (x[0], calculate_popularity(x[1][0],x[1][1],self.comment_weight,self.appreciation_weight)))
@@ -255,11 +263,9 @@ class NetworkUtilities(object):
         def pid_filter(pid):
             return pid in pid_set_broad.value
 
-        rdd_popularity_cur = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
+        rdd_cur = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
             lambda x: date_filter("0000-00-00", x[0], cur_date)) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
-
-        rdd_popularity_base.join(rdd_popularity_cur)
 
 
 

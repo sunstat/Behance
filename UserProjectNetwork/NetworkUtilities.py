@@ -170,6 +170,12 @@ class NetworkUtilities(object):
 
     def create_popularity(self, sc, end_date, output_dir):
 
+
+        def changeNoneToZero(x):
+            if not x:
+                return 0
+            return x
+
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
             date2_arr = date2.split("-")
@@ -212,13 +218,11 @@ class NetworkUtilities(object):
         print(temp_left.take(10))
         temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations).filter(lambda x: not x[1][0])
         print(temp_right.take(10))
-        rdd_popularity = temp_left.union(temp_right).distinct()
+        rdd_popularity = temp_left.union(temp_right).distinct().map(lambda x: (x[0], (changeNoneToZero(x[1][0]), changeNoneToZero(x[1][1]))))
         print("================")
         print(rdd_popularity.take(10))
         print("==================")
-        #rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.map(lambda x: (x[0],x[1][0]+x[1][1]))
-        #rdd_popularity.reduceByKey(lambda x, y: x+y)
         print("======================")
         print(rdd_popularity.take(5))
         print("======================")

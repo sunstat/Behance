@@ -18,7 +18,7 @@ def init_spark(name, max_excutors):
 
 sc, sqlContext = init_spark('olivia', 20)
 
-sc.addFile()
+sc.addFile('/home/yiming/Behance/Model/FeatureExtraction/pageRank.py')
 
 intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
 cur_date = "2016-06-30"

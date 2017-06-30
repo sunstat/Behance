@@ -15,7 +15,6 @@ class IOutilities(object):
     '''
     shell_dir = "../EditData/ShellEdit"
 
-
     def __init__(self):
         pass
 
@@ -73,6 +72,6 @@ class IOutilities(object):
         if output_format == 'csv':
             rdd.map(lambda x: to_string(x)).saveAsTextFile(output_file)
         elif output_format == 'tsv':
-            rdd.map(lambda x: str(x[0])+"\t"+(to_string(x[1]))).saveAsTextFile(output_file)
+            rdd.map(lambda x: str(x[0])+"#"+(to_string(x[1]))).saveAsTextFile(output_file)
 
 

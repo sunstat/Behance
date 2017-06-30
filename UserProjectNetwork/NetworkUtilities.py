@@ -75,7 +75,7 @@ class NetworkUtilities(object):
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: x[4] == 'F').cache()
         rdd_follow = rdd.map(lambda x: (x[1], [x[2]])).reduceByKey(lambda x, y: x + y).cache()
-        print(rdd_follow.take(5))
+        print(rdd_follow.take(100))
         IOutilities.print_rdd_to_file(rdd_follow, output_file, 'tsv')
 
         '''
@@ -182,5 +182,5 @@ class NetworkUtilities(object):
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
         self.extract_neighbors_from_users_network(sc, end_date, output_dir)
-        self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
-        self.create_popularity(sc, end_date, output_dir)
+        #self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
+        #self.create_popularity(sc, end_date, output_dir)

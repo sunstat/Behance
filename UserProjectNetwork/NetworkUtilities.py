@@ -91,10 +91,12 @@ class NetworkUtilities(object):
         '''
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
-        rdd_uid_index = rdd.flatMap(lambda x: (x[1],x[2])).distinct().zipWithIndex().cache()
+        rdd_uid_index = rdd.flatMap(lambda x: (x[1],x[2])).distinct()\
         print("=====================")
+        print (rdd_uid_index.take(10))
         print (rdd_uid_index.count())
         print("=====================")
+        rdd_uid_index = rdd_uid_index.zipWithIndex().cache()
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 
         ls = rdd_uid_index.map(lambda x: x[0]).collect()

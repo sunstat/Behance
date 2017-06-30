@@ -70,21 +70,27 @@ class NetworkUtilities(object):
         '''
         print follow_map to intermediate directory 
         '''
-        output_file = os.path.join(output_dir, 'follow_map-tsv')
+        output_file = os.path.join(output_dir, 'follow_map-psv')
         rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: x[4] == 'F').cache()
         rdd_follow = rdd.map(lambda x: (x[1], [x[2]])).reduceByKey(lambda x, y: x + y).cache()
-        print(rdd_follow.take(100))
-        IOutilities.print_rdd_to_file(rdd_follow, output_file, 'tsv')
+        print(rdd_follow.take(10))
+        IOutilities.print_rdd_to_file(rdd_follow, output_file, 'psv')
+
+        '''
+        test num of incoming nodes
+        '''
+        rdd_incoming = rdd_follow.flatMap(lambda x: x[1]).distinct()
+        print (rdd_incoming.count())
 
         '''
         print uid_index to intermediate directory
         '''
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
-        rdd_uid_index = rdd.flatMap(lambda x: [x[1],x[2]]).distinct().zipWithIndex().cache()
-        print (rdd_uid_index.take(5))
+        rdd_uid_index = rdd.flatMap(lambda x: (x[1],x[2])).distinct().zipWithIndex().cache()
+        print (rdd_uid_index.count())
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 
         ls = rdd_uid_index.map(lambda x: x[0]).collect()

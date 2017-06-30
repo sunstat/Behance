@@ -75,14 +75,16 @@ class NetworkUtilities(object):
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: x[4] == 'F').cache()
         rdd_follow = rdd.map(lambda x: (x[1], [x[2]])).reduceByKey(lambda x, y: x + y).cache()
-        print(rdd_follow.take(10))
         IOutilities.print_rdd_to_file(rdd_follow, output_file, 'psv')
 
         '''
         test num of incoming nodes
         '''
         rdd_incoming = rdd_follow.flatMap(lambda x: x[1]).distinct()
+        print("=====================")
+        print (rdd_incoming.take(10))
         print (rdd_incoming.count())
+        print("=====================")
 
         '''
         print uid_index to intermediate directory
@@ -90,7 +92,9 @@ class NetworkUtilities(object):
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
         rdd_uid_index = rdd.flatMap(lambda x: (x[1],x[2])).distinct().zipWithIndex().cache()
+        print("=====================")
         print (rdd_uid_index.count())
+        print("=====================")
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 
         ls = rdd_uid_index.map(lambda x: x[0]).collect()

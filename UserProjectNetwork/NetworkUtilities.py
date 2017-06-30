@@ -91,7 +91,7 @@ class NetworkUtilities(object):
         '''
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
-        rdd_uid_index = rdd.flatMap(lambda x: (x[1],x[2])).distinct()\
+        rdd_uid_index = rdd.flatMap(lambda x: (x[1],x[2])).distinct()
         print("=====================")
         print (rdd_uid_index.take(10))
         print (rdd_uid_index.count())

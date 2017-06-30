@@ -30,3 +30,5 @@ pageRank = PageRank(follow_file, uid_2_index_file, num_iters)
 
 pageRank.run(sc)
 
+sc.stop()
+

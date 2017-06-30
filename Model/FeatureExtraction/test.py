@@ -22,7 +22,7 @@ sc.addFile('/home/yiming/Behance/Model/FeatureExtraction/pageRank.py')
 
 intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
 cur_date = "2016-06-30"
-follow_file = os.path.join(intermediate_result_dir,cur_date, 'follow_map-csv')
+follow_file = os.path.join(intermediate_result_dir,cur_date, 'follow_map-psv')
 uid_2_index_file = os.path.join(intermediate_result_dir,cur_date, 'uid_2_index-csv')
 
 num_iters = 10

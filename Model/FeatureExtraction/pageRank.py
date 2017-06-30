@@ -25,7 +25,7 @@ class PageRank():
         return parts[0], parts[1]
 
     def run(self, sc):
-        ranks = sc.textFile(self.uid_2_index_file)
+        ranks = sc.textFile(self.uid_2_index_file).map(lambda x: x.split(',')).map(lambda x: (x[0], 0))
         links = sc.textFile(self.follow_file).map(lambda x: re.split('#', x))\
             .map(lambda x: (x[0], x[1].split(',')))
         print(links.take(5))

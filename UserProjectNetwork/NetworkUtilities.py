@@ -13,9 +13,6 @@ from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
 
 
-
-
-
 local_run = False
 
 if local_run:

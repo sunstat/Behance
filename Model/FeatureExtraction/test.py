@@ -3,10 +3,7 @@ from pyspark.sql import HiveContext
 import pyspark.sql.functions as F
 from pyspark.sql.types import StructField, StructType, StringType, LongType, DoubleType, IntegerType, BooleanType
 import os, sys
-import operator
-from scipy.sparse import coo_matrix, csr_matrix
-from subprocess import Popen
-
+from pageRank import PageRank
 
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
@@ -20,9 +17,11 @@ def init_spark(name, max_excutors):
     return sc, sqlContext
 
 sc, sqlContext = init_spark('olivia', 20)
-x = sc.parallelize([("a", 1), ("b", 4)])
-y = sc.parallelize([("a", 2), ["d", 5]])
+intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
+cur_date = "2016-06-30"
+follow_file = os.path.join(intermediate_result_dir,cur_date, 'follow_map-csv')
+uid_2_index_file = os.path.join(intermediate_result_dir,cur_date, 'uid_2_index-csv')
 
-w = x.join(y)
+num_iters = 10
+pageRank = PageRank(follow_file, uid_2_index_file, num_iters)
 
-print(w.take(5))

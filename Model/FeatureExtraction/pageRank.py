@@ -21,12 +21,12 @@ class PageRank():
     @staticmethod
     def parse_neighbors(urls):
         """Parses a urls pair string into urls pair."""
-        parts = re.split(r'\s+', urls)
+        parts = re.split('#', urls)
         return parts[0], parts[1]
 
     def run(self, sc):
-        ranks = sc.textFile(self.uid_2_index_file).map(lambda x: (x[0], 0))
-        links =  sc.textFile(self.follow_file).map(lambda x: re.split('#', x))\
+        ranks = sc.textFile(self.uid_2_index_file)
+        links = sc.textFile(self.follow_file).map(lambda x: re.split('#', x))\
             .map(lambda x: (x[0], x[1].split(',')))
         print(links.take(5))
         incoming_nodes = links.flatMap(lambda x: x[1]).distinct()

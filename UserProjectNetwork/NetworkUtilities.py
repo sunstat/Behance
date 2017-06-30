@@ -175,9 +175,6 @@ class NetworkUtilities(object):
             .map(lambda x: (x[0], (NetworkHelpFunctions.change_none_to_zero(x[1][0]), NetworkHelpFunctions.change_none_to_zero(x[1][1]))))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.map(lambda x: (x[0], NetworkHelpFunctions.calculate_popularity(x[1][0],x[1][1], 1, 2)))
-        print("======================")
-        print(rdd_popularity.take(5))
-        print("======================")
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
         print(output_file)
         IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')
@@ -190,6 +187,3 @@ class NetworkUtilities(object):
         self.extract_neighbors_from_users_network(sc, end_date, output_dir)
         self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
         self.create_popularity(sc, end_date, output_dir)
-
-
-

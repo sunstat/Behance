@@ -28,7 +28,7 @@ class PageRank():
         ranks = sc.textFile(self.uid_2_index_file).map(lambda x: (x[0], 0))
         links =  sc.textFile(self.follow_file).map(lambda x: re.split(r'\s+', x))\
             .map(lambda x: (x[0], x[1].split(',')))
-        incoming_nodes = links.flagMap(lambda x: x[1]).distinct()
+        incoming_nodes = links.flatMap(lambda x: x[1]).distinct()
         print(ranks.count())
         print(incoming_nodes.count())
 

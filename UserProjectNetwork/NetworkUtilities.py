@@ -97,6 +97,7 @@ class NetworkUtilities(object):
         print (rdd_uid_index.count())
         print("=====================")
         rdd_uid_index = rdd_uid_index.zipWithIndex().cache()
+        print (rdd_uid_index.count())
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 
         ls = rdd_uid_index.map(lambda x: x[0]).collect()

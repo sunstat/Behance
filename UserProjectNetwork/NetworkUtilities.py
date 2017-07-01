@@ -95,8 +95,8 @@ class NetworkUtilities(object):
 
         rdd_follow = rdd_incoming.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         print("pruning both out and in nodes")
-        print (rdd_incoming.take(10))
-        print (rdd_incoming.count())
+        print (rdd_follow.take(10))
+        print (rdd_follow.count())
         print("pruning both out and in nodes")
 
         IOutilities.print_rdd_to_file(rdd_follow, output_file, 'psv')

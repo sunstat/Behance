@@ -71,29 +71,29 @@ class NetworkUtilities(object):
         print follow_map to intermediate directory 
         '''
         output_file = os.path.join(output_dir, 'follow_map-psv')
-        rdd = sc.textFile(action_file).map(lambda x: x.split(','))\
+        rdd_pair = sc.textFile(action_file).map(lambda x: x.split(','))\
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date))\
-            .filter(lambda x: x[4] == 'F').cache()
+            .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         '''
         test num of incoming nodes
         '''
 
-        rdd_incoming = rdd.map(lambda x: x[2]).distinct()
+        rdd_incoming_ls = rdd_pair.map(lambda x: x[1]).distinct()
 
         print("number of nodes witn incoming degree greater than zero")
-        print (rdd_incoming.take(10))
-        print (rdd_incoming.count())
+        print (rdd_incoming_ls.take(10))
+        print (rdd_incoming_ls.count())
         print("number of nodes witn incoming degree greater than zero")
-        ls = rdd_incoming.collect()
+        ls = rdd_incoming_ls.collect()
         uid_set = set(ls)
         uid_set_broad = sc.broadcast(uid_set)
 
         def incoming_filter(uid):
             return uid in uid_set_broad
 
-        rdd_incoming = rdd.filter(lambda x: incoming_filter(x[1])).filter(lambda x: incoming_filter(x[2]))
+        rdd_incoming = rdd_pair.filter(lambda x: incoming_filter(x[0]))
 
-        rdd_follow = rdd_incoming.map(lambda x: (x[1], [x[2]])).reduceByKey(lambda x, y: x + y).cache()
+        rdd_follow = rdd_incoming.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         print("pruning both out and in nodes")
         print (rdd_incoming.take(10))
         print (rdd_incoming.count())
@@ -106,12 +106,7 @@ class NetworkUtilities(object):
         '''
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
-        rdd_uid_index = rdd.flatMap(lambda x: (x[1],x[2])).incoming_filter(incoming_filter).distinct()
-        print("=====================")
-        print (rdd_uid_index.take(10))
-        print (rdd_uid_index.count())
-        print("=====================")
-        rdd_uid_index = rdd_uid_index.zipWithIndex().cache()
+        rdd_uid_index = rdd_incoming.zipWithIndex().cache()
         print (rdd_uid_index.count())
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 

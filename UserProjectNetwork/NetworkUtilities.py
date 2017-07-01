@@ -106,7 +106,7 @@ class NetworkUtilities(object):
         '''
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
-        rdd_uid_index = rdd_incoming.zipWithIndex().cache()
+        rdd_uid_index = rdd_incoming.map(lambda x: x[0]).zipWithIndex().cache()
         print (rdd_uid_index.count())
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 

@@ -37,8 +37,8 @@
       <file leaf-file-name="NetworkUtilities.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="93" column="71" lean-forward="false" selection-start-line="93" selection-start-column="71" selection-end-line="93" selection-end-column="71" />
+            <state relative-caret-position="347">
+              <caret line="93" column="79" lean-forward="true" selection-start-line="93" selection-start-column="79" selection-end-line="93" selection-end-column="79" />
               <folding>
                 <element signature="e#79#122#0" expanded="true" />
               </folding>
@@ -122,7 +122,6 @@
       <find>IOutilities</find>
       <find>intermediateResultDir</find>
       <find>date_filter</find>
-      <find>broad</find>
       <find>sc</find>
       <find>index</find>
       <find>SparkContext</find>
@@ -133,6 +132,7 @@
       <find>calculate_popularity</find>
       <find>left</find>
       <find>follow</find>
+      <find>broad</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -943,8 +943,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="93" column="71" lean-forward="false" selection-start-line="93" selection-start-column="71" selection-end-line="93" selection-end-column="71" />
+        <state relative-caret-position="347">
+          <caret line="93" column="79" lean-forward="true" selection-start-line="93" selection-start-column="79" selection-end-line="93" selection-end-column="79" />
           <folding>
             <element signature="e#79#122#0" expanded="true" />
           </folding>

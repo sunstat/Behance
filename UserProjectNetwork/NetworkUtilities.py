@@ -89,9 +89,9 @@ class NetworkUtilities(object):
         uid_set_broad = sc.broadcast(uid_set)
 
         def incoming_filter(uid):
-            return uid in uid_set_broad
+            return uid in uid_set_broad.value
 
-        rdd_incoming = rdd_pair.filter(lambda x: incoming_filter(x[0]))
+        rdd_incoming = rdd_pair.filter(lambda x: incoming_filter(x[0])).filter()
 
         rdd_follow = rdd_incoming.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         print("pruning both out and in nodes")

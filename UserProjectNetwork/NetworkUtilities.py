@@ -91,7 +91,7 @@ class NetworkUtilities(object):
         def incoming_filter(uid):
             return uid in uid_set_broad.value
 
-        rdd_incoming = rdd_pair.filter(lambda x: incoming_filter(x[0]))
+        rdd_incoming = rdd_pair.filter(lambda x: incoming_filter(x[1]))
 
         rdd_follow = rdd_incoming.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         print("pruning both out and in nodes")
@@ -106,7 +106,7 @@ class NetworkUtilities(object):
         '''
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
-        rdd_uid_index = rdd_follow.map(lambda x: x[0]).zipWithIndex().cache()
+        rdd_uid_index = rdd_incoming.zipWithIndex().cache()
         print (rdd_uid_index.count())
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 

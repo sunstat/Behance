@@ -13,3 +13,9 @@ class NetworkHelpFunctions():
     @staticmethod
     def date_filter(prev_date, date, end_date):
         return NetworkHelpFunctions.date_filer_help(prev_date, date) and NetworkHelpFunctions.date_filer_help(date, end_date)
+
+    '''
+    incoming pairs 
+    '''
+    @staticmethod
+    def filter_graph(x):

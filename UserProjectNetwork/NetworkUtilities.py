@@ -91,7 +91,7 @@ class NetworkUtilities(object):
         def incoming_filter(uid):
             return uid in uid_set_broad.value
 
-        rdd_incoming = rdd_pair.filter(lambda x: incoming_filter(x[0])).filter(lambda x: incoming_filter(x[1]))
+        rdd_incoming = rdd_pair.filter(lambda x: incoming_filter(x[0]))
 
         rdd_follow = rdd_incoming.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         print("pruning both out and in nodes")

@@ -28,18 +28,22 @@ class NetworkHelpFunctions():
     @staticmethod
     def filter_social_cycle(sc, rdd_pair):
         incoming_set = set(rdd_pair.map(lambda x : x[1]).collect())
-        incoming_set_broad = sc.broadcast(incoming_set)
+        outcoming_set = set(rdd_pair.map(lambda x : x[0]).collect())
+        filter_set = incoming_set.intersection(outcoming_set)
+        filter_set_broad = sc.broadcast(filter_set)
+        
+        def filter_user(uid):
+            return uid in filter_set_broad.value
 
-        def filter_incoming(uid):
-            return uid in incoming_set_broad.value
-
-        rdd_incoming = rdd_pair.filter(lambda x: filter_incoming(x[0])).cache()
-        while rdd_incoming.count() != len(incoming_set):
-            incoming_set = set(rdd_incoming.map(lambda x: x[1]).collect())
-            incoming_set_broad = sc.broadcast(incoming_set)
-            rdd_incoming = rdd_incoming.filter(lambda x: filter_incoming(x[0])).cache()
-            print len(incoming_set)
-        return rdd_incoming
+        rdd_filtered = rdd_pair.filter(lambda x: filter_user(x[0])).filter(lambda x: filter_user(x[1])).cache()
+        while rdd_filtered.count() != len(incoming_set):
+            incoming_set = set(rdd_pair.map(lambda x: x[1]).collect())
+            outcoming_set = set(rdd_pair.map(lambda x: x[0]).collect())
+            filter_set = incoming_set.intersection(outcoming_set)
+            filter_set_broad = sc.broadcast(filter_set)
+            rdd_filtered = rdd_pair.filter(lambda x: filter_user(x[0])).filter(lambda x: filter_user(x[1])).cache()
+            print len(rdd_filtered)
+        return rdd_filtered
 
 
 

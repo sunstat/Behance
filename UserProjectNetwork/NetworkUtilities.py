@@ -96,9 +96,7 @@ class NetworkUtilities(object):
         print (rdd_follow.take(10))
         print (rdd_follow.count())
         print("pruning both out and in nodes")
-
         IOutilities.print_rdd_to_file(rdd_follow, output_file, 'psv')
-
         '''
         print uid_index to intermediate directory
         '''

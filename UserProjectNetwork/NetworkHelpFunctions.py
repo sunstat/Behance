@@ -41,7 +41,7 @@ class NetworkHelpFunctions():
             outcoming_set = set(rdd_pair.map(lambda x: x[0]).collect())
             filter_set = incoming_set.intersection(outcoming_set)
             filter_set_broad = sc.broadcast(filter_set)
-            rdd_filtered = rdd_pair.filter(lambda x: filter_user(x[0])).filter(lambda x: filter_user(x[1])).cache()
+            rdd_filtered = rdd_filtered.filter(lambda x: filter_user(x[0])).filter(lambda x: filter_user(x[1])).cache()
             print len(filter_set)
         return rdd_filtered
 

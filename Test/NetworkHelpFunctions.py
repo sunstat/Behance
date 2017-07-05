@@ -18,4 +18,5 @@ class NetworkHelpFunctions():
     incoming pairs 
     '''
     @staticmethod
-    def filter_graph(x):
+    def filter_graph(rdd_pair):
+        rdd_incoming = rdd_pair

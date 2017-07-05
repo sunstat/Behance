@@ -66,7 +66,6 @@ class NetworkUtilities(object):
     '''
 
     def extract_neighbors_from_users_network(self, sc, end_date, output_dir):
-
         '''
         print follow_map to intermediate directory 
         '''
@@ -77,7 +76,6 @@ class NetworkUtilities(object):
         '''
         test num of incoming nodes
         '''
-
         rdd_incoming_ls = rdd_pair.map(lambda x: x[1]).distinct()
 
         print("number of nodes witn incoming degree greater than zero")
@@ -91,7 +89,7 @@ class NetworkUtilities(object):
         def incoming_filter(uid):
             return uid in uid_set_broad.value
 
-        rdd_incoming = rdd_pair.filter(lambda x: incoming_filter(x[1]))
+        rdd_incoming = NetworkHelpFunctions.filter_social_cycle(sc, rdd_pair)
 
         rdd_follow = rdd_incoming.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         print("pruning both out and in nodes")
@@ -106,7 +104,7 @@ class NetworkUtilities(object):
         '''
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
-        rdd_uid_index = rdd_incoming.zipWithIndex().cache()
+        rdd_uid_index = rdd_follow.map(lambda x: x[0]).zipWithIndex().cache()
         print (rdd_uid_index.count())
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
 

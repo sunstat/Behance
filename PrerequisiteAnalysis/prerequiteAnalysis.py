@@ -40,6 +40,7 @@ def init_spark(name, max_excutors):
     sqlContext = HiveContext(sc)
     return sc, sqlContext
 
+
 class prerequisiteAnalysis():
     def __init__(self, action_file, owner_file):
         self.action_file = action_file
@@ -72,25 +73,9 @@ class prerequisiteAnalysis():
         rdd_in = rdd_pair.map(lambda x: (x[1], [x[0]])).reduceByKey(lambda x, y: x + y).cache()
         in_degree_arr = rdd_in.map(lambda x: len(x[1])).collect()
 
-        plt.figure(1)
-        plt.subplot(121)
-        plt.hist(out_degree_arr)
-        plt.title("Out Degree Distribution")
-        plt.xlabel("Out Degree")
-        plt.ylabel("Frequency")
+        return out_degree_arr, in_degree_arr
 
-        plt.subplot(122)
-        plt.hist(in_degree_arr)
-        plt.title("In Degree Distribution")
-        plt.xlabel("In Degree")
-        plt.ylabel("Frequency")
-
-        plt.show()
-        plt.pause(10)
-        plt.close()
-
-
-if  __name__ == "__main__":
+if __name__ == "__main__":
     sc, _ = init_spark('olivia', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
@@ -98,4 +83,20 @@ if  __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
 
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file)
-    prerequisite_analysis.degree_distribution(sc, '2016-06-30')
+    out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
+    plt.figure(1)
+    plt.subplot(121)
+    plt.hist(out_degree_arr)
+    plt.title("Out Degree Distribution")
+    plt.xlabel("Out Degree")
+    plt.ylabel("Frequency")
+
+    plt.subplot(122)
+    plt.hist(in_degree_arr)
+    plt.title("In Degree Distribution")
+    plt.xlabel("In Degree")
+    plt.ylabel("Frequency")
+
+    plt.show()
+    plt.pause(10)
+    plt.close()

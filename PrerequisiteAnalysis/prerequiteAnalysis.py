@@ -44,7 +44,6 @@ class prerequisiteAnalysis():
     def __init__(self, action_file, owner_file):
         self.action_file = action_file
         self.owners_file = owner_file
-        self.appreciation_weight = appreciation_weight
         prerequisiteAnalysis.shell_dir = "../EditData/ShellEdit"
         prerequisiteAnalysis.local_intermediate_dir = "../IntermediateDir"
         prerequisiteAnalysis.behance_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance"

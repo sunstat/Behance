@@ -64,7 +64,6 @@ class NetworkUtilities(object):
     '''
     extract neighbors in user network and uids set which involved in the network built 
     '''
-
     def extract_neighbors_from_users_network(self, sc, end_date, output_dir):
         '''
         print follow_map to intermediate directory 
@@ -73,9 +72,13 @@ class NetworkUtilities(object):
         rdd_pair = sc.textFile(action_file).map(lambda x: x.split(','))\
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
+
+        '''
+        build 
+        '''
+
         '''
         test num of incoming nodes
-        '''
         rdd_incoming_ls = rdd_pair.map(lambda x: x[1]).distinct()
 
         print("number of nodes witn incoming degree greater than zero")
@@ -85,13 +88,15 @@ class NetworkUtilities(object):
         ls = rdd_incoming_ls.collect()
         uid_set = set(ls)
         uid_set_broad = sc.broadcast(uid_set)
-
         def incoming_filter(uid):
             return uid in uid_set_broad.value
 
         rdd_incoming = NetworkHelpFunctions.filter_social_cycle(sc, rdd_pair)
+        '''
 
-        rdd_follow = rdd_incoming.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
+
+
+        rdd_follow = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         print("pruning both out and in nodes")
         print (rdd_follow.take(10))
         print (rdd_follow.count())
@@ -105,7 +110,6 @@ class NetworkUtilities(object):
         rdd_uid_index = rdd_follow.map(lambda x: x[0]).zipWithIndex().cache()
         print (rdd_uid_index.count())
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
-
 
     def handle_uid_pid(self, sc, uid_set, end_date, output_dir):
 

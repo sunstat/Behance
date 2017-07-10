@@ -1,3 +1,6 @@
+import numpy as np
+from scipy.sparse import csr_matrix
+
 class NetworkHelpFunctions():
 
     @staticmethod
@@ -25,8 +28,15 @@ class NetworkHelpFunctions():
     def calculate_popularity(num_comments, num_appreciations, comment_weight, appreciation_weight):
         return appreciation_weight * num_appreciations + comment_weight * num_comments
 
+
     @staticmethod
-    def filter_social_cycle(sc, rdd_pair):
+    def degree_filter(rdd_pair, in_coming_degree_threshold):
+        rdd_follow = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
+        rdd_follow = rdd_follow.firlter(lambda x : len(x[1])>= in_coming_degree_threshold)
+
+
+    @staticmethod
+    def filter_social_cycle_brutal(sc, rdd_pair):
         incoming_set = set(rdd_pair.map(lambda x : x[1]).collect())
         outcoming_set = set(rdd_pair.map(lambda x : x[0]).collect())
         filter_set = incoming_set.intersection(outcoming_set)
@@ -45,6 +55,10 @@ class NetworkHelpFunctions():
             print len(filter_set)
         return rdd_filtered
 
+
+    @staticmethod
+    def filter_social_cycle_strong_component(sc, rdd_pair):
+        pass
 
 
 

@@ -31,3 +31,25 @@ def calculate_increase_popularity(self, sc, intermediate_dir, base_date, cur_dat
     rdd_cur = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(
         lambda x: date_filter("0000-00-00", x[0], cur_date)) \
         .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
+
+
+
+    '''
+    old filter
+    '''
+    '''
+            test num of incoming nodes
+            rdd_incoming_ls = rdd_pair.map(lambda x: x[1]).distinct()
+
+            print("number of nodes witn incoming degree greater than zero")
+            print (rdd_incoming_ls.take(10))
+            print (rdd_incoming_ls.count())
+            print("number of nodes witn incoming degree greater than zero")
+            ls = rdd_incoming_ls.collect()
+            uid_set = set(ls)
+            uid_set_broad = sc.broadcast(uid_set)
+            def incoming_filter(uid):
+                return uid in uid_set_broad.value
+
+            rdd_incoming = NetworkHelpFunctions.filter_social_cycle(sc, rdd_pair)
+            '''

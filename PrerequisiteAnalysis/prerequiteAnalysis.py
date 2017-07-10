@@ -100,4 +100,8 @@ if __name__ == "__main__":
 
     plt.show()
     plt.pause(10)
+
+    plt.savefig(os.path.join('../Graph/', 'degreeDistribution.png'))
     plt.close()
+
+    sc.stop()

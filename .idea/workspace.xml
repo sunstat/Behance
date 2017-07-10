@@ -71,8 +71,8 @@
       <file leaf-file-name="prerequiteAnalysis.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="103" column="68" lean-forward="false" selection-start-line="103" selection-start-column="68" selection-end-line="103" selection-end-column="68" />
+            <state relative-caret-position="28">
+              <caret line="65" column="32" lean-forward="true" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
               <folding>
                 <element signature="e#79#122#0" expanded="true" />
               </folding>
@@ -698,6 +698,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4046">
           <caret line="260" column="0" lean-forward="false" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1000,8 +1001,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="103" column="68" lean-forward="false" selection-start-line="103" selection-start-column="68" selection-end-line="103" selection-end-column="68" />
+        <state relative-caret-position="28">
+          <caret line="65" column="32" lean-forward="true" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
           <folding>
             <element signature="e#79#122#0" expanded="true" />
           </folding>

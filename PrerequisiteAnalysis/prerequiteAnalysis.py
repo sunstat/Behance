@@ -51,8 +51,7 @@ class prerequisiteAnalysis():
         prerequisiteAnalysis.behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
         prerequisiteAnalysis.azure_intermediate_dir = os.path.join(prerequisiteAnalysis.behance_dir, "IntermediateResult")
 
-    @staticmethod
-    def degree_distribution(sc, end_date):
+    def degree_distribution(self, sc, end_date):
         def date_filer_help(date1, date2):
             date1_arr = date1.split("-")
             date2_arr = date2.split("-")
@@ -66,7 +65,7 @@ class prerequisiteAnalysis():
         def date_filter(prev_date, date, end_date):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
 
-        rdd_pair = sc.textFile(action_file).map(lambda x: x.split(',')) \
+        rdd_pair = sc.textFile(self.action_file).map(lambda x: x.split(',')) \
             .filter(lambda x: date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         rdd_out = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()

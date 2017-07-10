@@ -12,7 +12,7 @@ from subprocess import Popen
 import matplotlib.pyplot as plt
 
 
-local_run = True
+local_run = False
 graph_dir = "../Graph"
 
 
@@ -65,6 +65,7 @@ class prerequisiteAnalysis():
 
         def date_filter(prev_date, date, end_date):
             return date_filer_help(prev_date, date) and date_filer_help(date, end_date)
+
         rdd_pair = sc.textFile(action_file).map(lambda x: x.split(',')) \
             .filter(lambda x: date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()

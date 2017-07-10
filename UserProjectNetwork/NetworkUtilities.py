@@ -93,9 +93,6 @@ class NetworkUtilities(object):
 
         rdd_incoming = NetworkHelpFunctions.filter_social_cycle(sc, rdd_pair)
         '''
-
-
-
         rdd_follow = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         print("pruning both out and in nodes")
         print (rdd_follow.take(10))

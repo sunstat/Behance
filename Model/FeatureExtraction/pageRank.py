@@ -12,11 +12,14 @@ class PageRank():
         self.num_iters = num_iters
 
     @staticmethod
-    def compute_contribs(urls, rank):
+    def compute_contribs(source_url, urls, rank):
         """Calculates URL contributions to the rank of other URLs."""
-        num_urls = len(urls)
-        for url in urls:
-            yield (url, rank / num_urls)
+        if not urls == 0:
+            yield (source_url, 0)
+        else:
+            num_urls = len(urls)
+            for url in urls:
+                yield (url, rank / num_urls)
 
     @staticmethod
     def parse_neighbors(urls):
@@ -25,30 +28,24 @@ class PageRank():
         return parts[0], parts[1]
 
     def run(self, sc):
-        ranks = sc.textFile(self.uid_2_index_file).map(lambda x: x.split(',')).map(lambda x: (x[0], 0))
+        ranks = sc.textFile(self.uid_2_index_file).map(lambda x: x.split(',')).map(lambda x: (x[0], 1))
+        links_base = ranks.map(lambda x: (x[0], []))
         links = sc.textFile(self.follow_file).map(lambda x: re.split('#', x))\
             .map(lambda x: (x[0], x[1].split(',')))
+        links = links_base.uion(links)
+        links = links.reduceByKey(lambda x, y: x + y).cache()
         print(links.take(5))
-        incoming_nodes = links.flatMap(lambda x: x[1]).distinct()
-        print("==================")
-        print(ranks.take(5))
-        print(ranks.count())
-        print(incoming_nodes.take(5))
-        print(incoming_nodes.count())
-        print("=================")
 
-        '''
         for iteration in range(self.num_iters):
             # Calculates URL contributions to the rank of other URLs.
             contribs = links.join(ranks).flatMap(
-                lambda url_urls_rank: PageRank.compute_contribs(url_urls_rank[1][0], url_urls_rank[1][1]))
+                lambda url_urls_rank: PageRank.compute_contribs(url_urls_rank[0], url_urls_rank[1][0], url_urls_rank[1][1]))
             # Re-calculates URL ranks based on neighbor contributions.
             ranks_temp = contribs.reduceByKey(add).mapValues(lambda x: x * 0.85 + 0.15)
 
             # Collects all URL ranks and dump them to console.
         for (link, rank) in ranks.collect():
             print("%s has rank: %s." % (link, rank))
-        '''
 
 
 

@@ -69,7 +69,8 @@ class prerequisiteAnalysis():
             .filter(lambda x: date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         rdd_out = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
-        out_degree_arr = rdd_out.flatMap(lambda x : len(x[1])).collect()
+        print rdd_out.take(5)
+        out_degree_arr = rdd_out.flatMap(lambda x: len(x[1])).collect()
         rdd_in = rdd_pair.map(lambda x: (x[1], [x[0]])).reduceByKey(lambda x, y: x + y).cache()
         in_degree_arr = rdd_in.flatMap(lambda x: len(x[1])).collect()
 

@@ -21,8 +21,6 @@ else:
     owners_file = os.path.join(behance_data_dir, "owners-csv")
     intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
 
-
-
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
             .set("spark.dynamicAllocation.enabled", "false")

@@ -102,6 +102,7 @@ class prerequisiteAnalysis():
         plt.close()
 
 
+
 if __name__ == "__main__":
     sc, _ = init_spark('olivia', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')

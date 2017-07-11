@@ -18,5 +18,6 @@ class NetworkHelpFunctions():
     incoming pairs 
     '''
     @staticmethod
-    def filter_graph(rdd_pair):
-        rdd_incoming = rdd_pair
+    def filter_graph(rdd_pair, in_threshold, out_threshold):
+        rdd_outcoming = rdd_pair.groupByKey().mapValues(len)
+        rdd_incoming = 

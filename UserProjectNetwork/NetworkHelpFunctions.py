@@ -36,25 +36,9 @@ class NetworkHelpFunctions():
 
 
     @staticmethod
-    def filter_social_cycle_brutal(sc, rdd_pair):
-        incoming_set = set(rdd_pair.map(lambda x : x[1]).collect())
-        outcoming_set = set(rdd_pair.map(lambda x : x[0]).collect())
-        filter_set = incoming_set.intersection(outcoming_set)
-        filter_set_broad = sc.broadcast(filter_set)
-
-        def filter_user(uid):
-            return uid in filter_set_broad.value
-
-        rdd_filtered = rdd_pair.filter(lambda x: filter_user(x[0])).filter(lambda x: filter_user(x[1])).cache()
-        while rdd_filtered.count() != len(filter_set):
-            incoming_set = set(rdd_filtered.map(lambda x: x[1]).collect())
-            outcoming_set = set(rdd_filtered.map(lambda x: x[0]).collect())
-            filter_set = incoming_set.intersection(outcoming_set)
-            filter_set_broad = sc.broadcast(filter_set)
-            rdd_filtered = rdd_filtered.filter(lambda x: filter_user(x[0])).filter(lambda x: filter_user(x[1])).cache()
-            print len(filter_set)
-        return rdd_filtered
-
+    def filter_social_cycle_brutal(sc, rdd_pair, in_threshold, out_threshold):
+        # rdd_data uid,out-degree, in-degree
+        rdd_out = rdd_pair.groupByKey()
 
     @staticmethod
     def filter_social_cycle_strong_component(sc, rdd_pair):

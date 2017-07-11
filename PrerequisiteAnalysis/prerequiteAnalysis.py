@@ -10,6 +10,7 @@ import operator
 from scipy.sparse import coo_matrix, csr_matrix
 from subprocess import Popen
 import matplotlib.pyplot as plt
+matplotlib.use('Agg')
 
 
 local_run = False

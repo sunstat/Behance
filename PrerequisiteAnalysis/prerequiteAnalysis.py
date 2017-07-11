@@ -83,9 +83,9 @@ class prerequisiteAnalysis():
     def tail_array(out_degree_arr, in_degree_arr, N):
         out_tail_arr = [0.]*(N+1)
         in_tail_arr = [0.]*(N+1)
-        for i in range(N+1):
-            out_tail_arr[i] = sum([ int(num) >= i for num in out_degree_arr])
-            in_tail_arr[i] = sum([ int(num) >= i for num in in_degree_arr])
+        for i in range(1, N+1):
+            out_tail_arr[i-1] = sum([ int(num) >= i for num in out_degree_arr])
+            in_tail_arr[i-1] = sum([ int(num) >= i for num in in_degree_arr])
         print out_tail_arr
         print in_tail_arr
 
@@ -110,7 +110,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
-    N = 200
+    N = 30
     date = "2016-06-30"
     pid_2_field_index_file = os.path.join(intermediate_result_dir, date, 'pid_2_field_index-csv')
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file)
@@ -122,13 +122,13 @@ if __name__ == "__main__":
     plt.figure()
 
     plt.subplot(121)
-    plt.plot(list(range(N+1)), np.log(out_tail_arr))
+    plt.plot(np.log(list(range(1, N+1))), np.log(out_tail_arr))
     plt.title("Out Degree Tail Distribution")
     plt.xlabel("Out Degree")
     plt.ylabel("Number of Elements Greater")
 
     plt.subplot(122)
-    plt.plot(list(range(N + 1)), np.log(in_tail_arr))
+    plt.plot(np.log(list(range(1, N+1))), np.log(in_tail_arr))
     plt.title("In Degree Tail Distribution")
     plt.xlabel("In Degree")
     plt.ylabel("Number of Elements Greater")

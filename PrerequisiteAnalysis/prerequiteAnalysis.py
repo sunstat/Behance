@@ -85,7 +85,7 @@ if __name__ == "__main__":
 
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file)
     out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
-    plt.figure(1)
+    plt.figure()
     plt.subplot(121)
     plt.hist(out_degree_arr)
     plt.title("Out Degree Distribution")

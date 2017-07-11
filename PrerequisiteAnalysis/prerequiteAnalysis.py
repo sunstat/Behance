@@ -120,14 +120,15 @@ if __name__ == "__main__":
 
     out_tail_arr, in_tail_arr = prerequisiteAnalysis.tail_array(out_degree_arr, in_degree_arr, N)
     plt.figure()
-    plt.set_xscale("symlog")
-    plt.subplot(121)
+    fig, ax = plt.subplot(121)
+    ax.set_xscale("symlog")
     plt.plot(np.log(list(range(1, N+1))), np.log(out_tail_arr))
     plt.title("Out Degree Tail Distribution")
     plt.xlabel("Out Degree")
     plt.ylabel("Number of Elements Greater")
 
-    plt.subplot(122)
+    fig, ax = plt.subplot(122)
+    ax.set_xscale("symlog")
     plt.plot(np.log(list(range(1, N+1))), np.log(in_tail_arr))
     plt.title("In Degree Tail Distribution")
     plt.xlabel("In Degree")

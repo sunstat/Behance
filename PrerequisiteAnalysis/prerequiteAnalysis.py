@@ -71,7 +71,6 @@ class prerequisiteAnalysis():
             .filter(lambda x: date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         rdd_out = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
-        print rdd_out.take(5)
         out_degree_arr = rdd_out.map(lambda x: len(x[1])).collect()
         rdd_in = rdd_pair.map(lambda x: (x[1], [x[0]])).reduceByKey(lambda x, y: x + y).cache()
         in_degree_arr = rdd_in.map(lambda x: len(x[1])).collect()
@@ -80,11 +79,11 @@ class prerequisiteAnalysis():
 
     @staticmethod
     def tail_array(out_degree_arr, in_degree_arr, N):
-        out_tail_arr = [0.]*N
-        in_tail_arr = [0.]*N
-        for i in range(1,N+1):
-            out_tail_arr[i-1] = sum([ num>= i for num in out_degree_arr])
-            in_degree_arr[i-1] = sum([ num>= i for num in in_degree_arr])
+        out_tail_arr = [0.]*(N+1)
+        in_tail_arr = [0.]*(N+1)
+        for i in range(N+1):
+            out_tail_arr[i-1] = sum([ int(num) >= i for num in out_degree_arr])
+            in_degree_arr[i-1] = sum([ int(num) >= i for num in in_degree_arr])
         print out_tail_arr
         print in_tail_arr
 
@@ -103,8 +102,10 @@ if __name__ == "__main__":
     N = 30
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file)
     out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
-    out_tail_arr, in_tail_arr = prerequisiteAnalysis.tail_array(out_degree_arr, in_degree_arr, N)
+    print out_degree_arr[1:10]
+    print in_degree_arr[1:10]
 
+    out_tail_arr, in_tail_arr = prerequisiteAnalysis.tail_array(out_degree_arr, in_degree_arr, N)
     plt.figure()
 
     plt.subplot(121)

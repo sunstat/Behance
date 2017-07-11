@@ -14,12 +14,12 @@ class FieldExtract():
     '''
     rdd_ranks [pid, score]
     '''
-    def build_feild_map(self, sc, rdd_ranks, rdd_history_popularity, rdd_popularity):
+    def build_data(self, sc, rdd_ranks, rdd_history_popularity, rdd_popularity):
 
-        def sparse_label_points(vec, score, popularity, N):
+        def sparse_label_points(vec, score, historical_popularity, popularity, N):
             feature = None
             if not vec:
-                feature = SparseVector(N, [N-1], [score])
+                feature = SparseVector(N, [N-2,N-1], [score,historical_popularity])
             else:
                 vec.append(N-1)
                 scores = [1.]*len(vec)
@@ -30,8 +30,6 @@ class FieldExtract():
         rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file)
         rdd_fields_2_index = sc.textFile(self.fields_2_index_file)
         N = rdd_fields_2_index.count()+1
-        rdd_data = rdd_fields_2_index.join(rdd_pid_2_field_index)
-        rdd_data = rdd_data.join(rdd_popularity)
-        rdd_data.map(lambda x: sparse_label_points(x[1][0][0], , popularity, N))
+
 
 

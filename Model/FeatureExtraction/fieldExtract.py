@@ -11,4 +11,5 @@ class FieldExtract():
 
     def build_feild_map(self, sc):
         rdd_pid_2_index = sc.textFile(self.pid_2_index_file)
-        rdd_field_index_file = sc.textFile(self.fields_2_index_file )
+        rdd_field_index_file = sc.textFile(self.fields_2_index_file)
+        rdd_field_index_file.collectTo

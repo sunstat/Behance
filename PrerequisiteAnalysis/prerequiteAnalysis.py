@@ -12,6 +12,7 @@ from subprocess import Popen
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 local_run = False
@@ -121,13 +122,13 @@ if __name__ == "__main__":
     plt.figure()
 
     plt.subplot(121)
-    plt.plot(list(range(N+1)), log(out_tail_arr))
+    plt.plot(list(range(N+1)), np.log(out_tail_arr))
     plt.title("Out Degree Tail Distribution")
     plt.xlabel("Out Degree")
     plt.ylabel("Number of Elements Greater")
 
     plt.subplot(122)
-    plt.plot(list(range(N + 1)), log(in_tail_arr))
+    plt.plot(list(range(N + 1)), np.log(in_tail_arr))
     plt.title("In Degree Tail Distribution")
     plt.xlabel("In Degree")
     plt.ylabel("Number of Elements Greater")

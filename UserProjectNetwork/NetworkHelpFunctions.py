@@ -37,8 +37,8 @@ class NetworkHelpFunctions():
 
     @staticmethod
     def filter_social_cycle_brutal(sc, rdd_pair, in_threshold, out_threshold):
-        # rdd_data uid,out-degree, in-degree
-        rdd_out = rdd_pair.groupByKey()
+        pass
+
 
     @staticmethod
     def filter_social_cycle_strong_component(sc, rdd_pair):

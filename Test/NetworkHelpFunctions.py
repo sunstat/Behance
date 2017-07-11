@@ -18,18 +18,32 @@ class NetworkHelpFunctions():
     incoming pairs 
     '''
     @staticmethod
-    def filter_graph(sc, rdd_pair, in_threshold, out_threshold, N_iters):
+    def filter_graph(sc, rdd_pair, in_threshold,  N_iters):
         iteration = 0
-        rdd_outcoming = rdd_pair.groupByKey().mapValues(len).filter(lambda x: x[1] >= out_threshold)
         rdd_incoming =  rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len)\
             .filter(lambda x: x[1] >= in_threshold)
-        uid_out = set(rdd_outcoming.map(lambda x: x[0]).collect())
         uid_in = set(rdd_incoming.map(lambda x: x[0]).collect())
-        uid_set = uid_out.intersection(uid_in)
-        sc.broadcast(uid_set)
+        uid_set_broad = sc.broadcast(uid_in)
+
+        def filter_set(x):
+            return x[0] in uid_set_broad and x[1] in uid_set_broad
+
 
         while len(uid_set) != len(uid_out) and iteration < N_iters:
             print "iteration : {}, with outuid: {}, uid: {}".format(iteration, len(uid_out), len(uid_set))
+            rdd_pair = rdd_pair.filter(filter_set)
+            rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len) \
+                .filter(lambda x: x[1] >= in_threshold)
+            uid_out = set(rdd_outcoming.map(lambda x: x[0]).collect())
+            uid_in = set(rdd_incoming.map(lambda x: x[0]).collect())
+            uid_set = uid_out.intersection(uid_in)
+            uid_set_broad = sc.broadcast(uid_set)
+
+            def filter_set(x):
+                return x[0] in uid_set_broad and x[1] in uid_set_broad
+
+
+
 
 
 

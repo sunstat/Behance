@@ -18,6 +18,20 @@ class NetworkHelpFunctions():
     incoming pairs 
     '''
     @staticmethod
-    def filter_graph(rdd_pair, in_threshold, out_threshold):
-        rdd_outcoming = rdd_pair.groupByKey().mapValues(len)
-        rdd_incoming = 
+    def filter_graph(sc, rdd_pair, in_threshold, out_threshold, N_iters):
+        iteration = 0
+        rdd_outcoming = rdd_pair.groupByKey().mapValues(len).filter(lambda x: x[1] >= out_threshold)
+        rdd_incoming =  rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len)\
+            .filter(lambda x: x[1] >= in_threshold)
+        uid_out = set(rdd_outcoming.map(lambda x: x[0]).collect())
+        uid_in = set(rdd_incoming.map(lambda x: x[0]).collect())
+        uid_set = uid_out.intersection(uid_in)
+        sc.broadcast(uid_set)
+
+        while len(uid_set) != len(uid_out) and iteration < N_iters:
+            print "iteration : {}, with outuid: {}, uid: {}".format(iteration, len(uid_out), len(uid_set))
+
+
+
+
+

@@ -44,9 +44,10 @@ def init_spark(name, max_excutors):
 
 
 class prerequisiteAnalysis():
-    def __init__(self, action_file, owner_file):
+    def __init__(self, action_file, owner_file, field_2_index_file):
         self.action_file = action_file
         self.owners_file = owner_file
+        self.field_2_index_file = field_2_index_file
         prerequisiteAnalysis.shell_dir = "../EditData/ShellEdit"
         prerequisiteAnalysis.local_intermediate_dir = "../IntermediateDir"
         prerequisiteAnalysis.behance_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance"
@@ -125,6 +126,19 @@ if __name__ == "__main__":
 
     plt.savefig(os.path.join('../Graph/', 'degreeTailDistribution.png'))
     plt.close()
+
+
+
+    '''
+    plot histogram of fields
+    '''
+
+    sc.textFile()
+
+
+    '''
+    plot histogram of historical_popularity
+    '''
 
     sc.stop()
 

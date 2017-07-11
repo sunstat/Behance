@@ -83,8 +83,8 @@ class prerequisiteAnalysis():
         out_tail_arr = [0.]*(N+1)
         in_tail_arr = [0.]*(N+1)
         for i in range(N+1):
-            out_tail_arr[i-1] = sum([ int(num) >= i for num in out_degree_arr])
-            in_tail_arr[i-1] = sum([ int(num) >= i for num in in_degree_arr])
+            out_tail_arr[i] = sum([ int(num) >= i for num in out_degree_arr])
+            in_tail_arr[i] = sum([ int(num) >= i for num in in_degree_arr])
         print out_tail_arr
         print in_tail_arr
 
@@ -136,8 +136,6 @@ if __name__ == "__main__":
 
     plt.savefig(os.path.join('../Graph/', 'degreeTailDistribution.png'))
     plt.close()
-
-
     sc.stop()
 
     '''

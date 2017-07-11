@@ -78,16 +78,63 @@ class prerequisiteAnalysis():
 
         return out_degree_arr, in_degree_arr
 
+    @staticmethod
+    def tail_array(out_degree_arr, in_degree_arr, N):
+        out_tail_arr = [0.]*N
+        in_tail_arr = [0.]*N
+        for i in range(1,N+1):
+            out_tail_arr[i-1] = sum([ num>= i for num in out_degree_arr])
+            in_degree_arr[i-1] = sum([ num>= i for num in in_degree_arr])
+        print out_tail_arr
+        print in_tail_arr
+
+        return out_tail_arr, in_tail_arr
+
+
+
+
+
 if __name__ == "__main__":
     sc, _ = init_spark('olivia', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
-
+    N = 30
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file)
     out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
-    #plt.figure()
+    out_tail_arr, in_tail_arr = prerequisiteAnalysis.tail_array(out_degree_arr, in_degree_arr, N)
+
+    plt.figure()
+
+    plt.subplot(121)
+    plt.plot(list(range(1,N+1)), out_tail_arr)
+    plt.title("Out Degree Tail Distribution")
+    plt.xlabel("Out Degree")
+    plt.ylabel("Number of Elements Greater")
+
+    plt.subplot(122)
+    plt.plot(list(range(1, N + 1)), in_tail_arr)
+    plt.title("In Degree Tail Distribution")
+    plt.xlabel("In Degree")
+    plt.ylabel("Number of Elements Greater")
+
+    plt.show()
+    plt.pause(10)
+
+    plt.savefig(os.path.join('../Graph/', 'degreeTailDistribution.png'))
+    plt.close()
+
+    sc.stop()
+
+
+
+    '''
+    comment out the histogram which is not good since the appearance of outliers
+    '''
+
+    '''    
+    plt.figure()
     plt.subplot(121)
     print max(out_degree_arr)
     plt.hist(out_degree_arr, 30, range=[min(out_degree_arr)-1, max(out_degree_arr)+1])
@@ -107,5 +154,7 @@ if __name__ == "__main__":
 
     plt.savefig(os.path.join('../Graph/', 'degreeDistribution.png'))
     plt.close()
+    
+    '''
 
-    sc.stop()
+

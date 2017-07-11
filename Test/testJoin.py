@@ -21,8 +21,7 @@ def init_spark(name, max_excutors):
 
 sc, sqlContext = init_spark('olivia', 20)
 x = sc.parallelize([("a", 1), ("b", 4)])
-y = sc.parallelize([("a", 2), ["d", 5]])
-
-w = x.join(y)
+y = sc.parallelize([("a", 2), ["b", 5]])
+z = sc.parallelize([("a", 3), ["b", 6]])
 
 print(w.take(5))

@@ -76,6 +76,7 @@ class NetworkUtilities(object):
         rdd_pair = sc.textFile(action_file).map(lambda x: x.split(','))\
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date))\
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
+        print(rdd_pair.take(5))
         rdd_pair = NetworkHelpFunctions.filter_graph_by_incoming_degree(sc, rdd_pair, in_threshold, n_iters)
 
         rdd_follow = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()

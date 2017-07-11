@@ -65,9 +65,11 @@ class NetworkUtilities(object):
     extract neighbors in user network and uids set which involved in the network built 
     '''
     def extract_neighbors_from_users_network(self, sc, end_date, output_dir):
+
         '''
         print follow_map to intermediate directory 
         '''
+
         in_threshold = 5
         n_iters = 20
         output_file = os.path.join(output_dir, 'follow_map-psv')
@@ -76,26 +78,6 @@ class NetworkUtilities(object):
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         rdd_pair = NetworkHelpFunctions.filter_graph_by_incoming_degree(sc, rdd_pair, in_threshold, n_iters)
 
-        '''
-        build 
-        '''
-
-        '''
-        test num of incoming nodes
-        rdd_incoming_ls = rdd_pair.map(lambda x: x[1]).distinct()
-
-        print("number of nodes witn incoming degree greater than zero")
-        print (rdd_incoming_ls.take(10))
-        print (rdd_incoming_ls.count())
-        print("number of nodes witn incoming degree greater than zero")
-        ls = rdd_incoming_ls.collect()
-        uid_set = set(ls)
-        uid_set_broad = sc.broadcast(uid_set)
-        def incoming_filter(uid):
-            return uid in uid_set_broad.value
-
-        rdd_incoming = NetworkHelpFunctions.filter_social_cycle(sc, rdd_pair)
-        '''
         rdd_follow = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         print("pruning both out and in nodes")
         print (rdd_follow.take(10))
@@ -107,16 +89,18 @@ class NetworkUtilities(object):
         '''
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
-        rdd_uid_index = rdd_follow.map(lambda x: x[0]).zipWithIndex().cache()
+        rdd_uid_index = rdd_pair.flatMap(lambda x: (x[0],x[1])).zipWithIndex().cache()
         print (rdd_uid_index.count())
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
+        self.uid_set = set(rdd_uid_index.map(lambda x: x[0]).collect())
 
-    def handle_uid_pid(self, sc, uid_set, end_date, output_dir):
+
+    def handle_uid_pid(self, sc, end_date, output_dir):
 
         def __filter_uid_incycle(uid):
             return uid in uid_set_broad.value
 
-        uid_set_broad = sc.broadcast(uid_set)
+        uid_set_broad = sc.broadcast(self.uid_set)
 
         '''
         print field_2_index to intermediate diretory
@@ -201,5 +185,5 @@ class NetworkUtilities(object):
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
         self.extract_neighbors_from_users_network(sc, end_date, output_dir)
-        #self.handle_uid_pid(sc, self.uid_set, end_date, output_dir)
+        #self.handle_uid_pid(sc, end_date, output_dir)
         #self.create_popularity(sc, end_date, output_dir)

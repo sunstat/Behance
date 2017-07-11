@@ -53,8 +53,9 @@ class NetworkHelpFunctions():
 
         while ell1 != ell2 and iteration < n_iters:
             print "iteration : {}, with first: {}, second: {}".format(iteration, ell1, ell2)
-            rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len) \
-                .filter(lambda x: x[1] >= in_threshold)
+            rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len)
+            print(rdd_incoming.take(5))
+            rdd_incoming = rdd_incoming.filter(lambda x: x[1] >= in_threshold)
             set1 = set(rdd_incoming.map(lambda x: x[0]).collect())
             set2 = set(rdd_incoming.map(lambda x: x[1]).collect())
             uid_set = set1.intersection(set2)

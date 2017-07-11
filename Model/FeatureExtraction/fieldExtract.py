@@ -9,4 +9,5 @@ class FieldExtract():
         self.pid_2_index_file = pid_2_index_file
         self.fields_2_index_file = fields_2_index_file
 
-    def build_feild_map(self):
+    def build_feild_map(self, sc):
+        sc.textFile(self.pid_2_index_file)

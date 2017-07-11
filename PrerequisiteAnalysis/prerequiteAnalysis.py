@@ -81,8 +81,8 @@ class prerequisiteAnalysis():
 
     @staticmethod
     def tail_array(out_degree_arr, in_degree_arr, N):
-        out_tail_arr = [0.]*(N+1)
-        in_tail_arr = [0.]*(N+1)
+        out_tail_arr = [0.]*N
+        in_tail_arr = [0.]*N
         for i in range(1, N+1):
             out_tail_arr[i-1] = sum([ int(num) >= i for num in out_degree_arr])
             in_tail_arr[i-1] = sum([ int(num) >= i for num in in_degree_arr])

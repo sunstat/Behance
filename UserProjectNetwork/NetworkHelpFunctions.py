@@ -39,33 +39,29 @@ class NetworkHelpFunctions():
         iteration = 0
         rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len) \
             .filter(lambda x: x[1] >= in_threshold)
-        set1 = set(rdd_incoming.map(lambda x: x[0]).collect())
-        set2 = set(rdd_incoming.map(lambda x: x[1]).collect())
-        ell1 = len(set1)
-        ell2 = len(set2)
-        uid_set = set1.intersection(set2)
+        uid_set = set(rdd_incoming.map(lambda x: x[0]).collect())
         uid_set_broad = sc.broadcast(uid_set)
 
         def filter_set(x):
             return x[0] in uid_set_broad and x[1] in uid_set_broad
 
         rdd_pair = rdd_pair.filter(filter_set)
+        true_size = rdd_pair.count()
 
-        while ell1 != ell2 and iteration < n_iters:
-            print "iteration : {}, with first: {}, second: {}".format(iteration, ell1, ell2)
+        while true_size != len(uid_set) and iteration < n_iters:
+            print "iteration : {}, with true size: {}, filter_size: {}".format(iteration, true_size, len(uid_set))
             rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len)
             print(rdd_incoming.take(5))
-            rdd_incoming = rdd_incoming.filter(lambda x: x[1] >= in_threshold)
-            set1 = set(rdd_incoming.map(lambda x: x[0]).collect())
-            set2 = set(rdd_incoming.map(lambda x: x[1]).collect())
-            uid_set = set1.intersection(set2)
+            rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len) \
+                .filter(lambda x: x[1] >= in_threshold)
+            uid_set = set(rdd_incoming.map(lambda x: x[0]).collect())
             uid_set_broad = sc.broadcast(uid_set)
-            ell1 = len(set1)
-            ell2 = len(set2)
 
             def filter_set(x):
                 return x[0] in uid_set_broad and x[1] in uid_set_broad
             rdd_pair = rdd_pair.filter(filter_set)
+            true_size = rdd_pair.count()
+            iteration += 1
 
         return rdd_pair
 

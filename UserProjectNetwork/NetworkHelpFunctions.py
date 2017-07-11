@@ -43,7 +43,7 @@ class NetworkHelpFunctions():
         uid_set_broad = sc.broadcast(uid_set)
 
         def filter_set(x):
-            return x[0] in uid_set_broad and x[1] in uid_set_broad
+            return x[0] in uid_set_broad.value and x[1] in uid_set_broad.value
 
         rdd_pair = rdd_pair.filter(filter_set)
         true_size = rdd_pair.count()
@@ -58,7 +58,7 @@ class NetworkHelpFunctions():
             uid_set_broad = sc.broadcast(uid_set)
 
             def filter_set(x):
-                return x[0] in uid_set_broad and x[1] in uid_set_broad
+                return x[0] in uid_set_broad.value and x[1] in uid_set_broad.value
             rdd_pair = rdd_pair.filter(filter_set)
             true_size = rdd_pair.count()
             iteration += 1

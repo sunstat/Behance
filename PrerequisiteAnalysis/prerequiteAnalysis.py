@@ -10,8 +10,8 @@ import operator
 from scipy.sparse import coo_matrix, csr_matrix
 from subprocess import Popen
 import matplotlib
-import matplotlib.pyplot as plt
 matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 
 local_run = False

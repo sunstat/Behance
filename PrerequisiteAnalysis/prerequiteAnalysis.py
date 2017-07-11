@@ -44,10 +44,10 @@ def init_spark(name, max_excutors):
 
 
 class prerequisiteAnalysis():
-    def __init__(self, action_file, owner_file, field_2_index_file):
+    def __init__(self, action_file, owner_file, pid_2_field_index_file):
         self.action_file = action_file
         self.owners_file = owner_file
-        self.field_2_index_file = field_2_index_file
+        self.pid_2_field_index_file = pid_2_field_index_file
         prerequisiteAnalysis.shell_dir = "../EditData/ShellEdit"
         prerequisiteAnalysis.local_intermediate_dir = "../IntermediateDir"
         prerequisiteAnalysis.behance_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance"
@@ -90,8 +90,16 @@ class prerequisiteAnalysis():
 
         return out_tail_arr, in_tail_arr
 
-
-
+    def plot_field(self, sc):
+        rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file)
+        field_2_frequency = rdd_pid_2_field_index.groupByKey().mapValues(len).collect()
+        plt.figure()
+        plt.hist(field_2_frequency)
+        plt.title("The field Distribution")
+        plt.xlabel("Field Index")
+        plt.ylabel("Frequency")
+        plt.savefig(os.path.join('../Graph/', 'histogram_of_fields.png'))
+        plt.close()
 
 
 if __name__ == "__main__":
@@ -101,7 +109,9 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     N = 200
-    prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file)
+    date = "2016-06-30"
+    pid_2_field_index_file = os.path.join(intermediate_result_dir, date, 'pid_2_field_index-csv')
+    prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file)
     out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
     print out_degree_arr[1:10]
     print in_degree_arr[1:10]
@@ -127,18 +137,6 @@ if __name__ == "__main__":
     plt.savefig(os.path.join('../Graph/', 'degreeTailDistribution.png'))
     plt.close()
 
-
-
-    '''
-    plot histogram of fields
-    '''
-
-    sc.textFile()
-
-
-    '''
-    plot histogram of historical_popularity
-    '''
 
     sc.stop()
 

@@ -39,8 +39,6 @@ def init_spark(name, max_excutors):
     sqlContext = HiveContext(sc)
     return sc, sqlContext
 
-
-
 class NetworkUtilities(object):
     '''
     methods used only within in this class

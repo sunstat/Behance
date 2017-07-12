@@ -27,10 +27,6 @@ else:
 
 
 class NetworkUtilities(object):
-    '''
-    methods used only within in this class
-    '''
-
     def __extract_parameters(self):
         months_arr = []
         with open(self.config_file, 'r') as f:
@@ -47,7 +43,6 @@ class NetworkUtilities(object):
         self.comment_weight = comment_weight
         self.appreciation_weight = appreciation_weight
         NetworkUtilities.shell_dir = "../EditData/ShellEdit"
-        NetworkUtilities.local_intermediate_dir = "../IntermediateDir"
         NetworkUtilities.behance_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance"
         NetworkUtilities.behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
         NetworkUtilities.azure_intermediate_dir = os.path.join(NetworkUtilities.behance_dir, "IntermediateResult")
@@ -55,8 +50,11 @@ class NetworkUtilities(object):
         self.pid_set = None
         self.months_arr = self.__extract_parameters()
 
-    def extract_neighbors_from_users_network(self, sc, base_date, output_dir):
-        sc.textFile()
+    def extract_neighbors_from_users_network(self, sc, end_date, output_dir):
+        # read uid_set pid_set from base
+        rdd_uid_2_index = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'uid_2_index-csv'))
+        rdd_pid_2_index = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_index-csv'))
+        self.uid_set = rdd_uid_2_index
         in_threshold = 5
         n_iters = 20
         output_file = os.path.join(output_dir, 'follow_map-psv')

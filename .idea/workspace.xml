@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Model/FeatureExtraction/featureExtraction.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graph/degreeTailDistribution.png" afterPath="$PROJECT_DIR$/Graph/degreeTailDistribution.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/FeatureExtraction/fieldExtract.py" afterPath="$PROJECT_DIR$/Model/FeatureExtraction/fieldExtract.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py" afterPath="$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" afterPath="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,8 +33,8 @@
       <file leaf-file-name="NetworkUtilities.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="135" column="11" lean-forward="true" selection-start-line="135" selection-start-column="11" selection-end-line="135" selection-end-column="11" />
+            <state relative-caret-position="253">
+              <caret line="164" column="30" lean-forward="false" selection-start-line="164" selection-start-column="22" selection-end-line="164" selection-end-column="30" />
               <folding>
                 <element signature="e#79#122#0" expanded="true" />
               </folding>
@@ -52,8 +55,8 @@
       <file leaf-file-name="prerequiteAnalysis.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="132" column="23" lean-forward="false" selection-start-line="132" selection-start-column="23" selection-end-line="132" selection-end-column="23" />
+            <state relative-caret-position="327">
+              <caret line="128" column="40" lean-forward="false" selection-start-line="128" selection-start-column="40" selection-end-line="128" selection-end-column="40" />
               <folding>
                 <element signature="e#79#122#0" expanded="true" />
               </folding>
@@ -81,18 +84,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pageRank.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/FeatureExtraction/pageRank.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="21" lean-forward="false" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="run.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/run.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -106,8 +97,18 @@
       <file leaf-file-name="fieldExtract.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/FeatureExtraction/fieldExtract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="25" column="38" lean-forward="true" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+            <state relative-caret-position="476">
+              <caret line="33" column="47" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="featureExtraction.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Model/FeatureExtraction/featureExtraction.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="23" column="71" lean-forward="false" selection-start-line="23" selection-start-column="71" selection-end-line="23" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -204,11 +205,12 @@
         <option value="$PROJECT_DIR$/Model/FeatureExtraction/pageRank.py" />
         <option value="$PROJECT_DIR$/Test/testSparseVector.py" />
         <option value="$PROJECT_DIR$/Test/testJoin.py" />
-        <option value="$PROJECT_DIR$/Model/FeatureExtraction/fieldExtract.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/run.py" />
         <option value="$PROJECT_DIR$/Test/NetworkHelpFunctions.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" />
+        <option value="$PROJECT_DIR$/Model/FeatureExtraction/fieldExtract.py" />
+        <option value="$PROJECT_DIR$/Model/FeatureExtraction/featureExtraction.py" />
         <option value="$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py" />
       </list>
     </option>
@@ -664,13 +666,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/EditData/ShellEdit/checkCount.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/spark/python/pyspark/rdd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-8">
@@ -921,7 +916,7 @@
         <state relative-caret-position="300">
           <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -980,29 +975,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/FeatureExtraction/fieldExtract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="25" column="38" lean-forward="true" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test/NetworkHelpFunctions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="346">
           <caret line="42" column="40" lean-forward="false" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="135" column="11" lean-forward="true" selection-start-line="135" selection-start-column="11" selection-end-line="135" selection-end-column="11" />
-          <folding>
-            <element signature="e#79#122#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1016,10 +993,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="164" column="30" lean-forward="false" selection-start-line="164" selection-start-column="22" selection-end-line="164" selection-end-column="30" />
+          <folding>
+            <element signature="e#79#122#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/FeatureExtraction/fieldExtract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="33" column="47" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/FeatureExtraction/featureExtraction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="23" column="71" lean-forward="false" selection-start-line="23" selection-start-column="71" selection-end-line="23" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="132" column="23" lean-forward="false" selection-start-line="132" selection-start-column="23" selection-end-line="132" selection-end-column="23" />
+        <state relative-caret-position="327">
+          <caret line="128" column="40" lean-forward="false" selection-start-line="128" selection-start-column="40" selection-end-line="128" selection-end-column="40" />
           <folding>
             <element signature="e#79#122#0" expanded="true" />
           </folding>

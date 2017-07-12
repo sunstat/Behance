@@ -64,7 +64,7 @@ class NetworkUtilities(object):
     '''
     extract neighbors in user network and uids set which involved in the network built 
     '''
-    def extract_neighbors_from_users_network(self, sc, end_date, output_dir):
+    def extract_neighbors_from_users_network(self, sc, base_date, output_dir):
 
         '''
         print follow_map to intermediate directory 
@@ -74,7 +74,7 @@ class NetworkUtilities(object):
         n_iters = 20
         output_file = os.path.join(output_dir, 'follow_map-psv')
         rdd_pair = sc.textFile(action_file).map(lambda x: x.split(','))\
-            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date))\
+            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], base_date))\
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         print(rdd_pair.take(5))
         rdd_pair = NetworkHelpFunctions.filter_graph_by_incoming_degree(sc, rdd_pair, in_threshold, n_iters)
@@ -97,7 +97,7 @@ class NetworkUtilities(object):
 
         print "first :{}, second:{}".format(first, second)
 
-    def handle_uid_pid(self, sc, end_date, output_dir):
+    def handle_uid_pid(self, sc, base_date, output_dir):
 
         uid_set_broad = sc.broadcast(self.uid_set)
 
@@ -109,7 +109,7 @@ class NetworkUtilities(object):
         '''
 
         rdd_owners = sc.textFile(self.owners_file).map(lambda x: x.split(',')) \
-            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[2], end_date)) \
+            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[2], base_date)) \
             .filter(lambda x: __filter_uid_incycle(x[1])).persist()
 
         print(rdd_owners.take(5))
@@ -174,7 +174,8 @@ class NetworkUtilities(object):
         temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations).filter(lambda x: not x[1][0])
         print(temp_right.take(10))
         rdd_popularity = temp_left.union(temp_right).distinct()\
-            .map(lambda x: (x[0], (NetworkHelpFunctions.change_none_to_zero(x[1][0]), NetworkHelpFunctions.change_none_to_zero(x[1][1]))))
+            .map(lambda x: (x[0], (NetworkHelpFunctions.change_none_to_zero(x[1][0]),
+                                   NetworkHelpFunctions.change_none_to_zero(x[1][1]))))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.map(lambda x: (x[0], NetworkHelpFunctions.calculate_popularity(x[1][0],x[1][1], 1, 2)))
         output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
@@ -182,10 +183,10 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')
 
     def write_to_intermediate_directory(self, sc):
-        end_date = self.arguments_arr[0]
+        base_date = self.arguments_arr[0]
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-        Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
-        output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
-        self.extract_neighbors_from_users_network(sc, end_date, output_dir)
+        Popen('./%s %s %s' % (shell_file, intermediate_result_dir, base_date,), shell=True)
+        output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, base_date)
+        self.extract_neighbors_from_users_network(sc, base_date, output_dir)
         #self.handle_uid_pid(sc, end_date, output_dir)
         #self.create_popularity(sc, end_date, output_dir)

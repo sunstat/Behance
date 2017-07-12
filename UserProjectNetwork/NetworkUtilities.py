@@ -81,7 +81,6 @@ class NetworkUtilities(object):
 
         rdd_follow = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         print("pruning both out and in nodes")
-        print (rdd_follow.take(10))
         print (rdd_follow.count())
         print("pruning both out and in nodes")
         IOutilities.print_rdd_to_file(rdd_follow, output_file, 'psv')
@@ -90,7 +89,7 @@ class NetworkUtilities(object):
         '''
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
-        rdd_uid_index = rdd_pair.flatMap(lambda x: (x[0],x[1])).zipWithIndex().cache()
+        rdd_uid_index = rdd_pair.flatMap(lambda x: (x[0],x[1])).distinct().zipWithIndex().cache()
         print (rdd_uid_index.count())
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
         self.uid_set = set(rdd_uid_index.map(lambda x: x[0]).collect())

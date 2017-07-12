@@ -41,15 +41,16 @@ class NetworkHelpFunctions():
             .filter(lambda x: x[1] >= in_threshold)
         uid_set = set(rdd_incoming.map(lambda x: x[0]).collect())
         uid_set_broad = sc.broadcast(uid_set)
-
+        prev_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
         def filter_set(x):
             return x[0] in uid_set_broad.value and x[1] in uid_set_broad.value
 
         rdd_pair = rdd_pair.filter(filter_set)
-        true_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
+        cur_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
 
-        while true_size != len(uid_set) and iteration < n_iters:
-            print "iteration : {}, with true size: {}, filter_size: {}".format(iteration, true_size, len(uid_set))
+        while cur_size != prev_size and iteration < n_iters:
+            print "iteration : {}, cur size: {}, prev size: {}".format(iteration, cur_size, prev_size)
+            prev_size = cur_size
             rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len)
             print(rdd_incoming.take(5))
             rdd_incoming = rdd_incoming.filter(lambda x: x[1] >= in_threshold)
@@ -59,7 +60,7 @@ class NetworkHelpFunctions():
             def filter_set(x):
                 return x[0] in uid_set_broad.value and x[1] in uid_set_broad.value
             rdd_pair = rdd_pair.filter(filter_set)
-            true_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
+            cur_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
             iteration += 1
 
         return rdd_pair

@@ -147,12 +147,12 @@ class NetworkUtilities(object):
     def run(self, sc):
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, 'base',), shell=True)
-        output_dir = os.path.join(NetworkUtilities.shell_dir, 'base')
+        output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, 'base')
         self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
         self.handle_uid_pid(sc, self.base_date, output_dir)
 
 if __name__ == "__main__":
-    sc, _ = init_spark('olivia', 20)
+    sc, _ = init_spark('base', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')

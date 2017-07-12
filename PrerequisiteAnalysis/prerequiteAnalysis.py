@@ -116,6 +116,7 @@ if __name__ == "__main__":
     pid_2_field_index_file = os.path.join(intermediate_result_dir, date, 'pid_2_field_index-csv')
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file)
     out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
+    prerequisite_analysis.plot_field(sc)
     print out_degree_arr[1:10]
     print in_degree_arr[1:10]
 

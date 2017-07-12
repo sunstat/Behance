@@ -105,6 +105,7 @@ class prerequisiteAnalysis():
 
 
 if __name__ == "__main__":
+
     sc, _ = init_spark('olivia', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
@@ -123,15 +124,15 @@ if __name__ == "__main__":
     fig, ax_arr = plt.subplots(2)
     ax_arr[0].set_xscale("symlog")
     ax_arr[0].plot(np.log(list(range(1, N+1))), np.log(out_tail_arr))
-    ax_arr[0].title("Out Degree Tail Distribution")
-    ax_arr[0].xlabel("Out Degree")
-    ax_arr[0].ylabel("Log of Number of Elements Greater")
+    ax_arr[0].set_title("Out Degree Tail Distribution")
+    ax_arr[0].set_xlabel("Out Degree")
+    ax_arr[0].set_ylabel("Log of Number of Elements Greater")
 
     ax_arr[1].set_xscale("symlog")
     ax_arr[1].plot(np.log(list(range(1, N+1))), np.log(in_tail_arr))
-    ax_arr[1].title("In Degree Tail Distribution")
-    ax_arr[1].xlabel("In Degree")
-    ax_arr[1].ylabel("Log of Number of Elements Greater")
+    ax_arr[1].set_title("In Degree Tail Distribution")
+    ax_arr[1].set_xlabel("In Degree")
+    ax_arr[1].set_ylabel("Log of Number of Elements Greater")
 
     plt.show()
     plt.pause(10)

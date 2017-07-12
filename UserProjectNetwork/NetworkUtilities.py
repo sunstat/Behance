@@ -130,8 +130,8 @@ class NetworkUtilities(object):
         def trim_str_array(str_arr):
             return [fields_2_index_broad.value[x] for x in str_arr if x]
         rdd = rdd_owners.map(lambda x: (x[0], trim_str_array(x[3:])))
-        output_file = os.path.join(output_dir, 'pid_2_fields_index-csv')
-        IOutilities.print_rdd_to_file(rdd, output_file, 'tsv')
+        output_file = os.path.join(output_dir, 'pid_2_fields_index-psv')
+        IOutilities.print_rdd_to_file(rdd, output_file, 'psv')
 
         '''
         print owners_map to intermediate directory

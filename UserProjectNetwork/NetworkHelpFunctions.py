@@ -42,6 +42,7 @@ class NetworkHelpFunctions():
         uid_set = set(rdd_incoming.map(lambda x: x[0]).collect())
         uid_set_broad = sc.broadcast(uid_set)
         prev_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
+
         def filter_set(x):
             return x[0] in uid_set_broad.value and x[1] in uid_set_broad.value
 

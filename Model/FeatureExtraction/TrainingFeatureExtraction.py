@@ -6,7 +6,7 @@ from pyspark.mllib.linalg import SparseVector
 from pyspark.mllib.regression import LabeledPoint
 
 
-class featureExtraction():
+class TrainingFeatureExtraction():
     def __init__(self, pid_2_fields_index_file, field_2_index_file, pid_ranks_file,
                  rdd_historic_popularity_file, rdd_popularity_file):
         self.pid_2_field_index_file = pid_2_fields_index_file

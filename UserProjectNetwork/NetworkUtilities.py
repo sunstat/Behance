@@ -91,11 +91,9 @@ class NetworkUtilities(object):
         self.uid_set = set(rdd_uid_index.map(lambda x: x[0]).collect())
 
         print("now checking")
-
         print rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
         print rdd_pair.map(lambda x: x[0]).distinct().count()
         print rdd_pair.map(lambda x: x[1]).distinct().count()
-
         print("now checking")
 
     def handle_uid_pid(self, sc, base_date, output_dir):

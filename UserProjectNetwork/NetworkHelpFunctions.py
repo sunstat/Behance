@@ -41,7 +41,10 @@ class NetworkHelpFunctions():
             .filter(lambda x: x[1] >= in_threshold)
         uid_set = set(rdd_incoming.map(lambda x: x[0]).collect())
         uid_set_broad = sc.broadcast(uid_set)
-        prev_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
+        set1 = set(rdd_pair.map(lambda x: x[0]).distinct().collect())
+        set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
+        uid_set = set1.intersection(set2)
+        prev_size = len(uid_set)
 
         def filter_set(x):
             return x[0] in uid_set_broad.value and x[1] in uid_set_broad.value
@@ -61,7 +64,10 @@ class NetworkHelpFunctions():
             def filter_set(x):
                 return x[0] in uid_set_broad.value and x[1] in uid_set_broad.value
             rdd_pair = rdd_pair.filter(filter_set)
-            cur_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
+            set1 = set(rdd_pair.map(lambda x: x[0]).distinct().collect())
+            set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
+            uid_set = set1.intersection(set2)
+            cur_size = len(uid_set)
             iteration += 1
 
         return rdd_pair

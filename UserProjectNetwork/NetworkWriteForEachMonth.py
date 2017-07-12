@@ -1,19 +1,46 @@
+#!/usr/bin/env python
+# extract all user information from owners and actions:
+
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import HiveContext
+import pyspark.sql.functions as F
+from pyspark.sql.types import StructField, StructType, StringType, LongType, DoubleType, IntegerType, BooleanType
+import os, sys
+import operator
+from scipy.sparse import coo_matrix, csr_matrix
+from IOutilities import IOutilities
+from subprocess import Popen
+from NetworkHelpFunctions import NetworkHelpFunctions
+
+
+local_run = False
+
+if local_run:
+    action_file = "/Users/yimsun/PycharmProjects/Data/TinyData/action/actionDataTrimNoView-csv"
+    owners_file = "/Users/yimsun/PycharmProjects/Data/TinyData/owners-csv"
+    intermediate_result_dir = '../IntermediateDir'
+else:
+    behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
+    action_file = os.path.join(behance_data_dir, "action", "actionDataTrimNoView-csv")
+    owners_file = os.path.join(behance_data_dir, "owners-csv")
+    intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
+
+
 class NetworkUtilities(object):
     '''
     methods used only within in this class
     '''
 
     def __extract_parameters(self):
-        arguments_arr = []
+        months_arr = []
         with open(self.config_file, 'r') as f:
             for line in f:
-                arguments_arr.append(line.strip())
-        return arguments_arr
+                months_arr.append(line.strip())
+        return months_arr
 
     # compare two date strings "2016-12-01"
 
     def __init__(self, action_file, owner_file, config_file, comment_weight, appreciation_weight):
-
         self.action_file = action_file
         self.owners_file = owner_file
         self.config_file = config_file
@@ -24,25 +51,12 @@ class NetworkUtilities(object):
         NetworkUtilities.behance_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance"
         NetworkUtilities.behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
         NetworkUtilities.azure_intermediate_dir = os.path.join(NetworkUtilities.behance_dir, "IntermediateResult")
-
-        '''
-        two intermediate results for 
-        '''
         self.uid_set = None
-        '''
-        ===============================
-        '''
-        self.arguments_arr = self.__extract_parameters()
+        self.pid_set = None
+        self.months_arr = self.__extract_parameters()
 
-    '''
-    extract neighbors in user network and uids set which involved in the network built 
-    '''
     def extract_neighbors_from_users_network(self, sc, base_date, output_dir):
-
-        '''
-        print follow_map to intermediate directory
-        '''
-
+        sc.textFile()
         in_threshold = 5
         n_iters = 20
         output_file = os.path.join(output_dir, 'follow_map-psv')

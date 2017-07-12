@@ -46,7 +46,7 @@ class NetworkHelpFunctions():
             return x[0] in uid_set_broad.value and x[1] in uid_set_broad.value
 
         rdd_pair = rdd_pair.filter(filter_set)
-        true_size = rdd_pair.count()
+        true_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
 
         while true_size != len(uid_set) and iteration < n_iters:
             print "iteration : {}, with true size: {}, filter_size: {}".format(iteration, true_size, len(uid_set))
@@ -59,7 +59,7 @@ class NetworkHelpFunctions():
             def filter_set(x):
                 return x[0] in uid_set_broad.value and x[1] in uid_set_broad.value
             rdd_pair = rdd_pair.filter(filter_set)
-            true_size = rdd_pair.count()
+            true_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
             iteration += 1
 
         return rdd_pair

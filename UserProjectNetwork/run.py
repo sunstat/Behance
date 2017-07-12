@@ -38,8 +38,13 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     network_utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1, 2)
-    network_utilities.write_to_intermediate_directory(sc)
-    #network_utilities.handle_uid_pid(sc, network_utilities.uid_set)
-    sc.stop()
+    '''
+    write to base files, uid_2_index-csv, pid_2_index-csv,  
+    '''
+
+
+    '''
+    for each month
+    '''
 
 

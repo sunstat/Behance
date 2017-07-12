@@ -25,17 +25,21 @@ else:
     owners_file = os.path.join(behance_data_dir, "owners-csv")
     intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
 
+'''
+write pid_2_index, uid_2_index to the base directory
+'''
+
 class NetworkUtilities(object):
     '''
     methods used only within in this class
     '''
 
-    def __extract_parameters(self):
-        arguments_arr = []
+    def __extract_base_date(self):
+        base_date = None
         with open(self.config_file, 'r') as f:
             for line in f:
-                arguments_arr.append(line.strip())
-        return arguments_arr
+                base_date = line.strip()
+        return base_date
 
     # compare two date strings "2016-12-01"
 
@@ -59,7 +63,10 @@ class NetworkUtilities(object):
         '''
         ===============================
         '''
-        self.arguments_arr = self.__extract_parameters()
+        self.base_date = self.__extract_base_date()
+
+        shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
+        Popen('./%s %s %s' % (shell_file, intermediate_result_dir, base_date,), shell=True)
 
     '''
     extract neighbors in user network and uids set which involved in the network built 
@@ -67,20 +74,17 @@ class NetworkUtilities(object):
     def extract_neighbors_from_users_network(self, sc, base_date, output_dir):
 
         '''
-        print follow_map to intermediate directory 
+        print follow_map to intermediate directory
         '''
 
         in_threshold = 5
         n_iters = 20
-        output_file = os.path.join(output_dir, 'follow_map-psv')
         rdd_pair = sc.textFile(action_file).map(lambda x: x.split(','))\
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], base_date))\
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         rdd_pair = NetworkHelpFunctions.filter_graph_by_incoming_degree(sc, rdd_pair, in_threshold, n_iters)
         print(rdd_pair.count())
 
-        rdd_follow = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
-        IOutilities.print_rdd_to_file(rdd_follow, output_file, 'psv')
         '''
         print uid_index to intermediate directory
         '''
@@ -93,11 +97,11 @@ class NetworkUtilities(object):
         print("now checking")
 
         print rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
-        print rdd_pair.flatMap(lambda x: x[0]).distinct().count()
-        print rdd_pair.flatMap(lambda x: x[1]).distinct().count()
+        first = rdd_pair.flatMap(lambda x: x[0]).distinct().count()
+        second = rdd_pair.flatMap(lambda x: x[1]).distinct().count()
 
-        print("now checking")
-        
+        print "first :{}, second:{}".format(first, second)
+
     def handle_uid_pid(self, sc, base_date, output_dir):
 
         uid_set_broad = sc.broadcast(self.uid_set)

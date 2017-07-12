@@ -151,6 +151,7 @@ class NetworkUtilities(object):
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, 'base',), shell=True)
         output_dir = os.path.join(NetworkUtilities.shell_dir, 'base')
         self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
+        self.handle_uid_pid(sc, self.base_date, output_dir)
 
 if __name__ == "__main__":
     sc, _ = init_spark('olivia', 20)

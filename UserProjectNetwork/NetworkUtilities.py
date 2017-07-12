@@ -93,8 +93,8 @@ class NetworkUtilities(object):
         print("now checking")
 
         print rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
-        print rdd_pair.flatMap(lambda x: x[0]).distinct().count()
-        print rdd_pair.flatMap(lambda x: x[1]).distinct().count()
+        print rdd_pair.map(lambda x: x[0]).distinct().count()
+        print rdd_pair.map(lambda x: x[1]).distinct().count()
 
         print("now checking")
 

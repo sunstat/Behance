@@ -92,6 +92,7 @@ class NetworkUtilities(object):
 
 
         print("now checking")
+        print rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
         first = rdd_pair.flatMap(lambda x: x[0]).distinct().count()
         second = rdd_pair.flatMap(lambda x: x[1]).distinct().count()
 
@@ -177,8 +178,8 @@ class NetworkUtilities(object):
             .map(lambda x: (x[0], (NetworkHelpFunctions.change_none_to_zero(x[1][0]),
                                    NetworkHelpFunctions.change_none_to_zero(x[1][1]))))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
-        rdd_popularity = rdd_popularity.map(lambda x: (x[0], NetworkHelpFunctions.calculate_popularity(x[1][0],x[1][1], 1, 2)))
-        output_file = os.path.join(output_dir, 'pid_2_popularity-csv')
+        rdd_popularity = rdd_popularity.map(lambda x: (x[0], NetworkHelpFunctions.calculate_popularity(x[1][0],x[1][1],1,2)))
+        output_file = os.path.join(output_dir, '-'.join(['pid_2_popularity', end_date, 'csv']))
         print(output_file)
         IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')
 

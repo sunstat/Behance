@@ -7,13 +7,12 @@ from pyspark.mllib.regression import LabeledPoint
 
 
 class TrainingFeatureExtraction():
-    def __init__(self, pid_2_fields_index_file, field_2_index_file, pid_ranks_file,
-                 rdd_historic_popularity_file, rdd_popularity_file):
+    def __init__(self, pid_2_fields_index_file, field_2_index_file,
+                 base_date, new_date):
         self.pid_2_field_index_file = pid_2_fields_index_file
         self.field_2_index_file = field_2_index_file
-        self.pid_ranks_file = pid_ranks_file
-        self.rdd_historic_popularity_file = rdd_historic_popularity_file
-        self.rdd_popularity_file = rdd_popularity_file
+        self.base_date = base_date
+        self.new_date = new_date
 
 
      def extract_features(self, sc):
@@ -21,7 +20,7 @@ class TrainingFeatureExtraction():
             .map(lambda x: [x(0),tuple(x[1].split(','))])
         rdd_field_2_index = sc.textFile(self.rdd_field_2_index).map(lambda x: x.split(','))
         rdd_ranks = sc.textFile(self.pid_ranks_file).map(lambda x: x.split(','))
-        rdd_historic_popularity = sc.textFile(self.rdd_historic_popularity_file).map(lambda x: x.split(','))
+        rdd_base_popularity = sc.textFile(self.rdd_historic_popularity_file).map(lambda x: x.split(','))
         rdd_popularity = sc.textFile(self.rdd_historic_popularity_file).map(lambda x: x.split(','))
         rdd_label_data = self.build_data(rdd_pid_2_field_index, rdd_field_2_index, rdd_ranks, rdd_historic_popularity, rdd_popularity)
         return rdd_label_data
@@ -29,7 +28,7 @@ class TrainingFeatureExtraction():
     '''
     rdd_ranks [pid, score] already split
     '''
-    def build_data(self, rdd_pid_2_field_index, rdd_field_2_index, rdd_ranks, rdd_historic_popularity, rdd_popularity):
+    def build_data(self, rdd_pid_2_field_index, rdd_field_2_index, rdd_ranks, rdd_historic_popularity, rdd_increment_popularity):
 
         def sparse_label_points(vec, score, historical_popularity, popularity, N):
             feature = None
@@ -46,7 +45,7 @@ class TrainingFeatureExtraction():
 
         rdd_data = rdd_pid_2_field_index.join(rdd_ranks)
         rdd_data = rdd_data.join(rdd_historic_popularity).mapValues(lambda x: x[0] + (x[1], ))
-        rdd_data = rdd_data.join(rdd_popularity).mapValues(lambda x: x[0] + (x[1], ))
+        rdd_data = rdd_data.join(rdd_increment_popularity).mapValues(lambda x: x[0] + (x[1], ))
         N = rdd_field_2_index.count()+2
         '''
         vec, score, historical_popularity, popularity

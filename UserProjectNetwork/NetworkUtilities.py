@@ -97,7 +97,7 @@ class NetworkUtilities(object):
         print rdd_pair.flatMap(lambda x: x[1]).distinct().count()
 
         print("now checking")
-        
+
     def handle_uid_pid(self, sc, base_date, output_dir):
 
         uid_set_broad = sc.broadcast(self.uid_set)

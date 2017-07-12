@@ -111,9 +111,8 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
-    N = 30
-    date = "2016-06-30"
-    pid_2_field_index_file = os.path.join(intermediate_result_dir, date, 'pid_2_field_index-csv')
+    N = 100
+    pid_2_field_index_file = os.path.join(intermediate_result_dir, 'base', 'pid_2_field_index-csv')
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file)
     out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
     prerequisite_analysis.plot_field(sc)

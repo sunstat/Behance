@@ -77,7 +77,7 @@ class NetworkHelpFunctions():
             uid_set1 = set1.intersection(set2)
             intersection_set_broad_inner = sc.broadcast(uid_set1)
             print("first element is {}, second element is {} and intersection is {}"
-                  .format(len(set1), len(set2), len(intersection_set_broad)))
+                  .format(len(set1), len(set2), len(intersection_set_broad_inner.value)))
 
             def intersection_filter_inner(x):
                 return (x[0] in intersection_set_broad_inner.value) and (x[1] in intersection_set_broad_inner.value)

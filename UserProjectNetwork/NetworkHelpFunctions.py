@@ -56,7 +56,7 @@ class NetworkHelpFunctions():
             return x[0] in intersection_set_broad.value and x[1] in intersection_set_broad.value
 
         rdd_pair.filter(intersection_filter)
-        cur_size = len(uid_set1)
+        cur_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
 
         while cur_size != prev_size and iteration < n_iters:
             print "iteration : {}, cur size: {}, prev size: {}".format(iteration, cur_size, prev_size)
@@ -81,7 +81,7 @@ class NetworkHelpFunctions():
             def intersection_filter(x):
                 return x[0] in intersection_set_broad.value and x[1] in intersection_set_broad.value
             rdd_pair.filter(intersection_filter)
-            cur_size = len(uid_set1)
+            cur_size = rdd_pair.flatMap(lambda x: (x[0],x[1])).distinct().count()
             iteration += 1
 
         return rdd_pair

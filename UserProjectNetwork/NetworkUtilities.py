@@ -77,7 +77,6 @@ class NetworkUtilities(object):
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], base_date))\
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         rdd_pair = NetworkHelpFunctions.filter_graph_by_incoming_degree(sc, rdd_pair, in_threshold, n_iters)
-        print(rdd_pair.count())
 
         rdd_follow = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         IOutilities.print_rdd_to_file(rdd_follow, output_file, 'psv')

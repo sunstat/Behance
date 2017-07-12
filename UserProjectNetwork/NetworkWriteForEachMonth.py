@@ -121,8 +121,11 @@ class NetworkUtilities(object):
         for end_date in self.months_arr:
             self.create_month_dir(sc, end_date)
 
-
 if __name__ == "__main__":
-
+    sc, _ = init_spark('olivia', 20)
+    sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
+    sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
+    sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
+    network_utilities = NetworkUtilities(action_file, owners_file, 'config', 1, 2)
 
 

@@ -4,6 +4,7 @@ import pyspark.sql.functions as F
 from pyspark.sql.types import StructField, StructType, StringType, LongType, DoubleType, IntegerType
 import os, sys
 import operator
+from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkUtilities import NetworkUtilities
@@ -37,13 +38,8 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     network_utilities = NetworkUtilities(action_file, owners_file, 'user_project_network', 40, 'config', 1, 2)
-    '''
-    write to base files, uid_2_index-csv, pid_2_index-csv,  
-    '''
-
-
-    '''
-    for each month
-    '''
+    network_utilities.write_to_intermediate_directory(sc)
+    #network_utilities.handle_uid_pid(sc, network_utilities.uid_set)
+    sc.stop()
 
 

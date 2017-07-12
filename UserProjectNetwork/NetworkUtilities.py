@@ -30,12 +30,6 @@ class NetworkUtilities(object):
     methods used only within in this class
     '''
 
-    def __extract_parameters(self):
-        arguments_arr = []
-        with open(self.config_file, 'r') as f:
-            for line in f:
-                arguments_arr.append(line.strip())
-        return arguments_arr
 
     # compare two date strings "2016-12-01"
 
@@ -59,7 +53,6 @@ class NetworkUtilities(object):
         '''
         ===============================
         '''
-        self.arguments_arr = self.__extract_parameters()
 
     '''
     extract neighbors in user network and uids set which involved in the network built 
@@ -182,7 +175,7 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')
 
     def write_to_intermediate_directory(self, sc):
-        base_date = self.arguments_arr[0]
+        base_date = "2016-06-20"
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, base_date,), shell=True)
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, base_date)

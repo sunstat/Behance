@@ -157,4 +157,6 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     network_utilities = NetworkUtilities(action_file, owners_file, 'config')
+    network_utilities.run(sc)
+    sc.stop()
 

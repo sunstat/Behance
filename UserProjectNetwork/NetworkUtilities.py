@@ -98,10 +98,10 @@ class NetworkUtilities(object):
 
     def handle_uid_pid(self, sc, end_date, output_dir):
 
+        uid_set_broad = sc.broadcast(self.uid_set)
+
         def __filter_uid_incycle(uid):
             return uid in uid_set_broad.value
-
-        uid_set_broad = sc.broadcast(self.uid_set)
 
         '''
         print field_2_index to intermediate diretory

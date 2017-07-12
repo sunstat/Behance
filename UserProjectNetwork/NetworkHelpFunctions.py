@@ -53,7 +53,7 @@ class NetworkHelpFunctions():
         intersection_set_broad = sc.broadcast(uid_set1)
 
         def intersection_filter(x):
-            x[0] in intersection_set_broad.value and x[1] in intersection_set_broad.value
+            return x[0] in intersection_set_broad.value and x[1] in intersection_set_broad.value
 
         rdd_pair.filter(intersection_filter)
         cur_size = len(uid_set1)
@@ -78,7 +78,7 @@ class NetworkHelpFunctions():
             intersection_set_broad = sc.broadcast(uid_set1)
 
             def intersection_filter(x):
-                x[0] in intersection_set_broad.value and x[1] in intersection_set_broad.value
+                return x[0] in intersection_set_broad.value and x[1] in intersection_set_broad.value
             rdd_pair.filter(intersection_filter)
             cur_size = len(uid_set1)
             iteration += 1

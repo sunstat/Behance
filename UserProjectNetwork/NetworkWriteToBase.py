@@ -71,7 +71,7 @@ class NetworkUtilities(object):
         '''
         ===============================
         '''
-        self.base_date = "2016-6-30"
+        self.base_date = "2016-06-30"
 
 
     '''

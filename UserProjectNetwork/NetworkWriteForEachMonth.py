@@ -13,6 +13,18 @@ from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
 
 
+
+def init_spark(name, max_excutors):
+    conf = (SparkConf().setAppName(name)
+            .set("spark.dynamicAllocation.enabled", "false")
+            .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
+            .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer"))
+    sc = SparkContext(conf=conf)
+    sc.setLogLevel('ERROR')
+    sqlContext = HiveContext(sc)
+    return sc, sqlContext
+
+
 local_run = False
 
 if local_run:
@@ -105,4 +117,12 @@ class NetworkUtilities(object):
         self.extract_neighbors_from_users_network(sc, end_date, output_dir)
         self.handle_uid_pid(sc, end_date, output_dir)
 
-    def run(self):
+    def run(self, sc):
+        for end_date in self.months_arr:
+            self.create_month_dir(sc, end_date)
+
+
+if __name__ == "__main__":
+
+
+

@@ -151,7 +151,6 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
 
     def create_popularity(self, sc, end_date, output_dir):
-
         rdd_popularity_base = sc.textFile(os.path.join(output_dir, 'pid_2_index-csv')).map(lambda x: x.split(',')) \
             .map(lambda x: (x[0], (0, 0)))
 

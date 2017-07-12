@@ -82,6 +82,7 @@ class NetworkHelpFunctions():
             def intersection_filter_inner(x):
                 return (x[0] in intersection_set_broad_inner.value) and (x[1] in intersection_set_broad_inner.value)
 
+            print len(set(rdd_pair.flatMap(lambda x: (x[0],x[1])).collect()))
             rdd_pair.filter(intersection_filter_inner)
             print(rdd_pair.take(5))
             cur_size = len(set(rdd_pair.flatMap(lambda x: (x[0],x[1])).collect()))

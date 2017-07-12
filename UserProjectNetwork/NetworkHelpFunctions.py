@@ -44,7 +44,7 @@ class NetworkHelpFunctions():
         uid_set_broad = sc.broadcast(uid_set)
 
         def filter_set(x):
-            return x[0] in uid_set_broad.value and x[1] in uid_set_broad.value
+            return (x[0] in uid_set_broad.value) and (x[1] in uid_set_broad.value)
 
         rdd_pair = rdd_pair.filter(filter_set)
         set1 = set(rdd_pair.map(lambda x: x[0]).distinct().collect())
@@ -53,7 +53,7 @@ class NetworkHelpFunctions():
         intersection_set_broad = sc.broadcast(uid_set1)
 
         def intersection_filter(x):
-            return x[0] in intersection_set_broad.value and x[1] in intersection_set_broad.value
+            return (x[0] in intersection_set_broad.value) and (x[1] in intersection_set_broad.value)
 
         rdd_pair.filter(intersection_filter)
         cur_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
@@ -68,7 +68,7 @@ class NetworkHelpFunctions():
             uid_set_broad = sc.broadcast(uid_set)
 
             def filter_set(x):
-                return x[0] in uid_set_broad.value and x[1] in uid_set_broad.value
+                return (x[0] in uid_set_broad.value) and (x[1] in uid_set_broad.value)
 
             rdd_pair = rdd_pair.filter(filter_set)
 
@@ -79,7 +79,7 @@ class NetworkHelpFunctions():
             intersection_set_broad = sc.broadcast(uid_set1)
 
             def intersection_filter(x):
-                return x[0] in intersection_set_broad.value and x[1] in intersection_set_broad.value
+                return (x[0] in intersection_set_broad.value) and (x[1] in intersection_set_broad.value)
             rdd_pair.filter(intersection_filter)
             cur_size = rdd_pair.flatMap(lambda x: (x[0],x[1])).distinct().count()
             iteration += 1

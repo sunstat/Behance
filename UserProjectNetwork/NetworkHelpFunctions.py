@@ -65,22 +65,24 @@ class NetworkHelpFunctions():
             rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len)
             rdd_incoming = rdd_incoming.filter(lambda x: x[1] >= in_threshold)
             uid_set = set(rdd_incoming.map(lambda x: x[0]).collect())
-            uid_set_broad = sc.broadcast(uid_set)
+            uid_set_broad_inner = sc.broadcast(uid_set)
 
-            def filter_set(x):
-                return (x[0] in uid_set_broad.value) and (x[1] in uid_set_broad.value)
+            def filter_set_inner(x):
+                return (x[0] in uid_set_broad_inner.value) and (x[1] in uid_set_broad_inner.value)
 
-            rdd_pair = rdd_pair.filter(filter_set)
+            rdd_pair = rdd_pair.filter(filter_set_inner)
 
             set1 = set(rdd_pair.map(lambda x: x[0]).collect())
             set2 = set(rdd_pair.map(lambda x: x[1]).collect())
             uid_set1 = set1.intersection(set2)
-            print("first element is {}, second element is {} and intersection is {}".format(len(set1), len(set2), len(uid_set1)))
-            intersection_set_broad = sc.broadcast(uid_set1)
+            intersection_set_broad_inner = sc.broadcast(uid_set1)
+            print("first element is {}, second element is {} and intersection is {}"
+                  .format(len(set1), len(set2), len(intersection_set_broad)))
 
-            def intersection_filter(x):
-                return (x[0] in intersection_set_broad.value) and (x[1] in intersection_set_broad.value)
-            rdd_pair.filter(intersection_filter)
+            def intersection_filter_inner(x):
+                return (x[0] in intersection_set_broad_inner.value) and (x[1] in intersection_set_broad_inner.value)
+
+            rdd_pair.filter(intersection_filter_inner)
             print(rdd_pair.take(5))
             cur_size = len(set(rdd_pair.flatMap(lambda x: (x[0],x[1])).collect()))
             iteration += 1

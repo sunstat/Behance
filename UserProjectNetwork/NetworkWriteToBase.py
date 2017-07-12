@@ -26,8 +26,20 @@ else:
     intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
 
 '''
-write pid_2_index, uid_2_index, field_2_index, pid_2_field_index, to the base directory
+write pid_2_index, uid_2_index, field_2_index, pid_2_field_index, pid_2_uid to the base directory
 '''
+
+def init_spark(name, max_excutors):
+    conf = (SparkConf().setAppName(name)
+            .set("spark.dynamicAllocation.enabled", "false")
+            .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
+            .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer"))
+    sc = SparkContext(conf=conf)
+    sc.setLogLevel('ERROR')
+    sqlContext = HiveContext(sc)
+    return sc, sqlContext
+
+
 
 class NetworkUtilities(object):
     '''
@@ -43,13 +55,11 @@ class NetworkUtilities(object):
 
     # compare two date strings "2016-12-01"
 
-    def __init__(self, action_file, owner_file, program_name, max_executors, config_file, comment_weight, appreciation_weight):
+    def __init__(self, action_file, owner_file, config_file):
 
         self.action_file = action_file
         self.owners_file = owner_file
         self.config_file = config_file
-        self.comment_weight = comment_weight
-        self.appreciation_weight = appreciation_weight
         NetworkUtilities.shell_dir = "../EditData/ShellEdit"
         NetworkUtilities.local_intermediate_dir = "../IntermediateDir"
         NetworkUtilities.behance_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance"
@@ -105,28 +115,28 @@ class NetworkUtilities(object):
         rdd_fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(
             lambda x: x).distinct().zipWithIndex().cache()
 
-        output_file = os.path.join(output_dir, 'fields_2_index-csv')
+        output_file = os.path.join(output_dir, 'field_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_fields_map_index, output_file, 'csv')
 
         '''
-        build pid-2-fields-index
+        build pid-2-field-index
         '''
 
         field_2_index = rdd_fields_map_index.collectAsMap()
-        field_2_index_broad = sc.broadcast(fields_2_index)
+        field_2_index_broad = sc.broadcast(field_2_index)
 
         def trim_str_array(str_arr):
             return [field_2_index_broad.value[x] for x in str_arr if x]
         rdd = rdd_owners.map(lambda x: (x[0], trim_str_array(x[3:])))
-        output_file = os.path.join(output_dir, 'pid_2_fields_index-psv')
+        output_file = os.path.join(output_dir, 'pid_2_field_index-psv')
         IOutilities.print_rdd_to_file(rdd, output_file, 'psv')
 
         '''
-        print owners_map to intermediate directory
+        print pid_2_uid to intermediate directory
         '''
 
         rdd_owners_map = rdd_owners.map(lambda x: (x[0], x[1])).distinct().persist()
-        output_file = os.path.join(output_dir, 'owners_map-csv')
+        output_file = os.path.join(output_dir, 'pid_2_uid-csv')
         IOutilities.print_rdd_to_file(rdd_owners_map, output_file, 'csv')
 
         '''
@@ -141,3 +151,11 @@ class NetworkUtilities(object):
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, 'base',), shell=True)
         output_dir = os.path.join(NetworkUtilities.shell_dir, 'base')
         self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
+
+if __name__ == "__main__":
+    sc, _ = init_spark('olivia', 20)
+    sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
+    sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
+    sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
+    network_utilities = NetworkUtilities(action_file, owners_file, 'config')
+

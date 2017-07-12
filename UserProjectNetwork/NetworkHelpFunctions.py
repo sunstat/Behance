@@ -52,8 +52,7 @@ class NetworkHelpFunctions():
             print "iteration : {}, with true size: {}, filter_size: {}".format(iteration, true_size, len(uid_set))
             rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len)
             print(rdd_incoming.take(5))
-            rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len) \
-                .filter(lambda x: x[1] >= in_threshold)
+            rdd_incoming = rdd_incoming.filter(lambda x: x[1] >= in_threshold)
             uid_set = set(rdd_incoming.map(lambda x: x[0]).collect())
             uid_set_broad = sc.broadcast(uid_set)
 

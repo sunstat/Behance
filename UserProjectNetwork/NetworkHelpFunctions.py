@@ -58,7 +58,7 @@ class NetworkHelpFunctions():
         rdd_pair.filter(intersection_filter)
         cur_size = rdd_pair.flatMap(lambda x: (x[0], x[1])).distinct().count()
 
-        while cur_size != prev_size and len(set1) == len(uid_set1) and iteration < n_iters:
+        while cur_size != prev_size and len(set1) != len(uid_set1) and iteration < n_iters:
             print "iteration : {}, cur size: {}, prev size: {}".format(iteration, cur_size, prev_size)
             prev_size = cur_size
 

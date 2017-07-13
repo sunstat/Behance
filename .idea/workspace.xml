@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="" />
+    <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/ConfigurationFiles/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/ConfigurationFiles/pysparkFiles.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/IntermediateDir/2016-06-30/owners_map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/IntermediateDir/2016-06-30/pid_map_index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/IntermediateDir/2016-06-30/pid_map_popularity" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/IntermediateDir/2016-06-30/uid_map_index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Model/FeatureExtraction/TrainingFeatureExtraction.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Model/FeatureExtraction/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Model/FeatureExtraction/pageRank.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Model/FeatureExtraction/test.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Model/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Test/IOutilities.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Test/NetworkHelpFunctions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Test/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Test/run.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Test/test1.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Test/testFile.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Test/testJoin.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Test/testSparseVector.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/Test/testYeild.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/UserProjectNetwork/IOutilities.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/UserProjectNetwork/NetworkHelpFunctions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/UserProjectNetwork/NetworkUtilities.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/UserProjectNetwork/NetworkWriteForEachMonth.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/UserProjectNetwork/NetworkWriteToBase.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/UserProjectNetwork/README" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/UserProjectNetwork/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/UserProjectNetwork/config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/UserProjectNetwork/run.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/UserProjectNetwork/temp.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Behance/github.sh" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py" afterPath="$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,11 +45,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="IOutilities.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="538">
+              <caret line="70" column="9" lean-forward="false" selection-start-line="70" selection-start-column="9" selection-end-line="70" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="NetworkUtilities.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2032">
-              <caret line="177" column="28" lean-forward="false" selection-start-line="177" selection-start-column="28" selection-end-line="177" selection-end-column="28" />
+            <state relative-caret-position="418">
+              <caret line="71" column="15" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
                 <element signature="e#79#122#0" expanded="true" />
               </folding>
@@ -37,8 +80,8 @@
       <file leaf-file-name="NetworkHelpFunctions.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="78" column="119" lean-forward="false" selection-start-line="78" selection-start-column="119" selection-end-line="78" selection-end-column="119" />
+            <state relative-caret-position="358">
+              <caret line="79" column="12" lean-forward="false" selection-start-line="79" selection-start-column="12" selection-end-line="79" selection-end-column="12" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -68,31 +111,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testJoin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test/testJoin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testFile.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test/testFile.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="5" column="30" lean-forward="false" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="test1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test/test1.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="409">
               <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="run.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/run.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="40" column="57" lean-forward="false" selection-start-line="40" selection-start-column="57" selection-end-line="40" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -207,9 +240,9 @@
         <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/config" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" />
-        <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkWriteForEachMonth.py" />
         <option value="$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py" />
+        <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py" />
       </list>
     </option>
   </component>
@@ -915,24 +948,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="70" column="9" lean-forward="false" selection-start-line="70" selection-start-column="9" selection-end-line="70" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="40" column="57" lean-forward="false" selection-start-line="40" selection-start-column="57" selection-end-line="40" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/temp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="574">
@@ -1009,20 +1024,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="40" column="57" lean-forward="false" selection-start-line="40" selection-start-column="57" selection-end-line="40" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2032">
-          <caret line="177" column="28" lean-forward="false" selection-start-line="177" selection-start-column="28" selection-end-line="177" selection-end-column="28" />
+        <state relative-caret-position="418">
+          <caret line="71" column="15" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
           <folding>
             <element signature="e#79#122#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="70" column="9" lean-forward="false" selection-start-line="70" selection-start-column="9" selection-end-line="70" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="78" column="119" lean-forward="false" selection-start-line="78" selection-start-column="119" selection-end-line="78" selection-end-column="119" />
+        <state relative-caret-position="358">
+          <caret line="79" column="12" lean-forward="false" selection-start-line="79" selection-start-column="12" selection-end-line="79" selection-end-column="12" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

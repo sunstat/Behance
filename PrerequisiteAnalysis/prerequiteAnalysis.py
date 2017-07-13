@@ -93,7 +93,7 @@ class prerequisiteAnalysis():
 
     def plot_field(self, sc):
         rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file)
-        field_2_frequency = rdd_pid_2_field_index.groupByKey().mapValues(len).collect()
+        field_2_frequency = rdd_pid_2_field_index.map(lambda x : x.split('#')).map(lambda x: x[1]).map(lambda x: x.split(','))
         plt.figure()
         plt.hist(field_2_frequency)
         plt.title("The field Distribution")
@@ -105,14 +105,13 @@ class prerequisiteAnalysis():
 
 
 if __name__ == "__main__":
-
     sc, _ = init_spark('olivia', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     N = 100
-    pid_2_field_index_file = os.path.join(intermediate_result_dir, 'base', 'pid_2_field_index-csv')
+    pid_2_field_index_file = os.path.join(intermediate_result_dir, 'base', 'pid_2_field_index-psv')
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file)
     out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
     prerequisite_analysis.plot_field(sc)

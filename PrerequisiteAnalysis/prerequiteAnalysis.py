@@ -126,14 +126,14 @@ class prerequisiteAnalysis():
         print ylabel
         plt.figure()
         plt.barh(pos_y, arr[1], align='center', color='green', ecolor='black', alpha=0.5)
-        plt.yticks(pos_y, arr[0])
+        #plt.yticks(pos_y, arr[0])
         plt.xlabel('Performance')
         plt.title('Fields Distribution')
         plt.savefig(os.path.join('../Graph/', 'histogram_of_fields.png'))
         plt.close()
 
 
-    def pruned_network_preliminary_analysis(self):
+    def pruned_network_preliminary_analysis(self, sc):
         N = 100
         def flat_2_pairs(x):
             for y in x[1]:
@@ -178,6 +178,7 @@ if __name__ == "__main__":
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file, field_2_index_file)
     #prerequisite_analysis.plot_orginal_degrees(sc, 100)
     prerequisite_analysis.plot_field(sc)
+    prerequisite_analysis.pruned_network_preliminary_analysis(sc)
 
     sc.stop()
 

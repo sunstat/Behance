@@ -162,7 +162,7 @@ class prerequisiteAnalysis():
         ax_arr[1].set_xscale("symlog")
         ax_arr[1].plot(list(range(1, N + 1)), np.log(out_tail_arr))
         ax_arr[1].set_title("Out Degree Tail Distribution")
-        ax_arr[1].set_xlabel("In Degree")
+        ax_arr[1].set_xlabel("Out Degree")
         ax_arr[1].set_ylabel("Log of Tail")
         plt.savefig(os.path.join('../Graph/', 'DegreeTailDistributionInPrunedNetwork.png'))
         plt.close()

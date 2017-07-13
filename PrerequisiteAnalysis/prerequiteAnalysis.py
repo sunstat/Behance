@@ -109,7 +109,7 @@ class prerequisiteAnalysis():
         rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file)
         index_2_field = sc.textFile(self.field_2_index_file)
         index_2_field = index_2_field.map(lambda x: x.split(',')).map(lambda x: (x[1], x[0])).collectAsMap()
-        print(index_2_field.take(5))
+        print(index_2_field)
         print rdd_pid_2_field_index.take(5)
 
         field_index_2_frequency = rdd_pid_2_field_index.map(lambda x: x.split('#')).map(lambda x: x[1])
@@ -122,8 +122,6 @@ class prerequisiteAnalysis():
             ylabel.append(index_2_field[index])
 
         print ylabel
-
-        
         plt.figure()
         plt.barh(pos, arr[1], align='center')
         plt.yticks(pos, ylabel)
@@ -140,7 +138,7 @@ class prerequisiteAnalysis():
                 yield (x[0], y)
 
         rdd_follow = sc.textFile(os.path.join(intermediate_result_dir, '2016-06-30', 'follow_map-psv'))
-        rdd_pair = rdd_follow.map(lambda x: x.split('#')).flatMap(flat_2_pairs)
+        rdd_pair = rdd_follow.map(lambda x: x.split('#')).map(lambda x: (x[0],x[1].split(','))).flatMap(flat_2_pairs)
 
         # test cycle correct or not
         set1 = set(rdd_pair.map(lambda x: x[0]).distinct().collect())
@@ -149,9 +147,8 @@ class prerequisiteAnalysis():
 
         print("first is {}, second is {}, intersection is {}".format(len(set1), len(set2), len(set3)))
 
-        #rdd_out = rdd_follow
-
-
+        out_degree_arr = rdd_follow.map(lambda x: x.split('#')).map(lambda x: len(x[1].split(','))).collect()
+        in_degree_arr = rdd_pair.map(lambda x : (x[1], x[0])).reduceByKey(lambda x,y : x+y).map(lambda x: len(x[1])).collect()
 
 if __name__ == "__main__":
     sc, _ = init_spark('olivia', 20)

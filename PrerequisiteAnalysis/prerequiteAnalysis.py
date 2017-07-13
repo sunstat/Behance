@@ -95,7 +95,7 @@ class prerequisiteAnalysis():
         rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file)
         print rdd_pid_2_field_index.take(5)
         field_2_frequency = rdd_pid_2_field_index.map(lambda x: x.split('#')).map(lambda x: x[1])
-        field_2_frequency = field_2_frequency..filter(lambda x: x).map(lambda x: x.split(',')).collect()
+        field_2_frequency = field_2_frequency.filter(lambda x: x).map(lambda x: x.split(',')).collect()
         plt.figure()
         plt.hist(field_2_frequency)
         plt.title("The field Distribution")

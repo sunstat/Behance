@@ -45,10 +45,11 @@ def init_spark(name, max_excutors):
 
 
 class prerequisiteAnalysis():
-    def __init__(self, action_file, owner_file, pid_2_field_index_file):
+    def __init__(self, action_file, owner_file, pid_2_field_index_file, field_2_index_file):
         self.action_file = action_file
         self.owners_file = owner_file
         self.pid_2_field_index_file = pid_2_field_index_file
+        self.field_2_index_file = field_2_index_file
         prerequisiteAnalysis.shell_dir = "../EditData/ShellEdit"
         prerequisiteAnalysis.local_intermediate_dir = "../IntermediateDir"
         prerequisiteAnalysis.behance_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance"
@@ -93,15 +94,20 @@ class prerequisiteAnalysis():
 
     def plot_field(self, sc):
         rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file)
+        index_2_field = sc.textFile(self.field_2_index_file).map(lambda x: x.split(',')).map(lambda x: (x[1],x[0])).collectAsMap()
         print rdd_pid_2_field_index.take(5)
         field_2_frequency = rdd_pid_2_field_index.map(lambda x: x.split('#')).map(lambda x: x[1])
         field_2_frequency = field_2_frequency.filter(lambda x: x).flatMap(lambda x: x.split(',')).map(lambda x: (x,1))\
-            .reduceByKey(lambda x, y: x + y)
+            .reduceByKey(lambda x, y: x + y).collect()
+
+        pos = range(len(index_2_field)) + .5
         plt.figure()
-        plt.hist(field_2_frequency)
-        plt.title("The field Distribution")
-        plt.xlabel("Field Index")
-        plt.ylabel("Frequency")
+        plt.barh(pos, , align='center')
+        yticks(pos, ('Tom', 'Dick', 'Harry', 'Slim', 'Jim'))
+        xlabel('Performance')
+        title('How fast do you want to go today?')
+        grid(True)
+
         plt.savefig(os.path.join('../Graph/', 'histogram_of_fields.png'))
         plt.close()
 
@@ -115,7 +121,8 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     N = 100
     pid_2_field_index_file = os.path.join(intermediate_result_dir, 'base', 'pid_2_field_index-psv')
-    prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file)
+    field_2_index_file = os.path.join(intermediate_result_dir, 'base', 'field_2_index-csv')
+    prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file, field_2_index_file)
     out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
     prerequisite_analysis.plot_field(sc)
     print out_degree_arr[1:10]

@@ -87,7 +87,7 @@ class NetworkUtilities(object):
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         print rdd_pair.take(5)
 
-        '''
+
         rdd_pair = NetworkHelpFunctions.filter_graph_by_incoming_degree(sc, rdd_pair, in_threshold, n_iters)
 
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
@@ -95,7 +95,7 @@ class NetworkUtilities(object):
         rdd_uid_index = rdd_pair.flatMap(lambda x: (x[0],x[1])).distinct().zipWithIndex().cache()
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
         self.uid_set = set(rdd_uid_index.map(lambda x: x[0]).collect())
-        '''
+        
     def handle_uid_pid(self, sc, base_date, output_dir):
 
         uid_set_broad = sc.broadcast(self.uid_set)
@@ -150,7 +150,7 @@ class NetworkUtilities(object):
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, 'base',), shell=True)
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, 'base')
         self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
-        #self.handle_uid_pid(sc, self.base_date, output_dir)
+        self.handle_uid_pid(sc, self.base_date, output_dir)
 
 if __name__ == "__main__":
     sc, _ = init_spark('base', 20)

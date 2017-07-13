@@ -125,10 +125,10 @@ if __name__ == "__main__":
     pid_2_field_index_file = os.path.join(intermediate_result_dir, 'base', 'pid_2_field_index-psv')
     field_2_index_file = os.path.join(intermediate_result_dir, 'base', 'field_2_index-csv')
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file, field_2_index_file)
-    out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
+    #out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
     prerequisite_analysis.plot_field(sc)
-    print out_degree_arr[1:10]
-    print in_degree_arr[1:10]
+    #print out_degree_arr[1:10]
+    #print in_degree_arr[1:10]
 
     out_tail_arr, in_tail_arr = prerequisiteAnalysis.tail_array(out_degree_arr, in_degree_arr, N)
     plt.figure()

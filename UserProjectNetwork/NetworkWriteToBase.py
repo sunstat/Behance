@@ -49,7 +49,7 @@ class NetworkUtilities(object):
         with open(self.config_file, 'r') as f:
             for line in f:
                 base_date = line.strip()
-        return base_date
+                return base_date
 
     # compare two date strings "2016-12-01"
 
@@ -72,6 +72,7 @@ class NetworkUtilities(object):
         ===============================
         '''
         self.base_date = self.__extract_base_date
+        print("base date is {}".format(self.base_date))
 
 
     '''
@@ -81,8 +82,7 @@ class NetworkUtilities(object):
 
         in_threshold = 5
         n_iters = 20
-        rdd_pair = sc.textFile(action_file).map(lambda x: x.split(','))\
-            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], base_date))
+        rdd_pair = sc.textFile(action_file).map(lambda x: x.split(',')).filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], base_date))
         print rdd_pair.take(5)
 
         '''

@@ -99,6 +99,8 @@ class NetworkUtilities(object):
 
         rdd_pid_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len)
         rdd_pid_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len)
+        print rdd_pid_num_comments.take(5)
+        print rdd_pid_num_appreciations.take(5)
         temp_left = rdd_pid_num_comments.leftOuterJoin(rdd_pid_num_appreciations)
         print(temp_left.take(10))
         temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations).filter(lambda x: not x[1][0])

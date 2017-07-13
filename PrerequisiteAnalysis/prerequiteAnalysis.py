@@ -96,11 +96,11 @@ class prerequisiteAnalysis():
         _, in_tail_arr = prerequisiteAnalysis.tail_array(out_degree_arr, in_degree_arr, N)
         plt.figure()
         fig, ax_arr = plt.subplots(1)
-        ax_arr[0].set_xscale("symlog")
-        ax_arr[0].plot(list(range(1, N + 1)), np.log(in_tail_arr))
-        ax_arr[0].set_title("In Degree Tail Distribution")
-        ax_arr[0].set_xlabel("In Degree")
-        ax_arr[0].set_ylabel("Log of Tail")
+        ax_arr.set_xscale("symlog")
+        ax_arr.plot(list(range(1, N + 1)), np.log(in_tail_arr))
+        ax_arr.set_title("In Degree Tail Distribution")
+        ax_arr.set_xlabel("In Degree")
+        ax_arr.set_ylabel("Log of Tail")
         plt.savefig(os.path.join('../Graph/', 'originalDegreeTailDistribution.png'))
         plt.close()
 
@@ -127,7 +127,14 @@ class prerequisiteAnalysis():
         '''
 
     def pruned_network_preliminary_analysis(self):
-        os.path.join(intermediate_result_dir, 'base', 'field_2_index-csv')
+
+        def flat_2_pairs(x):
+            for y in x[1]:
+                yield (x[0], y)
+
+        rdd_follow = sc.textFile(os.path.join(intermediate_result_dir, '2016-06-30', 'follow_map-psv'))
+        rdd_pair = rdd_follow.map(lambda x: x.split('#')).flatMap(flat_2_pairs)
+        
 
 
 

@@ -121,18 +121,12 @@ if __name__ == "__main__":
 
     out_tail_arr, in_tail_arr = prerequisiteAnalysis.tail_array(out_degree_arr, in_degree_arr, N)
     plt.figure()
-    fig, ax_arr = plt.subplots(1, 2)
+    fig, ax_arr = plt.subplots(1)
     ax_arr[0].set_xscale("symlog")
-    ax_arr[0].plot(list(range(1, N+1)), np.log(out_tail_arr))
-    ax_arr[0].set_title("Out Degree Tail Distribution")
-    ax_arr[0].set_xlabel("Out Degree")
+    ax_arr[0].plot(list(range(1, N+1)), np.log(in_tail_arr))
+    ax_arr[0].set_title("In Degree Tail Distribution")
+    ax_arr[0].set_xlabel("In Degree")
     ax_arr[0].set_ylabel("Log of Tail")
-
-    ax_arr[1].set_xscale("symlog")
-    ax_arr[1].plot(list(range(1, N+1)), np.log(in_tail_arr))
-    ax_arr[1].set_title("In Degree Tail Distribution")
-    ax_arr[1].set_xlabel("In Degree")
-    ax_arr[1].set_ylabel("Log of Tail")
 
     plt.show()
     plt.pause(10)
@@ -141,32 +135,6 @@ if __name__ == "__main__":
     plt.close()
     sc.stop()
 
-    '''
-    comment out the histogram which is not good since the appearance of outliers
-    '''
 
-    '''    
-    plt.figure()
-    plt.subplot(121)
-    print max(out_degree_arr)
-    plt.hist(out_degree_arr, 30, range=[min(out_degree_arr)-1, max(out_degree_arr)+1])
-    plt.title("Out Degree Distribution")
-    plt.xlabel("Out Degree")
-    plt.ylabel("Frequency")
-
-    plt.subplot(122)
-    print max(in_degree_arr)
-    plt.hist(in_degree_arr, 30, range=[min(in_degree_arr)-1, max(in_degree_arr)+1])
-    plt.title("In Degree Distribution")
-    plt.xlabel("In Degree")
-    plt.ylabel("Frequency")
-
-    plt.show()
-    plt.pause(10)
-
-    plt.savefig(os.path.join('../Graph/', 'degreeDistribution.png'))
-    plt.close()
-    
-    '''
 
 

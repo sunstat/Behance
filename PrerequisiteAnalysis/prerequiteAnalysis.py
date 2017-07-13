@@ -108,24 +108,30 @@ class prerequisiteAnalysis():
     def plot_field(self, sc):
         rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file)
         index_2_field = sc.textFile(self.field_2_index_file)
-        print(index_2_field.take(5))
         index_2_field = index_2_field.map(lambda x: x.split(',')).map(lambda x: (x[1], x[0])).collectAsMap()
-
+        print(index_2_field.take(5))
         print rdd_pid_2_field_index.take(5)
-        '''
-        field_2_frequency = rdd_pid_2_field_index.map(lambda x: x.split('#')).map(lambda x: x[1])
-        field_2_frequency = field_2_frequency.filter(lambda x: x).flatMap(lambda x: x.split(',')).map(lambda x: (x,1))\
+
+        field_index_2_frequency = rdd_pid_2_field_index.map(lambda x: x.split('#')).map(lambda x: x[1])
+        field_index_2_frequency = field_index_2_frequency.filter(lambda x: x).flatMap(lambda x: x.split(',')).map(lambda x: (x,1))\
             .reduceByKey(lambda x, y: x + y).collect()
-        arr = zip(*field_2_frequency)
+        arr = zip(*field_index_2_frequency)
         pos = range(len(arr[0])) + .5
+        ylabel = []
+        for index in arr[0]:
+            ylabel.append(index_2_field[index])
+
+        print ylabel
+
+        
         plt.figure()
         plt.barh(pos, arr[1], align='center')
-        plt.yticks(pos, arr[0])
+        plt.yticks(pos, ylabel)
         plt.xlabel('Performance')
         plt.title('Fields Distribution')
         plt.savefig(os.path.join('../Graph/', 'histogram_of_fields.png'))
         plt.close()
-        '''
+
 
 
     def pruned_network_preliminary_analysis(self):

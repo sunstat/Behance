@@ -82,19 +82,20 @@ class NetworkUtilities(object):
         in_threshold = 5
         n_iters = 20
         rdd_pair = sc.textFile(action_file).map(lambda x: x.split(','))\
-            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], base_date)).filter(lambda x: x[4] == 'F')\
-            .map(lambda x: (x[1], x[2])).cache()
-        rdd_pair = NetworkHelpFunctions.filter_graph_by_incoming_degree(sc, rdd_pair, in_threshold, n_iters)
+            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], base_date))\
+            .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).persist()
+
+        print rdd_pair.take(5)
 
         '''
-        print uid_index to intermediate directory
-        '''
+        rdd_pair = NetworkHelpFunctions.filter_graph_by_incoming_degree(sc, rdd_pair, in_threshold, n_iters)
+
         output_file = os.path.join(output_dir, 'uid_2_index-csv')
 
         rdd_uid_index = rdd_pair.flatMap(lambda x: (x[0],x[1])).distinct().zipWithIndex().cache()
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
         self.uid_set = set(rdd_uid_index.map(lambda x: x[0]).collect())
-
+        '''
     def handle_uid_pid(self, sc, base_date, output_dir):
 
         uid_set_broad = sc.broadcast(self.uid_set)

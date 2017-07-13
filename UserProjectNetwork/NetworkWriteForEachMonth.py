@@ -61,13 +61,15 @@ class NetworkUtilities(object):
         self.uid_set = None
         self.pid_set = None
         self.months_arr = self.__extract_parameters()
+        rdd_uid_2_index = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'uid_2_index-csv')).map(
+            lambda x: x.split(','))
+        rdd_pid_2_index = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_index-csv')).map(
+            lambda x: x.split(','))
+        self.uid_set = set(rdd_uid_2_index.map(lambda x: x[0]).collect())
+        self.pid_set = set(rdd_pid_2_index.map(lambda x: x[0]).collect())
 
     def extract_neighbors_from_users_network(self, sc, end_date, output_dir):
         # read uid_set pid_set from base
-        rdd_uid_2_index = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'uid_2_index-csv')).map(lambda x: x.split(','))
-        rdd_pid_2_index = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_index-csv')).map(lambda x: x.split(','))
-        self.uid_set = set(rdd_uid_2_index.map(lambda x: x[0]).collect())
-        self.pid_set = set(rdd_pid_2_index.map(lambda x: x[0]).collect())
 
         uid_set_broad = sc.broadcast(self.uid_set)
 
@@ -83,10 +85,6 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_follow, output_file, 'psv')
 
     def create_popularity(self, sc, end_date, output_dir):
-        rdd_uid_2_index = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'uid_2_index-csv')).map(lambda x: x.split(','))
-        rdd_pid_2_index = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_index-csv')).map(lambda x: x.split(','))
-        self.uid_set = set(rdd_uid_2_index.map(lambda x: x[0]).collect())
-        self.pid_set = set(rdd_pid_2_index.map(lambda x: x[0]).collect())
         rdd_popularity_base = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_index-csv'))\
             .map(lambda x: x.split(',')) .map(lambda x: (x[0], (0, 0)))
         print (rdd_popularity_base.take(5))

@@ -115,7 +115,9 @@ class prerequisiteAnalysis():
         field_index_2_frequency = rdd_pid_2_field_index.map(lambda x: x.split('#')).map(lambda x: x[1])
         field_index_2_frequency = field_index_2_frequency.filter(lambda x: x).flatMap(lambda x: x.split(',')).map(lambda x: (x,1))\
             .reduceByKey(lambda x, y: x + y).collect()
+        print field_index_2_frequency
         arr = zip(*field_index_2_frequency)
+        print arr
         pos = range(len(arr[0])) + .5
         ylabel = []
         for index in arr[0]:

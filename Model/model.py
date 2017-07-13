@@ -6,14 +6,12 @@ from pyspark.mllib.linalg import SparseVector
 from pyspark.mllib.regression import LabeledPoint
 
 
-class TrainingFeatureExtraction():
-    def __init__(self, pid_2_fields_index_file, field_2_index_file,
-                 base_date, new_date):
-        self.pid_2_field_index_file = pid_2_fields_index_file
-        self.field_2_index_file = field_2_index_file
-        self.base_date = base_date
-        self.new_date = new_date
+class Model():
 
+    def __init__(self, training_month_set, valid_month_set, test_month_set):
+        self.training_month_set = training_month_set
+        self.valid_month_set = valid_month_set
+        self.test_month_set = test_month_set
 
      def extract_features(self, sc):
         rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file).map(lambda x: x.split("#"))\

@@ -70,7 +70,7 @@ class NetworkUtilities(object):
 
     def extract_neighbors_from_users_network(self, sc, end_date, output_dir):
         # read uid_set pid_set from base
-
+        print end_date
         uid_set_broad = sc.broadcast(self.uid_set)
 
         def __filter_uid_incycle(x):

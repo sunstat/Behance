@@ -94,7 +94,10 @@ class prerequisiteAnalysis():
 
     def plot_field(self, sc):
         rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file)
-        index_2_field = sc.textFile(self.field_2_index_file).map(lambda x: x.split(',')).map(lambda x: (x[1],x[0])).collectAsMap()
+        index_2_field = sc.textFile(self.field_2_index_file)
+        print(index_2_field.take(5))
+        #index_2_field = index_2_field.map(lambda x: x.split(',')).map(lambda x: (x[1],x[0])).collectAsMap()
+        '''
         print rdd_pid_2_field_index.take(5)
         field_2_frequency = rdd_pid_2_field_index.map(lambda x: x.split('#')).map(lambda x: x[1])
         field_2_frequency = field_2_frequency.filter(lambda x: x).flatMap(lambda x: x.split(',')).map(lambda x: (x,1))\
@@ -108,6 +111,7 @@ class prerequisiteAnalysis():
         plt.title('Fields Distribution')
         plt.savefig(os.path.join('../Graph/', 'histogram_of_fields.png'))
         plt.close()
+        '''
 
 
 

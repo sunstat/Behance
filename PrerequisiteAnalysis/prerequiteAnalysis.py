@@ -104,7 +104,6 @@ class prerequisiteAnalysis():
         plt.savefig(os.path.join('../Graph/', 'originalDegreeTailDistribution.png'))
         plt.close()
 
-
     def plot_field(self, sc):
         rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file)
         index_2_field = sc.textFile(self.field_2_index_file)
@@ -118,7 +117,7 @@ class prerequisiteAnalysis():
         print field_index_2_frequency
         arr = zip(*field_index_2_frequency)
         print arr
-        pos = range(len(arr[0])) + .5
+        pos = np.arange(len(arr[0])) + .5
         ylabel = []
         for index in arr[0]:
             ylabel.append(index_2_field[index])
@@ -133,8 +132,8 @@ class prerequisiteAnalysis():
         plt.close()
 
 
-
     def pruned_network_preliminary_analysis(self):
+        N = 100
         def flat_2_pairs(x):
             for y in x[1]:
                 yield (x[0], y)
@@ -151,6 +150,21 @@ class prerequisiteAnalysis():
 
         out_degree_arr = rdd_follow.map(lambda x: x.split('#')).map(lambda x: len(x[1].split(','))).collect()
         in_degree_arr = rdd_pair.map(lambda x : (x[1], x[0])).reduceByKey(lambda x,y : x+y).map(lambda x: len(x[1])).collect()
+        out_tail_arr, in_tail_arr = prerequisiteAnalysis.tail_array(out_degree_arr, in_degree_arr, N)
+        plt.figure()
+        fig, ax_arr = plt.subplots(1, 2, sharey=True)
+        ax_arr[0].set_xscale("symlog")
+        ax_arr[0].plot(list(range(1, N + 1)), np.log(in_tail_arr))
+        ax_arr[0].set_title("In Degree Tail Distribution")
+        ax_arr[0].set_xlabel("In Degree")
+        ax_arr[0].set_ylabel("Log of Tail")
+        ax_arr[1].set_xscale("symlog")
+        ax_arr[1].plot(list(range(1, N + 1)), np.log(out_tail_arr))
+        ax_arr[1].set_title("In Degree Tail Distribution")
+        ax_arr[1].set_xlabel("In Degree")
+        ax_arr[1].set_ylabel("Log of Tail")
+        plt.savefig(os.path.join('../Graph/', 'originalDegreeTailDistribution.png'))
+        plt.close()
 
 if __name__ == "__main__":
     sc, _ = init_spark('olivia', 20)

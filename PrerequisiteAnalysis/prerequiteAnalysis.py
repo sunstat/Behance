@@ -161,10 +161,10 @@ class prerequisiteAnalysis():
         ax_arr[0].set_ylabel("Log of Tail")
         ax_arr[1].set_xscale("symlog")
         ax_arr[1].plot(list(range(1, N + 1)), np.log(out_tail_arr))
-        ax_arr[1].set_title("In Degree Tail Distribution")
+        ax_arr[1].set_title("Out Degree Tail Distribution")
         ax_arr[1].set_xlabel("In Degree")
         ax_arr[1].set_ylabel("Log of Tail")
-        plt.savefig(os.path.join('../Graph/', 'originalDegreeTailDistribution.png'))
+        plt.savefig(os.path.join('../Graph/', 'DegreeTailDistributionInPrunedNetwork.png'))
         plt.close()
 
 if __name__ == "__main__":
@@ -176,8 +176,8 @@ if __name__ == "__main__":
     pid_2_field_index_file = os.path.join(intermediate_result_dir, 'base', 'pid_2_field_index-psv')
     field_2_index_file = os.path.join(intermediate_result_dir, 'base', 'field_2_index-csv')
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file, field_2_index_file)
-    #prerequisite_analysis.plot_orginal_degrees(sc, 100)
-    #prerequisite_analysis.plot_field(sc)
+    prerequisite_analysis.plot_orginal_degrees(sc, 100)
+    prerequisite_analysis.plot_field(sc)
     prerequisite_analysis.pruned_network_preliminary_analysis(sc)
 
     sc.stop()

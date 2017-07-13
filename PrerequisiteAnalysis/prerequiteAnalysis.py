@@ -99,15 +99,13 @@ class prerequisiteAnalysis():
         field_2_frequency = rdd_pid_2_field_index.map(lambda x: x.split('#')).map(lambda x: x[1])
         field_2_frequency = field_2_frequency.filter(lambda x: x).flatMap(lambda x: x.split(',')).map(lambda x: (x,1))\
             .reduceByKey(lambda x, y: x + y).collect()
-        zip(*field_2_frequency)
+        arr = zip(*field_2_frequency)
         pos = range(len(index_2_field)) + .5
         plt.figure()
-        plt.barh(pos, , align='center')
-        yticks(pos, ('Tom', 'Dick', 'Harry', 'Slim', 'Jim'))
-        xlabel('Performance')
-        title('How fast do you want to go today?')
-        grid(True)
-
+        plt.barh(pos, arr[1], align='center')
+        plt.yticks(pos, arr[0])
+        plt.xlabel('Performance')
+        plt.title('Fields Distribution')
         plt.savefig(os.path.join('../Graph/', 'histogram_of_fields.png'))
         plt.close()
 

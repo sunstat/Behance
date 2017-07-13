@@ -95,7 +95,7 @@ class NetworkUtilities(object):
         rdd_uid_index = rdd_pair.flatMap(lambda x: (x[0],x[1])).distinct().zipWithIndex().cache()
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
         self.uid_set = set(rdd_uid_index.map(lambda x: x[0]).collect())
-        
+
     def handle_uid_pid(self, sc, base_date, output_dir):
 
         uid_set_broad = sc.broadcast(self.uid_set)

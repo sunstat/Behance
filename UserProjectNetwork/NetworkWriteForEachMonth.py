@@ -93,6 +93,8 @@ class NetworkUtilities(object):
 
         pid_set_broad = sc.broadcast(self.pid_set)
 
+        print len(self.pid_set)
+
         def pid_filter(pid):
             return pid in pid_set_broad.value
 

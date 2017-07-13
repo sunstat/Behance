@@ -41,21 +41,22 @@ class NetworkHelpFunctions():
         rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len) \
             .filter(lambda x: x[1] >= in_threshold)
         uid_set = set(rdd_incoming.map(lambda x: x[0]).collect())
+        uid_set_broad = sc.broadcast(uid_set)
 
-        def filter_set(x, set_filter):
-            return (x[0] in set_filter) and (x[1] in set_filter)
+        def filter_set(x):
+            return (x[0] in uid_set_broad.value) and (x[1] in uid_set_broad.value)
 
-        rdd_pair = rdd_pair.filter(lambda x : filter_set(x, uid_set))
+        rdd_pair = rdd_pair.filter(filter_set)
         set1 = set(rdd_pair.map(lambda x: x[0]).distinct().collect())
         set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
         uid_set1 = set1.intersection(set2)
+        intersection_set_broad = sc.broadcast(uid_set1)
 
-        print len(set(rdd_pair.flatMap(lambda x: (x[0], x[1])).collect()))
-        rdd_pair.filter(lambda x: filter_set(x, uid_set1))
+        def intersection_filter(x):
+            return (x[0] in intersection_set_broad.value) and (x[1] in intersection_set_broad.value)
+
+        rdd_pair = rdd_pair.filter(intersection_filter)
         cur_size = len(set(rdd_pair.flatMap(lambda x: (x[0], x[1])).collect()))
-        print cur_size
-
-        print "==================================================="
 
         while (cur_size != prev_size or len(set1) != len(set2)) and iteration < n_iters:
             print "iteration : {}, cur size: {}, prev size: {}".format(iteration, cur_size, prev_size)
@@ -63,17 +64,23 @@ class NetworkHelpFunctions():
 
             rdd_incoming = rdd_pair.map(lambda x: (x[1], x[0])).groupByKey().mapValues(len)
             rdd_incoming = rdd_incoming.filter(lambda x: x[1] >= in_threshold)
-            uid_set2 = set(rdd_incoming.map(lambda x: x[0]).collect())
-            rdd_pair = rdd_pair.filter(lambda x: filter_set(x, uid_set2))
+            uid_set = set(rdd_incoming.map(lambda x: x[0]).collect())
+            uid_set_broad = sc.broadcast(uid_set)
+
+            def filter_set(x):
+                return (x[0] in uid_set_broad.value) and (x[1] in uid_set_broad.value)
+
+            rdd_pair = rdd_pair.filter(filter_set)
 
             set1 = set(rdd_pair.map(lambda x: x[0]).collect())
-            set2 = set(rdd_pair.map(lambda x: x[1]).collect())
-            uid_set2 = set1.intersection(set2)
-            print("first element is {}, second element is {} and intersection is {}"
-                  .format(len(set1), len(set2), len(uid_set2)))
+            set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
+            uid_set1 = set1.intersection(set2)
+            print("first element is {}, second element is {} and intersection is {}".format(len(set1), len(set2), len(uid_set1)))
+            intersection_set_broad = sc.broadcast(uid_set1)
 
-            print len(set(rdd_pair.flatMap(lambda x: (x[0],x[1])).collect()))
-            rdd_pair.filter(lambda x: filter_set(x, uid_set2))
+            def intersection_filter(x):
+                return (x[0] in intersection_set_broad.value) and (x[1] in intersection_set_broad.value)
+            rdd_pair = rdd_pair.filter(intersection_filter)
             print(rdd_pair.take(5))
             cur_size = len(set(rdd_pair.flatMap(lambda x: (x[0],x[1])).collect()))
             iteration += 1

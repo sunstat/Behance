@@ -89,8 +89,21 @@ class prerequisiteAnalysis():
             in_tail_arr[i-1] = sum([ int(num) >= i for num in in_degree_arr])
         print out_tail_arr
         print in_tail_arr
-
         return out_tail_arr, in_tail_arr
+
+    def plot_orginal_degrees(self, sc, N):
+        out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
+        _, in_tail_arr = prerequisiteAnalysis.tail_array(out_degree_arr, in_degree_arr, N)
+        plt.figure()
+        fig, ax_arr = plt.subplots(1)
+        ax_arr[0].set_xscale("symlog")
+        ax_arr[0].plot(list(range(1, N + 1)), np.log(in_tail_arr))
+        ax_arr[0].set_title("In Degree Tail Distribution")
+        ax_arr[0].set_xlabel("In Degree")
+        ax_arr[0].set_ylabel("Log of Tail")
+        plt.savefig(os.path.join('../Graph/', 'originalDegreeTailDistribution.png'))
+        plt.close()
+
 
     def plot_field(self, sc):
         rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file)
@@ -113,6 +126,9 @@ class prerequisiteAnalysis():
         plt.close()
         '''
 
+    def pruned_network_preliminary_analysis(self):
+        os.path.join(intermediate_result_dir, 'base', 'field_2_index-csv')
+
 
 
 if __name__ == "__main__":
@@ -121,29 +137,14 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
-    N = 100
     pid_2_field_index_file = os.path.join(intermediate_result_dir, 'base', 'pid_2_field_index-psv')
     field_2_index_file = os.path.join(intermediate_result_dir, 'base', 'field_2_index-csv')
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file, field_2_index_file)
-    #out_degree_arr, in_degree_arr = prerequisite_analysis.degree_distribution(sc, '2016-06-30')
-    prerequisite_analysis.plot_field(sc)
-    #print out_degree_arr[1:10]
-    #print in_degree_arr[1:10]
+    prerequisite_analysis.plot_orginal_degrees(sc, 100)
 
-    out_tail_arr, in_tail_arr = prerequisiteAnalysis.tail_array(out_degree_arr, in_degree_arr, N)
-    plt.figure()
-    fig, ax_arr = plt.subplots(1)
-    ax_arr[0].set_xscale("symlog")
-    ax_arr[0].plot(list(range(1, N+1)), np.log(in_tail_arr))
-    ax_arr[0].set_title("In Degree Tail Distribution")
-    ax_arr[0].set_xlabel("In Degree")
-    ax_arr[0].set_ylabel("Log of Tail")
 
-    plt.show()
-    plt.pause(10)
 
-    plt.savefig(os.path.join('../Graph/', 'degreeTailDistribution.png'))
-    plt.close()
+
     sc.stop()
 
 

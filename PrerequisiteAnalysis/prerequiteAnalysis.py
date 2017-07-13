@@ -110,7 +110,7 @@ class prerequisiteAnalysis():
         index_2_field = sc.textFile(self.field_2_index_file)
         print(index_2_field.take(5))
         #index_2_field = index_2_field.map(lambda x: x.split(',')).map(lambda x: (x[1],x[0])).collectAsMap()
-        '''
+
         print rdd_pid_2_field_index.take(5)
         field_2_frequency = rdd_pid_2_field_index.map(lambda x: x.split('#')).map(lambda x: x[1])
         field_2_frequency = field_2_frequency.filter(lambda x: x).flatMap(lambda x: x.split(',')).map(lambda x: (x,1))\
@@ -124,17 +124,24 @@ class prerequisiteAnalysis():
         plt.title('Fields Distribution')
         plt.savefig(os.path.join('../Graph/', 'histogram_of_fields.png'))
         plt.close()
-        '''
+
 
     def pruned_network_preliminary_analysis(self):
-
         def flat_2_pairs(x):
             for y in x[1]:
                 yield (x[0], y)
 
         rdd_follow = sc.textFile(os.path.join(intermediate_result_dir, '2016-06-30', 'follow_map-psv'))
         rdd_pair = rdd_follow.map(lambda x: x.split('#')).flatMap(flat_2_pairs)
-        
+
+        # test cycle correct or not
+        set1 = set(rdd_pair.map(lambda x: x[0]).distinct().collect())
+        set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
+        set3 = set1.intersection(set2)
+
+        print("first is {}, second is {}, intersection is {}".format(len(set1), len(set2), len(set3)))
+
+        #rdd_out = rdd_follow
 
 
 
@@ -148,9 +155,7 @@ if __name__ == "__main__":
     field_2_index_file = os.path.join(intermediate_result_dir, 'base', 'field_2_index-csv')
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file, field_2_index_file)
     prerequisite_analysis.plot_orginal_degrees(sc, 100)
-
-
-
+    prerequisite_analysis.plot_field(sc)
 
     sc.stop()
 

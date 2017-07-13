@@ -125,8 +125,8 @@ class prerequisiteAnalysis():
 
         print ylabel
         plt.figure()
-        plt.barh(pos, arr[1], align='center')
-        plt.yticks(pos_y , ylabel)
+        plt.barh(pos_y, arr[1], align='center')
+        plt.yticks(pos_y, ylabel)
         plt.xlabel('Performance')
         plt.title('Fields Distribution')
         plt.savefig(os.path.join('../Graph/', 'histogram_of_fields.png'))

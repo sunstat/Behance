@@ -177,7 +177,7 @@ if __name__ == "__main__":
     field_2_index_file = os.path.join(intermediate_result_dir, 'base', 'field_2_index-csv')
     prerequisite_analysis = prerequisiteAnalysis(action_file, owners_file, pid_2_field_index_file, field_2_index_file)
     #prerequisite_analysis.plot_orginal_degrees(sc, 100)
-    prerequisite_analysis.plot_field(sc)
+    #prerequisite_analysis.plot_field(sc)
     prerequisite_analysis.pruned_network_preliminary_analysis(sc)
 
     sc.stop()

@@ -82,7 +82,7 @@ class NetworkUtilities(object):
         in_threshold = 5
         n_iters = 20
         rdd_pair = sc.textFile(action_file).map(lambda x: x.split(','))\
-            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], base_date))\
+            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], base_date))
 
         print rdd_pair.take(5)
 

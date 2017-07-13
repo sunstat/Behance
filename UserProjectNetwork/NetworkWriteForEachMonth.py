@@ -98,12 +98,10 @@ class NetworkUtilities(object):
         def pid_filter(pid):
             return pid in pid_set_broad.value
 
-        rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(','))
-        '''
-        .filter(
-            lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date)) \
+        rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(','))\
+            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
-        '''
+
 
         print(rdd_pids.take(5))
         rdd_pid_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len)

@@ -77,7 +77,7 @@ class NetworkHelpFunctions():
             uid_set1 = set1.intersection(set2)
             intersection_set_broad = sc.broadcast(uid_set1)
             print "first element is {}, second element is {} and intersection is {}".format(len(set1), len(set2), len(uid_set1))
-            
+
             def intersection_filter(x):
                 return (x[0] in intersection_set_broad.value) and (x[1] in intersection_set_broad.value)
             rdd_pair = rdd_pair.filter(intersection_filter)

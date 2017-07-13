@@ -83,9 +83,10 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_follow, output_file, 'psv')
 
     def create_popularity(self, sc, end_date, output_dir):
-
         rdd_popularity_base = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_index-csv'))\
             .map(lambda x: x.split(',')) .map(lambda x: (x[0], (0, 0)))
+        print (rdd_popularity_base.take(5))
+
         pid_set_broad = sc.broadcast(self.pid_set)
 
         def pid_filter(pid):
@@ -114,7 +115,7 @@ class NetworkUtilities(object):
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
-        self.extract_neighbors_from_users_network(sc, end_date, output_dir)
+        #self.extract_neighbors_from_users_network(sc, end_date, output_dir)
         self.create_popularity(sc, end_date, output_dir)
 
     def run(self, sc):

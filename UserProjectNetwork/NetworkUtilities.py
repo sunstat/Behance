@@ -175,7 +175,7 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')
 
     def write_to_intermediate_directory(self, sc):
-        base_date = "2016-05-30"
+        base_date = "2016-06-30"
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, base_date,), shell=True)
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, base_date)

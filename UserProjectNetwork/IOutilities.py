@@ -7,6 +7,7 @@ import operator
 from scipy.sparse import coo_matrix, csr_matrix
 from subprocess import Popen
 
+import time
 
 
 class IOutilities(object):
@@ -71,6 +72,7 @@ class IOutilities(object):
             return ",".join([str(y) for y in x])
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
         Popen('./%s %s' %(delete_shell_azure, output_file,), shell=True)
+        time.sleep(1)
         if output_format == 'csv':
             rdd.map(lambda x: to_string(x)).saveAsTextFile(output_file)
         elif output_format == 'psv':

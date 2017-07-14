@@ -124,7 +124,7 @@ class NetworkUtilities(object):
         Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
         self.extract_neighbors_from_users_network(sc, end_date, output_dir)
-        self.create_popularity(sc, end_date, output_dir)
+        #self.create_popularity(sc, end_date, output_dir)
 
     def run(self, sc):
         for end_date in self.months_arr:

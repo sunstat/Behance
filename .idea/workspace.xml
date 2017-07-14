@@ -2,7 +2,110 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserProjectNetwork/config" afterPath="$PROJECT_DIR$/UserProjectNetwork/config" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ConfigurationFiles/constants.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-avro_2.10/ivy-2.0.1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-avro_2.10/ivy-2.0.1.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-avro_2.10/ivydata-2.0.1.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-avro_2.10/jars/spark-avro_2.10-2.0.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-csv_2.10/ivy-1.5.0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-csv_2.10/ivy-1.5.0.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-csv_2.10/ivydata-1.5.0.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-csv_2.10/jars/spark-csv_2.10-1.5.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer-parent/ivy-2.3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer-parent/ivy-2.3.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer-parent/ivydata-2.3.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer/ivy-2.3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer/ivy-2.3.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer/ivydata-2.3.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer/jars/paranamer-2.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.univocity/univocity-parsers/ivy-1.5.1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.univocity/univocity-parsers/ivy-1.5.1.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.univocity/univocity-parsers/ivydata-1.5.1.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.univocity/univocity-parsers/jars/univocity-parsers-1.5.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/ivy-report.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/ivy-report.xsl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-parent/ivy-1.7.6.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-parent/ivy-1.7.6.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-parent/ivydata-1.7.6.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-toplevel/ivy-1.7.6.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-toplevel/ivy-1.7.6.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-toplevel/ivydata-1.7.6.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro/bundles/avro-1.7.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro/ivy-1.7.6.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro/ivy-1.7.6.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro/ivydata-1.7.6.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-compress/ivy-1.4.1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-compress/ivy-1.4.1.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-compress/ivydata-1.4.1.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-compress/jars/commons-compress-1.4.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-csv/ivy-1.1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-csv/ivy-1.1.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-csv/ivydata-1.1.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-csv/jars/commons-csv-1.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivy-24.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivy-24.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivy-35.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivy-35.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivydata-24.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivydata-35.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.spark-spark-submit-parent-default.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-10.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-10.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-15.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-15.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-9.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-9.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivydata-10.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivydata-15.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivydata-9.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-core-asl/ivy-1.9.13.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-core-asl/ivy-1.9.13.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-core-asl/ivydata-1.9.13.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-core-asl/jars/jackson-core-asl-1.9.13.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-mapper-asl/ivy-1.9.13.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-mapper-asl/ivy-1.9.13.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-mapper-asl/ivydata-1.9.13.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-mapper-asl/jars/jackson-mapper-asl-1.9.13.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus/codehaus-parent/ivy-1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus/codehaus-parent/ivy-1.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus/codehaus-parent/ivydata-1.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-api/ivydata-1.6.4.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.6.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-parent/ivy-1.6.4.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-parent/ivy-1.6.4.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-parent/ivydata-1.6.4.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.sonatype.oss/oss-parent/ivydata-7.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.tukaani/xz/ivy-1.0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.tukaani/xz/ivy-1.0.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.tukaani/xz/ivydata-1.0.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.tukaani/xz/jars/xz-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.xerial.snappy/snappy-java/bundles/snappy-java-1.0.5.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.xerial.snappy/snappy-java/ivy-1.0.5.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.xerial.snappy/snappy-java/ivy-1.0.5.xml.original" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.xerial.snappy/snappy-java/ivydata-1.0.5.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/resolved-org.apache.spark-spark-submit-parent-1.0.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/resolved-org.apache.spark-spark-submit-parent-1.0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/com.databricks_spark-avro_2.10-2.0.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/com.databricks_spark-csv_2.10-1.5.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/com.thoughtworks.paranamer_paranamer-2.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/com.univocity_univocity-parsers-1.5.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.apache.avro_avro-1.7.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.apache.commons_commons-compress-1.4.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.apache.commons_commons-csv-1.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.codehaus.jackson_jackson-core-asl-1.9.13.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.codehaus.jackson_jackson-mapper-asl-1.9.13.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.slf4j_slf4j-api-1.6.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.tukaani_xz-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.xerial.snappy_snappy-java-1.0.5.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/someStatistic.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/model.py" afterPath="$PROJECT_DIR$/Model/model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/test1.py" afterPath="$PROJECT_DIR$/Test/test1.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/testJoin.py" afterPath="$PROJECT_DIR$/Test/testJoin.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,97 +117,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IOutilities.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
+      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Model/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+            <state relative-caret-position="312">
+              <caret line="29" column="32" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="29" selection-end-column="32" />
               <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="delete.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EditData/ShellEdit/delete.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="14" lean-forward="true" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="createIntermediateDateDirHdfs.sh" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/EditData/ShellEdit/createIntermediateDateDirHdfs.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="compressFourActions.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EditData/ShellEdit/compressFourActions.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/config">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="10" lean-forward="false" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="image-url.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EditData/PySparkEdit/image-url.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="deleteRow.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EditData/PySparkEdit/deleteRow.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#39#71#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="owners.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EditData/PySparkEdit/owners.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="38" column="39" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="replaceRow.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EditData/PySparkEdit/replaceRow.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,6 +134,88 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NetworkUtilities.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="452">
+              <caret line="177" column="21" lean-forward="false" selection-start-line="177" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test1.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/test1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testJoin.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Test/testJoin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="511">
+              <caret line="44" column="17" lean-forward="false" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NetworkHelpFunctions.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/NetworkHelpFunctions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="714">
+              <caret line="42" column="45" lean-forward="true" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NetworkWriteForEachMonth.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteForEachMonth.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="58" column="41" lean-forward="false" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="41" />
+              <folding>
+                <element signature="e#79#122#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="run.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/run.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NetworkWriteToBase.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="constants.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ConfigurationFiles/constants.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -154,7 +255,11 @@
       <find>broad</find>
       <find>reduce</find>
       <find>end_date</find>
+      <find>behance_data_dir</find>
     </findStrings>
+    <replaceStrings>
+      <replace>behance_data_dir</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -162,8 +267,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/UserProjectNetwork/ProjectNode.py" />
-        <option value="$PROJECT_DIR$/UserProjectNetwork/UserProject.py" />
         <option value="$PROJECT_DIR$/editDataWithPySpark.py" />
         <option value="$PROJECT_DIR$/editFilePySpark/deleteRow.py" />
         <option value="$PROJECT_DIR$/TinyData/action/action_data_20161.csv000" />
@@ -183,7 +286,6 @@
         <option value="$PROJECT_DIR$/EditData/ShellEdit/createIntermediateDateDirLocally.sh" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/dateUtilities.py" />
         <option value="$PROJECT_DIR$/Model.py" />
-        <option value="$PROJECT_DIR$/Test/test1.py" />
         <option value="$PROJECT_DIR$/Test/IOutilities.py" />
         <option value="$PROJECT_DIR$/Test/run.py" />
         <option value="$PROJECT_DIR$/Test/testFile.py" />
@@ -194,7 +296,6 @@
         <option value="$PROJECT_DIR$/ConfigurationFiles/pysparkFiles.py" />
         <option value="$PROJECT_DIR$/Model/FeatureExtraction/pageRank.py" />
         <option value="$PROJECT_DIR$/Test/testSparseVector.py" />
-        <option value="$PROJECT_DIR$/Test/testJoin.py" />
         <option value="$PROJECT_DIR$/Test/NetworkHelpFunctions.py" />
         <option value="$PROJECT_DIR$/Model/FeatureExtraction/fieldExtract.py" />
         <option value="$PROJECT_DIR$/Model/FeatureExtraction/featureExtraction.py" />
@@ -205,7 +306,6 @@
         <option value="$PROJECT_DIR$/Model/FeatureExtraction/TrainingFeatureExtraction.py" />
         <option value="$PROJECT_DIR$/Model/Model.py" />
         <option value="$PROJECT_DIR$/Model/pageRank.py" />
-        <option value="$PROJECT_DIR$/Model/model.py" />
         <option value="$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/test.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkWriteForEachMonth.py" />
@@ -213,6 +313,11 @@
         <option value="$PROJECT_DIR$/EditData/ShellEdit/delete.sh" />
         <option value="$PROJECT_DIR$/EditData/ShellEdit/createIntermediateDateDirHdfs.sh" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/config" />
+        <option value="$PROJECT_DIR$/constants.py" />
+        <option value="$PROJECT_DIR$/Test/test1.py" />
+        <option value="$PROJECT_DIR$/ConfigurationFiles/constants.py" />
+        <option value="$PROJECT_DIR$/Model/model.py" />
+        <option value="$PROJECT_DIR$/Test/testJoin.py" />
       </list>
     </option>
   </component>
@@ -617,6 +722,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2899878" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2877551" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -630,7 +736,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -643,20 +748,17 @@
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Model/FeatureExtraction/test.py</url>
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ConfigurationFiles/constants.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/pid_map_popularity">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/BuildNetWork.py" />
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -767,30 +869,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test/testJoin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test/test1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/FeatureExtraction/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -867,48 +945,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/pageRank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="177" column="21" lean-forward="false" selection-start-line="177" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
-          <folding>
-            <element signature="e#79#122#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test/testSparseVector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test/NetworkHelpFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="42" column="45" lean-forward="true" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="424">
           <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -937,16 +979,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="28" column="76" lean-forward="false" selection-start-line="28" selection-start-column="67" selection-end-line="28" selection-end-column="76" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/EditData/ShellEdit/createIntermediateDateDirLocally.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -955,30 +987,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-577">
-          <caret line="97" column="0" lean-forward="true" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteForEachMonth.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="123" column="76" lean-forward="false" selection-start-line="123" selection-start-column="76" selection-end-line="123" selection-end-column="76" />
-          <folding>
-            <element signature="e#79#122#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="443">
           <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1004,16 +1018,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ConfigurationFiles/pysparkFiles.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1030,7 +1036,7 @@
         <state relative-caret-position="-1">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#39#71#0" expanded="true" />
+            <element signature="e#39#71#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1055,6 +1061,116 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/pageRank.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/testSparseVector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/NetworkHelpFunctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="42" column="45" lean-forward="true" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/test1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ConfigurationFiles/pysparkFiles.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ConfigurationFiles/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteForEachMonth.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="58" column="41" lean-forward="false" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="41" />
+          <folding>
+            <element signature="e#79#122#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="177" column="21" lean-forward="false" selection-start-line="177" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="29" column="32" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="29" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/testJoin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="44" column="17" lean-forward="false" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
           <folding />
         </state>
       </provider>

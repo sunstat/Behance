@@ -1,9 +1,12 @@
 import numpy as np
-import scipy.sparse as sps
+import os
 from pyspark.mllib.linalg import Vectors, LabeledPoint
 
 from pyspark.mllib.linalg import SparseVector
 from pyspark.mllib.regression import LabeledPoint
+
+
+from ConfigurationFiles import constants as C
 
 
 class Model():
@@ -13,7 +16,35 @@ class Model():
         self.valid_month_set = valid_month_set
         self.test_month_set = test_month_set
 
+    @staticmethod
+    def __next_month(month):
+        arr = month.split('-')
+        arr[1] = str(int(arr[1])+1)
+
+    @staticmethod
+    def __join_pair_rdds(rdd1, rdd2):
+        return rdd1.join(rdd2).mapValues(lambda x: x[0] + (x[1],))
+
+    @staticmethod
+    def __join_list_rdds(ls_rdds):
+        for i in range(1, len())
+
      def extract_features(self, sc):
+        # build training rdd
+        rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
+            .map(lambda x: [x[0], tuple(x[1].split(','))])
+        count = 0
+        for month in self.training_month_set:
+            rdd_cur_popularity = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR,month,C.PID_2_POPULARITY_FILE))\
+                .map(lambda x: x.split(','))
+            rdd_next_popularity = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR,Model.next_month(month),C.PID_2_POPULARITY_FILE))\
+                .map(lambda x: x.split(','))
+            rdd_score = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR, month,C.PID_2_SCORE_FILE))\
+                .map(lambda x: x.split(','))
+            rdd_temp = rdd_pid_2_field_index.join
+
+
+
         rdd_pid_2_field_index = sc.textFile(self.pid_2_field_index_file).map(lambda x: x.split("#"))\
             .map(lambda x: [x(0),tuple(x[1].split(','))])
         rdd_field_2_index = sc.textFile(self.rdd_field_2_index).map(lambda x: x.split(','))

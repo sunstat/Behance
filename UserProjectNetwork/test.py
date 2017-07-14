@@ -57,6 +57,10 @@ else:
 
     print set_6 == set_7
 
+    set_6 = set(rdd_pid_2_popularity_6.map(lambda x: x[0]).collect())
+    set_7 = set(rdd_pid_2_popularity_7.map(lambda x: x[0]).collect())
+
+    print set_6 == set_7
 
 june_popularity = os.path.join(intermediate_result_dir, "2016-06-30")
 june_popularity = os.path.join(intermediate_result_dir, "2016-07-30")

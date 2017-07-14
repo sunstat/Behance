@@ -70,10 +70,11 @@ class IOutilities(object):
                 return " "
             return ",".join([str(y) for y in x])
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
-        Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)
+        Popen('./%s %s' %(delete_shell_azure, output_file,), shell=True)
         if output_format == 'csv':
             rdd.map(lambda x: to_string(x)).saveAsTextFile(output_file)
         elif output_format == 'psv':
             rdd.map(lambda x: str(x[0])+"#"+(to_string(x[1]))).saveAsTextFile(output_file)
+
 
 

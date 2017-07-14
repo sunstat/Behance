@@ -62,5 +62,5 @@ else:
 
     print set_6 == set_7
 
-june_popularity = os.path.join(intermediate_result_dir, "2016-06-30")
-june_popularity = os.path.join(intermediate_result_dir, "2016-07-30")
+    delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
+    Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)

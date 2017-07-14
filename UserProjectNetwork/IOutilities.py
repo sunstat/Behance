@@ -73,8 +73,7 @@ class IOutilities(object):
 
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
         Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)
-        temp_file = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult/2016-06-30/follow_map-psv"
-        if os.system("hadoop fs -test -d {0}".format(temp_file)) == 0:
+        if os.system("hadoop fs -test -d {0}".format(output_file)) == 0:
             raise Exception("Folder already exists!!")
 
         # time.sleep(1)

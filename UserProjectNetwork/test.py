@@ -38,6 +38,24 @@ else:
     owners_file = os.path.join(behance_data_dir, "owners-csv")
     intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
 
+    sc, _ = init_spark('test', 20)
+
+    rdd_uid_2_index_6 = sc.textFile(os.path.join(intermediate_result_dir, '2016-06-30', 'uid_2_index-csv')).map(
+        lambda x: x.split(','))
+    rdd_pid_2_index_6 = sc.textFile(os.path.join(intermediate_result_dir, '2016-06-30', 'pid_2_index-csv')).map(
+        lambda x: x.split(','))
+
+    rdd_uid_2_index_7 = sc.textFile(os.path.join(intermediate_result_dir, '2016-07-30', 'uid_2_index-csv')).map(
+        lambda x: x.split(','))
+    rdd_pid_2_index_7 = sc.textFile(os.path.join(intermediate_result_dir, '2016-07-30', 'pid_2_index-csv')).map(
+        lambda x: x.split(','))
+
+
+    set_6 = set(rdd_uid_2_index_6.map(lambda x: x[0]).collect())
+    set_7 = set(rdd_uid_2_index_7.map(lambda x: x[0]).collect())
+
+    print set_6 == set_7
+
 
 june_popularity = os.path.join(intermediate_result_dir, "2016-06-30")
 june_popularity = os.path.join(intermediate_result_dir, "2016-07-30")

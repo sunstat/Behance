@@ -46,7 +46,7 @@ class IOutilities(object):
             f.write("\n")
 
     @staticmethod
-    def print_dict_to_file(sc, my_dict, local_intermediate_dir, filename, azure_intermediate_dir = None):
+    def print_dict_to_file(sc, my_dict, local_intermediate_dir, filename, azure_intermediate_dir=None):
         local_file = os.path.join(local_intermediate_dir, filename)
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
         delete_shell_local = os.path.join(IOutilities.shell_dir, 'deleteLocal.sh')
@@ -60,7 +60,7 @@ class IOutilities(object):
             sc.SparkContext(appName="transfering to Azure")
             rdd_dict = sc.textFile(local_file).map(lambda x: x.split(',')).cache()
             rdd_dict.map(IOutilities.to_string).saveAsTextFile(output_file)
-            #now delete the original file
+            # now delete the original file
             Popen('./%s %s' % (delete_shell_local, local_file,), shell=True)
             sc.stop()
 
@@ -70,13 +70,15 @@ class IOutilities(object):
             if not x:
                 return " "
             return ",".join([str(y) for y in x])
+
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
-        Popen('./%s %s' %(delete_shell_azure, output_file,), shell=True)
-        #time.sleep(1)
+        Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)
+        if os.system(
+                "hadoop fs -test -d wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult/2016-06-30/   follow_map-psv") == 0:
+            raise Exception("Folder already exists!!")
+
+        # time.sleep(1)
         if output_format == 'csv':
             rdd.map(lambda x: to_string(x)).saveAsTextFile(output_file)
         elif output_format == 'psv':
-            rdd.map(lambda x: str(x[0])+"#"+(to_string(x[1]))).saveAsTextFile(output_file)
-
-
-
+            rdd.map(lambda x: str(x[0]) + "#" + (to_string(x[1]))).saveAsTextFile(output_file)

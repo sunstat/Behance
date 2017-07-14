@@ -1,112 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ConfigurationFiles/constants.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-avro_2.10/ivy-2.0.1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-avro_2.10/ivy-2.0.1.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-avro_2.10/ivydata-2.0.1.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-avro_2.10/jars/spark-avro_2.10-2.0.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-csv_2.10/ivy-1.5.0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-csv_2.10/ivy-1.5.0.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-csv_2.10/ivydata-1.5.0.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.databricks/spark-csv_2.10/jars/spark-csv_2.10-1.5.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer-parent/ivy-2.3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer-parent/ivy-2.3.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer-parent/ivydata-2.3.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer/ivy-2.3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer/ivy-2.3.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer/ivydata-2.3.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.thoughtworks.paranamer/paranamer/jars/paranamer-2.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.univocity/univocity-parsers/ivy-1.5.1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.univocity/univocity-parsers/ivy-1.5.1.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.univocity/univocity-parsers/ivydata-1.5.1.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/com.univocity/univocity-parsers/jars/univocity-parsers-1.5.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/ivy-report.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/ivy-report.xsl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-parent/ivy-1.7.6.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-parent/ivy-1.7.6.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-parent/ivydata-1.7.6.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-toplevel/ivy-1.7.6.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-toplevel/ivy-1.7.6.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro-toplevel/ivydata-1.7.6.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro/bundles/avro-1.7.6.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro/ivy-1.7.6.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro/ivy-1.7.6.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.avro/avro/ivydata-1.7.6.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-compress/ivy-1.4.1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-compress/ivy-1.4.1.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-compress/ivydata-1.4.1.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-compress/jars/commons-compress-1.4.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-csv/ivy-1.1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-csv/ivy-1.1.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-csv/ivydata-1.1.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-csv/jars/commons-csv-1.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivy-24.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivy-24.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivy-35.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivy-35.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivydata-24.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.commons/commons-parent/ivydata-35.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache.spark-spark-submit-parent-default.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-10.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-10.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-15.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-15.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-9.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivy-9.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivydata-10.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivydata-15.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.apache/apache/ivydata-9.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-core-asl/ivy-1.9.13.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-core-asl/ivy-1.9.13.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-core-asl/ivydata-1.9.13.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-core-asl/jars/jackson-core-asl-1.9.13.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-mapper-asl/ivy-1.9.13.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-mapper-asl/ivy-1.9.13.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-mapper-asl/ivydata-1.9.13.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus.jackson/jackson-mapper-asl/jars/jackson-mapper-asl-1.9.13.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus/codehaus-parent/ivy-1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus/codehaus-parent/ivy-1.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.codehaus/codehaus-parent/ivydata-1.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-api/ivy-1.6.4.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-api/ivydata-1.6.4.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.6.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-parent/ivy-1.6.4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-parent/ivy-1.6.4.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.slf4j/slf4j-parent/ivydata-1.6.4.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.sonatype.oss/oss-parent/ivy-7.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.sonatype.oss/oss-parent/ivydata-7.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.tukaani/xz/ivy-1.0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.tukaani/xz/ivy-1.0.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.tukaani/xz/ivydata-1.0.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.tukaani/xz/jars/xz-1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.xerial.snappy/snappy-java/bundles/snappy-java-1.0.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.xerial.snappy/snappy-java/ivy-1.0.5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.xerial.snappy/snappy-java/ivy-1.0.5.xml.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/org.xerial.snappy/snappy-java/ivydata-1.0.5.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/resolved-org.apache.spark-spark-submit-parent-1.0.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/cache/resolved-org.apache.spark-spark-submit-parent-1.0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/com.databricks_spark-avro_2.10-2.0.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/com.databricks_spark-csv_2.10-1.5.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/com.thoughtworks.paranamer_paranamer-2.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/com.univocity_univocity-parsers-1.5.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.apache.avro_avro-1.7.6.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.apache.commons_commons-compress-1.4.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.apache.commons_commons-csv-1.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.codehaus.jackson_jackson-core-asl-1.9.13.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.codehaus.jackson_jackson-mapper-asl-1.9.13.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.slf4j_slf4j-api-1.6.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.tukaani_xz-1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.ivy2/jars/org.xerial.snappy_snappy-java-1.0.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/someStatistic.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/model.py" afterPath="$PROJECT_DIR$/Model/model.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/test1.py" afterPath="$PROJECT_DIR$/Test/test1.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/testJoin.py" afterPath="$PROJECT_DIR$/Test/testJoin.py" />
-    </list>
+    <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -162,8 +57,8 @@
       <file leaf-file-name="testJoin.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Test/testJoin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="44" column="17" lean-forward="false" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
+            <state relative-caret-position="205">
+              <caret line="25" column="83" lean-forward="false" selection-start-line="25" selection-start-column="83" selection-end-line="25" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -1169,8 +1064,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Test/testJoin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="44" column="17" lean-forward="false" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
+        <state relative-caret-position="205">
+          <caret line="25" column="83" lean-forward="false" selection-start-line="25" selection-start-column="83" selection-end-line="25" selection-end-column="83" />
           <folding />
         </state>
       </provider>

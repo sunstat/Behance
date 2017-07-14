@@ -24,7 +24,6 @@ def init_spark(name, max_excutors):
             .set("spark.dynamicAllocation.enabled", "false")
             .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
             .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer"))
-
     sc = SparkContext.getOrCreate(conf)
     sc.setLogLevel('ERROR')
     sqlContext = HiveContext(sc)

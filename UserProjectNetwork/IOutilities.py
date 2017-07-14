@@ -66,6 +66,8 @@ class IOutilities(object):
     @staticmethod
     def print_rdd_to_file(rdd, output_file, output_format):
         def to_string(x):
+            if not x:
+                return " "
             return ",".join([str(y) for y in x])
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
         Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)

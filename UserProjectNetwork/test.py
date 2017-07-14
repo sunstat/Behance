@@ -14,6 +14,18 @@ from NetworkHelpFunctions import NetworkHelpFunctions
 
 
 
+
+def init_spark(name, max_excutors):
+    conf = (SparkConf().setAppName(name)
+            .set("spark.dynamicAllocation.enabled", "false")
+            .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
+            .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer"))
+    sc = SparkContext(conf=conf)
+    sc.setLogLevel('ERROR')
+    sqlContext = HiveContext(sc)
+    return sc, sqlContext
+
+
 local_run = False
 
 if local_run:

@@ -9,9 +9,11 @@ from subprocess import Popen
 
 
 def __join_pair_rdds(rdd1, rdd2):
-    if isinstance(x[0], tuple):
-        return rdd1.join(rdd2).mapValues(lambda x: x[0] + (x[1],))
-    return rdd1.join(rdd2)
+    def f(x):
+        if isinstance(x[0], tuple):
+            return x[0] + (x[1],)
+        return (x[0], x[1])
+    return rdd1.join(rdd2).mapValues(f)
 
 def __join_list_rdds(ls_rdds):
     rdd = ls_rdds[0]

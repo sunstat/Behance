@@ -117,7 +117,7 @@ class NetworkUtilities(object):
 
     def create_month_dir(self, sc, end_date):
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-        args = ["./",]
+        args = []
         args.append(shell_file)
         args.append(intermediate_result_dir)
         args.append(end_date)

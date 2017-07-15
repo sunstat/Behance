@@ -100,16 +100,12 @@ class NetworkUtilities(object):
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
 
+        print rdd_pids.count()
 
-        print(rdd_pids.take(5))
         rdd_pid_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len)
         rdd_pid_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len)
-        print rdd_pid_num_comments.take(5)
-        print rdd_pid_num_appreciations.take(5)
         temp_left = rdd_pid_num_comments.leftOuterJoin(rdd_pid_num_appreciations)
-        print(temp_left.take(10))
         temp_right = rdd_pid_num_comments.rightOuterJoin(rdd_pid_num_appreciations).filter(lambda x: not x[1][0])
-        print(temp_right.take(10))
         rdd_popularity = temp_left.union(temp_right).distinct()\
             .map(lambda x: (x[0], (NetworkHelpFunctions.change_none_to_zero(x[1][0]),
                                    NetworkHelpFunctions.change_none_to_zero(x[1][1]))))

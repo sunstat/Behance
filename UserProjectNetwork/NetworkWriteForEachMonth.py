@@ -7,6 +7,7 @@ import pyspark.sql.functions as F
 from pyspark.sql.types import StructField, StructType, StringType, LongType, DoubleType, IntegerType, BooleanType
 import os, sys
 import operator
+from subprocess import check_call
 from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
@@ -116,7 +117,11 @@ class NetworkUtilities(object):
 
     def create_month_dir(self, sc, end_date):
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-        Popen('./%s %s %s' % (shell_file, intermediate_result_dir, end_date,), shell=True)
+        args = []
+        args.append(shell_file)
+        args.append(intermediate_result_dir)
+        args.append(end_date)
+        check_call(args)
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
         self.extract_neighbors_from_users_network(sc, end_date, output_dir)
         self.create_popularity(sc, end_date, output_dir)

@@ -100,8 +100,6 @@ class NetworkUtilities(object):
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()
 
-        print rdd_pids.count()
-
         rdd_pid_num_comments = rdd_pids.filter(lambda x: x[1] == 'C').groupByKey().mapValues(len)
         rdd_pid_num_appreciations = rdd_pids.filter(lambda x: x[1] == 'A').groupByKey().mapValues(len)
         temp_left = rdd_pid_num_comments.leftOuterJoin(rdd_pid_num_appreciations)
@@ -111,6 +109,7 @@ class NetworkUtilities(object):
                                    NetworkHelpFunctions.change_none_to_zero(x[1][1]))))
         rdd_popularity = rdd_popularity.union(rdd_popularity_base)
         rdd_popularity = rdd_popularity.map(lambda x: (x[0], NetworkHelpFunctions.calculate_popularity(x[1][0],x[1][1],1,2)))
+        rdd_popularity = rdd_popularity.reduceByKey(lambda x,y : x+y) 
         output_file = os.path.join(output_dir, '-'.join(['pid_2_popularity', 'csv']))
         print(output_file)
         IOutilities.print_rdd_to_file(rdd_popularity, output_file, 'csv')

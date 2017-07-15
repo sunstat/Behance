@@ -73,7 +73,6 @@ class IOutilities(object):
             return ",".join([str(y) for y in x])
 
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
-        os.system.
         args = ["/bin/bash"]
         args.append(delete_shell_azure)
         args.append(output_file)

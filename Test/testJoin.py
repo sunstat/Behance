@@ -35,15 +35,8 @@ def init_spark(name, max_excutors):
 
 sc, sqlContext = init_spark('olivia', 20)
 x = sc.parallelize([("a", 1), ("b", 4)])
-y = sc.parallelize([("a", 2), ["b", 5]])
-z = sc.parallelize([("a", 3), ["b", 6]])
+y = sc.parallelize([("a", 2), ["d", 5]])
+z = sc.parallelize([("a", 3), ["f", 6]])
 
-ls = []
-ls.append(x)
-ls.append(y)
-ls.append(z)
-
-rdd = __join_list_rdds(ls)
-
-print rdd.take(10)
-
+rdd = x.rightOuterJoin(y)
+print rdd.take(5)

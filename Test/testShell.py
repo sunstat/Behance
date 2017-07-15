@@ -1,7 +1,10 @@
 from subprocess import Popen
+from subprocess import check_call
 
-shell_file = "shell1.sh"
+shell_file = "./shell1.sh"
 
+args = []
+args.append(shell_file)
+args.append("a")
 
-
-Popen('./%s '%(shell_file,), shell=True)
+check_call(args)

@@ -62,5 +62,6 @@ else:
 
     print set_6 == set_7
 
-    delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
-    Popen('./%s %s' % (delete_shell_azure, output_file,), shell=True)
+    rdd_popularity = rdd_pid_2_popularity_6.join(rdd_pid_2_popularity_7)
+
+    print rdd_popularity.take(5)

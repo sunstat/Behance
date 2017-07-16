@@ -73,7 +73,7 @@ class IOutilities(object):
             return ",".join([str(y) for y in x])
 
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
-        Popen('{} {} {}'.format("/bin/bash", delete_shell_azure, output_file), shell=True)
+        Popen('{} {} {}'.format("/usr/bin/env bash", delete_shell_azure, output_file), shell=True)
         if os.system("hadoop fs -test -d {0}".format(output_file)) == 0:
             raise Exception("Folder already exists!!")
 

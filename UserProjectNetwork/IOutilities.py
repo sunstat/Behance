@@ -74,7 +74,7 @@ class IOutilities(object):
             return ",".join([str(y) for y in x])
 
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
-        call('{} {} {}'.format("/usr/bin/env bash", delete_shell_azure, output_file))
+        call('{} {} {}'.format("/usr/bin/env bash", delete_shell_azure, output_file), shell=True)
 
         while os.system("hadoop fs -test -d {0}".format(output_file)) == 0:
             print "sleep for finishing deletion"

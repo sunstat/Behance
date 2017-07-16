@@ -117,7 +117,7 @@ class NetworkUtilities(object):
 
     def create_month_dir(self, sc, end_date):
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-        Popen('{} {} {} {}'.format("/usr/bin/env bash", shell_file, intermediate_result_dir, end_date), shell=True)
+        os.system('{} {} {} {}'.format("/usr/bin/env bash", shell_file, intermediate_result_dir, end_date))
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
         self.extract_neighbors_from_users_network(sc, end_date, output_dir)
         self.create_popularity(sc, end_date, output_dir)

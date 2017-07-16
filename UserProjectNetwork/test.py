@@ -67,6 +67,9 @@ else:
     print rdd_popularity.count()
     print rdd_popularity.take(5)
 
+    rdd_data = rdd_popularity.filter(lambda x: int(x[1][0]) == 0)
+    print rdd_data.count()
+
     rdd_popularity = rdd_popularity.map(lambda x: (x[0], int(x[1][1])-int(x[1][0])))
     print rdd_popularity.take(5)
     rdd_A = rdd_popularity.filter(lambda x: x[1]>=0)

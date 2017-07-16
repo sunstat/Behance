@@ -6,6 +6,7 @@ import os, sys
 import operator
 from scipy.sparse import coo_matrix, csr_matrix
 from subprocess import Popen
+from subprocess import call
 from subprocess import check_call
 
 import time
@@ -73,7 +74,7 @@ class IOutilities(object):
             return ",".join([str(y) for y in x])
 
         delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
-        Popen('{} {} {}'.format("/usr/bin/env bash", delete_shell_azure, output_file))
+        call('{} {} {}'.format("/usr/bin/env bash", delete_shell_azure, output_file))
 
         while os.system("hadoop fs -test -d {0}".format(output_file)) == 0:
             print "sleep for finishing deletion"

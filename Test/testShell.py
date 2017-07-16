@@ -1,6 +1,7 @@
 import os
 from subprocess import Popen
 from subprocess import check_call
+from subprocess import call
 
 shell_file = "shell1.sh"
 
@@ -16,8 +17,7 @@ args.append(a2)
 print ' '.join(args)
 print '{} {} {} {}'.format('/usr/bin/env bash', shell_file, a1, a2)
 
-a = Popen(' '.join(args), shell=True)
-print a.wait()
+call(' '.join(args), shell=True)
 
 
 

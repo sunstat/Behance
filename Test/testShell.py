@@ -17,7 +17,8 @@ args.append(a2)
 print ' '.join(args)
 print '{} {} {} {}'.format('/usr/bin/env bash', shell_file, a1, a2)
 
-call(' '.join(args), shell=True)
+a = Popen(' '.join(args), shell=True)
+a.wait()
 
 
 

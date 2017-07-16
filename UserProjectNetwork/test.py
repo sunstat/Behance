@@ -64,4 +64,12 @@ else:
 
     rdd_popularity = rdd_pid_2_popularity_6.join(rdd_pid_2_popularity_7)
 
+    print rdd_popularity.count()
+
+    rdd_popularity = rdd_popularity.mapValues(lambda x: x[1]-x[0])
+    rdd_A = rdd_popularity.filter(lambda x: x[1]>=0)
+    print rdd_A.count()
+    rdd_B = rdd_popularity.filter(lambda x: x[1]==0)
+    print rdd_B.count()
+
     print rdd_popularity.take(5)

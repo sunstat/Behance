@@ -11,9 +11,7 @@ from pyspark.mllib.linalg import Vectors, LabeledPoint
 from pyspark.mllib.linalg import SparseVector
 from pyspark.mllib.regression import LabeledPoint
 
-
-from ConfigurationFiles import constants as C
-
+import configuration.constants as C
 
 class Model():
 
@@ -23,9 +21,9 @@ class Model():
         self.test_month_set = test_month_set
 
     @staticmethod
-    def __next_month(month):
+    def __pair_month(month, gap):
         arr = month.split('-')
-        arr[1] = str(int(arr[1])+1)
+        arr[1] = str(int(arr[1])+gap)
 
     @staticmethod
     def __join_pair_rdds(rdd1, rdd2):
@@ -57,7 +55,7 @@ class Model():
                 .map(lambda x: x.split(','))
             rdd_next_popularity = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR,Model.next_month(month), C.PID_2_POPULARITY_FILE))\
                 .map(lambda x: x.split(','))
-            rdd_score = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR, month,C.PID_2_SCORE_FILE))\
+            rdd_score = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR, month, C.PID_2_SCORE_FILE))\
                 .map(lambda x: x.split(','))
             ls = []
             ls.append(rdd_pid_2_field_index)

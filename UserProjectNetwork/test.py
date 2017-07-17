@@ -40,15 +40,15 @@ else:
 
     sc, _ = init_spark('test', 20)
 
-    rdd_follow_map_6 = sc.textFile(os.path.join(intermediate_result_dir, '2016-06-30', 'follow_map-psv')).map(
+    rdd_follow_map_6 = sc.textFile(os.path.join(intermediate_result_dir, '2016-01-30', 'follow_map-psv')).map(
         lambda x: x.split('#'))
-    rdd_pid_2_popularity_6 = sc.textFile(os.path.join(intermediate_result_dir, '2016-06-30', 'pid_2_popularity-csv')).map(
+    rdd_pid_2_popularity_6 = sc.textFile(os.path.join(intermediate_result_dir, '2016-01-30', 'pid_2_popularity-csv')).map(
         lambda x: x.split(','))
 
-    rdd_follow_map_7 = sc.textFile(os.path.join(intermediate_result_dir, '2016-07-30', 'follow_map-psv')).map(
+    rdd_follow_map_7 = sc.textFile(os.path.join(intermediate_result_dir, '2016-02-30', 'follow_map-psv')).map(
         lambda x: x.split('#'))
     rdd_pid_2_popularity_7 = sc.textFile(
-        os.path.join(intermediate_result_dir, '2016-07-30', 'pid_2_popularity-csv')).map(
+        os.path.join(intermediate_result_dir, '2016-02-30', 'pid_2_popularity-csv')).map(
         lambda x: x.split(','))
 
 

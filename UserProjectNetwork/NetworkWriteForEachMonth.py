@@ -13,6 +13,7 @@ from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
+import constants as C
 
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
@@ -130,7 +131,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
-    sc.addFile('/home/yiming/Behance/ConfigurationFiles/constants.py')
+    sc.addFile('/home/yiming/Behance/constants.py')
     network_utilities = NetworkUtilities(action_file, owners_file, 'config', 1, 2)
     network_utilities.run(sc)
     sc.stop()

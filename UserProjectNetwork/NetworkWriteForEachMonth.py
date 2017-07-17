@@ -56,7 +56,7 @@ class NetworkUtilities(object):
 
     # compare two date strings "2016-12-01"
 
-    def __init__(self, action_file, owner_file, config_file, comment_weight, appreciation_weight):
+    def __init__(self, action_file, owner_file, config_file, comment_weight, appreciation_weight, create_time):
         self.action_file = action_file
         self.owners_file = owner_file
         self.config_file = config_file
@@ -69,12 +69,14 @@ class NetworkUtilities(object):
         self.uid_set = None
         self.pid_set = None
         self.months_arr = self.__extract_parameters()
+        self.create_time = create_time
+
         rdd_uid_2_index = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'uid_2_index-csv')).map(
             lambda x: x.split(','))
-        rdd_pid_2_index = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_index-csv')).map(
-            lambda x: x.split(','))
+        rdd_pid_2_date = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_index-csv')).map(
+            lambda x: x.split(',')).filter(lambda x: NetworkHelpFunctions.date_filter(self.create_time, x[1], "2016-12-30"))
         self.uid_set = set(rdd_uid_2_index.map(lambda x: x[0]).collect())
-        self.pid_set = set(rdd_pid_2_index.map(lambda x: x[0]).collect())
+        self.pid_set = set(rdd_pid_2_date.map(lambda x: x[0]).collect())
 
     def extract_neighbors_from_users_network(self, sc, end_date, output_dir):
         # read uid_set pid_set from base
@@ -93,6 +95,10 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_follow, output_file, 'psv')
 
     def create_popularity(self, sc, end_date, output_dir):
+
+        def pid_filter(pid):
+            return pid in pid_set_broad.value
+
         rdd_popularity_base = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_index-csv'))\
             .map(lambda x: x.split(',')) .map(lambda x: (x[0], (0, 0)))
         print (rdd_popularity_base.take(5))
@@ -101,8 +107,6 @@ class NetworkUtilities(object):
 
         print len(self.pid_set)
 
-        def pid_filter(pid):
-            return pid in pid_set_broad.value
 
         rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(','))\
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date)) \

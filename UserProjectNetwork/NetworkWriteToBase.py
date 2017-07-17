@@ -19,6 +19,7 @@ from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
+from subprocess import call 
 
 
 local_run = False
@@ -158,7 +159,7 @@ class NetworkUtilities(object):
 
     def run(self, sc):
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-        Popen('./%s %s %s' % (shell_file, intermediate_result_dir, 'base',), shell=True)
+        call('./%s %s %s' % (shell_file, intermediate_result_dir, 'base',), shell=True)
         output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, 'base')
         self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
         self.handle_uid_pid(sc, self.base_date, output_dir)

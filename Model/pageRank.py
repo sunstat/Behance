@@ -1,3 +1,9 @@
+import sys
+
+sys.path.append('/home/yiming/Behance')
+sys.path.append('/home/yiming/Behance/configuration')
+
+
 import re
 from operator import add
 import os
@@ -7,7 +13,7 @@ from pyspark.sql import HiveContext
 import pyspark.sql.functions as F
 from pyspark.sql.types import StructField, StructType, StringType, LongType, DoubleType, IntegerType, BooleanType
 
-import ConfigurationFiles.constants as C
+import configuration.constants as C
 
 class PageRank():
     def __init__(self, num_iters):
@@ -20,7 +26,7 @@ class PageRank():
                 return " "
             return ",".join([str(y) for y in x])
 
-        delete_shell_azure = os.path.join(C.C.SHELL_DIR, 'delete.sh')
+        delete_shell_azure = os.path.join(C.SHELL_DIR, 'delete.sh')
         call('{} {} {}'.format("/usr/bin/env bash", delete_shell_azure, output_file), shell=True)
 
         if os.system("hadoop fs -test -d {0}".format(output_file)) == 0:

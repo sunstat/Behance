@@ -1,3 +1,9 @@
+import sys
+
+sys.path.append('/home/yiming/Behance')
+sys.path.append('/home/yiming/Behance/configuration')
+
+
 import numpy as np
 import os
 from pyspark.mllib.linalg import Vectors, LabeledPoint

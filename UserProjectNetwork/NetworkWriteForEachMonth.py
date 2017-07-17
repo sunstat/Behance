@@ -130,7 +130,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
-    sc..addFile('/home/yiming/Behance/ConfigurationFiles/constants.py')
+    sc.addFile('/home/yiming/Behance/ConfigurationFiles/constants.py')
     network_utilities = NetworkUtilities(action_file, owners_file, 'config', 1, 2)
     network_utilities.run(sc)
     sc.stop()

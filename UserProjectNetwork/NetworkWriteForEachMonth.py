@@ -130,6 +130,7 @@ class NetworkUtilities(object):
 if __name__ == "__main__":
     sys.path.append('/home/yiming/Behance')
     sys.path.append('/home/yiming/Behance/configuration')
+    sys.path.append('/home/yiming/Behance/configuration/constants.py')
     sc, _ = init_spark('olivia', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')

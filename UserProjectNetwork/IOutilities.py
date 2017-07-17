@@ -1,3 +1,9 @@
+import sys
+
+sys.path.append('/home/yiming/Behance')
+sys.path.append('/home/yiming/Behance/configuration')
+#sys.path.append('/home/yiming/Behance/configuration/constants.py')
+
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 import pyspark.sql.functions as F

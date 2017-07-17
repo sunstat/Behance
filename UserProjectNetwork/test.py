@@ -13,8 +13,6 @@ from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
 
 
-
-
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
             .set("spark.dynamicAllocation.enabled", "false")
@@ -45,10 +43,10 @@ else:
     rdd_pid_2_popularity_6 = sc.textFile(os.path.join(intermediate_result_dir, '2016-01-30', 'pid_2_popularity-csv')).map(
         lambda x: x.split(','))
 
-    rdd_follow_map_7 = sc.textFile(os.path.join(intermediate_result_dir, '2016-02-30', 'follow_map-psv')).map(
+    rdd_follow_map_7 = sc.textFile(os.path.join(intermediate_result_dir, '2016-03-30', 'follow_map-psv')).map(
         lambda x: x.split('#'))
     rdd_pid_2_popularity_7 = sc.textFile(
-        os.path.join(intermediate_result_dir, '2016-02-30', 'pid_2_popularity-csv')).map(
+        os.path.join(intermediate_result_dir, '2016-03-30', 'pid_2_popularity-csv')).map(
         lambda x: x.split(','))
 
 
@@ -64,7 +62,7 @@ else:
 
     rdd_popularity = rdd_pid_2_popularity_6.join(rdd_pid_2_popularity_7)
 
-    print rdd_popularity.count()
+        print rdd_popularity.count()
     print rdd_popularity.take(5)
 
     rdd_data = rdd_popularity.filter(lambda x: int(x[1][0]) == 0)
@@ -77,4 +75,3 @@ else:
     rdd_B = rdd_popularity.filter(lambda x: x[1]==0)
     print rdd_B.count()
 
-    print rdd_popularity.take(5)

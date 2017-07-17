@@ -73,7 +73,7 @@ class IOutilities(object):
                 return " "
             return ",".join([str(y) for y in x])
 
-        delete_shell_azure = os.path.join(C.C.SHELL_DIR, 'delete.sh')
+        delete_shell_azure = os.path.join(C.SHELL_DIR, 'delete.sh')
         call('{} {} {}'.format("/usr/bin/env bash", delete_shell_azure, output_file), shell=True)
 
         if os.system("hadoop fs -test -d {0}".format(output_file)) == 0:

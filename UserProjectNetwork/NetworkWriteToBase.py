@@ -79,7 +79,7 @@ class NetworkUtilities(object):
         '''
         ===============================
         '''
-        self.base_date = self.__extract_base_date()
+        self.base_date = "2016-06-30"
         print("base date is {}".format(self.base_date))
 
 

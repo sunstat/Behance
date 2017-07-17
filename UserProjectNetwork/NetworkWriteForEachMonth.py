@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # extract all user information from owners and actions:
 
+import sys
+
+sys.path.append('/home/yiming/Behance')
+sys.path.append('/home/yiming/Behance/configuration')
+#sys.path.append('/home/yiming/Behance/configuration/constants.py')
+
+
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 import pyspark.sql.functions as F
@@ -14,7 +21,6 @@ from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
 import configuration.constants as C
-import sys
 
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
@@ -128,9 +134,6 @@ class NetworkUtilities(object):
             self.create_month_dir(sc, end_date)
 
 if __name__ == "__main__":
-    sys.path.append('/home/yiming/Behance')
-    sys.path.append('/home/yiming/Behance/configuration')
-    sys.path.append('/home/yiming/Behance/configuration/constants.py')
     sc, _ = init_spark('olivia', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')

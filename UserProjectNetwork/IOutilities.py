@@ -8,6 +8,7 @@ from scipy.sparse import coo_matrix, csr_matrix
 from subprocess import Popen
 from subprocess import call
 from subprocess import check_call
+import ConfigurationFiles.constants as C
 
 import time
 
@@ -16,7 +17,6 @@ class IOutilities(object):
     '''
     static memebers
     '''
-    shell_dir = "../EditData/ShellEdit"
 
     def __init__(self):
         pass
@@ -50,8 +50,8 @@ class IOutilities(object):
     @staticmethod
     def print_dict_to_file(sc, my_dict, local_intermediate_dir, filename, azure_intermediate_dir=None):
         local_file = os.path.join(local_intermediate_dir, filename)
-        delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
-        delete_shell_local = os.path.join(IOutilities.shell_dir, 'deleteLocal.sh')
+        delete_shell_azure = os.path.join(IOutilities.C.SHELL_DIR, 'delete.sh')
+        delete_shell_local = os.path.join(IOutilities.C.SHELL_DIR, 'deleteLocal.sh')
         if os.path.exists(local_file):
             Popen('./%s %s' % (delete_shell_local, local_file,), shell=True)
         IOutilities.print_dict_to_file_help(my_dict, local_file)
@@ -73,7 +73,7 @@ class IOutilities(object):
                 return " "
             return ",".join([str(y) for y in x])
 
-        delete_shell_azure = os.path.join(IOutilities.shell_dir, 'delete.sh')
+        delete_shell_azure = os.path.join(C.C.SHELL_DIR, 'delete.sh')
         call('{} {} {}'.format("/usr/bin/env bash", delete_shell_azure, output_file), shell=True)
 
         if os.system("hadoop fs -test -d {0}".format(output_file)) == 0:

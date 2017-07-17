@@ -8,7 +8,7 @@ from scipy.sparse import coo_matrix, csr_matrix
 from subprocess import Popen
 from subprocess import call
 from subprocess import check_call
-import constants as C
+import configuration.constants as C
 
 import time
 

@@ -14,6 +14,7 @@ from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
 import configuration.constants as C
+import sys
 
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
@@ -127,6 +128,7 @@ class NetworkUtilities(object):
             self.create_month_dir(sc, end_date)
 
 if __name__ == "__main__":
+    sys.path.append('/home/yiming/Behance')
     sc, _ = init_spark('olivia', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')

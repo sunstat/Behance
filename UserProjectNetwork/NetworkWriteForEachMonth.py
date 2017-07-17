@@ -13,7 +13,7 @@ from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
-import constants as C
+import configuration.constants as C
 
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)

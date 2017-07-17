@@ -105,28 +105,22 @@ class NetworkUtilities(object):
 
     def handle_uid_pid(self, sc, base_date, output_dir):
 
-        self.uid_set = set(sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
-
         uid_set_broad = sc.broadcast(self.uid_set)
 
         def __filter_uid_in_cycle(uid):
             return uid in uid_set_broad.value
 
-        rdd_owners= sc.textFile(self.owners_file).map(lambda x: x.split(',')) \
-            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[2], base_date)) \
-            .filter(lambda x: __filter_uid_in_cycle(x[1])).persist()
 
-        rdd_pid_2_date = rdd_owners.map(lambda x: (x[0], x[2]))
-        output_file = os.path.join(output_dir, 'pid_2_date-csv')
-        IOutilities.print_rdd_to_file(rdd_pid_2_date, output_file, 'csv')
-
-        '''
         # print field_2_index to intermediate diretory
 
 
         rdd_owners = sc.textFile(self.owners_file).map(lambda x: x.split(',')) \
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[2], base_date)) \
             .filter(lambda x: __filter_uid_in_cycle(x[1])).persist()
+
+        rdd_pid_2_date = rdd_owners.map(lambda x: (x[0], x[2]))
+        output_file = os.path.join(output_dir, 'pid_2_date-csv')
+        IOutilities.print_rdd_to_file(rdd_pid_2_date, output_file, 'csv')
 
         rdd_fields_map_index = rdd_owners.flatMap(lambda x: (x[3], x[4], x[5])).filter(
             lambda x: x).distinct().zipWithIndex().cache()
@@ -160,7 +154,7 @@ class NetworkUtilities(object):
         rdd_pid_index = rdd_owners.map(lambda x: x[0]).distinct().zipWithIndex().cache()
         output_file = os.path.join(output_dir, 'pid_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
-        '''
+
 
     def run(self, sc):
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')

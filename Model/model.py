@@ -46,17 +46,24 @@ class Model():
         :param month_set:
         :return: rdd with column pid,fields(maybe empty), score, cur_popularity, next_popularity
         '''
+
+        def __vec_2_int(vec):
+            vec_result = []
+            for y in vec:
+                vec_result.append(int(y))
+            return tuple(vec_result)
+
         # build training rdd
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
-            .map(lambda x: [x[0], tuple(x[1].split(','))])
+            .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(lambda x: __vec_2_int)
         rdd_data = None
         for month in month_set:
             rdd_cur_popularity = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR,month,C.PID_2_POPULARITY_FILE))\
-                .map(lambda x: x.split(','))
+                .map(lambda x: x.split(',')).map(lambda x: (x[0], float(x[1])))
             rdd_next_popularity = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR,Model.next_month(month), C.PID_2_POPULARITY_FILE))\
-                .map(lambda x: x.split(','))
+                .map(lambda x: x.split(',')).map(lambda x: (x[0], float(x[1])))
             rdd_score = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR, month, C.PID_2_SCORE_FILE))\
-                .map(lambda x: x.split(','))
+                .map(lambda x: x.split(',')).map(lambda x: (x[0], float(x[1])))
             ls = []
             ls.append(rdd_pid_2_field_index)
             ls.append(rdd_score)

@@ -87,5 +87,24 @@ class NetworkHelpFunctions():
 
         return rdd_pair
 
+    @staticmethod
+    def date_2_value(date1):
+        result = 0
+        gaps = [365,30,1]
+        arr1 = date1.split('-')
+        arr1[0] = int(arr1[0])-2015
+        arr1[1] = int(arr1[1])
+        arr1[2] = int(arr1[2])
+        for i in range(3):
+            result += gaps[i]*arr1[i]
+        return result
+
+    @staticmethod
+    def gap_popularity(arr):
+        arr.sort()
+        return arr[1]-arr[0]
+
+
+
 
 

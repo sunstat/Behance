@@ -19,7 +19,7 @@ from scipy.sparse import coo_matrix, csr_matrix
 from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
-from subprocess import call 
+from subprocess import call
 
 
 local_run = False

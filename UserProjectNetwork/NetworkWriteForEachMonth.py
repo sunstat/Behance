@@ -128,8 +128,9 @@ class NetworkUtilities(object):
 
     def create_month_dir(self, sc, end_date):
         shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-        call('{} {} {} {}'.format("/usr/bin/env bash", shell_file, intermediate_result_dir, end_date), shell=True)
-        output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, end_date)
+        call('{} {} {} {}'.format("/usr/bin/env bash", shell_file,
+                                  intermediate_result_dir, os.path.join(self.create_time, end_date)), shell=True)
+        output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, os.path.join(self.create_time, end_date))
         self.extract_neighbors_from_users_network(sc, end_date, output_dir)
         self.create_popularity(sc, end_date, output_dir)
 
@@ -143,7 +144,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/constants.py')
-    network_utilities = NetworkUtilities(action_file, owners_file, 'config', 1, 2)
+    network_utilities = NetworkUtilities(action_file, owners_file, 'config', 1, 2, "2016-01-01")
     network_utilities.run(sc)
     sc.stop()
 

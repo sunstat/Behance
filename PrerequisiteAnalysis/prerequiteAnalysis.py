@@ -183,6 +183,7 @@ class prerequisiteAnalysis():
 
         pid_2_date = pid_2_date.filter(lambda x: NetworkHelpFunctions.date_filter("2016-01-30", x[1], "2016-12-30"))
 
+        print pid_2_date.take(10)
         pid_set = set(pid_2_date.map(lambda x: x[0]).collect())
 
         pid_set_broad = sc.broadcast(pid_set)

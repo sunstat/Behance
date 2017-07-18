@@ -22,17 +22,6 @@ from NetworkHelpFunctions import NetworkHelpFunctions
 from subprocess import call
 
 
-local_run = False
-
-if local_run:
-    action_file = "/Users/yimsun/PycharmProjects/Data/TinyData/action/actionDataTrimNoView-csv"
-    owners_file = "/Users/yimsun/PycharmProjects/Data/TinyData/owners-csv"
-    intermediate_result_dir = '../IntermediateDir'
-else:
-    behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
-    action_file = os.path.join(behance_data_dir, "action", "actionDataTrimNoView-csv")
-    owners_file = os.path.join(behance_data_dir, "owners-csv")
-    intermediate_result_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
 
 '''
 write pid_2_index, uid_2_index, field_2_index, pid_2_field_index, pid_2_uid to the base directory
@@ -80,7 +69,7 @@ class NetworkUtilities(object):
         '''
         ===============================
         '''
-        self.base_date = "2016-06-30"
+        self.base_date = "2016-12-30"
         print("base date is {}".format(self.base_date))
 
 

@@ -6,10 +6,12 @@ sys.path.append('/home/yiming/Behance/configuration')
 
 import numpy as np
 import os
-from pyspark.mllib.linalg import Vectors, LabeledPoint
+from pyspark.mllib.linalg import Vectors
 
 from pyspark.mllib.linalg import SparseVector
 from pyspark.mllib.regression import LabeledPoint
+from pyspark.mllib.regression import LabeledPoint, LinearRegressionWithSGD, LinearRegressionModel
+
 
 import configuration.constants as C
 
@@ -104,6 +106,9 @@ class Model():
         '''
         rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0], x[1][1], x[1][2], x[1][3], N)
         return rdd_label_data
+
+    def train_model(self)):
+        model = LinearRegressionWithSGD.train(parsedData, iterations=100, step=0.00000001)
 
 
 

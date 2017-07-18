@@ -175,7 +175,7 @@ if __name__ == "__main__":
     sc, _ = init_spark('olivia', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
-    sc..addFile('/home/yiming/Behance/configuration/constants.py')
+    sc.addFile('/home/yiming/Behance/configuration/constants.py')
     prerequisite_analysis = prerequisiteAnalysis()
     prerequisite_analysis.plot_orginal_degrees(sc, 100)
     #prerequisite_analysis.plot_field(sc)

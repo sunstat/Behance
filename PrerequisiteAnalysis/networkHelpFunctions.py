@@ -102,6 +102,8 @@ class NetworkHelpFunctions():
     @staticmethod
     def gap_popularity(arr):
         arr.sort()
+        if len(arr) == 1:
+            return 365
         return arr[1]-arr[0]
 
 

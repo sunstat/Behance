@@ -28,7 +28,6 @@ def init_spark(name, max_excutors):
             .set("spark.dynamicAllocation.enabled", "false")
             .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
             .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer"))
-
     sc = SparkContext.getOrCreate(conf)
     sc.setLogLevel('ERROR')
     sqlContext = HiveContext(sc)
@@ -41,7 +40,7 @@ class prerequisiteAnalysis():
 
     def degree_distribution(self, sc, end_date):
         rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(',')) \
-            .filter(lambda x: NetworkUtilities.NetworkUtilities.date_filter("0000-00-00", x[0], end_date)) \
+            .filter(lambda x: NetworkHelpFunctions.NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         rdd_out = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         out_degree_arr = rdd_out.map(lambda x: len(x[1])).collect()
@@ -175,7 +174,6 @@ class prerequisiteAnalysis():
 if __name__ == "__main__":
     sc, _ = init_spark('olivia', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
-    sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     prerequisite_analysis = prerequisiteAnalysis()
     prerequisite_analysis.plot_orginal_degrees(sc, 100)

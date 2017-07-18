@@ -20,7 +20,7 @@ from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
 from subprocess import call
-
+import configuration.constants as C
 
 
 '''
@@ -51,26 +51,9 @@ class NetworkUtilities(object):
 
     # compare two date strings "2016-12-01"
 
-    def __init__(self, action_file, owner_file, config_file):
-
-        self.action_file = action_file
-        self.owners_file = owner_file
-        self.config_file = config_file
-        NetworkUtilities.shell_dir = "../EditData/ShellEdit"
-        NetworkUtilities.local_intermediate_dir = "../IntermediateDir"
-        NetworkUtilities.behance_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance"
-        NetworkUtilities.behance_data_dir = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
-        NetworkUtilities.azure_intermediate_dir = os.path.join(NetworkUtilities.behance_dir, "IntermediateResult")
-
-        '''
-        two intermediate results for 
-        '''
+    def __init__(self):
         self.uid_set = None
-        '''
-        ===============================
-        '''
-        self.base_date = "2016-12-30"
-        print("base date is {}".format(self.base_date))
+        self.pid_set = None
 
 
     '''
@@ -79,8 +62,8 @@ class NetworkUtilities(object):
     def extract_neighbors_from_users_network(self, sc, base_date, output_dir):
 
         in_threshold = 5
-        n_iters = 20
-        rdd_pair = sc.textFile(action_file).map(lambda x: x.split(',')) \
+        n_iters = 30
+        rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(',')) \
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], base_date)) \
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         print rdd_pair.take(5)
@@ -156,9 +139,9 @@ class NetworkUtilities(object):
 if __name__ == "__main__":
     sc, _ = init_spark('base', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
-    sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
-    network_utilities = NetworkUtilities(action_file, owners_file, 'config')
+    sc.addFile('/home/yiming/Behance/configuration/constants.py')
+    network_utilities = NetworkUtilities()
     network_utilities.run(sc)
     sc.stop()
 

@@ -67,7 +67,6 @@ class NetworkUtilities(object):
         in_threshold = 5
         n_iters = 30
         rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(',')) \
-            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], base_date)) \
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         print rdd_pair.take(5)
 
@@ -78,6 +77,13 @@ class NetworkUtilities(object):
         rdd_uid_index = rdd_pair.flatMap(lambda x: (x[0],x[1])).distinct().zipWithIndex().cache()
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
         self.uid_set = set(rdd_uid_index.map(lambda x: x[0]).collect())
+
+        uid_set_broad = sc.broadcast(self.uid_set)
+
+        def __filter_uid_in_cycle(uid):
+            return uid in uid_set_broad.value
+
+        sc.textFile(C.ACTION_VIEW_FILE).
 
 
     def handle_uid_pid(self, sc, base_date, output_dir):
@@ -90,11 +96,15 @@ class NetworkUtilities(object):
 
         # print field_2_index to intermediate diretory
         rdd_owners = sc.textFile(C.OWNERS_FILE).map(lambda x: x.split(',')) \
-            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[2], base_date)) \
+            .filter(lambda x: NetworkHelpFunctions.date_filter("2016-01-01", x[2], base_date)) \
             .filter(lambda x: __filter_uid_in_cycle(x[1])).persist()
 
         self.pid_set = set(rdd_owners.map(lambda x: x[0]).collect())
         pid_set_broad = sc.broadcast(self.pid_set)
+
+
+
+
 
         rdd_pid_2_date = rdd_owners.map(lambda x: (x[0], x[2]))
         output_file = os.path.join(output_dir, 'pid_2_date-csv')

@@ -6,7 +6,6 @@ import sys
 sys.path.append('/home/yiming/Behance')
 sys.path.append('/home/yiming/Behance/configuration')
 sys.path.append('/home/yiming/Behance/UserProjectNetwork')
-sys.path.append('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
 
 
 
@@ -23,7 +22,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-from NetworkHelpFunctions import NetworkHelpFunctions
+from networkHelpFunctions import NetworkHelpFunctions
 
 
 local_run = False

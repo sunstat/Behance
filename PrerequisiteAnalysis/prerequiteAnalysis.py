@@ -204,8 +204,8 @@ class prerequisiteAnalysis():
             .map(lambda x: NetworkHelpFunctions.gap_popularity(x[1]))
 
         print rdd_pids.count()
-        print rdd_pids.filter(lambda x: x==365)
-        
+        print rdd_pids.filter(lambda x: x==365).count()
+
 
 
 

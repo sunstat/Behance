@@ -20,7 +20,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-import constants as C
+import configuration.constants as C
 from NetworkHelpFunctions import NetworkHelpFunctions
 
 def init_spark(name, max_excutors):

@@ -206,6 +206,7 @@ class prerequisiteAnalysis():
 if __name__ == "__main__":
     sc, _ = init_spark('olivia', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
+    sc.addFile('/home/yiming/Behance/UserProjectNetwork')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     pid_2_field_index_file = os.path.join(intermediate_result_dir, 'base', 'pid_2_field_index-psv')

@@ -190,7 +190,7 @@ class prerequisiteAnalysis():
         def pid_filter(pid):
             return pid in pid_set_broad.value
 
-        rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(','))\
+        rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(',')).filter(lambda x: x[4] == 'C' or x[4] == 'A')\
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], "2016-12-30")) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[0])).cache()
 
@@ -200,7 +200,7 @@ class prerequisiteAnalysis():
 
         print rdd_pids.take(10)
 
-        rdd_pids = rdd_pids.mapValues(lambda x : [x]).reduceByKey(lambda x,y: x+y).map(NetworkHelpFunctions.gap_popularity)
+        rdd_pids = rdd_pids.mapValues(lambda x : [x]).reduceByKey(lambda x,y: x+y)
         print rdd_pids.take(10)
 
 

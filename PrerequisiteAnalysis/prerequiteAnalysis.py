@@ -197,6 +197,9 @@ class prerequisiteAnalysis():
         print rdd_pids.take(10)
 
         rdd_pids = rdd_pids.union(pid_2_date).mapValues(NetworkHelpFunctions.date_2_value)
+
+        print rdd_pids.take(10)
+
         rdd_pids = rdd_pids.mapValues(lambda x : [x]).reduceByKey(lambda x,y: x+y).mapValues(NetworkHelpFunctions.gap_popularity)
         print rdd_pids.take(10)
 

@@ -194,6 +194,8 @@ class prerequisiteAnalysis():
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], "2016-12-30")) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[0])).cache()
 
+        print rdd_pids.take(10)
+
         rdd_pids = rdd_pids.union(pid_2_date).mapValues(NetworkHelpFunctions.date_2_value)
         rdd_pids = rdd_pids.mapValues(lambda x : [x]).reduceByKey(lambda x,y: x+y).mapValues(NetworkHelpFunctions.gap_popularity)
         print rdd_pids.take(10)

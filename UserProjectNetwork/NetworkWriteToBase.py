@@ -22,7 +22,7 @@ from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
 from subprocess import call
-import constants as C
+import configuration.constants as C
 
 
 '''
@@ -58,7 +58,6 @@ class NetworkUtilities(object):
         self.pid_set = None
         self.base_date = base_date
 
-
     '''
     extract neighbors in user network and uids set which involved in the network built 
     '''
@@ -83,7 +82,8 @@ class NetworkUtilities(object):
         def __filter_uid_in_cycle(uid):
             return uid in uid_set_broad.value
 
-        sc.textFile(C.ACTION_VIEW_FILE).
+        sc.textFile(C.ACTION_VIEW_FILE).filter(lambda x: x[4] == 'V')\
+            .filter(lambda x: __filter_uid_in_cycle(x[1])).map(lambda x: (x[3], x[0]))
 
 
     def handle_uid_pid(self, sc, base_date, output_dir):
@@ -93,18 +93,10 @@ class NetworkUtilities(object):
         def __filter_uid_in_cycle(uid):
             return uid in uid_set_broad.value
 
-
         # print field_2_index to intermediate diretory
         rdd_owners = sc.textFile(C.OWNERS_FILE).map(lambda x: x.split(',')) \
             .filter(lambda x: NetworkHelpFunctions.date_filter("2016-01-01", x[2], base_date)) \
             .filter(lambda x: __filter_uid_in_cycle(x[1])).persist()
-
-        self.pid_set = set(rdd_owners.map(lambda x: x[0]).collect())
-        pid_set_broad = sc.broadcast(self.pid_set)
-
-
-
-
 
         rdd_pid_2_date = rdd_owners.map(lambda x: (x[0], x[2]))
         output_file = os.path.join(output_dir, 'pid_2_date-csv')

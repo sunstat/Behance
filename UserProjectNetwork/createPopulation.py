@@ -107,7 +107,6 @@ class NetworkUtilities(object):
 
         print len(self.pid_set)
 
-
         rdd_pids = sc.textFile(self.action_file).map(lambda x: x.split(','))\
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: pid_filter(x[3])).map(lambda x: (x[3], x[4])).cache()

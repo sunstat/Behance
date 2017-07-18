@@ -202,7 +202,11 @@ class prerequisiteAnalysis():
 
         rdd_pids = rdd_pids.mapValues(lambda x : [x]).reduceByKey(lambda x,y: x+y)\
             .map(lambda x: NetworkHelpFunctions.gap_popularity(x[1]))
-        print rdd_pids.take(10)
+
+        print rdd_pids.count()
+        print rdd_pids.filter(lambda x: x==365)
+        
+
 
 
 if __name__ == "__main__":

@@ -139,7 +139,7 @@ class NetworkUtilities(object):
         call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
         output_dir = os.path.join(C.INTERMEDIATE_RESULT_DIR, 'base')
         self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
-        self.handle_uid_pid(sc, self.base_date, output_dir)
+        #self.handle_uid_pid(sc, self.base_date, output_dir)
 
 if __name__ == "__main__":
     sc, _ = init_spark('base', 20)

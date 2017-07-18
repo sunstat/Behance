@@ -21,6 +21,9 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import configuration.constants as C
+
+
+# import spark
 import NetworkHelpFunctions
 
 def init_spark(name, max_excutors):
@@ -178,9 +181,9 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     prerequisite_analysis = prerequisiteAnalysis()
     prerequisite_analysis.plot_orginal_degrees(sc, 100)
-    #prerequisite_analysis.plot_field(sc)
-    #prerequisite_analysis.pruned_network_preliminary_analysis(sc)
-    #prerequisite_analysis.popularity_gap_analysis(sc)
+    prerequisite_analysis.plot_field(sc)
+    prerequisite_analysis.pruned_network_preliminary_analysis(sc)
+    prerequisite_analysis.popularity_gap_analysis(sc)
 
     sc.stop()
 

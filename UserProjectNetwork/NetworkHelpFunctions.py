@@ -105,6 +105,29 @@ class NetworkHelpFunctions():
         return arr[1]-arr[0]
 
 
+    @staticmethod
+    def extract_feature(date_array, cur_date):
+        feature = []
+        feature.append(NetworkHelpFunctions.date_2_value(cur_date))
+        initial_day_views = len([x for x in date_array if x == cur_date])
+        feature.append(initial_day_views)
+
+        def month_filter(cur_date, month):
+            arr = cur_date.split("-")
+            return int(arr[1]) == month
+
+        for month in range(1, 13):
+            feature.append(len([x for x in date_array if month_filter(x, month)]))
+
+        return feature
+
+
+
+
+
+
+
+
 
 
 

@@ -23,7 +23,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-from UserProjectNetwork.NetworkHelpFunctions import NetworkHelpFunctions
+import  UserProjectNetwork.NetworkHelpFunctions.NetworkHelpFunctions as NetworkHelpFunctions
 
 
 local_run = False

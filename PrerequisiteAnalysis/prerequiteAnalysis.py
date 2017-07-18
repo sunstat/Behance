@@ -20,8 +20,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-import configuration.constants as C
-
+import constants as C
+from NetworkHelpFunctions import NetworkHelpFunctions
 
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
@@ -40,7 +40,7 @@ class prerequisiteAnalysis():
 
     def degree_distribution(self, sc, end_date):
         rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(',')) \
-            .filter(lambda x: NetworkHelpFunctions.NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date)) \
+            .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[0], end_date)) \
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).cache()
         rdd_out = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
         out_degree_arr = rdd_out.map(lambda x: len(x[1])).collect()

@@ -22,7 +22,7 @@ from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
 from subprocess import call
-import configuration.constants as C
+import constants as C
 
 
 '''
@@ -79,8 +79,6 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
         self.uid_set = set(rdd_uid_index.map(lambda x: x[0]).collect())
 
-        #write weekly views feature
-
 
     def handle_uid_pid(self, sc, base_date, output_dir):
 
@@ -95,6 +93,9 @@ class NetworkUtilities(object):
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[2], base_date)) \
             .filter(lambda x: __filter_uid_in_cycle(x[1])).persist()
 
+        self.pid_set = set(rdd_owners.map(lambda x: x[0]).collect())
+        pid_set_broad = sc.broadcast(self.pid_set)
+
         rdd_pid_2_date = rdd_owners.map(lambda x: (x[0], x[2]))
         output_file = os.path.join(output_dir, 'pid_2_date-csv')
         IOutilities.print_rdd_to_file(rdd_pid_2_date, output_file, 'csv')
@@ -106,8 +107,6 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_fields_map_index, output_file, 'csv')
 
         # build pid-2-field-index
-
-
         field_2_index = rdd_fields_map_index.collectAsMap()
         field_2_index_broad = sc.broadcast(field_2_index)
 

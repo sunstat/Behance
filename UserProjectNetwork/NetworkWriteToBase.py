@@ -5,6 +5,8 @@ import sys
 
 sys.path.append('/home/yiming/Behance')
 sys.path.append('/home/yiming/Behance/configuration')
+sys.path.append('/home/yiming/Behance/UserProjectNetwork')
+
 #sys.path.append('/home/yiming/Behance/configuration/constants.py')
 import configuration.constants as C
 
@@ -51,9 +53,10 @@ class NetworkUtilities(object):
 
     # compare two date strings "2016-12-01"
 
-    def __init__(self):
+    def __init__(self, base_date):
         self.uid_set = None
         self.pid_set = None
+        self.base_date = base_date
 
 
     '''
@@ -76,6 +79,9 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
         self.uid_set = set(rdd_uid_index.map(lambda x: x[0]).collect())
 
+        #write weekly views feature
+
+
     def handle_uid_pid(self, sc, base_date, output_dir):
 
         uid_set_broad = sc.broadcast(self.uid_set)
@@ -85,9 +91,7 @@ class NetworkUtilities(object):
 
 
         # print field_2_index to intermediate diretory
-
-
-        rdd_owners = sc.textFile(self.owners_file).map(lambda x: x.split(',')) \
+        rdd_owners = sc.textFile(C.OWNERS_FILE).map(lambda x: x.split(',')) \
             .filter(lambda x: NetworkHelpFunctions.date_filter("0000-00-00", x[2], base_date)) \
             .filter(lambda x: __filter_uid_in_cycle(x[1])).persist()
 
@@ -130,9 +134,9 @@ class NetworkUtilities(object):
 
 
     def run(self, sc):
-        shell_file = os.path.join(NetworkUtilities.shell_dir, 'createIntermediateDateDirHdfs.sh')
-        call('./%s %s %s' % (shell_file, intermediate_result_dir, 'base',), shell=True)
-        output_dir = os.path.join(NetworkUtilities.azure_intermediate_dir, 'base')
+        shell_file = os.path.join(C.SHELL_DIR, 'createIntermediateDateDirHdfs.sh')
+        call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
+        output_dir = os.path.join(C.INTERMEDIATE_RESULT_DIR, 'base')
         self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
         self.handle_uid_pid(sc, self.base_date, output_dir)
 
@@ -141,7 +145,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
-    network_utilities = NetworkUtilities()
+    network_utilities = NetworkUtilities("2016-12-30")
     network_utilities.run(sc)
     sc.stop()
 

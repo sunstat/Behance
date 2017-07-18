@@ -179,7 +179,7 @@ class prerequisiteAnalysis():
 
     def popularity_gap_analysis(self):
 
-        pid_2_date = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_date-csv')).map(lambda x: x.split(","))
+        pid_2_date = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_date-csv')).map(lambda x: x.split(','))
         print pid_2_date.take(10)
 
         pid_2_date = pid_2_date.filter(lambda x: NetworkHelpFunctions.date_filter("2016-01-30", x[1], "2016-12-30"))

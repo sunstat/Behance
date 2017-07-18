@@ -180,11 +180,9 @@ class prerequisiteAnalysis():
     def popularity_gap_analysis(self,sc):
 
         pid_2_date = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_date-csv')).map(lambda x: x.split(','))
-        print pid_2_date.take(10)
 
         pid_2_date = pid_2_date.filter(lambda x: NetworkHelpFunctions.date_filter("2016-01-30", x[1], "2016-12-30"))
 
-        print pid_2_date.take(10)
         pid_set = set(pid_2_date.map(lambda x: x[0]).collect())
 
         pid_set_broad = sc.broadcast(pid_set)
@@ -198,7 +196,7 @@ class prerequisiteAnalysis():
 
         rdd_pids = rdd_pids.union(pid_2_date).mapValues(NetworkHelpFunctions.date_2_value)
         rdd_pids = rdd_pids.mapValues(lambda x : [x]).reduceByKey(lambda x,y: x+y).mapValues(NetworkHelpFunctions.gap_popularity)
-        print rdd_pids
+        print rdd_pids.take(10)
 
 
 

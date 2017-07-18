@@ -177,7 +177,7 @@ class prerequisiteAnalysis():
         plt.savefig(os.path.join('../Graph/', 'DegreeTailDistributionInPrunedNetwork.png'))
         plt.close()
 
-    def popularity_gap_analysis(self,sc):
+    def popularity_gap_analysis(self, sc):
 
         pid_2_date = sc.textFile(os.path.join(intermediate_result_dir, 'base', 'pid_2_date-csv')).map(lambda x: x.split(','))
 

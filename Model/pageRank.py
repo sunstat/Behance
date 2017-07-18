@@ -55,8 +55,8 @@ class PageRank():
         parts = re.split('#', urls)
         return parts[0], parts[1]
 
-    def run(self, sc, month):
-        cur_dir = os.path.join(C.INTERMEDIATE_RESULT_DIR, month)
+    def run(self, sc, create_time, month):
+        cur_dir = os.path.join(C.INTERMEDIATE_RESULT_DIR, create_time, month)
         ranks = sc.textFile(os.path.join(cur_dir, C.UID_2_INDEX_FILE)).map(lambda x: x.split(',')).map(lambda x: (x[0], 1))
         links = sc.textFile(os.path.join(cur_dir, C.FOLLOW_MAP_FILE)).map(lambda x: re.split('#', x))\
             .map(lambda x: (x[0], x[1].split(',')))

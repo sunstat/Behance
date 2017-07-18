@@ -212,6 +212,7 @@ if __name__ == "__main__":
     #prerequisite_analysis.plot_orginal_degrees(sc, 100)
     #prerequisite_analysis.plot_field(sc)
     #prerequisite_analysis.pruned_network_preliminary_analysis(sc)
+    prerequisite_analysis.popularity_gap_analysis()
 
     sc.stop()
 

@@ -6,6 +6,7 @@ import sys
 sys.path.append('/home/yiming/Behance')
 sys.path.append('/home/yiming/Behance/configuration')
 sys.path.append('/home/yiming/Behance/UserProjectNetwork')
+sys.path.append('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
 
 
 
@@ -204,7 +205,6 @@ class prerequisiteAnalysis():
 
 if __name__ == "__main__":
     sc, _ = init_spark('olivia', 20)
-    sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkUtilities.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')

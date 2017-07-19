@@ -48,7 +48,7 @@ parsedData = data.map(parsePoint)
 print parsedData.take(5)
 
 # Build the model
-model = LinearRegressionWithSGD.train(parsedData, iterations=100, step=0.00000001, intercept=False)
+model = LinearRegressionWithSGD.train(parsedData, iterations=100, step=0.00000001, intercept=True)
 
 # Evaluate the model on training data
 valuesAndPreds = parsedData.map(lambda p: (p.label, model.predict(p.features)))

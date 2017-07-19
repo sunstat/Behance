@@ -58,5 +58,5 @@ MSE = valuesAndPreds \
 print("Mean Squared Error = " + str(MSE))
 
 # Save and load model
-model.save(sc, "target/temp/pythonLinearRegressionWithSGDModel")
-sameModel = LinearRegressionModel.load(sc, "target/tmp/pythonLinearRegressionWithSGDModel")
+model.save(sc, 'pythonLinearRegressionWithSGDModel')
+sameModel = LinearRegressionModel.load(sc, 'pythonLinearRegressionWithSGDModel')

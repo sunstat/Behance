@@ -41,7 +41,7 @@ def parsePoint(line):
     values = [float(x) for x in re.split(r'\s+',line)]
     return LabeledPoint(values[0], values[1:])
 
-data = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR, data))
+data = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR, 'data'))
 print data.take(5)
 parsedData = data.map(parsePoint)
 

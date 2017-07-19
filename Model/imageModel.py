@@ -15,3 +15,6 @@ from pyspark.mllib.regression import LabeledPoint, LinearRegressionWithSGD, Line
 import configuration.constants as C
 
 class imageModel(object):
+    def __init__(self):
+        pass
+    

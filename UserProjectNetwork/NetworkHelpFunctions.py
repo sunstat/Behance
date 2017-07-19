@@ -106,7 +106,7 @@ class NetworkHelpFunctions():
 
 
     @staticmethod
-    def extract_feature(date_array, create_date):
+    def extract_feature(create_date, date_array):
         feature = []
         feature.append(NetworkHelpFunctions.date_2_value(create_date))
         initial_day_views = len([x for x in date_array if x == create_date])

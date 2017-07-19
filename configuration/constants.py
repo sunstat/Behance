@@ -15,7 +15,8 @@ original data path
 ACTION_FILE = os.path.join(BEHANCE_DATA_DIR, "action", "actionDataTrimNoView-csv")
 ACTION_VIEW_FILE = os.path.join(BEHANCE_DATA_DIR, "action", "actionDataTrim-csv")
 OWNER_FILE = os.path.join(BEHANCE_DATA_DIR, "owners-csv")
-IMAGE_FILE = os.path.join(BEHANCE_DATA_DIR, )
+IMAGE_FILE = os.path.join(BEHANCE_DATA_DIR, 'image-url-csv')
+IMAGE_TRIMMED_FILE = os.path.join(BEHANCE_DATA_DIR, 'image-trimmed_url-csv')
 
 
 '''

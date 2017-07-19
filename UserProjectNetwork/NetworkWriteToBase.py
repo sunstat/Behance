@@ -127,7 +127,7 @@ class NetworkUtilities(object):
 
         print rdd_pid_2_view_dates.take(5)
 
-        rdd_pid_2_date_feature = rdd_pid_2_view_dates.mapValues(lambda x: NetworkHelpFunctions.extract_feature(x[1][1], x[1][0]))
+        rdd_pid_2_date_feature = rdd_pid_2_view_dates.mapValues(lambda x: NetworkHelpFunctions.extract_feature(x[0], x[1]))
 
         print rdd_pid_2_date_feature.take(5)
 

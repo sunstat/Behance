@@ -106,10 +106,10 @@ class NetworkHelpFunctions():
 
 
     @staticmethod
-    def extract_feature(date_array, cur_date):
+    def extract_feature(date_array, create_date):
         feature = []
-        feature.append(NetworkHelpFunctions.date_2_value(cur_date))
-        initial_day_views = len([x for x in date_array if x == cur_date])
+        feature.append(NetworkHelpFunctions.date_2_value(create_date))
+        initial_day_views = len([x for x in date_array if x == create_date])
         feature.append(initial_day_views)
 
         def month_filter(cur_date, month):

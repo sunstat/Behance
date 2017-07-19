@@ -15,7 +15,6 @@ import re
 from pyspark.mllib.regression import LabeledPoint, LinearRegressionWithSGD, LinearRegressionModel
 import configuration.constants as C
 
-s
 
 
 def init_spark(name, max_excutors):

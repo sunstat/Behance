@@ -107,6 +107,7 @@ class NetworkUtilities(object):
 
         # build views feature
         rdd_views = sc.textFile(C.ACTION_VIEW_FILE).map(lambda x: x.split(',')).filter(lambda x: x[4] == 'V')
+        print rdd_views.take(5)
         pid_set2 = set(rdd_views.filter(lambda x: x[1] in uid_set_broad.value).map(lambda x: x[3]).collect())
 
         print len(pid_set2)

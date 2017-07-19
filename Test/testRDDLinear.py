@@ -60,4 +60,5 @@ print("Mean Squared Error = " + str(MSE))
 # Save and load model
 
 print model.weights
+print model.intercept
 sc.stop()

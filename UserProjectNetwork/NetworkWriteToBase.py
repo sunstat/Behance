@@ -98,6 +98,7 @@ class NetworkUtilities(object):
         rdd_owners = sc.textFile(C.OWNER_FILE).map(lambda x: x.split(',')) \
             .filter(lambda x: NetworkHelpFunctions.date_filter("2016-01-01", x[2], base_date)) \
             .filter(lambda x: __filter_uid_in_cycle(x[1])).persist()
+        print rdd_owners.take(5)
 
         pid_set1 = set(rdd_owners.map(lambda x: x[0]).collect())
 

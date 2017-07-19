@@ -1,3 +1,7 @@
+sys.path.append('/home/yiming/Behance')
+sys.path.append('/home/yiming/Behance/configuration')
+sys.path.append('/home/yiming/Behance/UserProjectNetwork')
+
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 import pyspark.sql.functions as F
@@ -10,10 +14,7 @@ import re
 from pyspark.mllib.regression import LabeledPoint, LinearRegressionWithSGD, LinearRegressionModel
 import configuration.constants as C
 
-sys.path.append('/home/yiming/Behance')
-sys.path.append('/home/yiming/Behance/configuration')
-sys.path.append('/home/yiming/Behance/UserProjectNetwork')
-
+s
 
 
 def init_spark(name, max_excutors):

@@ -101,6 +101,7 @@ class NetworkUtilities(object):
         print rdd_owners.take(5)
 
         pid_set1 = set(rdd_owners.map(lambda x: x[0]).collect())
+        print len(pid_set1)
 
         # build views feature
         rdd_views = sc.textFile(C.ACTION_VIEW_FILE).map(lambda x: x.split(',')).filter(lambda x: x[4] == 'V')

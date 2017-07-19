@@ -90,6 +90,8 @@ class NetworkUtilities(object):
 
         self.uid_set = set(sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
 
+        print(len(self.uid_set))
+
         uid_set_broad = sc.broadcast(self.uid_set)
 
         def __filter_uid_in_cycle(uid):
@@ -106,6 +108,9 @@ class NetworkUtilities(object):
         # build views feature
         rdd_views = sc.textFile(C.ACTION_VIEW_FILE).map(lambda x: x.split(',')).filter(lambda x: x[4] == 'V')
         pid_set2 = set(rdd_views.filter(lambda x: x[1] in uid_set_broad.value).map(lambda x: x[3]).collect())
+
+        print len(pid_set2)
+
 
         pid_set = pid_set1.intersection(pid_set2)
         pid_set_broad = sc.broadcast(pid_set)

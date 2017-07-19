@@ -95,7 +95,6 @@ class NetworkUtilities(object):
         def __filter_uid_in_cycle(uid):
             return uid in uid_set_broad.value
 
-        # print field_2_index to intermediate diretory
         rdd_owners = sc.textFile(C.OWNER_FILE).map(lambda x: x.split(',')) \
             .filter(lambda x: NetworkHelpFunctions.date_filter("2016-01-01", x[2], base_date)) \
             .filter(lambda x: __filter_uid_in_cycle(x[1])).persist()
@@ -109,9 +108,10 @@ class NetworkUtilities(object):
         pid_set = pid_set1.intersection(pid_set2)
         pid_set_broad = sc.broadcast(pid_set)
 
-        rdd_owners = rdd_owners.filter(lambda x: x[0] in pid_set_broad)
+        rdd_owners = rdd_owners.filter(lambda x: x[0] in pid_set_broad.value)
         rdd_pid_2_date = rdd_owners.map(lambda x: (x[0], x[2]))
-        rdd_pid_2_view_dates = rdd_views.filter(x[3] in pid_set_broad).map(lambda x : (x[3], [[0]])).reduceByKey(lambda x, y: x+y)
+        rdd_pid_2_view_dates = rdd_views.filter(lambda x : x[3] in pid_set_broad.value)\
+            .map(lambda x: (x[3], [[0]])).reduceByKey(lambda x, y: x+y)
 
         print rdd_pid_2_date.count()
         print rdd_pid_2_view_dates.count()

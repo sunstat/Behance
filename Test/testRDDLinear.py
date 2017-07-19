@@ -32,7 +32,7 @@ def parsePoint(line):
     values = [float(x) for x in re.split(r'\s+',line)]
     return LabeledPoint(values[0], values[1:])
 
-data = sc.textFile("../IntermediateDir/2016-06-30/data")
+data = sc.textFile("file:///../IntermediateDir/2016-06-30/data")
 parsedData = data.map(parsePoint)
 
 print parsedData.take(5)
@@ -48,5 +48,5 @@ MSE = valuesAndPreds \
 print("Mean Squared Error = " + str(MSE))
 
 # Save and load model
-model.save(sc, "target/pythonLinearRegressionWithSGDModel")
+model.save(sc, "target/temp/pythonLinearRegressionWithSGDModel")
 sameModel = LinearRegressionModel.load(sc, "target/tmp/pythonLinearRegressionWithSGDModel")

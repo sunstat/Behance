@@ -87,7 +87,6 @@ class NetworkUtilities(object):
 
 
     def handle_uid_pid(self, sc, base_date, output_dir):
-
         self.uid_set = set(sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
 
         print(len(self.uid_set))
@@ -108,7 +107,7 @@ class NetworkUtilities(object):
         # build views feature
         rdd_views = sc.textFile(C.ACTION_VIEW_FILE).map(lambda x: x.split(',')).filter(lambda x: x[4] == 'V')
         print rdd_views.take(5)
-        pid_set2 = set(rdd_views.filter(lambda x: x[1] in uid_set_broad.value).map(lambda x: x[3]).collect())
+        pid_set2 = set(rdd_views.filter(lambda x: __filter_uid_in_cycle(x[1])).map(lambda x: x[3]).distinct().collect())
 
         print len(pid_set2)
 

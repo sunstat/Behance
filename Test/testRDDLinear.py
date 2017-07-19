@@ -32,7 +32,7 @@ def parsePoint(line):
     values = [float(x) for x in re.split(r'\s+',line)]
     return LabeledPoint(values[0], values[1:])
 
-data = sc.textFile("file:///../IntermediateDir/2016-06-30/data")
+data = sc.textFile("file:////home/yiming/Behance/IntermediateDir/2016-06-30/data")
 parsedData = data.map(parsePoint)
 
 print parsedData.take(5)

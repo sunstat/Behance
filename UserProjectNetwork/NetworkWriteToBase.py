@@ -110,8 +110,6 @@ class NetworkUtilities(object):
         pid_set2 = set(rdd_views.filter(lambda x: __filter_uid_in_cycle(x[1])).map(lambda x: x[3]).distinct().collect())
 
         print len(pid_set2)
-
-
         pid_set = pid_set1.intersection(pid_set2)
         pid_set_broad = sc.broadcast(pid_set)
 
@@ -120,8 +118,10 @@ class NetworkUtilities(object):
         rdd_pid_2_view_dates = rdd_views.filter(lambda x : x[3] in pid_set_broad.value)\
             .map(lambda x: (x[3], [[0]])).reduceByKey(lambda x, y: x+y)
 
-        print rdd_pid_2_date.count()
-        print rdd_pid_2_view_dates.count()
+        #print rdd_pid_2_date.count()
+        #print rdd_pid_2_view_dates.count()
+
+        print rdd_pid_2_view_dates.take(5)
 
         rdd_pid_2_view_dates = rdd_pid_2_date.join(rdd_pid_2_view_dates)
 

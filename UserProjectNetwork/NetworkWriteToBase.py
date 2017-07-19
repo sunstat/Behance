@@ -61,7 +61,7 @@ class NetworkUtilities(object):
     '''
     extract neighbors in user network and uids set which involved in the network built 
     '''
-    def extract_neighbors_from_users_network(self, sc, base_date, output_dir):
+    def extract_neighbors_from_users_network(self, sc, output_dir):
 
         in_threshold = 5
         n_iters = 30
@@ -171,9 +171,6 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
         
         '''
-
-
-
 
 
     def run(self, sc):

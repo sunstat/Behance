@@ -96,7 +96,7 @@ class NetworkUtilities(object):
             return uid in uid_set_broad.value
 
         # print field_2_index to intermediate diretory
-        rdd_owners = sc.textFile(C.OWNERS_FILE).map(lambda x: x.split(',')) \
+        rdd_owners = sc.textFile(C.OWNER_FILE).map(lambda x: x.split(',')) \
             .filter(lambda x: NetworkHelpFunctions.date_filter("2016-01-01", x[2], base_date)) \
             .filter(lambda x: __filter_uid_in_cycle(x[1])).persist()
 

@@ -25,10 +25,7 @@ PID_2_UID_FILE = os.path.join(BASE_DIR, 'pid_2_uid-csv')
 PID_2_FIELD_INDEX_FILE = os.path.join(BASE_DIR, 'pid_2_field_index-csv')
 FIELD_2_INDEX = os.path.join(BASE_DIR, 'field_2_index-csv')
 UID_2_INDEX_FILE = os.path.join(BASE_DIR, 'uid_2_index-csv')
-
-
-
-PID_2_POPULARITY_FILE = 'pid_2_popularity-csv'
+PID_2_POPULARITY_FILE = os.path.join(BASE_DIR, 'pid_2_popularity-csv')
 FOLLOW_MAP_FILE = 'follow_map-psv'
 PID_2_SCORE_FILE = 'pid_2_score-csv'
 PID_2_VIEWS_FEATURE_FILE = 'pid_view_features-psv'

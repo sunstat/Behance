@@ -116,7 +116,7 @@ class NetworkUtilities(object):
         rdd_owners = rdd_owners.filter(lambda x: x[0] in pid_set_broad.value)
         rdd_pid_2_date = rdd_owners.map(lambda x: (x[0], x[2]))
         rdd_pid_2_view_dates = rdd_views.filter(lambda x : x[3] in pid_set_broad.value)\
-            .map(lambda x: (x[3], [[0]])).reduceByKey(lambda x, y: x+y)
+            .map(lambda x: (x[3], [x[0]])).reduceByKey(lambda x, y: x+y)
 
         #print rdd_pid_2_date.count()
         #print rdd_pid_2_view_dates.count()

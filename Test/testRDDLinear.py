@@ -8,7 +8,11 @@ from scipy.sparse import coo_matrix, csr_matrix
 from subprocess import Popen
 import re
 from pyspark.mllib.regression import LabeledPoint, LinearRegressionWithSGD, LinearRegressionModel
+import configuration.constants as C
 
+sys.path.append('/home/yiming/Behance')
+sys.path.append('/home/yiming/Behance/configuration')
+sys.path.append('/home/yiming/Behance/UserProjectNetwork')
 
 
 
@@ -27,12 +31,16 @@ def init_spark(name, max_excutors):
 
 sc,_ = init_spark('human', 10)
 
+sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
+sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
+sc.addFile('/home/yiming/Behance/configuration/constants.py')
+
 # Load and parse the data
 def parsePoint(line):
     values = [float(x) for x in re.split(r'\s+',line)]
     return LabeledPoint(values[0], values[1:])
 
-data = sc.textFile("file:///home/yiming/Behance/IntermediateDir/2016-06-30/data")
+data = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR, data))
 print data.take(5)
 parsedData = data.map(parsePoint)
 

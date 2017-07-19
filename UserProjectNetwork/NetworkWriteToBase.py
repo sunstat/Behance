@@ -131,12 +131,10 @@ class NetworkUtilities(object):
 
         print rdd_pid_2_date_feature.take(5)
 
-
-        '''
+        IOutilities.print_rdd_to_file(rdd_pid_2_date_feature, 'pid_2_view_dates-psv', 'psv')
 
 
         # pid_2_date
-        rdd_pid_2_date = rdd_owners.map(lambda x: (x[0], x[2]))
         output_file = os.path.join(output_dir, 'pid_2_date-csv')
         IOutilities.print_rdd_to_file(rdd_pid_2_date, output_file, 'csv')
 
@@ -171,7 +169,7 @@ class NetworkUtilities(object):
         output_file = os.path.join(output_dir, 'pid_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
         
-        '''
+
 
 
     def run(self, sc):

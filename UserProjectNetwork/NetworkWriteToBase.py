@@ -88,6 +88,8 @@ class NetworkUtilities(object):
 
     def handle_uid_pid(self, sc, base_date, output_dir):
 
+        self.uid_set = set(sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
+
         uid_set_broad = sc.broadcast(self.uid_set)
 
         def __filter_uid_in_cycle(uid):
@@ -98,6 +100,34 @@ class NetworkUtilities(object):
             .filter(lambda x: NetworkHelpFunctions.date_filter("2016-01-01", x[2], base_date)) \
             .filter(lambda x: __filter_uid_in_cycle(x[1])).persist()
 
+        pid_set1 = set(rdd_owners.map(lambda x: x[0]).collect())
+
+        # build views feature
+        rdd_views = sc.textFile(C.ACTION_VIEW_FILE).map(lambda x: x.split(',')).filter(lambda x: x[4] == 'V')
+        pid_set2 = set(rdd_views.filter(lambda x: x[1] in uid_set_broad).map(lambda x: x[3]).collect())
+
+        pid_set = pid_set1.intersection(pid_set2)
+        pid_set_broad = sc.broadcast(pid_set)
+
+        rdd_owners = rdd_owners.filter(lambda x: x[0] in pid_set_broad)
+        rdd_pid_2_date = rdd_owners.map(lambda x: (x[0], x[2]))
+        rdd_pid_2_view_dates = rdd_views.filter(x[3] in pid_set_broad).map(lambda x : (x[3], [[0]])).reduceByKey(lambda x, y: x+y)
+
+        print rdd_pid_2_date.count()
+        print rdd_pid_2_view_dates.count()
+
+        rdd_pid_2_view_dates = rdd_pid_2_date.join(rdd_pid_2_view_dates)
+
+        print rdd_pid_2_view_dates.take(5)
+
+        rdd_pid_2_date_feature = rdd_pid_2_view_dates.mapValues(lambda x: NetworkHelpFunctions.extract_feature(x[1][1],x[1][0]))
+
+
+
+        '''
+
+
+        # pid_2_date
         rdd_pid_2_date = rdd_owners.map(lambda x: (x[0], x[2]))
         output_file = os.path.join(output_dir, 'pid_2_date-csv')
         IOutilities.print_rdd_to_file(rdd_pid_2_date, output_file, 'csv')
@@ -132,14 +162,19 @@ class NetworkUtilities(object):
         rdd_pid_index = rdd_owners.map(lambda x: x[0]).distinct().zipWithIndex().cache()
         output_file = os.path.join(output_dir, 'pid_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
+        
+        '''
+
+
+
 
 
     def run(self, sc):
-        shell_file = os.path.join(C.SHELL_DIR, 'createIntermediateDateDirHdfs.sh')
-        call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
+        #shell_file = os.path.join(C.SHELL_DIR, 'createIntermediateDateDirHdfs.sh')
+        #call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
         output_dir = os.path.join(C.INTERMEDIATE_RESULT_DIR, 'base')
-        self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
-        #self.handle_uid_pid(sc, self.base_date, output_dir)
+        #self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
+        self.handle_uid_pid(sc, self.base_date, output_dir)
 
 if __name__ == "__main__":
     sc, _ = init_spark('base', 20)

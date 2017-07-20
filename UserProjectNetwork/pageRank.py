@@ -72,6 +72,7 @@ class PageRank():
             #print ranks.take(5)
             # Collects all URL ranks and dump them to console.
             print "iteration : {}".format(iteration)
+        print "finishing iterative algorithm"
         uid_2_pid = pid_2_uid.map(lambda x: (x[1], x[0]))
         pid_2_score = uid_2_pid.join(ranks).map(lambda x: (x[1][0], x[1][1])).cache()
         print pid_2_score.take(5)

@@ -82,7 +82,7 @@ class Model():
     def generate_feature_response(self, sc, rdd_data):
 
         def sparse_label_points(field_index_vec, score, view_feature, num_fields):
-            N = num_fields+
+            N = num_fields+1+len(view_feature)
             feature = None
             if not field_index_vec:
                 feature = SparseVector(N, [N-2, N-1], [score, cur_popularity])

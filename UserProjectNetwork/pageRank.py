@@ -60,7 +60,7 @@ class PageRank():
                 lambda url_urls_rank: PageRank.compute_contribs(url_urls_rank[1][0], url_urls_rank[1][1]))
             # Re-calculates URL ranks based on neighbor contributions.
             ranks = contribs.reduceByKey(lambda x, y: x+y).mapValues(lambda x: x * 0.85 + 0.15)
-
+            print ranks.take(5)
             # Collects all URL ranks and dump them to console.
         pid_2_score = pid_2_uid.join(ranks).map(lambda x: (x[0], x[1][1]))
         PageRank.print_rdd_to_file(pid_2_score, C.PID_2_SCORE_FILE, 'csv')

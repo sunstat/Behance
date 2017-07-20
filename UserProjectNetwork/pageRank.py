@@ -82,7 +82,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/pageRank.py')
-    page_rank = PageRank(500)
+    page_rank = PageRank(1000)
     page_rank.run(sc)
 
 

@@ -59,13 +59,14 @@ class PageRank():
         for iteration in range(self.num_iters):
             # Calculates URL contributions to the rank of other URLs.
             contribs = links.join(ranks)
-            print contribs.take(5)
+            #print contribs.take(5)
             contribs = contribs.flatMap(lambda x: compute_contribs(x[0], x[1][0], x[1][1]))
             # Re-calculates URL ranks based on neighbor contributions.
-            print contribs.take(5)
+            #print contribs.take(5)
             ranks = contribs.reduceByKey(lambda x, y: x+y).mapValues(lambda x: x * 0.85 + 0.15)
-            print ranks.take(5)
+            #print ranks.take(5)
             # Collects all URL ranks and dump them to console.
+            print "iteration : {}".format(iteration)
         pid_2_score = pid_2_uid.join(ranks).map(lambda x: (x[0], x[1][1]))
         PageRank.print_rdd_to_file(pid_2_score, C.PID_2_SCORE_FILE, 'csv')
         
@@ -76,7 +77,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/pageRank.py')
-    page_rank = PageRank(10)
+    page_rank = PageRank(1000)
     page_rank.run(sc)
 
 

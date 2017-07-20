@@ -108,16 +108,16 @@ class Model():
         rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3])
         return rdd_label_data
 
-    def train_model(self, sc):
-        pid_training = set(sc.textFile(C.TRAININING_PID_SET_FILE).collect())
-        pid_training.join()
+    def train_model(self, sc, model_path):
+        pid_training_set = set(sc.textFile(C.TRAININING_PID_SET_FILE).collect())
+        pid_valid_set = set(sc.textFile(C.VALID_PID_SET_FILE).collect())
+        rdd_training_data = self.extract_data_rdd(sc, pid_training_set)
+        rdd_valid_data = self.extract_data_rdd(sc, pid_valid_set)
 
-
-
-
-
-
-        model = LinearRegressionWithSGD.train(parsedData, iterations=100, step=0.00000001)
+        rdd_training_labeled_data = self.generate_feature_response(sc, rdd_training_data)
+        
+        model = LinearRegressionWithSGD.train(rdd_training_labeled_data, iterations=100, step=0.00000001)
+        model.save()
 
 
 

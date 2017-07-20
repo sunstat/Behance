@@ -7,7 +7,8 @@ base directary
 BEHANCE_DATA_DIR = "wasb://testing@adobedatascience.blob.core.windows.net/behance/data"
 INTERMEDIATE_RESULT_DIR = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult"
 BASE_DIR = "wasb://testing@adobedatascience.blob.core.windows.net/behance/IntermediateResult/base"
-
+TEMPORARY_DIR =  "wasb://testing@adobedatascience.blob.core.windows.net/behance/Temporary_File"
+MODEL_DIR = "wasb://testing@adobedatascience.blob.core.windows.net/behance/Models"
 
 '''
 original data path

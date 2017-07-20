@@ -75,18 +75,13 @@ class PageRank():
             #print ranks.take(5)
             # Collects all URL ranks and dump them to console.
 
-            def my_abs(x):
-                if x>=0:
-                    return x
-                return -x
-
             if iteration%10 == 0:
                 print ranks.cache().count()
                 print "evaluate every 10 times"
 
-            if iteration%20 == 0:
-                test =  ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1]))
-                print test.take(5)
+            if iteration%5 == 0:
+                dif = ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1])).map(lambda x: x[1]).reduce(lambda x,y: x+y)
+                print dif
                 prev_ranks = ranks
 
             print "iteration : {}".format(iteration)

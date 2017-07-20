@@ -28,7 +28,7 @@ def init_spark(name, max_excutors):
 
 sc, _ = init_spark('a', 40)
 
-rdd = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: x.split("#"))
+rdd = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: x.split("#")).map(lambda x: x[1].split(',')) 
 print rdd.take(5)
 
 set1 = set(rdd.map(lambda x: x[0]).collect())

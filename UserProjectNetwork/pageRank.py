@@ -41,11 +41,14 @@ class PageRank():
         self.num_iters = num_iters
 
     @staticmethod
-    def compute_contribs(urls, rank):
+    def compute_contribs(source_url, urls, rank):
         #Calculates URL contributions to the rank of other URLs.
         num_urls = len(urls)
-        for url in urls:
-            yield (url, rank/num_urls)
+        if len(urls) == 0:
+            yield(source_url, 0)
+        else:
+            for url in urls:
+                yield (url, rank/num_urls)
 
     def run(self, sc):
         ranks = sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: (x[0], 1.))
@@ -56,7 +59,7 @@ class PageRank():
             # Calculates URL contributions to the rank of other URLs.
             contribs = links.join(ranks)
             print contribs.take(5)
-            contribs = contribs.flatMap(lambda x: PageRank.compute_contribs(x[1][0], x[1][1]))
+            contribs = contribs.flatMap(lambda x: PageRank.compute_contribs(x[0], x[1][0], x[1][1]))
             # Re-calculates URL ranks based on neighbor contributions.
             print contribs.take(5)
             ranks = contribs.reduceByKey(lambda x, y: x+y).mapValues(lambda x: x * 0.85 + 0.15)

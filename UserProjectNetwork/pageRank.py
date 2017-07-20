@@ -71,8 +71,10 @@ class PageRank():
             ranks = contribs.reduceByKey(lambda x, y: x+y).mapValues(lambda x: x * 0.85 + 0.15)
             #print ranks.take(5)
             # Collects all URL ranks and dump them to console.
+            '''
             if iteration%10 == 0:
                 ranks = sc.parallelize(ranks.collect())
+            '''
             print "iteration : {}".format(iteration)
 
         print "finishing iterative algorithm"
@@ -90,7 +92,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/pageRank.py')
-    page_rank = PageRank(500)
+    page_rank = PageRank(50)
     page_rank.run(sc)
 
 

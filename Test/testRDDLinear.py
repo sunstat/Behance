@@ -62,5 +62,5 @@ print("Mean Squared Error = " + str(MSE))
 print model.weights
 print model.intercept
 
-model.save(sc, C.INTERMEDIATE_RESULT_DIR)
+model.save(sc, os.path.join(C.INTERMEDIATE_RESULT_DIR, "IntermediateResult", "Model"))
 sc.stop()

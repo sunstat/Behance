@@ -52,6 +52,7 @@ class PageRank():
         links = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: re.split('#', x)).map(lambda x: (x[0], x[1].split(',')))
         pid_2_uid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(','))
         print(links.take(5))
+        print ranks.takle(5)
 
         for iteration in range(self.num_iters):
             # Calculates URL contributions to the rank of other URLs.

@@ -89,7 +89,7 @@ class Model():
             index.append(N-1)
             values.extend(view_feature)
             values.append(score)
-            feature =
+            feature = SparseVector()
 
             return LabeledPoint(popularity, feature)
         rdd_field_2_index = sc.textFile(C.FIELD_2_INDEX)

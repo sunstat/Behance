@@ -73,13 +73,23 @@ class PageRank():
         
 
 if __name__ == "__main__":
-    sc, _ = init_spark('pageRank', 50)
+    sc, _ = init_spark('pageRank', 30)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/pageRank.py')
     page_rank = PageRank(1000)
     page_rank.run(sc)
+
+
+
+    '''
+    test 
+    '''
+    sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))
+
+
+    sc.stop()
 
 
 

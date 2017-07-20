@@ -64,7 +64,7 @@ class PageRank():
         pid_2_uid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(','))
         print pid_2_uid.take(5)
 
-        for iteration in range(self.num_iters):
+        for iteration in range(1, self.num_iters):
             # Calculates URL contributions to the rank of other URLs.
             contribs = links.join(ranks, 8)
             #print contribs.take(5)
@@ -82,7 +82,7 @@ class PageRank():
 
             if iteration%10 == 0:
                 print ranks.cache().count()
-                print "evaluate every four times"
+                print "evaluate every 10 times"
 
             if iteration%20 == 0:
                 print ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1])).reduce(lambda x,y : x[1]+y[1]).take(5)

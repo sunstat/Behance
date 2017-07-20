@@ -56,6 +56,7 @@ class PageRank():
                 yield (url, rank / num_urls)
 
         ranks = sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: (x[0], 1.)).cache()
+        prev_ranks = ranks
         print ranks.count()
         links = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: re.split('#', x))\
             .map(lambda x: (x[0], x[1].split(','))).cache()
@@ -75,7 +76,11 @@ class PageRank():
 
             if iteration%4 == 0:
                 print ranks.cache().count()
-                print "put in memory and evalute previous 10 jobs"
+                print "evaluate every four times"
+
+            if iteration%10 == 0:
+                print ranks.join(prev_ranks).mapValues(lambda x, abs(x[0]-x[1])).reduce(lambda x,y : x[1]+y[1]).take(5)
+
 
             print "iteration : {}".format(iteration)
 
@@ -94,7 +99,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/pageRank.py')
-    page_rank = PageRank(50)
+    page_rank = PageRank(20)
     page_rank.run(sc)
 
 

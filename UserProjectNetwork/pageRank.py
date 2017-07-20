@@ -49,7 +49,10 @@ class PageRank():
 
     def run(self, sc):
         ranks = sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: (x[0], 1.))
-        links = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: re.split('#', x))\
+        links = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: re.split('#', x))
+        print links.take(5)
+        '''   
+            \
             .map(lambda x: (x[0], x[1].split(',')))
         pid_2_uid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(','))
         print(links.take(5))
@@ -64,6 +67,7 @@ class PageRank():
             # Collects all URL ranks and dump them to console.
         pid_2_score = pid_2_uid.join(ranks).map(lambda x: (x[0], x[1][1]))
         PageRank.print_rdd_to_file(pid_2_score, C.PID_2_SCORE_FILE, 'csv')
+        '''
 
 if __name__ == "__main__":
     sc, _ = init_spark('pageRank', 50)

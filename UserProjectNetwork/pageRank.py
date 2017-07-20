@@ -22,6 +22,8 @@ from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
 from subprocess import call
+from IOutilities import IOutilities
+
 import configuration.constants as C
 
 
@@ -69,8 +71,9 @@ class PageRank():
             #print ranks.take(5)
             # Collects all URL ranks and dump them to console.
             print "iteration : {}".format(iteration)
-        pid_2_score = pid_2_uid.join(ranks).map(lambda x: (x[0], x[1][1]))
-        PageRank.print_rdd_to_file(pid_2_score, C.PID_2_SCORE_FILE, 'csv')
+        uid_2_pid = pid_2_uid.map(lambda x: (x[1], x[0]))
+        pid_2_score = uid_2_pid.join(ranks).map(lambda x: (x[1][0], x[1][1]))
+        IOutilities.print_rdd_to_file(pid_2_score, C.PID_2_SCORE_FILE, 'csv')
         
 
 if __name__ == "__main__":

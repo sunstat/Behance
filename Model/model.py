@@ -106,7 +106,7 @@ class Model():
         rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0], x[1][1], x[1][2], x[1][3], N)
         return rdd_label_data
 
-    def train_model(self)):
+    def train_model(self):
         model = LinearRegressionWithSGD.train(parsedData, iterations=100, step=0.00000001)
 
 

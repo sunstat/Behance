@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/testRDDLinear.py" afterPath="$PROJECT_DIR$/Test/testRDDLinear.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/model.py" afterPath="$PROJECT_DIR$/Model/model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/testFile.py" afterPath="$PROJECT_DIR$/Test/testFile.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,28 +15,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NetworkWriteToBase.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="136" column="0" lean-forward="true" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NetworkHelpFunctions.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="108" column="47" lean-forward="false" selection-start-line="108" selection-start-column="47" selection-end-line="108" selection-end-column="47" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="testSparseVector.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test/testSparseVector.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -68,6 +47,36 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="testFile.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Test/testFile.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="443">
+              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="constants.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/configuration/constants.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="426">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NetworkHelpFunctions.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/NetworkHelpFunctions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="testImageUrlFile.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test/testImageUrlFile.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -78,31 +87,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testYeild.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test/testYeild.py">
+      <file leaf-file-name="pageRank.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Model/pageRank.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="19" column="25" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="19" selection-end-column="25" />
+            <state relative-caret-position="153">
+              <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testRDDLinear.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="testRDDLinear.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test/testRDDLinear.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="596">
-              <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="createPopulation.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/createPopulation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-254">
-              <caret line="59" column="31" lean-forward="false" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
+            <state relative-caret-position="439">
+              <caret line="30" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -111,8 +110,8 @@
       <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-186">
-              <caret line="70" column="40" lean-forward="false" selection-start-line="70" selection-start-column="22" selection-end-line="70" selection-end-column="40" />
+            <state relative-caret-position="460">
+              <caret line="108" column="25" lean-forward="false" selection-start-line="108" selection-start-column="25" selection-end-line="108" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -178,7 +177,6 @@
         <option value="$PROJECT_DIR$/UserProjectNetwork/dateUtilities.py" />
         <option value="$PROJECT_DIR$/Model.py" />
         <option value="$PROJECT_DIR$/Test/run.py" />
-        <option value="$PROJECT_DIR$/Test/testFile.py" />
         <option value="$PROJECT_DIR$/Model/FeatureExtraction/test.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/README" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/temp.py" />
@@ -218,9 +216,10 @@
         <option value="$PROJECT_DIR$/EditData/PySparkEdit/trimImage.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py" />
         <option value="$PROJECT_DIR$/configuration/constants.py" />
-        <option value="$PROJECT_DIR$/Model/model.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/createPopulation.py" />
         <option value="$PROJECT_DIR$/Test/testRDDLinear.py" />
+        <option value="$PROJECT_DIR$/Model/model.py" />
+        <option value="$PROJECT_DIR$/Test/testFile.py" />
       </list>
     </option>
   </component>
@@ -905,14 +904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/pageRank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/imageModel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -937,31 +928,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test/NetworkHelpFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test/shell1.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configuration/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test/testFile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1027,23 +994,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-186">
-          <caret line="70" column="40" lean-forward="false" selection-start-line="70" selection-start-column="22" selection-end-line="70" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test/testShell.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test/testSparseVector.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1055,6 +1006,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="409">
           <caret line="33" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/pageRank.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/testSparseVector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1071,8 +1038,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Test/testRDDLinear.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+        <state relative-caret-position="439">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/NetworkHelpFunctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configuration/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="108" column="25" lean-forward="false" selection-start-line="108" selection-start-column="25" selection-end-line="108" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/testFile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>

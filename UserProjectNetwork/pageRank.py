@@ -85,7 +85,8 @@ class PageRank():
                 print "evaluate every 10 times"
 
             if iteration%20 == 0:
-                print ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1])).reduce(lambda x,y : x[1]+y[1]).take(5)
+                test =  ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1]))
+                print test.take(5)
                 prev_ranks = ranks
 
             print "iteration : {}".format(iteration)

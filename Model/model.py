@@ -83,9 +83,10 @@ class Model():
 
         def sparse_label_points(field_index_vec, score, view_feature, num_fields):
             N = num_fields+1+len(view_feature)
-            feature = None
+            index = None
+            values = None
             if not field_index_vec:
-                feature = SparseVector(N, [N-2, N-1], [score, cur_popularity])
+
             else:
                 vec.append(N-2)
                 vec.append(N-1)

@@ -59,6 +59,7 @@ class PageRank():
         links = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: re.split('#', x))\
             .map(lambda x: (x[0], x[1].split(','))).cache()
         pid_2_uid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(','))
+        print pid_2_uid.take(5)
 
         for iteration in range(self.num_iters):
             # Calculates URL contributions to the rank of other URLs.
@@ -83,7 +84,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/pageRank.py')
-    page_rank = PageRank(1000)
+    page_rank = PageRank(500)
     page_rank.run(sc)
 
 

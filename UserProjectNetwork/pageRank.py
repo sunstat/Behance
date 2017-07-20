@@ -68,7 +68,7 @@ class PageRank():
             contribs = contribs.flatMap(lambda x: compute_contribs(x[1][0], x[1][1]))
             # Re-calculates URL ranks based on neighbor contributions.
             #print contribs.take(5)
-            ranks = contribs.reduceByKey(lambda x, y: x+y).mapValues(lambda x: x * 0.85 + 0.15).cache()
+            ranks = contribs.reduceByKey(lambda x, y: x+y).mapValues(lambda x: x * 0.85 + 0.15)
             #print ranks.take(5)
             # Collects all URL ranks and dump them to console.
             print "iteration : {}".format(iteration)

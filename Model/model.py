@@ -42,7 +42,7 @@ class Model():
         '''
         :param sc:
         :param month_set:
-        :return: rdd with column pid, fields(maybe empty), score, cur_popularity, next_popularity
+        :return: rdd with column pid, fields(maybe empty), view_feature, page_rank score, popularity
         '''
 
         def __vec_2_int(vec):
@@ -62,16 +62,23 @@ class Model():
         # build training rdd
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
             .filter(lambda x: x[0] in pid_set_broad.value)\
-            .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(lambda x: __vec_2_int)
-        rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))\
-            .filter(lambda x: x[0] in pid_set_broad.value)
+            .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(__vec_2_int)
+
         rdd_pid_2_view_feature = sc.textFile(C.PID_2_VIEWS_FEATURE_FILE).map(lambda x : x.split('#')) \
             .filter(lambda x: x[0] in pid_set_broad.value)\
-            .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(lambda x: __vec_2_int)
+            .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(__vec_2_float)
+
+        rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(',')) \
+            .filter(lambda x: x[0] in pid_set_broad.value).mapValues(__vec_2_float)
+
+        rdd_pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))\
+            .filter(lambda x: x[0] in pid_set_broad.value).mapValues(__vec_2_float)
+
         ls = []
         ls.append(rdd_pid_2_field_index)
-        ls.append(rdd_pid_2_score)
         ls.append(rdd_pid_2_view_feature)
+        ls.append(rdd_pid_2_score)
+        ls.append(rdd_pid_2_popularity)
         rdd_data = Model.__join_list_rdds(ls)
 
         return rdd_data
@@ -89,11 +96,12 @@ class Model():
             index.append(N-1)
             values.extend(view_feature)
             values.append(score)
-            feature = SparseVector()
-
+            feature = SparseVector(N, index, values)
             return LabeledPoint(popularity, feature)
+
         rdd_field_2_index = sc.textFile(C.FIELD_2_INDEX)
-        N = rdd_field_2_index.count()
+        num_fileds = rdd_field_2_index.count()
+
         '''
         vec, score, historical_popularity, popularity
         '''

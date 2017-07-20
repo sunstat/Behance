@@ -135,7 +135,7 @@ class NetworkUtilities(object):
 
         IOutilities.print_rdd_to_file(rdd_pid_2_date_feature,  output_file, 'psv')
 
-        '''
+
         # pid_2_date
         output_file = os.path.join(output_dir, 'pid_2_date-csv')
         IOutilities.print_rdd_to_file(rdd_pid_2_date, output_file, 'csv')
@@ -171,13 +171,13 @@ class NetworkUtilities(object):
         output_file = os.path.join(output_dir, 'pid_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
 
-        '''
+
 
     def run(self, sc):
-        #shell_file = os.path.join(C.SHELL_DIR, 'createIntermediateDateDirHdfs.sh')
-        #call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
+        shell_file = os.path.join(C.SHELL_DIR, 'createIntermediateDateDirHdfs.sh')
+        call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
         output_dir = os.path.join(C.INTERMEDIATE_RESULT_DIR, 'base')
-        #self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
+        self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
         self.handle_uid_pid(sc, self.base_date, output_dir)
 
 if __name__ == "__main__":

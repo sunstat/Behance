@@ -62,5 +62,5 @@ print("Mean Squared Error = " + str(MSE))
 print model.weights
 print model.intercept
 
-model.save(sc, "pythonLinearRegressionWithSGDModel")
+model.save(sc, C.INTERMEDIATE_RESULT_DIR)
 sc.stop()

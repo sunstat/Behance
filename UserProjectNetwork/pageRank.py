@@ -22,6 +22,7 @@ from IOutilities import IOutilities
 from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
 from subprocess import call
+import numpy as np
 from IOutilities import IOutilities
 
 import configuration.constants as C
@@ -74,12 +75,18 @@ class PageRank():
             #print ranks.take(5)
             # Collects all URL ranks and dump them to console.
 
-            if iteration%4 == 0:
+            def my_abs(x):
+                if x>=0:
+                    return x
+                return -x
+
+            if iteration%10 == 0:
                 print ranks.cache().count()
                 print "evaluate every four times"
 
-            if iteration%10 == 0:
-                print ranks.join(prev_ranks).mapValues(lambda x, abs(x[0]-x[1])).reduce(lambda x,y : x[1]+y[1]).take(5)
+            if iteration%20 == 0:
+                print ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1])).reduce(lambda x,y : x[1]+y[1]).take(5)
+                prev_ranks = ranks
 
 
             print "iteration : {}".format(iteration)
@@ -99,7 +106,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/pageRank.py')
-    page_rank = PageRank(20)
+    page_rank = PageRank(40)
     page_rank.run(sc)
 
 

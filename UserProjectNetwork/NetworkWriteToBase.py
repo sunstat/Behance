@@ -168,7 +168,6 @@ class NetworkUtilities(object):
         rdd_pid_index = rdd_owners.map(lambda x: x[0]).distinct().zipWithIndex().cache()
         output_file = os.path.join(output_dir, 'pid_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
-        
 
 
 

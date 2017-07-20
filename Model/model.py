@@ -46,13 +46,19 @@ class Model():
         '''
         :param sc:
         :param month_set:
-        :return: rdd with column pid,fields(maybe empty), score, cur_popularity, next_popularity
+        :return: rdd with column pid, fields(maybe empty), score, cur_popularity, next_popularity
         '''
 
         def __vec_2_int(vec):
             vec_result = []
             for y in vec:
                 vec_result.append(int(y))
+            return tuple(vec_result)
+
+        def __vec_2_float(vec):
+            vec_result = []
+            for y in vec:
+                vec_result.append(float(y))
             return tuple(vec_result)
 
         # build training rdd

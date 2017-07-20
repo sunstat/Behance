@@ -73,7 +73,7 @@ class PageRank():
             #print ranks.take(5)
             # Collects all URL ranks and dump them to console.
 
-            if iteration%10 == 0:
+            if iteration%4 == 0:
                 print ranks.cache().count()
                 print "put in memory and evalute previous 10 jobs"
 

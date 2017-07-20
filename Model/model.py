@@ -109,7 +109,8 @@ class Model():
         return rdd_label_data
 
     def train_model(self, sc):
-
+        pid_training_set = set(sc.textFile(C.TRAININING_PID_SET_FILE).collect())
+        self.extract_data_rdd(sc, pid_training_set)
 
 
 

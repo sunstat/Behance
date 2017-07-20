@@ -55,7 +55,7 @@ class PageRank():
             for url in urls:
                 yield (url, rank / num_urls)
 
-        ranks = sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: (x[0], 1.))
+        ranks = sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: (x[0], 1.)).cache()
         links = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: re.split('#', x))\
             .map(lambda x: (x[0], x[1].split(','))).cache()
         pid_2_uid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(','))

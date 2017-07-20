@@ -57,6 +57,7 @@ class NetworkUtilities(object):
             .filter(lambda x: x[4] == 'F').map(lambda x: (x[1], x[2])).filter(__filter_uid_incycle).cache()
 
         rdd_follow = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
+        print rdd_follow.take(5)
         output_file = os.path.join(output_dir, 'follow_map-psv')
         IOutilities.print_rdd_to_file(rdd_follow, output_file, 'psv')
 

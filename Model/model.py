@@ -57,14 +57,14 @@ class Model():
                 vec_result.append(float(y))
             return tuple(vec_result)
 
+        pid_set_broad = sc.broadcast(pid_set)
+
         # build training rdd
-        rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
+        rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#')).filter(lambda x: )
             .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(lambda x: __vec_2_int)
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))
         rdd_pid_2_view_feature = sc.textFile(C.PID_2_VIEWS_FEATURE_FILE).map(lambda x : x.split('#'))\
             .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(lambda x: __vec_2_int)
-
-
         ls = []
         ls.append(rdd_pid_2_field_index)
         ls.append(rdd_pid_2_score)

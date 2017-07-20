@@ -68,7 +68,7 @@ class PageRank():
 if __name__ == "__main__":
     sc, _ = init_spark('pageRank', 50)
     page_rank = PageRank(10)
-    page_rank.run()
+    page_rank.run(sc)
 
 
 

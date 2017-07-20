@@ -88,7 +88,6 @@ class PageRank():
                 print ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1])).reduce(lambda x,y : x[1]+y[1]).take(5)
                 prev_ranks = ranks
 
-
             print "iteration : {}".format(iteration)
 
         print "finishing iterative algorithm"

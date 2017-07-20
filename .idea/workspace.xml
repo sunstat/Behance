@@ -92,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/pageRank.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="87" column="65" lean-forward="false" selection-start-line="87" selection-start-column="65" selection-end-line="87" selection-end-column="65" />
+              <caret line="87" column="3" lean-forward="false" selection-start-line="87" selection-start-column="3" selection-end-line="87" selection-end-column="3" />
               <folding>
                 <element signature="e#79#89#0" expanded="true" />
               </folding>
@@ -1080,7 +1080,7 @@
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/pageRank.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="87" column="65" lean-forward="false" selection-start-line="87" selection-start-column="65" selection-end-line="87" selection-end-column="65" />
+          <caret line="87" column="3" lean-forward="false" selection-start-line="87" selection-start-column="3" selection-end-line="87" selection-end-column="3" />
           <folding>
             <element signature="e#79#89#0" expanded="true" />
           </folding>

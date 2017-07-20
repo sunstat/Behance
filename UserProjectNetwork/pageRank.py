@@ -72,10 +72,11 @@ class PageRank():
             ranks = contribs.reduceByKey(lambda x, y: x+y).mapValues(lambda x: x * 0.85 + 0.15)
             #print ranks.take(5)
             # Collects all URL ranks and dump them to console.
-            '''
+
             if iteration%10 == 0:
-                ranks = sc.parallelize(ranks.collect())
-            '''
+                print ranks.cache().count()
+                print "put in memory and evalute previous 10 jobs"
+
             print "iteration : {}".format(iteration)
 
         print "finishing iterative algorithm"

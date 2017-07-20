@@ -63,7 +63,7 @@ class PageRank():
             # Collects all URL ranks and dump them to console.
         pid_2_score = pid_2_uid.join(ranks).map(lambda x: (x[0], x[1][1]))
         PageRank.print_rdd_to_file(pid_2_score, C.PID_2_SCORE_FILE, 'csv')
-        '''
+        
 
 if __name__ == "__main__":
     sc, _ = init_spark('pageRank', 50)

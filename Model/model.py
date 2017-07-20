@@ -65,20 +65,12 @@ class Model():
             .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(lambda x: __vec_2_int)
 
 
-            ls = []
-            ls.append(rdd_pid_2_field_index)
-            ls.append(rdd_score)
-            ls.append(rdd_cur_popularity)
-            ls.append(rdd_next_popularity)
-            rdd_piece = Model.__join_list_rdds(ls)
-            if not rdd_data:
-                rdd_data = rdd_piece
-            else:
-                rdd_data = rdd_data.union(rdd_piece)
-            print "================"
-            print rdd_data.count()
-            print rdd_data.take(5)
-            print "================"
+        ls = []
+        ls.append(rdd_pid_2_field_index)
+        ls.append(rdd_pid_2_score)
+        ls.append(rdd_pid_2_view_feature)
+        rdd_data = Model.__join_list_rdds(ls)
+
         return rdd_data
 
     '''

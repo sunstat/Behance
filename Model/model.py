@@ -100,15 +100,21 @@ class Model():
             return LabeledPoint(popularity, feature)
 
         rdd_field_2_index = sc.textFile(C.FIELD_2_INDEX)
-        num_fileds = rdd_field_2_index.count()
+        num_fields = rdd_field_2_index.count()
 
         '''
-        vec, score, historical_popularity, popularity
+        field_index_vec, view_feature, score, num_fields, popularity
         '''
-        rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0], x[1][1], x[1][2], x[1][3], N)
+        rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3])
         return rdd_label_data
 
-    def train_model(self):
+    def train_model(self, sc):
+
+
+
+
+
+
         model = LinearRegressionWithSGD.train(parsedData, iterations=100, step=0.00000001)
 
 

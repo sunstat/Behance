@@ -72,6 +72,8 @@ class PageRank():
             #print ranks.take(5)
             # Collects all URL ranks and dump them to console.
             print "iteration : {}".format(iteration)
+            if iteration == 499:
+                print ranks.take(5)
         print "finishing iterative algorithm"
         print ranks.take(5)
         uid_2_pid = pid_2_uid.map(lambda x: (x[1], x[0]))

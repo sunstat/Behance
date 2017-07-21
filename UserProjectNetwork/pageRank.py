@@ -46,6 +46,7 @@ class PageRank():
 
     def run(self, sc):
 
+        dif_array = []
         def compute_contribs(urls, rank):
             # Calculates URL contributions to the rank of other URLs.
             num_urls = len(urls)
@@ -64,27 +65,19 @@ class PageRank():
         pid_2_uid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(','))
         print pid_2_uid.take(5)
 
-        for iteration in range(1, self.num_iters):
+        for iteration in range(1, self.num_iters+1):
             # Calculates URL contributions to the rank of other URLs.
             contribs = links.join(ranks, 8)
-            #print contribs.take(5)
             contribs = contribs.flatMap(lambda x: compute_contribs(x[1][0], x[1][1]))
             # Re-calculates URL ranks based on neighbor contributions.
-            #print contribs.take(5)
             ranks = contribs.reduceByKey(lambda x, y: x+y).mapValues(lambda x: x * 0.85 + 0.15)
-            #print ranks.take(5)
-            # Collects all URL ranks and dump them to console.
 
             if iteration%10 == 0:
                 print ranks.cache().count()
-                print "evaluate every 10 times"
-
-            if iteration%5 == 0:
                 dif = ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1])).map(lambda x: x[1]).reduce(lambda x,y: x+y)
-                print dif
+                print "iteration : {} and the difference is {}".format(iteration, dif)
                 prev_ranks = ranks
-
-            print "iteration : {}".format(iteration)
+                dif_array.append(dif)
 
         print "finishing iterative algorithm"
         print ranks.take(5)
@@ -93,6 +86,10 @@ class PageRank():
         pid_2_score = uid_2_pid.join(ranks).map(lambda x: (x[1][0], x[1][1])).cache()
         print pid_2_score.take(5)
         IOutilities.print_rdd_to_file(pid_2_score, C.PID_2_SCORE_FILE, 'csv')
+        #import dif_array into Log
+        log_file = open(os.path.join(C.MODEL_LOG_DIR, 'page_rank_log'), 'w')
+        for item in dif_array:
+            log_file.write("%s\n" % item)
         
 
 if __name__ == "__main__":
@@ -101,7 +98,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/pageRank.py')
-    page_rank = PageRank(40)
+    page_rank = PageRank(1000)
     page_rank.run(sc)
 
 
@@ -109,8 +106,8 @@ if __name__ == "__main__":
     '''
     test 
     '''
-    sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))
-
+    print sc.textFile(C.PID_2_SCORE_FILE).count()
+    print sc.textFile(C.PID_2_INDEX_FILE).count()
 
     sc.stop()
 

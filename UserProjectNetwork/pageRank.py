@@ -99,7 +99,10 @@ class PageRank():
         pid_2_score = uid_2_pid.join(ranks).map(lambda x: (x[1][0], x[1][1])).cache()
         IOutilities.print_rdd_to_file(pid_2_score, C.PID_2_SCORE_FILE, 'csv')
         #import dif_array into Log
-        sc.parallelize(dif_array).map(lambda x: str(x)).saveAsTextFile(os.path.join(C.MODEL_LOG_DIR, 'page_rank_log'))
+        log_file = os.path.join(C.MODEL_LOG_DIR, 'page_rank_log')
+        if os.system("hadoop fs -test -d {0}".format(log_file)) == 0:
+            call('hdfs dfs -rm -r {}'.format(log_file))
+        sc.parallelize(dif_array).map(lambda x: str(x)).saveAsTextFile(log_file)
 
 
 if __name__ == "__main__":

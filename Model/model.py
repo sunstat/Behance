@@ -131,8 +131,6 @@ class Model():
         sc.parallelize(mse_array).map(lambda x: str(x)).saveAsTextFile(os.path.join(C.MODEL_LOG_DIR, model_name, "mse_log"))
 
 
-
-
     def evaluation(self, sc, model_name, valid = True):
         pid_evaluation_set = None
         if valid:

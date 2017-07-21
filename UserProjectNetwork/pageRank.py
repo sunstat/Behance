@@ -57,7 +57,6 @@ class PageRank():
 
             rdd.map(lambda x: to_string(x)).saveAsTextFile(output_file)
 
-
         dif_array = []
         def compute_contribs(urls, rank):
             # Calculates URL contributions to the rank of other URLs.
@@ -87,6 +86,7 @@ class PageRank():
             if iteration%10 == 0:
                 temp_file = os.path.join(C.TEMPORARY_DIR, 'ranks-csv')
                 print temp_file
+                ranks.cache()
                 IOutilities.print_rdd_to_file(ranks, temp_file, 'csv')
                 ranks = sc.textFile(temp_file).map(lambda x: x.split(',')).mapValues(lambda x: float(x)).cache()
                 dif = ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1])).map(lambda x: x[1]).reduce(lambda x,y: x+y)
@@ -101,7 +101,7 @@ class PageRank():
         #import dif_array into Log
         log_file = os.path.join(C.MODEL_LOG_DIR, 'page_rank_log')
         if os.system("hadoop fs -test -d {0}".format(log_file)) == 0:
-            call('hdfs dfs -rm -r {}'.format(log_file))
+            call('hdfs dfs -rm -r {}'.format(log_file), shell=True)
         sc.parallelize(dif_array).map(lambda x: str(x)).saveAsTextFile(log_file)
 
 
@@ -111,9 +111,8 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/pageRank.py')
-    page_rank = PageRank(200)
+    page_rank = PageRank(40)
     page_rank.run(sc)
-
 
 
     '''

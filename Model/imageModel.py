@@ -17,4 +17,9 @@ import configuration.constants as C
 class imageModel(object):
     def __init__(self):
         pass
+
+    def feature_extraction(self):
+
+
+
     

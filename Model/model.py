@@ -110,14 +110,16 @@ class Model():
 
     def train_model(self, sc, model_name, num_iter):
         pid_training_set = set(sc.textFile(C.TRAININING_PID_SET_FILE).collect())
-        pid_valid_set = set(sc.textFile(C.VALID_PID_SET_FILE).collect())
         rdd_training_data = self.extract_data_rdd(sc, pid_training_set)
-        rdd_valid_data = self.extract_data_rdd(sc, pid_valid_set)
 
         rdd_training_labeled_data = self.generate_feature_response(sc, rdd_training_data)
         mse_array = []
-        for iteration in range(num_iter):
-            model = LinearRegressionWithSGD.train(rdd_training_labeled_data, iterations=100, step=1e-4)
+        for iteration in range(1,num_iter+1):
+            if iteration == 1:
+                model = LinearRegressionWithSGD.train(rdd_training_labeled_data, iterations=100, step=1e-4)
+            else:
+                model = LinearRegressionWithSGD.train(rdd_training_labeled_data,\
+                    iterations=100, step=1e-4, initialWeights=model.weight)
             values_pred = rdd_training_data.map(lambda p: (p.label, model.predict(p.features)))
             MSE = values_pred.map(lambda vp: (vp[0] - vp[1]) ** 2) \
                       .reduce(lambda x, y: x + y) / values_pred.count()
@@ -126,23 +128,24 @@ class Model():
 
         model.save(sc, os.path.join(C.MODEL_DIR, model_name))
 
+        sc.parallelize(mse_array).map(lambda x: str(x)).saveAsTextFile(os.path.join(C.MODEL_LOG_DIR, model_name, "mse_log"))
 
 
 
 
+    def evaluation(self, sc, model_name, valid = True):
+        pid_evaluation_set = None
+        if valid:
+            pid_evaluation_set = set(sc.textFile(C.VALID_PID_SET_FILE).collect())
+        else:
+            pid_evaluation_set = set(sc.textFile(C.VALID_PID_SET_FILE).collect())
+        rdd_evaluation_data = self.extract_data_rdd(sc, pid_evaluation_set)
 
-
-
-            '''
-            #model.save(sc, os.path.join(C.INTERMEDIATE_RESULT_DIR, "IntermediateResult", "Model"))
-            sameModel = LinearRegressionModel.load(sc, os.path.join(C.MODEL_DIR, "testLinearModel"))
-            parsedData.map(lambda p: (p.label, sameModel.predict(p.features)))
-
-            MSE = valuesAndPreds \
-                .map(lambda vp: (vp[0] - vp[1])**2) \
-                .reduce(lambda x, y: x + y) / valuesAndPreds.count()
-            print("Mean Squared Error = " + str(MSE))
-
+        model = LinearRegressionModel.load(sc, os.path.join(C.MODEL_DIR, model_name))
+        values_pred = rdd_evaluation_data.map(lambda p: (p.label, model.predict(p.features)))
+        MSE = values_pred.map(lambda vp: (vp[0] - vp[1]) ** 2) \
+                  .reduce(lambda x, y: x + y) / values_pred.count()
+        print MSE
 
 
 

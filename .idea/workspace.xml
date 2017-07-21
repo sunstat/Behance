@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Test/testLinearLocally.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/testRDDLinear.py" afterPath="$PROJECT_DIR$/Test/testRDDLinear.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserProjectNetwork/pageRank.py" afterPath="$PROJECT_DIR$/UserProjectNetwork/pageRank.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testRDDLinear.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="testRDDLinear.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Test/testRDDLinear.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="56" column="56" lean-forward="true" selection-start-line="56" selection-start-column="56" selection-end-line="56" selection-end-column="56" />
+            <state relative-caret-position="596">
+              <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -99,7 +96,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pageRank.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pageRank.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/pageRank.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="283">
@@ -222,8 +219,8 @@
         <option value="$PROJECT_DIR$/Test/testReduce.py" />
         <option value="$PROJECT_DIR$/configuration/constants.py" />
         <option value="$PROJECT_DIR$/Test/testLinearLocally.py" />
-        <option value="$PROJECT_DIR$/Test/testRDDLinear.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/pageRank.py" />
+        <option value="$PROJECT_DIR$/Test/testRDDLinear.py" />
       </list>
     </option>
   </component>
@@ -1064,14 +1061,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test/testRDDLinear.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="56" column="56" lean-forward="true" selection-start-line="56" selection-start-column="56" selection-end-line="56" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test/testLinearLocally.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="703">
@@ -1087,6 +1076,14 @@
           <folding>
             <element signature="e#79#89#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/testRDDLinear.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="596">
+          <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

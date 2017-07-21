@@ -46,6 +46,18 @@ class PageRank():
 
     def run(self, sc):
 
+        def print_rdd_to_file(rdd, output_file, output_format):
+            def to_string(x):
+                if not x:
+                    return " "
+                return ",".join([str(y) for y in x])
+
+            if os.system("hadoop fs -test -d {0}".format(output_file)) == 0:
+                call('hdfs dfs -rm -r {}'.format(output_file))
+
+            rdd.map(lambda x: to_string(x)).saveAsTextFile(output_file)
+
+
         dif_array = []
         def compute_contribs(urls, rank):
             # Calculates URL contributions to the rank of other URLs.
@@ -76,7 +88,7 @@ class PageRank():
                 temp_file = os.path.join(C.TEMPORARY_DIR, 'ranks-csv')
                 print temp_file
                 IOutilities.print_rdd_to_file(ranks, temp_file, 'csv')
-                ranks = sc.textFile(temp_file).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
+                ranks = sc.textFile(temp_file).map(lambda x: x.split(',')).mapValues(lambda x: float(x)).cache()
                 dif = ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1])).map(lambda x: x[1]).reduce(lambda x,y: x+y)
                 print "iteration : {} and the difference is {}".format(iteration, dif)
                 prev_ranks = ranks

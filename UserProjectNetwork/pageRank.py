@@ -74,7 +74,8 @@ class PageRank():
 
             if iteration%10 == 0:
                 temp_file = os.path.join(C.TEMPORARY_DIR, 'ranks')
-                call('hdfs dfs -rm -r {}'.format(temp_file))
+                if os.system("hadoop fs -test -d {0}".format(temp_file)) == 0:
+                    call('hdfs dfs -rm -r {}'.format(temp_file))
                 ranks.saveAsTextFile(temp_file)
                 ranks = sc.textFile(temp_file)
                 dif = ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1])).map(lambda x: x[1]).reduce(lambda x,y: x+y)

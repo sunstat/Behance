@@ -73,11 +73,10 @@ class PageRank():
             ranks = contribs.reduceByKey(lambda x, y: x+y).mapValues(lambda x: x * 0.85 + 0.15)
 
             if iteration%10 == 0:
-                temp_file = os.path.join(C.TEMPORARY_DIR, 'ranks')
-                if os.system("hadoop fs -test -d {0}".format(temp_file)) == 0:
-                    call('hdfs dfs -rm -r {}'.format(temp_file))
-                ranks.saveAsTextFile(temp_file)
-                ranks = sc.textFile(temp_file)
+                temp_file = os.path.join(C.TEMPORARY_DIR, 'ranks-csv')
+                print temp_file
+                IOutilities.print_rdd_to_file(ranks, temp_file, 'csv')
+                ranks = sc.textFile(temp_file).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
                 dif = ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1])).map(lambda x: x[1]).reduce(lambda x,y: x+y)
                 print "iteration : {} and the difference is {}".format(iteration, dif)
                 prev_ranks = ranks

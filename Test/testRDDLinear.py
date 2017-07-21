@@ -63,7 +63,7 @@ print model.weights
 print model.intercept
 
 
-sameModel = LinearRegressionModel(model.weights,model.intercept).train(parsedData, iterations=100, step=0.00000001, intercept=True)
+sameModel = LinearRegressionWithSGD(model.weights,model.intercept).train(parsedData, iterations=100, step=0.00000001, intercept=True)
 valuesAndPreds = parsedData.map(lambda p: (p.label, sameModel.predict(p.features)))
 MSE = valuesAndPreds \
     .map(lambda vp: (vp[0] - vp[1])**2) \

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/testRDDLinear.py" afterPath="$PROJECT_DIR$/Test/testRDDLinear.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserProjectNetwork/pageRank.py" afterPath="$PROJECT_DIR$/UserProjectNetwork/pageRank.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pageRank.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pageRank.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/pageRank.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="89" column="40" lean-forward="false" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
+            <state relative-caret-position="222">
+              <caret line="115" column="26" lean-forward="false" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
               <folding>
                 <element signature="e#79#89#0" expanded="true" />
               </folding>
@@ -56,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testRDDLinear.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="testRDDLinear.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test/testRDDLinear.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="65" column="80" lean-forward="false" selection-start-line="65" selection-start-column="80" selection-end-line="65" selection-end-column="80" />
+            <state relative-caret-position="205">
+              <caret line="65" column="35" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -99,7 +100,7 @@
       <file leaf-file-name="NetworkWriteToBase.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="-2192">
               <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
@@ -217,8 +218,8 @@
         <option value="$PROJECT_DIR$/Test/testLinearLocally.py" />
         <option value="$PROJECT_DIR$/configuration/constants.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/IOutilities.py" />
-        <option value="$PROJECT_DIR$/UserProjectNetwork/pageRank.py" />
         <option value="$PROJECT_DIR$/Test/testRDDLinear.py" />
+        <option value="$PROJECT_DIR$/UserProjectNetwork/pageRank.py" />
       </list>
     </option>
   </component>
@@ -1041,14 +1042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="545">
@@ -1065,21 +1058,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/pageRank.py">
+    <entry file="file://$PROJECT_DIR$/Test/testRDDLinear.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="89" column="40" lean-forward="false" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
-          <folding>
-            <element signature="e#79#89#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="205">
+          <caret line="65" column="35" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test/testRDDLinear.py">
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="65" column="80" lean-forward="false" selection-start-line="65" selection-start-column="80" selection-end-line="65" selection-end-column="80" />
+        <state relative-caret-position="-2192">
+          <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/pageRank.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="115" column="26" lean-forward="false" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
+          <folding>
+            <element signature="e#79#89#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

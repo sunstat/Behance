@@ -63,7 +63,7 @@ print model.weights
 print model.intercept
 
 #model.save(sc, os.path.join(C.INTERMEDIATE_RESULT_DIR, "IntermediateResult", "Model"))
-sameModel = LinearRegressionModel.load(sc, os.path.join(C.MODEL_DIR, "testLinearModel"))
+sameModel = LinearRegressionModel.load(sc, os.path.join(C.INTERMEDIATE_RESULT_DIR, "IntermediateResult", "Model"))
 parsedData.map(lambda p: (p.label, sameModel.predict(p.features)))
 
 MSE = valuesAndPreds \

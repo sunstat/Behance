@@ -108,16 +108,42 @@ class Model():
         rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3])
         return rdd_label_data
 
-    def train_model(self, sc, model_path):
+    def train_model(self, sc, model_name, num_iter):
         pid_training_set = set(sc.textFile(C.TRAININING_PID_SET_FILE).collect())
         pid_valid_set = set(sc.textFile(C.VALID_PID_SET_FILE).collect())
         rdd_training_data = self.extract_data_rdd(sc, pid_training_set)
         rdd_valid_data = self.extract_data_rdd(sc, pid_valid_set)
 
         rdd_training_labeled_data = self.generate_feature_response(sc, rdd_training_data)
-        
-        model = LinearRegressionWithSGD.train(rdd_training_labeled_data, iterations=100, step=0.00000001)
-        model.save()
+        mse_array = []
+        for iteration in range(num_iter):
+            model = LinearRegressionWithSGD.train(rdd_training_labeled_data, iterations=100, step=1e-4)
+            values_pred = rdd_training_data.map(lambda p: (p.label, model.predict(p.features)))
+            MSE = values_pred.map(lambda vp: (vp[0] - vp[1]) ** 2) \
+                      .reduce(lambda x, y: x + y) / values_pred.count()
+            mse_array.append(MSE)
+            print("iteration {}, Mean Squared Error = {}".format(iteration, str(MSE)))
+
+        model.save(sc, os.path.join(C.MODEL_DIR, model_name))
+
+
+
+
+
+
+
+
+            '''
+            #model.save(sc, os.path.join(C.INTERMEDIATE_RESULT_DIR, "IntermediateResult", "Model"))
+            sameModel = LinearRegressionModel.load(sc, os.path.join(C.MODEL_DIR, "testLinearModel"))
+            parsedData.map(lambda p: (p.label, sameModel.predict(p.features)))
+
+            MSE = valuesAndPreds \
+                .map(lambda vp: (vp[0] - vp[1])**2) \
+                .reduce(lambda x, y: x + y) / valuesAndPreds.count()
+            print("Mean Squared Error = " + str(MSE))
+
+
 
 
 

@@ -73,7 +73,10 @@ class PageRank():
             ranks = contribs.reduceByKey(lambda x, y: x+y).mapValues(lambda x: x * 0.85 + 0.15)
 
             if iteration%10 == 0:
-                ranks=sc.parallelize(ranks.collect())
+                temp_file = os.path.join(C.TEMPORARY_DIR, 'ranks')
+                call('hdfs dfs -rm -r {}'.format(temp_file))
+                ranks.saveAsTextFile(temp_file)
+                ranks = sc.textFile(temp_file)
                 dif = ranks.join(prev_ranks).mapValues(lambda x: abs(x[0]-x[1])).map(lambda x: x[1]).reduce(lambda x,y: x+y)
                 print "iteration : {} and the difference is {}".format(iteration, dif)
                 prev_ranks = ranks

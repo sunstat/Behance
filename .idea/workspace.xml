@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/splitData.py" afterPath="$PROJECT_DIR$/Model/splitData.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/configuration/constants.py" afterPath="$PROJECT_DIR$/configuration/constants.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/test1.py" afterPath="$PROJECT_DIR$/Test/test1.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,22 +15,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pageRank.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/pageRank.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1208">
-              <caret line="27" column="35" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="27" selection-end-column="35" />
-              <folding>
-                <element signature="e#79#89#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="NetworkWriteToBase.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-279">
+            <state relative-caret-position="-2614">
               <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="24" selection-end-column="35" />
               <folding />
             </state>
@@ -50,11 +38,41 @@
       <file leaf-file-name="splitData.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Model/splitData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="63" column="52" lean-forward="true" selection-start-line="63" selection-start-column="52" selection-end-line="63" selection-end-column="52" />
+            <state relative-caret-position="477">
+              <caret line="66" column="45" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
               <folding>
                 <element signature="e#79#89#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test1.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/test1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="545">
+              <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testLinearLocally.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/testLinearLocally.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="639">
+              <caret line="73" column="9" lean-forward="false" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testPagerank.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/testPagerank.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="316">
+              <caret line="32" column="17" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -64,6 +82,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="460">
               <caret line="41" column="62" lean-forward="false" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Model/model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1632">
+              <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -79,41 +107,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="createPopulation.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/createPopulation.py">
+      <file leaf-file-name="IOutilities.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-288">
-              <caret line="59" column="31" lean-forward="false" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="temp.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/temp.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="run.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/run.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/README">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="426">
+              <caret line="83" column="101" lean-forward="true" selection-start-line="82" selection-start-column="8" selection-end-line="83" selection-end-column="101" />
               <folding />
             </state>
           </provider>
@@ -189,7 +187,6 @@
         <option value="$PROJECT_DIR$/Model/Model.py" />
         <option value="$PROJECT_DIR$/EditData/ShellEdit/delete.sh" />
         <option value="$PROJECT_DIR$/EditData/ShellEdit/createIntermediateDateDirHdfs.sh" />
-        <option value="$PROJECT_DIR$/Test/test1.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" />
         <option value="$PROJECT_DIR$/EditData/ShellEdit/deleteLocal.sh" />
         <option value="$PROJECT_DIR$/Test/shell1.sh" />
@@ -221,6 +218,7 @@
         <option value="$PROJECT_DIR$/Model/model.py" />
         <option value="$PROJECT_DIR$/Test/testFile.py" />
         <option value="$PROJECT_DIR$/configuration/constants.py" />
+        <option value="$PROJECT_DIR$/Test/test1.py" />
         <option value="$PROJECT_DIR$/Model/splitData.py" />
       </list>
     </option>
@@ -392,7 +390,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.testFile">
+  <component name="RunManager" selected="Python.test1">
     <configuration default="false" name="testJoin" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -406,24 +404,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Behance" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/testJoin.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="testShell" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Behance" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/testShell.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -478,6 +458,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Behance" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/testFile.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="test1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Behance" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/test1.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -560,18 +558,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.testJoin" />
-      <item index="1" class="java.lang.String" itemvalue="Python.testShell" />
-      <item index="2" class="java.lang.String" itemvalue="Python.testRDDLinear" />
-      <item index="3" class="java.lang.String" itemvalue="Python.testReduce" />
-      <item index="4" class="java.lang.String" itemvalue="Python.testFile" />
+      <item index="1" class="java.lang.String" itemvalue="Python.testRDDLinear" />
+      <item index="2" class="java.lang.String" itemvalue="Python.testReduce" />
+      <item index="3" class="java.lang.String" itemvalue="Python.testFile" />
+      <item index="4" class="java.lang.String" itemvalue="Python.test1" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.testFile" />
-        <item index="1" class="java.lang.String" itemvalue="Python.testJoin" />
-        <item index="2" class="java.lang.String" itemvalue="Python.testReduce" />
-        <item index="3" class="java.lang.String" itemvalue="Python.testRDDLinear" />
-        <item index="4" class="java.lang.String" itemvalue="Python.testShell" />
+        <item index="0" class="java.lang.String" itemvalue="Python.test1" />
+        <item index="1" class="java.lang.String" itemvalue="Python.testFile" />
+        <item index="2" class="java.lang.String" itemvalue="Python.testJoin" />
+        <item index="3" class="java.lang.String" itemvalue="Python.testReduce" />
+        <item index="4" class="java.lang.String" itemvalue="Python.testRDDLinear" />
       </list>
     </recent_temporary>
   </component>
@@ -793,13 +791,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test/test1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test/run.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -846,30 +837,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test/testLinearLocally.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="853">
-          <caret line="73" column="9" lean-forward="false" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test/testPagerank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="42" column="27" lean-forward="true" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/imageModel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="86">
@@ -906,14 +873,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="471">
           <caret line="101" column="14" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="72" column="21" lean-forward="true" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -960,14 +919,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-279">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="24" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test/IOutilities.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
@@ -992,10 +943,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Model/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1632">
+          <caret line="18" column="10" lean-forward="false" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2614">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="24" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="83" column="101" lean-forward="true" selection-start-line="82" selection-start-column="8" selection-end-line="83" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/testLinearLocally.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="639">
+          <caret line="73" column="9" lean-forward="false" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/testPagerank.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="32" column="17" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/test1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Model/splitData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="63" column="52" lean-forward="true" selection-start-line="63" selection-start-column="52" selection-end-line="63" selection-end-column="52" />
+        <state relative-caret-position="477">
+          <caret line="66" column="45" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding>
             <element signature="e#79#89#0" expanded="true" />
           </folding>

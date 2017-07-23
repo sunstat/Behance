@@ -50,6 +50,7 @@ class Model():
         rdd = ls_rdds[0]
         for i in range(1, len(ls_rdds)):
             rdd = Model.__join_pair_rdds(rdd, ls_rdds[i])
+            print rdd.take(5)
         return rdd
 
     def extract_data_rdd(self, sc, pid_set):

@@ -59,7 +59,10 @@ class Model():
         def __vec_2_int(vec):
             vec_result = []
             for y in vec:
-                vec_result.append(int(y))
+                try:
+                    vec_result.append(int(y))
+                except:
+                    print y
             return tuple(vec_result)
 
         def __vec_2_float(vec):
@@ -153,8 +156,6 @@ class Model():
         MSE = values_pred.map(lambda vp: (vp[0] - vp[1]) ** 2) \
                   .reduce(lambda x, y: x + y) / values_pred.count()
         print MSE
-
-
 
 
 if __name__ == "__main__":

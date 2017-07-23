@@ -88,7 +88,7 @@ class Model():
         print rdd_pid_2_view_feature.take(5)
 
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))\
-            .filter(lambda x: x[0] in pid_set_broad.value).map(lambda x: [x[0], float(x[1])])
+            .filter(lambda x: x[0] in pid_set_broad.value).mapValues(float(x))
         print rdd_pid_2_score.count()
         '''
         rdd_pid_2_score = rdd_pid_2_score.collect()

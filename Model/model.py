@@ -88,7 +88,7 @@ class Model():
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
             .filter(lambda x: x[0] in pid_set_broad.value)\
             .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(_vec_2_int)
-
+        print rdd_pid_2_field_index.count()
 
         rdd_pid_2_view_feature = sc.textFile(C.PID_2_VIEWS_FEATURE_FILE).map(lambda x : x.split('#')) \
             .filter(lambda x: x[0] in pid_set_broad.value)\

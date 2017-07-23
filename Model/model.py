@@ -93,7 +93,7 @@ class Model():
         rdd_pid_2_score = rdd_pid_2_score.collect()
         for num in rdd_pid_2_score:
             try:
-                float(num)
+                float(num[1])
             except:
                 print num
         '''

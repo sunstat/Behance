@@ -83,6 +83,8 @@ class Model():
             .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(_vec_2_float)
 
 
+        print rdd_pid_2_view_feature.take(5)
+
         '''
 
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(',')) \

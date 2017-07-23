@@ -74,13 +74,11 @@ class Model():
         pid_set_broad = sc.broadcast(pid_set)
 
         # build training rdd
-        rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#')).filter(lambda x: x[0] in pid_set_broad.value)
-        print rdd_pid_2_field_index.take(5)
-        rdd = rdd_pid_2_field_index.filter(lambda x: x[0] in pid_set_broad.value)\
-            .map(lambda x: [x[0], tuple(x[1].split(','))])
+        rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
+            .filter(lambda x: x[0] in pid_set_broad.value).map(lambda x: [x[0], tuple(x[1].split(','))])
 
-        print rdd.take(5)
         rdd = rdd_pid_2_field_index.mapValues(_vec_2_int)
+        print rdd.take(5)
 
 
         '''

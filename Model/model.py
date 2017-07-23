@@ -45,7 +45,7 @@ class Model():
                 return (x[0],)+(x[1],)
         rdd = rdd1.join(rdd2)
         print rdd.take(5)
-        return rdd1.join(rdd2).mapValues(f)
+        return rdd.mapValues(f)
 
     @staticmethod
     def __join_list_rdds(ls_rdds):

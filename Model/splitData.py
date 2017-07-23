@@ -29,8 +29,8 @@ import configuration.constants as C
 
 def _save_file(rdd, output_file):
     if os.system("hadoop fs -test -d {0}".format(output_file)) == 0:
-        call('hdfs dfs -rm -r {}'.format(output_file))
-    rdd.save(output_file)
+        call('hdfs dfs -rm -r {}'.format(output_file), shell = True)
+    rdd.saveAsTextFile(output_file)
 
 
 

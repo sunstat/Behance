@@ -90,13 +90,16 @@ class Model():
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value)
         print rdd_pid_2_score.count()
-        rdd_pid_2_score = rdd_pid_2_score.filter(lambda x: not x[1])
-        print rdd_pid_2_score.take(10)
+        rdd_pid_2_score = rdd_pid_2_score.collect()
+        for num in rdd_pid_2_score:
+            try:
+                float(num)
+            except:
+                print num
         '''
         .mapValues(_vec_2_float)
         '''
 
-        print rdd_pid_2_score.take(5)
 
         '''
         rdd_pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))\

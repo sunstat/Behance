@@ -80,22 +80,14 @@ class Model():
 
         print rdd_pid_2_field_index.take(5)
 
-
-
         rdd_pid_2_view_feature = sc.textFile(C.PID_2_VIEWS_FEATURE_FILE).map(lambda x : x.split('#')) \
             .filter(lambda x: x[0] in pid_set_broad.value)\
             .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(_vec_2_float)
 
-
         print rdd_pid_2_view_feature.take(5)
-
-
 
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(',')) \
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(_vec_2_float)
-
-
-
 
         rdd_pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(_vec_2_float)
@@ -106,7 +98,7 @@ class Model():
         ls.append(rdd_pid_2_popularity)
         rdd_data = Model.__join_list_rdds(ls)
         return rdd_data
-        '''
+
 
     '''
     rdd_ranks [pid, score] already split

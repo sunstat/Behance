@@ -10,15 +10,20 @@ from subprocess import Popen
 
 def __join_pair_rdds(rdd1, rdd2):
     def f(x):
-        if isinstance(x[0], tuple):
-            return x[0] + (x[1],)
-        return (x[0], x[1])
+        if isinstance(x[0], tuple) and isinstance(x[1], tuple):
+            return x[0] + x[1]
+        elif isinstance(x[0], tuple) and (not isinstance(x[1], tuple)):
+            return x[0] + (x[1], )
+        else:
+            return (x[0],)+(x[1],)
     return rdd1.join(rdd2).mapValues(f)
 
 def __join_list_rdds(ls_rdds):
     rdd = ls_rdds[0]
+    print rdd.take(5)
     for i in range(1, len(ls_rdds)):
-        rdd = __join_pair_rdds(rdd, ls[i])
+        rdd = __join_pair_rdds(rdd, ls_rdds[i])
+        print rdd.take(5)
     return rdd
 
 
@@ -38,5 +43,3 @@ x = sc.parallelize([["a", 1], ["a", 2]])
 y = sc.parallelize([("a", 2), ["a", 5]])
 z = sc.parallelize([("a", 3), ["f", 6]])
 
-w = x.join(y)
-print w.take(5)

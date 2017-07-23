@@ -90,20 +90,9 @@ class Model():
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(lambda x: float(x))
         print rdd_pid_2_score.count()
-        '''
-        rdd_pid_2_score = rdd_pid_2_score.collect()
-        for num in rdd_pid_2_score:
-            try:
-                float(num[1])
-            except:
-                print num
-        .mapValues(_vec_2_float)
-        '''
 
-
-        '''
         rdd_pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))\
-            .filter(lambda x: x[0] in pid_set_broad.value).mapValues(_vec_2_float)
+            .filter(lambda x: x[0] in pid_set_broad.value).mapValues(lambda x: float(x))
         ls = []
         ls.append(rdd_pid_2_field_index)
         ls.append(rdd_pid_2_view_feature)
@@ -111,7 +100,7 @@ class Model():
         ls.append(rdd_pid_2_popularity)
         rdd_data = Model.__join_list_rdds(ls)
         return rdd_data
-        '''
+        
 
 
     '''

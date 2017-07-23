@@ -46,3 +46,11 @@ rdd_train, rdd_valid, rdd_test = rdd_data.map(lambda x: x.split(','))\
 
 print rdd_data.count()
 print rdd_train.count()+rdd_valid.count()+rdd_test.count()
+
+
+rdd_sample_train = rdd_train.takeSample(False, int(rdd_train.count()*0.1))
+rdd_sample_valid = rdd_train.takeSample(False, int(rdd_valid.count()*0.1))
+rdd_sample_test= rdd_train.takeSample(False, int(rdd_test.count()*0.1))
+
+print rdd_train.count()
+print rdd_sample_train.count()

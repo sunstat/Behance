@@ -101,6 +101,7 @@ class Model():
         ls.append(rdd_pid_2_score)
         ls.append(rdd_pid_2_popularity)
         rdd_data = Model.__join_list_rdds(ls)
+        print rdd_data.take(5)
         return rdd_data
 
 

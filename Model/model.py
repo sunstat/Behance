@@ -58,7 +58,7 @@ class Model():
 
         def _vec_2_int(vec):
             if not isinstance(vec, tuple):
-                vec = tuple(vec,)
+                return tuple(int(vec), )
             vec_result = []
             for y in vec:
                 vec_result.append(int(y))
@@ -66,7 +66,7 @@ class Model():
 
         def _vec_2_float(vec):
             if not isinstance(vec, tuple):
-                vec = tuple(vec,)
+                return tuple(float(vec),)
             vec_result = []
             for y in vec:
                 vec_result.append(float(y))

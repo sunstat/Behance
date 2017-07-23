@@ -57,16 +57,16 @@ class Model():
         '''
 
         def _vec_2_int(vec):
-            if not isinstance(vec, list):
-                vec = [vec,]
+            if not isinstance(vec, tuple):
+                vec = tuple(vec,)
             vec_result = []
             for y in vec:
                 vec_result.append(int(y))
             return tuple(vec_result)
 
         def _vec_2_float(vec):
-            if not isinstance(vec, list):
-                vec = [vec,]
+            if not isinstance(vec, tuple):
+                vec = tuple(vec,)
             vec_result = []
             for y in vec:
                 vec_result.append(float(y))
@@ -76,7 +76,8 @@ class Model():
 
         # build training rdd
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
-            .filter(lambda x: x[0] in pid_set_broad.value).map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(_vec_2_int)
+            .filter(lambda x: x[0] in pid_set_broad.value)\
+            .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(_vec_2_int)
 
         print rdd_pid_2_field_index.take(5)
 

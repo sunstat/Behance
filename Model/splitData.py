@@ -44,9 +44,9 @@ rdd_data = sc.textFile(C.PID_2_INDEX_FILE)
 rdd_train, rdd_valid, rdd_test = rdd_data.map(lambda x: x.split(','))\
     .map(lambda x: x[0]).randomSplit(weights=[0.6, 0.2, 0.2], seed=1)
 
-rdd_train.saveAsTextFile('pid_train')
-rdd_valid.saveAsTextFile('pid_valid')
-rdd_test.saveAsTextFile('pid_test')
+rdd_train.saveAsTextFile(C.TRAIN_PID_SET_FILE)
+rdd_valid.saveAsTextFile(C.VALID_PID_SET_FILE)
+rdd_test.saveAsTextFile(C.TEST_PID_SET_FILE)
 
 print rdd_data.count()
 print rdd_train.count()+rdd_valid.count()+rdd_test.count()
@@ -59,6 +59,6 @@ rdd_sample_test= rdd_test.sample(False, 0.1)
 print rdd_train.count()
 print rdd_sample_train.count()
 
-rdd_sample_train.saveAsTextFile('pid_sample_train')
-rdd_sample_valid.saveAsTextFile('pid_sample_valid')
-rdd_sample_test.saveAsTextFile('pid_sample_test')
+rdd_sample_train.saveAsTextFile(C.TRAIN_PID_SAMPLE_SET_FILE)
+rdd_sample_valid.saveAsTextFile(C.VALID_PID_SET_FILE)
+rdd_sample_test.saveAsTextFile(C.TEST_PID_SET_FILE) 

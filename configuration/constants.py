@@ -34,10 +34,12 @@ PID_2_POPULARITY_FILE = os.path.join(BASE_DIR, 'pid_2_popularity-csv')
 FOLLOW_MAP_FILE = os.path.join(BASE_DIR, 'follow_map-psv')
 PID_2_SCORE_FILE = os.path.join(BASE_DIR, 'pid_2_score-csv')
 PID_2_VIEWS_FEATURE_FILE = os.path.join(BASE_DIR, 'pid_2_view_features-psv')
-TRAININING_PID_SET_FILE = os.path.join(BASE_DIR, 'pid_training')
+TRAIN_PID_SET_FILE = os.path.join(BASE_DIR, 'pid_train')
 VALID_PID_SET_FILE = os.path.join(BASE_DIR, 'pid_valid')
 TEST_PID_SET_FILE = os.path.join(BASE_DIR, 'pid_test')
-
+TRAIN_PID_SAMPLE_SET_FILE = os.path.join(BASE_DIR, 'pid_sample_train')
+VALID_PID_SAMPLE_SET_FILE = os.path.join(BASE_DIR, 'pid_sample_valid')
+TEST_PID_SAMPLE_SET_FILE = os.path.join(BASE_DIR, 'pid_sample_test')
 
 
 

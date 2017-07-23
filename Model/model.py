@@ -37,9 +37,12 @@ class Model():
     @staticmethod
     def __join_pair_rdds(rdd1, rdd2):
         def f(x):
-            if isinstance(x[0], tuple):
-                return x[0] + (x[1],)
-            return (x[0], x[1])
+            if isinstance(x[0], tuple) and isinstance(x[1], tuple):
+                return x[0] + x[1]
+            elif isinstance(x[0], tuple) and (not isinstance(x[1], tuple)):
+                return x[0] + (x[1], )
+            else:
+                return (x[0],)+(x[1],)
         return rdd1.join(rdd2).mapValues(f)
 
     @staticmethod
@@ -91,7 +94,7 @@ class Model():
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(lambda x: float(x))
 
         print rdd_pid_2_popularity.take(5)
-        
+
         ls = []
         ls.append(rdd_pid_2_field_index)
         ls.append(rdd_pid_2_view_feature)

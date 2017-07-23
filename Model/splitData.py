@@ -45,6 +45,4 @@ rdd_train, rdd_valid, rdd_test = rdd_data.map(lambda x: x.split(','))\
     .map(lambda x: x[0]).randomSplit(weights=[0.6, 0.2, 0.2], seed=1)
 
 print rdd_data.count()
-print rdd_train.count()
-print rdd_valid.count()
-print rdd_test.count()
+print rdd_train.count()+rdd_valid.count()+rdd_test.count()

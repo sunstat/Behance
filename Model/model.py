@@ -48,7 +48,7 @@ class Model():
                 return x[0] + (x[1], )
             else:
                 return (x[0],)+(x[1],)
-       
+
         return rdd.mapValues(f)
 
     @staticmethod
@@ -105,7 +105,10 @@ class Model():
         print rdd_pid_2_popularity.take(5)
 
         print "==================="
+        rdd = rdd_pid_2_field_index.join(rdd_pid_2_view_feature)
+        print rdd.take(5)
 
+        print  "==================="
         ls = []
         ls.append(rdd_pid_2_field_index)
         ls.append(rdd_pid_2_view_feature)

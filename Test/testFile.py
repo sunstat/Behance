@@ -28,17 +28,10 @@ def init_spark(name, max_excutors):
 
 sc, _ = init_spark('a', 40)
 
-rdd = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: x.split("#")).mapValues(lambda x: x.split(','))
-print rdd.take(5)
+rdd = sc.parallelize([1,2,3,4,5,6,7,8,9,10])
+rdd_subset = rdd.sample(False, 0.3)
 
-set1 = set(rdd.map(lambda x: x[0]).collect())
-set2 = set(rdd.flatMap(lambda x: x[1]).collect())
-set3 = set1.intersection(set2)
-
-print len(set1)
-print len(set2)
-print len(set3)
-
+print rdd_subset.take(5)
 
 
 

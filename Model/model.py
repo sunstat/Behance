@@ -38,6 +38,9 @@ class Model():
     def __join_pair_rdds(rdd1, rdd2):
         print rdd1.take(5)
         print rdd2.take(5)
+        rdd = rdd1.join(rdd2)
+        print rdd.take(5)
+
         def f(x):
             if isinstance(x[0], tuple) and isinstance(x[1], tuple):
                 return x[0] + x[1]
@@ -45,8 +48,7 @@ class Model():
                 return x[0] + (x[1], )
             else:
                 return (x[0],)+(x[1],)
-        rdd = rdd1.join(rdd2)
-        print rdd.take(5)
+       
         return rdd.mapValues(f)
 
     @staticmethod

@@ -87,9 +87,10 @@ class Model():
 
         print rdd_pid_2_view_feature.take(5)
 
-        rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(',')) \
+        rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(_vec_2_float)
 
+        print rdd_pid_2_score.take(5)
         rdd_pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(_vec_2_float)
         ls = []

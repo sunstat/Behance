@@ -34,7 +34,6 @@ class Model():
         self.valid_pid_set = None
         self.test_pid_set = None
 
-
     @staticmethod
     def __join_pair_rdds(rdd1, rdd2):
         def f(x):

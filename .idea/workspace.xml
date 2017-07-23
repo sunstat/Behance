@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/model.py" afterPath="$PROJECT_DIR$/Model/model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/configuration/constants.py" afterPath="$PROJECT_DIR$/configuration/constants.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -99,18 +100,18 @@
       <file leaf-file-name="model.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Model/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="118" column="117" lean-forward="false" selection-start-line="118" selection-start-column="117" selection-end-line="118" selection-end-column="117" />
+            <state relative-caret-position="390">
+              <caret line="85" column="28" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="constants.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/constants.py">
+        <entry file="file://$PROJECT_DIR$/configuration/constants.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="256">
+              <caret line="29" column="68" lean-forward="false" selection-start-line="29" selection-start-column="68" selection-end-line="29" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -215,10 +216,10 @@
         <option value="$PROJECT_DIR$/Test/testPagerank.py" />
         <option value="$PROJECT_DIR$/Test/testJoin.py" />
         <option value="$PROJECT_DIR$/Test/testFile.py" />
-        <option value="$PROJECT_DIR$/configuration/constants.py" />
         <option value="$PROJECT_DIR$/Test/test1.py" />
         <option value="$PROJECT_DIR$/Model/splitData.py" />
         <option value="$PROJECT_DIR$/Model/model.py" />
+        <option value="$PROJECT_DIR$/configuration/constants.py" />
       </list>
     </option>
   </component>
@@ -879,14 +880,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/configuration/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="41" column="62" lean-forward="false" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2614">
@@ -993,10 +986,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/configuration/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="29" column="68" lean-forward="false" selection-start-line="29" selection-start-column="68" selection-end-line="29" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Model/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="118" column="117" lean-forward="false" selection-start-line="118" selection-start-column="117" selection-end-line="118" selection-end-column="117" />
+        <state relative-caret-position="390">
+          <caret line="85" column="28" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
           <folding />
         </state>
       </provider>

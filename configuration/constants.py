@@ -27,7 +27,7 @@ create data path directories
 '''
 PID_2_INDEX_FILE = os.path.join(BASE_DIR, 'pid_2_index-csv')
 PID_2_UID_FILE = os.path.join(BASE_DIR, 'pid_2_uid-csv')
-PID_2_FIELD_INDEX_FILE = os.path.join(BASE_DIR, 'pid_2_field_index-csv')
+PID_2_FIELD_INDEX_FILE = os.path.join(BASE_DIR, 'pid_2_field_index-psv')
 FIELD_2_INDEX = os.path.join(BASE_DIR, 'field_2_index-csv')
 UID_2_INDEX_FILE = os.path.join(BASE_DIR, 'uid_2_index-csv')
 PID_2_POPULARITY_FILE = os.path.join(BASE_DIR, 'pid_2_popularity-csv')

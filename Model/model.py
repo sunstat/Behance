@@ -56,7 +56,7 @@ class Model():
         :return: rdd with column pid, fields(maybe empty), view_feature, page_rank score, popularity
         '''
 
-        def __vec_2_int(vec):
+        def _vec_2_int(vec):
             vec_result = []
             for y in vec:
                 try:
@@ -65,7 +65,7 @@ class Model():
                     print y
             return tuple(vec_result)
 
-        def __vec_2_float(vec):
+        def _vec_2_float(vec):
             vec_result = []
             for y in vec:
                 vec_result.append(float(y))
@@ -76,18 +76,22 @@ class Model():
         # build training rdd
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
             .filter(lambda x: x[0] in pid_set_broad.value)\
-            .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(__vec_2_int)
+            .map(lambda x: [x[0], tuple(x[1].split(','))])
 
+        print rdd_pid_2_field_index.take(5)
+        rdd = rdd_pid_2_field_index.mapValues(_vec_2_int)
+
+
+        '''
         rdd_pid_2_view_feature = sc.textFile(C.PID_2_VIEWS_FEATURE_FILE).map(lambda x : x.split('#')) \
             .filter(lambda x: x[0] in pid_set_broad.value)\
-            .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(__vec_2_float)
+            .map(lambda x: [x[0], tuple(x[1].split(','))]).mapValues(_vec_2_float)
 
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(',')) \
-            .filter(lambda x: x[0] in pid_set_broad.value).mapValues(__vec_2_float)
+            .filter(lambda x: x[0] in pid_set_broad.value).mapValues(_vec_2_float)
 
         rdd_pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))\
-            .filter(lambda x: x[0] in pid_set_broad.value).mapValues(__vec_2_float)
-
+            .filter(lambda x: x[0] in pid_set_broad.value).mapValues(_vec_2_float)
         ls = []
         ls.append(rdd_pid_2_field_index)
         ls.append(rdd_pid_2_view_feature)
@@ -95,6 +99,7 @@ class Model():
         ls.append(rdd_pid_2_popularity)
         rdd_data = Model.__join_list_rdds(ls)
         return rdd_data
+        '''
 
     '''
     rdd_ranks [pid, score] already split

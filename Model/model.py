@@ -57,7 +57,7 @@ class Model():
         '''
 
         def _vec_2_int(vec):
-            if not isinstance(vec, tuple):
+            if isinstance(vec, str):
                 return tuple(int(vec), )
             vec_result = []
             for y in vec:
@@ -65,7 +65,7 @@ class Model():
             return tuple(vec_result)
 
         def _vec_2_float(vec):
-            if not isinstance(vec, tuple):
+            if isinstance(vec, str):
                 return tuple(float(vec),)
             vec_result = []
             for y in vec:
@@ -95,7 +95,7 @@ class Model():
 
         print rdd_pid_2_score.take(5)
 
-
+        '''
         rdd_pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(_vec_2_float)
         ls = []
@@ -105,6 +105,7 @@ class Model():
         ls.append(rdd_pid_2_popularity)
         rdd_data = Model.__join_list_rdds(ls)
         return rdd_data
+        '''
 
 
     '''

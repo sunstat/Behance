@@ -16,8 +16,6 @@ from pyspark.mllib.regression import LabeledPoint, LinearRegressionWithSGD, Line
 import configuration.constants as C
 
 
-
-
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
             .set("spark.dynamicAllocation.enabled", "false")
@@ -27,8 +25,6 @@ def init_spark(name, max_excutors):
     sc.setLogLevel('ERROR')
     sqlContext = HiveContext(sc)
     return sc, sqlContext
-
-
 
 
 class Model():
@@ -96,7 +92,6 @@ class Model():
         ls.append(rdd_pid_2_score)
         ls.append(rdd_pid_2_popularity)
         rdd_data = Model.__join_list_rdds(ls)
-
         return rdd_data
 
     '''

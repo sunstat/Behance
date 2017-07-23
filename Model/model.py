@@ -102,8 +102,11 @@ class Model():
 
 
         print "==================="
-        print rdd_pid_2_view_feature.take(2)
-        print rdd_pid_2_field_index.take(2)
+        print rdd_pid_2_view_feature.count()
+        print rdd_pid_2_field_index.count()
+        set1 = set(rdd_pid_2_view_feature.map(lambda x: x[0]).collect())
+        set2 = set(rdd_pid_2_field_index.map(lambda x: x[0]).collect())
+        print set1 == set2
         rdd = rdd_pid_2_field_index.join(rdd_pid_2_view_feature)
         print rdd.take(5)
 

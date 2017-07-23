@@ -1,17 +1,35 @@
-import sys
+import os, sys
 
 sys.path.append('/home/yiming/Behance')
 sys.path.append('/home/yiming/Behance/configuration')
+sys.path.append('/home/yiming/Behance/UserProjectNetwork')
 
-
-import numpy as np
-import os
-from pyspark.mllib.linalg import Vectors
-
-from pyspark.mllib.linalg import SparseVector
-from pyspark.mllib.regression import LabeledPoint
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import HiveContext
+import pyspark.sql.functions as F
+from pyspark.sql.types import StructField, StructType, StringType, LongType, DoubleType, IntegerType, BooleanType
+import operator
+from scipy.sparse import coo_matrix, csr_matrix
+from subprocess import Popen
+import re
 from pyspark.mllib.regression import LabeledPoint, LinearRegressionWithSGD, LinearRegressionModel
 import configuration.constants as C
+
+
+
+
+def init_spark(name, max_excutors):
+    conf = (SparkConf().setAppName(name)
+            .set("spark.dynamicAllocation.enabled", "false")
+            .set("spark.dynamicAllocation.maxExecutors", str(max_excutors))
+            .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer"))
+    sc = SparkContext.getOrCreate(conf)
+    sc.setLogLevel('ERROR')
+    sqlContext = HiveContext(sc)
+    return sc, sqlContext
+
+
+
 
 class Model():
 
@@ -130,7 +148,6 @@ class Model():
 
 
     def evaluation(self, sc, model_name, valid = True):
-        pid_evaluation_set = None
         if valid:
             pid_evaluation_set = set(sc.textFile(C.VALID_PID_SET_FILE).collect())
         else:
@@ -144,5 +161,16 @@ class Model():
         print MSE
 
 
+
+
+if __name__ == "__main__":
+    sc, _ = init_spark('no_image_model', 40)
+    model = Model()
+    pid_train_set = set(sc.textFile(C.TRAIN_PID_SAMPLE_SET_FILE).collect())
+    pid_valid_set = set(sc.textFile(C.VALID_PID_SAMPLE_SET_FILE).collect())
+    pid_test_set = set(sc.textFile(C.TEST_PID_SAMPLE_SET_FILE).collect())
+
+    rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
+    print rdd_train_data.take(5)
 
 

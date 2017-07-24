@@ -154,7 +154,7 @@ class Model():
 
 
         #field_index_vec, view_feature, score, num_fields, popularity
-        
+        '''
         ls = rdd_data.collect()
         for x in ls:
             try:
@@ -162,6 +162,7 @@ class Model():
             except:
                 print x
                 sys.exit("STOP NOW")
+        '''
 
         rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0][:], x[1][1][:], x[1][2], num_fields, x[1][3]))
         return rdd_label_data

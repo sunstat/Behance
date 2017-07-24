@@ -202,9 +202,7 @@ if __name__ == "__main__":
     pid_train_set = set(sc.textFile(C.TRAIN_PID_SAMPLE_SET_FILE).collect())
     pid_valid_set = set(sc.textFile(C.VALID_PID_SAMPLE_SET_FILE).collect())
     pid_test_set = set(sc.textFile(C.TEST_PID_SAMPLE_SET_FILE).collect())
-    print len(pid_train_set)
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
-    print rdd_train_data.filter(lambda x: x[0] == '36015671').take(5)
     rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)
     #print rdd_label_train_data.take(5)
 

@@ -109,7 +109,7 @@ class Model():
         ls.append(rdd_pid_2_view_feature)
         ls.append(rdd_pid_2_score)
         ls.append(rdd_pid_2_popularity)
-        rdd = ls[0].join(ls[1])
+        rdd = rdd_pid_2_field_index.join(rdd_pid_2_view_feature)
         print rdd.take(5)
 
     '''

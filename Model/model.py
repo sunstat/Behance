@@ -35,11 +35,8 @@ class Model():
         self.test_pid_set = None
 
     @staticmethod
-    def __join_pair_rdds(rdd1, rdd2):
-        print rdd1.take(5)
-        print rdd2.take(5)
+    def _join_pair_rdds(rdd1, rdd2):
         rdd = rdd1.join(rdd2)
-        print rdd.take(5)
 
         def f(x):
             if isinstance(x[0], tuple) and isinstance(x[1], tuple):
@@ -52,10 +49,10 @@ class Model():
         return rdd.mapValues(f)
 
     @staticmethod
-    def __join_list_rdds(ls_rdds):
+    def _join_list_rdds(ls_rdds):
         rdd = ls_rdds[0]
         for i in range(1, len(ls_rdds)):
-            rdd = Model.__join_pair_rdds(rdd, ls_rdds[i])
+            rdd = Model._join_pair_rdds(rdd, ls_rdds[i])
             print rdd.take(5)
         return rdd
 
@@ -67,16 +64,16 @@ class Model():
         '''
 
         def _vec_2_int(vec):
-            if isinstance(vec, str):
-                return tuple(int(vec), )
+            if not vec:
+                return []
             vec_result = []
             for y in vec:
                 vec_result.append(int(y))
-            return tuple(vec_result)
+            return vec_result
 
         def _vec_2_float(vec):
-            if isinstance(vec, str):
-                return tuple(float(vec),)
+            if not vec:
+                return []
             vec_result = []
             for y in vec:
                 vec_result.append(float(y))
@@ -87,7 +84,7 @@ class Model():
         # build training rdd
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
             .filter(lambda x: x[0] in pid_set_broad.value)\
-            .map(lambda x: (x[0], tuple(x[1].split(',')))).mapValues(_vec_2_int)
+            .map(lambda x: (x[0], x[1].split(','))).mapValues(_vec_2_int)
         print rdd_pid_2_field_index.count()
 
         rdd_pid_2_view_feature = sc.textFile(C.PID_2_VIEWS_FEATURE_FILE).map(lambda x : x.split('#')) \
@@ -101,26 +98,15 @@ class Model():
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(lambda x: float(x))
 
 
-        print "==================="
-        print rdd_pid_2_view_feature.count()
-        print rdd_pid_2_field_index.count()
-        set1 = set(rdd_pid_2_view_feature.map(lambda x: x[0]).collect())
-        set2 = set(rdd_pid_2_field_index.map(lambda x: x[0]).collect())
-        print set1 == set2
-        #rdd = rdd_pid_2_field_index.join(rdd_pid_2_view_feature)
-        #print rdd.take(5)
-
         print  "==================="
         ls = []
         ls.append(rdd_pid_2_field_index)
         ls.append(rdd_pid_2_view_feature)
         ls.append(rdd_pid_2_score)
         ls.append(rdd_pid_2_popularity)
-        rdd_data = Model.__join_list_rdds(ls)
+        rdd_data = Model._join_list_rdds(ls)
         print rdd_data.take(5)
         return rdd_data
-
-
 
     '''
     rdd_ranks [pid, score] already split
@@ -168,7 +154,6 @@ class Model():
         model.save(sc, os.path.join(C.MODEL_DIR, model_name))
 
         sc.parallelize(mse_array).map(lambda x: str(x)).saveAsTextFile(os.path.join(C.MODEL_LOG_DIR, model_name, "mse_log"))
-
 
     def evaluation(self, sc, model_name, valid = True):
         if valid:

@@ -27,7 +27,6 @@ def __join_list_rdds(ls_rdds):
     return rdd
 
 
-
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
             .set("spark.dynamicAllocation.enabled", "false")
@@ -39,7 +38,9 @@ def init_spark(name, max_excutors):
     return sc, sqlContext
 
 sc, sqlContext = init_spark('olivia', 20)
-x = sc.parallelize([["a", 1], ["a", 2]])
+x = sc.parallelize([["a", ()], ["a", 2]])
 y = sc.parallelize([("a", 2), ["a", 5]])
 z = sc.parallelize([("a", 3), ["f", 6]])
+
+print x.join(y).join(z).take(5)
 

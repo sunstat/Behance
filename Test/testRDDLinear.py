@@ -48,6 +48,8 @@ sparse_data = [
 ]
 
 
+sparse_data = sc.parallelize(sparse_data)
+
 model = LinearRegressionWithSGD.train(sparse_data, iterations=100, step=0.00000001, intercept=True)
 
 # Evaluate the model on training data

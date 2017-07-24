@@ -156,7 +156,7 @@ class Model():
         ls = rdd_data.collect()
         for x in ls:
             try:
-                label_point = sparse_label_points(sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3]))
+                label_point = sparse_label_points(sparse_label_points(x[1][0][:], x[1][1][:], x[1][2], num_fields, x[1][3]))
             except:
                 print x
                 sys.exit("STOP NOW")

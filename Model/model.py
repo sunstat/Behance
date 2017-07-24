@@ -178,7 +178,7 @@ class Model():
             else:
                 linear_model = LinearRegressionWithSGD.train(rdd_training_labeled_data,\
                         iterations=100, step=1e-4, initialWeights=linear_model.weight)
-            values_pred = rdd_training_data.map(lambda p: (p.label, linear_model.predict(p.features)))
+            values_pred = rdd_training_labeled_data.map(lambda p: (p.label, linear_model.predict(p.features)))
             MSE = values_pred.map(lambda vp: (vp[0] - vp[1]) ** 2) \
                       .reduce(lambda x, y: x + y) / values_pred.count()
             mse_array.append(MSE)

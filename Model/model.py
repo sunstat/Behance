@@ -85,7 +85,7 @@ class Model():
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#')) \
             .filter(lambda x: x[0] in pid_set_broad.value) \
             .map(lambda x: (x[0], x[1].split(',')))
-        print rdd_pid_2_field_index.filter(lambda x: not x[1]).count()
+        print rdd_pid_2_field_index.filter(lambda x: len(x[1]) == 0).count()
 
         '''
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\

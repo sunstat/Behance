@@ -4,6 +4,9 @@ sys.path.append('/home/yiming/Behance')
 sys.path.append('/home/yiming/Behance/configuration')
 sys.path.append('/home/yiming/Behance/UserProjectNetwork')
 
+
+from pyspark.mllib.linalg import SparseVector
+
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 import pyspark.sql.functions as F
@@ -37,21 +40,18 @@ sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
 sc.addFile('/home/yiming/Behance/configuration/constants.py')
 
 # Load and parse the data
-def parsePoint(line):
-    values = [float(x) for x in re.split(r'\s+',line)]
-    return LabeledPoint(values[0], values[1:])
+sparse_data = [
+    LabeledPoint(0.0, SparseVector(2, {0: 0.0})),
+    LabeledPoint(1.0, SparseVector(2, {1: 1.0})),
+    LabeledPoint(0.0, SparseVector(2, {0: 1.0})),
+    LabeledPoint(1.0, SparseVector(2, {1: 2.0}))
+]
 
-data = sc.textFile(os.path.join(C.BEHANCE_DATA_DIR, 'data'))
-print data.take(5)
-parsedData = data.map(parsePoint)
 
-print parsedData.take(5)
-
-# Build the model
-model = LinearRegressionWithSGD.train(parsedData, iterations=100, step=0.00000001, intercept=True)
+model = LinearRegressionWithSGD.train(sparse_data, iterations=100, step=0.00000001, intercept=True)
 
 # Evaluate the model on training data
-valuesAndPreds = parsedData.map(lambda p: (p.label, model.predict(p.features)))
+valuesAndPreds = sparse_data.map(lambda p: (p.label, model.predict(p.features)))
 MSE = valuesAndPreds \
     .map(lambda vp: (vp[0] - vp[1])**2) \
     .reduce(lambda x, y: x + y) / valuesAndPreds.count()
@@ -62,6 +62,6 @@ print("Mean Squared Error = " + str(MSE))
 print model.weights
 print model.intercept
 
-LinearRegressionWithSGD.train(parsedData, iterations=100, step=0.00000001, intercept=True, initialWeights=model.weights)
+LinearRegressionWithSGD.train(sparse_data, iterations=100, step=0.00000001, intercept=True, initialWeights=model.weights)
 
 sc.stop()

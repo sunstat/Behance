@@ -85,11 +85,10 @@ class Model():
         # build training rdd
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
             .filter(lambda x: x[0] in pid_set_broad.value)\
-            .map(lambda x: (x[0], x[1].split(',')))
+            .map(lambda x: (x[0], x[1].split(','))).mapValues(_vec_2_int)
 
-        rdd = rdd_pid_2_field_index.filter(lambda x: x[1][0]==' ')
-        print rdd.count()
 
+        '''
         ls = rdd_pid_2_field_index.map(lambda x: x[1]).collect()
 
         for elem in ls:
@@ -98,15 +97,12 @@ class Model():
             except:
                 print elem
         set1 = set(rdd_pid_2_field_index.map(lambda x: x[0]).collect())
+        '''
 
 
         rdd_pid_2_view_feature = sc.textFile(C.PID_2_VIEWS_FEATURE_FILE).map(lambda x : x.split('#')) \
             .filter(lambda x: x[0] in pid_set_broad.value)\
             .map(lambda x: (x[0], tuple(x[1].split(',')))).mapValues(_vec_2_float)
-
-        set2 = set(rdd_pid_2_view_feature.map(lambda x: x[0]).collect())
-
-        rdd = rdd_pid_2_field_index.join(rdd_pid_2_view_feature)
 
 
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))\

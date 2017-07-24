@@ -87,7 +87,7 @@ class Model():
             .filter(lambda x: x[0] in pid_set_broad.value)\
             .map(lambda x: (x[0], x[1].split(',')))
 
-        rdd = rdd_pid_2_field_index.filter(lambda x: x[1] == ' ')
+        rdd = rdd_pid_2_field_index.filter(lambda x: x[1][0]==' ')
         print rdd.take(5)
 
         ls = rdd_pid_2_field_index.map(lambda x: x[1]).collect()

@@ -37,6 +37,7 @@ class Model():
     @staticmethod
     def _join_pair_rdds(rdd1, rdd2):
         rdd = rdd1.join(rdd2)
+        print rdd.take(5)
 
         def f(x):
             if isinstance(x[0], tuple) and isinstance(x[1], tuple):
@@ -101,7 +102,6 @@ class Model():
         rdd_pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(lambda x: float(x))
         print rdd_pid_2_popularity.take(5)
-
 
         print  "==================="
         ls = []

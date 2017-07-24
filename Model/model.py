@@ -85,11 +85,9 @@ class Model():
         # build training rdd
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
             .filter(lambda x: x[0] in pid_set_broad.value)\
-            .map(lambda x: (x[0], x[1].split(','))).mapValues(_vec_2_int)
-        print rdd_pid_2_field_index.take(5)
-        rdd = rdd_pid_2_field_index.filter(lambda x: x[1] == ' ')
+            .map(lambda x: (x[0], x[1].split(',')))
+        rdd = rdd_pid_2_field_index.filter(lambda x: x[1]==' ')
         print rdd.take(5)
-
 
         '''
         rdd_pid_2_view_feature = sc.textFile(C.PID_2_VIEWS_FEATURE_FILE).map(lambda x : x.split('#')) \

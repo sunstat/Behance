@@ -95,10 +95,9 @@ class Model():
 
         set2 = set(rdd_pid_2_view_feature.map(lambda x: x[0]).collect())
 
-        rdd = rdd_pid_2_field_index.join(rdd_pid_2_view_feature)
-        print rdd.take(5)
+        #rdd = rdd_pid_2_field_index.join(rdd_pid_2_view_feature)
 
-        '''
+
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(lambda x: float(x))
 
@@ -119,7 +118,7 @@ class Model():
         set1 = set(rdd_pid_2_field_index.map(lambda x: x[0]).collect())
         set2 = set(rdd_pid_2_view_feature.map(lambda x: x[0]).collect())
         print set1 == set2
-        '''
+
 
     '''
     rdd_ranks [pid, score] already split

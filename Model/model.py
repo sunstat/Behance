@@ -94,6 +94,9 @@ class Model():
 
         print rdd_pid_2_view_feature.take(5)
 
+        rdd = rdd_pid_2_field_index.join(rdd_pid_2_view_feature)
+        print rdd.take(5)
+
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(lambda x: float(x))
 

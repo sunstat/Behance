@@ -104,6 +104,7 @@ class Model():
         print rdd_pid_2_popularity.take(5)
 
         print  "==================="
+        '''
         ls = []
         ls.append(rdd_pid_2_field_index)
         ls.append(rdd_pid_2_view_feature)
@@ -113,6 +114,7 @@ class Model():
         set1 = set(rdd_pid_2_field_index.map(lambda x: x[0]).collect())
         set2 = set(rdd_pid_2_view_feature.map(lambda x: x[0]).collect())
         print set1 == set2
+        '''
 
     '''
     rdd_ranks [pid, score] already split

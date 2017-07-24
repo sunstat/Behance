@@ -212,5 +212,5 @@ if __name__ == "__main__":
     pid_test_set = set(sc.textFile(C.TEST_PID_SAMPLE_SET_FILE).collect())
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
     rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)
-    #print rdd_label_train_data.take(5)
+    print rdd_label_train_data.take(5)
 

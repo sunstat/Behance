@@ -153,11 +153,9 @@ class Model():
             try:
                 sparse_label_points(sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3]))
             except:
-                print x
+                #print x
                 sys.exit("STOP NOW")
 
-
-        
         rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3]))
         return rdd_label_data
 

@@ -174,10 +174,11 @@ class Model():
         print rdd_training_labeled_data.take(5)
         for iteration in range(1, num_iter+1):
             if iteration == 1:
-                linear_model = LinearRegressionWithSGD.train(rdd_training_labeled_data, iterations=100, step=1e-4)
+                linear_model = LinearRegressionWithSGD.train(rdd_training_labeled_data, intercept=True, iterations=100, step=1e-4)
             else:
+                print linear_model.weights()
                 linear_model = LinearRegressionWithSGD.train(rdd_training_labeled_data,\
-                        iterations=100, step=1e-4, initialWeights=linear_model.weights())
+                        iterations=100, step=1e-4, intercept=True, initialWeights=linear_model.weights())
             values_pred = rdd_training_labeled_data.map(lambda p: (p.label, linear_model.predict(p.features)))
             MSE = values_pred.map(lambda vp: (vp[0] - vp[1]) ** 2) \
                       .reduce(lambda x, y: x + y) / values_pred.count()
@@ -216,3 +217,4 @@ if __name__ == "__main__":
     print rdd_label_train_data.take(5)
     '''
     model.train_model(sc, 'linear-with-no-image', 100, pid_train_set)
+    sc.stop()

@@ -63,24 +63,5 @@ print model.weights
 print model.intercept
 
 
-sameModel = LinearRegressionWithSGD.train(parsedData, iterations=100, step=0.00001, intercept=True, initialWeights=model.weights)
-valuesAndPreds = parsedData.map(lambda p: (p.label, sameModel.predict(p.features)))
-MSE = valuesAndPreds \
-    .map(lambda vp: (vp[0] - vp[1])**2) \
-    .reduce(lambda x, y: x + y) / valuesAndPreds.count()
-print("Mean Squared Error = " + str(MSE))
-
-
-'''
-#model.save(sc, os.path.join(C.INTERMEDIATE_RESULT_DIR, "IntermediateResult", "Model"))
-sameModel = LinearRegressionModel.load(sc, os.path.join(C.MODEL_DIR, "testLinearModel"))
-parsedData.map(lambda p: (p.label, sameModel.predict(p.features)))
-
-MSE = valuesAndPreds \
-    .map(lambda vp: (vp[0] - vp[1])**2) \
-    .reduce(lambda x, y: x + y) / valuesAndPreds.count()
-print("Mean Squared Error = " + str(MSE))
-'''
-
 
 sc.stop()

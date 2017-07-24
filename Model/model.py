@@ -109,9 +109,8 @@ class Model():
         ls.append(rdd_pid_2_view_feature)
         ls.append(rdd_pid_2_score)
         ls.append(rdd_pid_2_popularity)
-        rdd_data = Model._join_list_rdds(ls)
-        print rdd_data.take(5)
-        return rdd_data
+        rdd = ls[0].join(ls[1])
+        print rdd.take(5)
 
     '''
     rdd_ranks [pid, score] already split

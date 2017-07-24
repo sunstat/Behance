@@ -46,7 +46,8 @@ def init_spark(name, max_excutors):
 
 sc, sqlContext = init_spark('olivia', 20)
 
-rdd_data = sc.textFile(C.PID_2_INDEX_FILE).map(lambda x: x.split(',')).filter(lambda x: x[0] != '32766755')
+
+rdd_data = sc.textFile(C.PID_2_INDEX_FILE).map(lambda x: x.split(',')).filter(lambda x: x[0] != '34907615')
 
 rdd_train, rdd_valid, rdd_test = rdd_data.map(lambda x: x[0]).randomSplit(weights=[0.6, 0.2, 0.2], seed=1)
 

@@ -62,6 +62,6 @@ print("Mean Squared Error = " + str(MSE))
 print model.weights
 print model.intercept
 
-
+LinearRegressionWithSGD.train(parsedData, iterations=100, step=0.00000001, intercept=True, initialWeights=model.weights)
 
 sc.stop()

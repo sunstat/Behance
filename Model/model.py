@@ -6,6 +6,7 @@ sys.path.append('/home/yiming/Behance/UserProjectNetwork')
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
+from pyspark.mllib.linalg import SparseVector
 import pyspark.sql.functions as F
 from pyspark.sql.types import StructField, StructType, StringType, LongType, DoubleType, IntegerType, BooleanType
 import operator
@@ -99,11 +100,9 @@ class Model():
         set1 = set(rdd_pid_2_field_index.map(lambda x: x[0]).collect())
         '''
 
-
         rdd_pid_2_view_feature = sc.textFile(C.PID_2_VIEWS_FEATURE_FILE).map(lambda x : x.split('#')) \
             .filter(lambda x: x[0] in pid_set_broad.value)\
             .map(lambda x: (x[0], tuple(x[1].split(',')))).mapValues(_vec_2_float)
-
 
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(lambda x: float(x))
@@ -128,7 +127,6 @@ class Model():
     rdd_ranks [pid, score] already split
     '''
     def generate_feature_response(self, sc, rdd_data):
-
         def sparse_label_points(field_index_vec, view_feature, score, num_fields, popularity):
             N = num_fields+1+len(view_feature)
             index = field_index_vec
@@ -193,6 +191,6 @@ if __name__ == "__main__":
     pid_test_set = set(sc.textFile(C.TEST_PID_SAMPLE_SET_FILE).collect())
     print len(pid_train_set)
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
-    print rdd_train_data.take(5)
-
+    rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)
+    print rdd_label_train_data.take(5)
 

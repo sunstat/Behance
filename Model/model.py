@@ -213,4 +213,4 @@ if __name__ == "__main__":
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
     rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)
     print rdd_label_train_data.take(5)
-    Model.train_model(sc, 'linear-with-no-image', 100)
+    model.train_model(sc, 'linear-with-no-image', 100)

@@ -137,9 +137,9 @@ class Model():
             values.extend(view_feature)
             values.append(score)
             feature = SparseVector(N, index, values)
-            print "feature **************"
-            print feature
-            print "**************"
+            #print "feature **************"
+            #print feature
+            #print "**************"
             return LabeledPoint(popularity, feature)
 
         rdd_field_2_index = sc.textFile(C.FIELD_2_INDEX)
@@ -151,7 +151,7 @@ class Model():
         ls = rdd_data.collect()
         for x in ls:
             try:
-                sparse_label_points(sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3]))
+                label_point = sparse_label_points(sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3]))
             except:
                 #print x
                 sys.exit("STOP NOW")

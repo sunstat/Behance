@@ -176,9 +176,9 @@ class Model():
             if iteration == 1:
                 linear_model = LinearRegressionWithSGD.train(rdd_training_labeled_data, intercept=True, iterations=100, step=1e-4)
             else:
-                print linear_model.weights()
+                print linear_model.weights
                 linear_model = LinearRegressionWithSGD.train(rdd_training_labeled_data,\
-                        iterations=100, step=1e-4, intercept=True, initialWeights=linear_model.weights())
+                        iterations=100, step=1e-4, intercept=True, initialWeights=linear_model.weights)
             values_pred = rdd_training_labeled_data.map(lambda p: (p.label, linear_model.predict(p.features)))
             MSE = values_pred.map(lambda vp: (vp[0] - vp[1]) ** 2) \
                       .reduce(lambda x, y: x + y) / values_pred.count()

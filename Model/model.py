@@ -178,8 +178,8 @@ class Model():
             if iteration == 1:
                 model = LinearRegressionWithSGD.train(rdd_training_labeled_data, iterations=100, step=1e-4)
             else:
-                model = LinearRegressionWithSGD.train(rdd_training_labeled_data,\
-                    iterations=100, step=1e-4, initialWeights=model.weight)
+                model = LinearRegressionWithSGD.train(rdd_training_labeled_data,
+                                                      iterations=100, step=1e-4, initialWeights=model.weight)
             values_pred = rdd_training_data.map(lambda p: (p.label, model.predict(p.features)))
             MSE = values_pred.map(lambda vp: (vp[0] - vp[1]) ** 2) \
                       .reduce(lambda x, y: x + y) / values_pred.count()
@@ -213,4 +213,4 @@ if __name__ == "__main__":
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
     rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)
     print rdd_label_train_data.take(5)
-
+    Model.train_model(sc, 'linear-with-no-image', 100)

@@ -46,10 +46,14 @@ def init_spark(name, max_excutors):
 
 sc, sqlContext = init_spark('olivia', 20)
 
+pid_set = set(sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
+    .map(lambda x: (x[0], x[1].split(','))).filter(lambda x: x[1][0] == ' ').map(lambda x: x[0]).collect())
 
-rdd_data = sc.textFile(C.PID_2_INDEX_FILE).map(lambda x: x.split(',')).filter(lambda x: x[0] != '34907615')
+pid_set_broad = sc.broadcast(pid_set)
 
-rdd_train, rdd_valid, rdd_test = rdd_data.map(lambda x: x[0]).randomSplit(weights=[0.6, 0.2, 0.2], seed=1)
+rdd_data = sc.textFile(C.PID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).filter(lambda x: x not in pid_set_broad)
+
+rdd_train, rdd_valid, rdd_test = rdd_data.randomSplit(weights=[0.6, 0.2, 0.2], seed=1)
 
 
 _save_file(rdd_train, C.TRAIN_PID_SET_FILE)

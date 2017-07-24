@@ -127,6 +127,7 @@ class Model():
 
         def sparse_label_points(field_index_vec, view_feature, score, num_fields, popularity):
             N = num_fields+1+len(view_feature)
+            print "N is {}".format(N)
             index = field_index_vec
             print index
             values = [1.]*len(index)

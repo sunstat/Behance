@@ -171,7 +171,7 @@ class Model():
         rdd_training_data = self.extract_data_rdd(sc, pid_training_set)
         rdd_training_labeled_data = self.generate_feature_response(sc, rdd_training_data)
         mse_array = []
-        for iteration in range(1,num_iter+1):
+        for iteration in range(1, num_iter+1):
             if iteration == 1:
                 linear_model = LinearRegressionWithSGD.train(rdd_training_labeled_data, iterations=100, step=1e-4)
             else:

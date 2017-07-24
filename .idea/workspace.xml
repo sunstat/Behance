@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/model.py" afterPath="$PROJECT_DIR$/Model/model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/testSparseVector.py" afterPath="$PROJECT_DIR$/Test/testSparseVector.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py" afterPath="$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,16 +16,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="testJoin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test/testJoin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="40" column="28" lean-forward="true" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="testLinearLocally.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test/testLinearLocally.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -34,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testImageUrlFile.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test/testImageUrlFile.py">
+      <file leaf-file-name="NetworkHelpFunctions.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state relative-caret-position="-539">
+              <caret line="32" column="21" lean-forward="false" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -57,8 +49,28 @@
       <file leaf-file-name="model.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Model/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="144" column="34" lean-forward="false" selection-start-line="144" selection-start-column="22" selection-end-line="144" selection-end-column="34" />
+            <state relative-caret-position="72">
+              <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testSparseVector.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/testSparseVector.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testShell.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/testShell.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -76,16 +88,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testInnerFunction.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test/testInnerFunction.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="7" lean-forward="false" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="IOutilities.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -96,23 +98,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pageRank.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/pageRank.py">
+      <file leaf-file-name="NetworkWriteToBase.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="27" column="35" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="27" selection-end-column="35" />
-              <folding>
-                <element signature="e#79#89#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="855">
+              <caret line="176" column="24" lean-forward="true" selection-start-line="176" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NetworkWriteToBase.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
+      <file leaf-file-name="testInnerFunction.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/testInnerFunction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="156" column="57" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+            <state relative-caret-position="51">
+              <caret line="3" column="7" lean-forward="false" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -179,7 +179,6 @@
         <option value="$PROJECT_DIR$/Test/testYeild.py" />
         <option value="$PROJECT_DIR$/ConfigurationFiles/pysparkFiles.py" />
         <option value="$PROJECT_DIR$/Model/FeatureExtraction/pageRank.py" />
-        <option value="$PROJECT_DIR$/Test/testSparseVector.py" />
         <option value="$PROJECT_DIR$/Test/NetworkHelpFunctions.py" />
         <option value="$PROJECT_DIR$/Model/FeatureExtraction/fieldExtract.py" />
         <option value="$PROJECT_DIR$/Model/FeatureExtraction/featureExtraction.py" />
@@ -207,7 +206,6 @@
         <option value="$PROJECT_DIR$/EditData/PySparkEdit/trimImage.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/createPopulation.py" />
         <option value="$PROJECT_DIR$/Model/pageRank.py" />
-        <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py" />
         <option value="$PROJECT_DIR$/Test/testReduce.py" />
         <option value="$PROJECT_DIR$/Test/testLinearLocally.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/IOutilities.py" />
@@ -221,6 +219,8 @@
         <option value="$PROJECT_DIR$/Test/testJoin.py" />
         <option value="$PROJECT_DIR$/Model/splitData.py" />
         <option value="$PROJECT_DIR$/Test/testInnerFunction.py" />
+        <option value="$PROJECT_DIR$/Test/testSparseVector.py" />
+        <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py" />
         <option value="$PROJECT_DIR$/Model/model.py" />
       </list>
     </option>
@@ -392,7 +392,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.testInnerFunction">
+  <component name="RunManager" selected="Python.testSparseVector">
     <configuration default="false" name="testJoin" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -406,24 +406,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Behance" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/testJoin.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="testReduce" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Behance" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/testReduce.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -478,6 +460,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Behance" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/testInnerFunction.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="testSparseVector" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Behance" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/testSparseVector.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -560,18 +560,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.testJoin" />
-      <item index="1" class="java.lang.String" itemvalue="Python.testReduce" />
-      <item index="2" class="java.lang.String" itemvalue="Python.testFile" />
-      <item index="3" class="java.lang.String" itemvalue="Python.test1" />
-      <item index="4" class="java.lang.String" itemvalue="Python.testInnerFunction" />
+      <item index="1" class="java.lang.String" itemvalue="Python.testFile" />
+      <item index="2" class="java.lang.String" itemvalue="Python.test1" />
+      <item index="3" class="java.lang.String" itemvalue="Python.testInnerFunction" />
+      <item index="4" class="java.lang.String" itemvalue="Python.testSparseVector" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.testInnerFunction" />
-        <item index="1" class="java.lang.String" itemvalue="Python.testJoin" />
-        <item index="2" class="java.lang.String" itemvalue="Python.test1" />
-        <item index="3" class="java.lang.String" itemvalue="Python.testFile" />
-        <item index="4" class="java.lang.String" itemvalue="Python.testReduce" />
+        <item index="0" class="java.lang.String" itemvalue="Python.testSparseVector" />
+        <item index="1" class="java.lang.String" itemvalue="Python.testInnerFunction" />
+        <item index="2" class="java.lang.String" itemvalue="Python.testJoin" />
+        <item index="3" class="java.lang.String" itemvalue="Python.test1" />
+        <item index="4" class="java.lang.String" itemvalue="Python.testFile" />
       </list>
     </recent_temporary>
   </component>
@@ -751,20 +751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test/testShell.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test/testSparseVector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test/run.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -907,34 +893,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1700">
-          <caret line="101" column="14" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/createPopulation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="59" column="31" lean-forward="false" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="639">
-          <caret line="83" column="101" lean-forward="true" selection-start-line="82" selection-start-column="8" selection-end-line="83" selection-end-column="101" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="156" column="57" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -999,10 +961,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Test/testShell.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="855">
+          <caret line="176" column="24" lean-forward="true" selection-start-line="176" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-539">
+          <caret line="32" column="21" lean-forward="false" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/IOutilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="639">
+          <caret line="83" column="101" lean-forward="true" selection-start-line="82" selection-start-column="8" selection-end-line="83" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/testSparseVector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Model/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="144" column="34" lean-forward="false" selection-start-line="144" selection-start-column="22" selection-end-line="144" selection-end-column="34" />
+        <state relative-caret-position="72">
+          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
           <folding />
         </state>
       </provider>

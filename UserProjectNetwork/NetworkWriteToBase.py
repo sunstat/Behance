@@ -156,14 +156,10 @@ class NetworkUtilities(object):
         output_file = os.path.join(output_dir, 'pid_2_field_index-psv')
         IOutilities.print_rdd_to_file(rdd, output_file, 'psv')
 
-
         # print pid_2_uid to intermediate directory
-
-
         rdd_owners_map = rdd_owners.map(lambda x: (x[0], x[1])).distinct().persist()
         output_file = os.path.join(output_dir, 'pid_2_uid-csv')
         IOutilities.print_rdd_to_file(rdd_owners_map, output_file, 'csv')
-
 
         # print pid_2_index-csv
 

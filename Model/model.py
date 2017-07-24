@@ -121,11 +121,8 @@ class Model():
         ls.append(rdd_pid_2_view_feature)
         ls.append(rdd_pid_2_score)
         ls.append(rdd_pid_2_popularity)
-
-        set1 = set(rdd_pid_2_field_index.map(lambda x: x[0]).collect())
-        set2 = set(rdd_pid_2_view_feature.map(lambda x: x[0]).collect())
-        print set1 == set2
-
+        rdd_data = Model._join_list_rdds(ls)
+        return rdd_data
 
     '''
     rdd_ranks [pid, score] already split
@@ -196,5 +193,6 @@ if __name__ == "__main__":
     pid_test_set = set(sc.textFile(C.TEST_PID_SAMPLE_SET_FILE).collect())
     print len(pid_train_set)
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
+    print rdd_train_data.take(5)
 
 

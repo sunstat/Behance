@@ -85,13 +85,16 @@ class Model():
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#')) \
             .filter(lambda x: x[0] in pid_set_broad.value) \
             .map(lambda x: (x[0], x[1].split(',')))
+
+        rdd = rdd_pid_2_field_index.filter(lambda x: x[1][0] == ' ')
+        print rdd.take(5)
         ls = rdd_pid_2_field_index.map(lambda x: x[1]).collect()
         for elem in ls:
             try:
                 _vec_2_int(elem)
             except:
                 print elem
-        
+
 
 
         '''

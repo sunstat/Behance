@@ -137,6 +137,7 @@ class Model():
             values.extend(view_feature)
             values.append(score)
             feature = SparseVector(N, index, values)
+            print feature
             return LabeledPoint(popularity, feature)
 
         rdd_field_2_index = sc.textFile(C.FIELD_2_INDEX)
@@ -151,6 +152,7 @@ class Model():
                 sparse_label_points(sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3]))
             except:
                 print x
+                sys.exit("STOP NOW")
 
 
         '''

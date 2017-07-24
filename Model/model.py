@@ -145,7 +145,7 @@ class Model():
 
         '''
         field_index_vec, view_feature, score, num_fields, popularity
-        '''
+        
         ls = rdd_data.collect()
         for x in ls:
             try:
@@ -155,7 +155,7 @@ class Model():
                 sys.exit("STOP NOW")
 
 
-        '''
+        
         rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3]))
         return rdd_label_data
         '''
@@ -204,6 +204,7 @@ if __name__ == "__main__":
     pid_test_set = set(sc.textFile(C.TEST_PID_SAMPLE_SET_FILE).collect())
     print len(pid_train_set)
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
-    rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)
-    print rdd_label_train_data.take(5)
+    print rdd_train_data.filter(lambda x: x[0] == '36015671').take(5)
+    #rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)
+    #print rdd_label_train_data.take(5)
 

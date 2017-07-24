@@ -127,6 +127,7 @@ class Model():
     rdd_ranks [pid, score] already split
     '''
     def generate_feature_response(self, sc, rdd_data):
+
         def sparse_label_points(field_index_vec, view_feature, score, num_fields, popularity):
             N = num_fields+1+len(view_feature)
             index = field_index_vec
@@ -144,8 +145,18 @@ class Model():
         '''
         field_index_vec, view_feature, score, num_fields, popularity
         '''
+        ls = rdd_data.collect()
+        for x in ls:
+            try:
+                sparse_label_points(sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3]))
+            except:
+                print x
+
+
+        '''
         rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3]))
         return rdd_label_data
+        '''
 
     def train_model(self, sc, model_name, num_iter):
         pid_training_set = set(sc.textFile(C.TRAININING_PID_SET_FILE).collect())

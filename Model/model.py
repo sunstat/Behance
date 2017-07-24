@@ -95,7 +95,8 @@ class Model():
 
         set2 = set(rdd_pid_2_view_feature.map(lambda x: x[0]).collect())
 
-        print set1 == set2
+        rdd = rdd_pid_2_field_index.join(rdd_pid_2_view_feature)
+        print rdd.take(5)
 
         '''
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))\
@@ -189,6 +190,5 @@ if __name__ == "__main__":
     pid_test_set = set(sc.textFile(C.TEST_PID_SAMPLE_SET_FILE).collect())
     print len(pid_train_set)
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
-    print rdd_train_data.take(5)
 
 

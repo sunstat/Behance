@@ -107,13 +107,13 @@ class Model():
         rdd_pid_2_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(lambda x: float(x))
 
-        print rdd_pid_2_score.take(5)
+        #print rdd_pid_2_score.take(5)
 
         rdd_pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))\
             .filter(lambda x: x[0] in pid_set_broad.value).mapValues(lambda x: float(x))
-        print rdd_pid_2_popularity.take(5)
+        #print rdd_pid_2_popularity.take(5)
 
-        print  "==================="
+        #print  "==================="
         
         ls = []
         ls.append(rdd_pid_2_field_index)
@@ -137,14 +137,16 @@ class Model():
             values.extend(view_feature)
             values.append(score)
             feature = SparseVector(N, index, values)
+            print "feature **************"
             print feature
+            print "**************"
             return LabeledPoint(popularity, feature)
 
         rdd_field_2_index = sc.textFile(C.FIELD_2_INDEX)
         num_fields = rdd_field_2_index.count()
 
-        '''
-        field_index_vec, view_feature, score, num_fields, popularity
+
+        #field_index_vec, view_feature, score, num_fields, popularity
         
         ls = rdd_data.collect()
         for x in ls:
@@ -158,7 +160,7 @@ class Model():
         
         rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0], x[1][1], x[1][2], num_fields, x[1][3]))
         return rdd_label_data
-        '''
+
 
     def train_model(self, sc, model_name, num_iter):
         pid_training_set = set(sc.textFile(C.TRAININING_PID_SET_FILE).collect())
@@ -205,6 +207,6 @@ if __name__ == "__main__":
     print len(pid_train_set)
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
     print rdd_train_data.filter(lambda x: x[0] == '36015671').take(5)
-    #rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)
+    rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)
     #print rdd_label_train_data.take(5)
 

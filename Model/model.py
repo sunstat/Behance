@@ -77,30 +77,14 @@ class Model():
             vec_result = []
             for y in vec:
                 vec_result.append(float(y))
-            return tuple(vec_result)
+            return vec_result
 
         pid_set_broad = sc.broadcast(pid_set)
 
         # build training rdd
-        rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#')) \
-            .filter(lambda x: x[0] in pid_set_broad.value) \
-            .map(lambda x: (x[0], x[1].split(',')))
-
-        rdd = rdd_pid_2_field_index.filter(lambda x: x[1][0] == ' ')
-        print rdd.take(5)
-        ls = rdd_pid_2_field_index.map(lambda x: x[1]).collect()
-        for elem in ls:
-            try:
-                _vec_2_int(elem)
-            except:
-                print elem
-
-        '''
         rdd_pid_2_field_index = sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
             .filter(lambda x: x[0] in pid_set_broad.value)\
             .map(lambda x: (x[0], x[1].split(','))).mapValues(_vec_2_int)
-        '''
-        print rdd_pid_2_field_index.count()
 
         rdd_pid_2_view_feature = sc.textFile(C.PID_2_VIEWS_FEATURE_FILE).map(lambda x : x.split('#')) \
             .filter(lambda x: x[0] in pid_set_broad.value)\

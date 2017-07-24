@@ -38,8 +38,6 @@ class Model():
     @staticmethod
     def _join_pair_rdds(rdd1, rdd2):
         rdd = rdd1.join(rdd2)
-        print rdd.take(5)
-
         def f(x):
             if isinstance(x[0], tuple) and isinstance(x[1], tuple):
                 return x[0] + x[1]
@@ -55,7 +53,6 @@ class Model():
         rdd = ls_rdds[0]
         for i in range(1, len(ls_rdds)):
             rdd = Model._join_pair_rdds(rdd, ls_rdds[i])
-            print rdd.take(5)
         return rdd
 
     def extract_data_rdd(self, sc, pid_set):

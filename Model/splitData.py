@@ -52,7 +52,7 @@ pid_set = set(sc.textFile(C.PID_2_FIELD_INDEX_FILE).map(lambda x: x.split('#'))\
 pid_set_broad = sc.broadcast(pid_set)
 
 rdd_data = sc.textFile(C.PID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0])\
-    .filter(lambda x: x not in pid_set_broad)
+    .filter(lambda x: x not in pid_set_broad.value)
 
 rdd_train, rdd_valid, rdd_test = rdd_data.randomSplit(weights=[0.6, 0.2, 0.2], seed=1)
 

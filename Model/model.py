@@ -87,13 +87,13 @@ class Model():
             .filter(lambda x: x[0] in pid_set_broad.value)\
             .map(lambda x: (x[0], x[1].split(',')))
 
-        ls = rdd_pid_2_field_index.filter(lambda x: x[1]).collect()
+        ls = rdd_pid_2_field_index.map(lambda x: x[1]).collect()
 
         for elem in ls:
             try:
                 _vec_2_int(elem)
             except:
-                print elem 
+                print elem
         set1 = set(rdd_pid_2_field_index.map(lambda x: x[0]).collect())
 
 

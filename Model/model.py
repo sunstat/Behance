@@ -171,6 +171,7 @@ class Model():
         rdd_training_data = self.extract_data_rdd(sc, pid_training_set)
         rdd_training_labeled_data = self.generate_feature_response(sc, rdd_training_data)
         mse_array = []
+        print rdd_training_labeled_data.take(5)
         for iteration in range(1, num_iter+1):
             if iteration == 1:
                 linear_model = LinearRegressionWithSGD.train(rdd_training_labeled_data, iterations=100, step=1e-4)
@@ -204,12 +205,14 @@ class Model():
 if __name__ == "__main__":
     sc, _ = init_spark('no_image_model', 40)
     model = Model()
-    pid_train_set = set(sc.textFile(C.TRAIN_PID_SET_FILE).collect())
+    pid_train_set = set(sc.textFile(C.TRAIN_PID_SAMPLE_SET_FILE).collect())
     print "size of training set is {}".format(len(pid_train_set))
     pid_valid_set = set(sc.textFile(C.VALID_PID_SET_FILE).collect())
     print "size of valid set is {}".format(len(pid_valid_set))
+    '''
     pid_test_set = set(sc.textFile(C.TEST_PID_SET_FILE).collect())
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
     rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)
     print rdd_label_train_data.take(5)
+    '''
     model.train_model(sc, 'linear-with-no-image', 100, pid_train_set)

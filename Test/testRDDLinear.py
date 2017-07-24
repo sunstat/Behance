@@ -64,6 +64,11 @@ print("Mean Squared Error = " + str(MSE))
 print model.weights
 print model.intercept
 
-LinearRegressionWithSGD.train(sparse_data, iterations=100, step=0.00000001, intercept=True, initialWeights=model.weights)
+model = LinearRegressionWithSGD.train(sparse_data, iterations=100, step=0.00000001, intercept=True, initialWeights=model.weights)
 
+
+MSE = valuesAndPreds \
+    .map(lambda vp: (vp[0] - vp[1])**2) \
+    .reduce(lambda x, y: x + y) / valuesAndPreds.count()
+print("Mean Squared Error = " + str(MSE))
 sc.stop()

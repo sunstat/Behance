@@ -91,8 +91,8 @@
       <file leaf-file-name="testRDDLinear.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Test/testRDDLinear.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="50" column="14" lean-forward="false" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
+            <state relative-caret-position="613">
+              <caret line="72" column="41" lean-forward="false" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -1003,8 +1003,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Test/testRDDLinear.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="50" column="14" lean-forward="false" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
+        <state relative-caret-position="613">
+          <caret line="72" column="41" lean-forward="false" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
           <folding />
         </state>
       </provider>

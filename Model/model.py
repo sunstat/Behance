@@ -167,26 +167,23 @@ class Model():
         rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0][:], x[1][1][:], x[1][2], num_fields, x[1][3]))
         return rdd_label_data
 
-
-    def train_model(self, sc, model_name, num_iter):
-        pid_training_set = set(sc.textFile(C.TRAININING_PID_SET_FILE).collect())
+    def train_model(self, sc, model_name, num_iter, pid_training_set):
         rdd_training_data = self.extract_data_rdd(sc, pid_training_set)
-
         rdd_training_labeled_data = self.generate_feature_response(sc, rdd_training_data)
         mse_array = []
         for iteration in range(1,num_iter+1):
             if iteration == 1:
-                model = LinearRegressionWithSGD.train(rdd_training_labeled_data, iterations=100, step=1e-4)
+                linear_model = LinearRegressionWithSGD.train(rdd_training_labeled_data, iterations=100, step=1e-4)
             else:
-                model = LinearRegressionWithSGD.train(rdd_training_labeled_data,
-                                                      iterations=100, step=1e-4, initialWeights=model.weight)
-            values_pred = rdd_training_data.map(lambda p: (p.label, model.predict(p.features)))
+                linear_model = LinearRegressionWithSGD.train(rdd_training_labeled_data,\
+                        iterations=100, step=1e-4, initialWeights=linear_model.weight)
+            values_pred = rdd_training_data.map(lambda p: (p.label, linear_model.predict(p.features)))
             MSE = values_pred.map(lambda vp: (vp[0] - vp[1]) ** 2) \
                       .reduce(lambda x, y: x + y) / values_pred.count()
             mse_array.append(MSE)
             print("iteration {}, Mean Squared Error = {}".format(iteration, str(MSE)))
 
-        model.save(sc, os.path.join(C.MODEL_DIR, model_name))
+        linear_model.save(sc, os.path.join(C.MODEL_DIR, model_name))
 
         sc.parallelize(mse_array).map(lambda x: str(x)).saveAsTextFile(os.path.join(C.MODEL_LOG_DIR, model_name, "mse_log"))
 
@@ -207,9 +204,9 @@ class Model():
 if __name__ == "__main__":
     sc, _ = init_spark('no_image_model', 40)
     model = Model()
-    pid_train_set = set(sc.textFile(C.TRAIN_PID_SAMPLE_SET_FILE).collect())
-    pid_valid_set = set(sc.textFile(C.VALID_PID_SAMPLE_SET_FILE).collect())
-    pid_test_set = set(sc.textFile(C.TEST_PID_SAMPLE_SET_FILE).collect())
+    pid_train_set = set(sc.textFile(C.TRAIN_PID_SET_FILE).collect())
+    pid_valid_set = set(sc.textFile(C.VAID_PID_SET_FILE).collect())
+    pid_test_set = set(sc.textFile(C.TEST_PID_SET_FILE).collect())
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
     rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)
     print rdd_label_train_data.take(5)

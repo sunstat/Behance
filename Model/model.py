@@ -143,9 +143,9 @@ class Model():
             print  " =========="
 
             feature = SparseVector(N, index, values)
-            #print "feature **************"
-            #print feature
-            #print "**************"
+            print "feature **************"
+            print feature
+            print "**************"
             return LabeledPoint(popularity, feature)
 
         rdd_field_2_index = sc.textFile(C.FIELD_2_INDEX)

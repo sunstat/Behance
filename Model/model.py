@@ -205,7 +205,7 @@ if __name__ == "__main__":
     sc, _ = init_spark('no_image_model', 40)
     model = Model()
     pid_train_set = set(sc.textFile(C.TRAIN_PID_SET_FILE).collect())
-    pid_valid_set = set(sc.textFile(C.VAID_PID_SET_FILE).collect())
+    pid_valid_set = set(sc.textFile(C.VALID_PID_SET_FILE).collect())
     pid_test_set = set(sc.textFile(C.TEST_PID_SET_FILE).collect())
     rdd_train_data = model.extract_data_rdd(sc, pid_train_set)
     rdd_label_train_data = model.generate_feature_response(sc, rdd_train_data)

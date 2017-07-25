@@ -102,7 +102,7 @@ def test_page_rank():
 
     print len(set1)
     print len(set2)
-    print len(set1) == len(set2)
+    print set1 == set2
 
     i1 = rdd_pair.filter(lambda x: x[1] == uid1).count()
     o1 = rdd_pair.filter(lambda x: x[0] == uid1).count()
@@ -116,6 +116,7 @@ def test_page_rank():
 
 if __name__ == "__main__":
     test_page_rank()
+    sc.stop()
 
 
 

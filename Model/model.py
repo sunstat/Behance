@@ -123,30 +123,27 @@ class Model():
     '''
     rdd_ranks [pid, score] already split
     '''
-    def generate_feature_response(self, sc, rdd_data):
+    def generate_feature_response(self, sc, rdd_data, view_feature= False):
 
         def sparse_label_points(field_index_vec, view_feature, score, num_fields, popularity):
-            N = num_fields+1+len(view_feature)
-            print "N is {}".format(N)
-            index = sorted(field_index_vec)
-            values = [1.]*len(index)
-            #index.extend(range(num_fields, num_fields+len(view_feature)))
-            index.append(N-1)
-            #values.extend(view_feature)
-            values.append(score)
-            print  " =========="
-            print len(index)
-            print len(values)
-            print index
-            print values
-            print  " =========="
+            if view_feature:
+                N = num_fields+1+len(view_feature)
+                print "N is {}".format(N)
+                index = sorted(field_index_vec)
+                values = [1.]*len(index)
+                index.extend(range(num_fields, num_fields+len(view_feature)))
+                index.append(N-1)
+                values.extend(view_feature)
+                values.append(score)
 
-            feature = SparseVector(N, index, values)
-            print "feature **************"
-            print feature
-            print "**************"
-            print popularity
-            print LabeledPoint(popularity, feature)
+                feature = SparseVector(N, index, values)
+            else:
+                N = num_fields + 1
+                index = sorted(field_index_vec)
+                values = [1.] * len(index)
+                index.append(N - 1)
+                values.append(score)
+                feature = SparseVector(N, index, values)
             return LabeledPoint(popularity, feature)
 
         rdd_field_2_index = sc.textFile(C.FIELD_2_INDEX)

@@ -92,8 +92,8 @@ def test_page_rank():
     print uid1 == uid2
 
 
-    set1 = set((rdd_pair.map(lambda x: x[0])).collect())
-    set2 = set((rdd_pair.map(lambda x: x[1])).collect())
+    set1 = set(rdd_pair.map(lambda x: x[0]).collect())
+    set2 = set(rdd_pair.map(lambda x: x[1]).collect())
 
     print set1 == set2
 

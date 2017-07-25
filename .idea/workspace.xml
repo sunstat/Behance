@@ -27,8 +27,8 @@
       <file leaf-file-name="testIntermediateResult.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TestModel/testIntermediateResult.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="102" column="80" lean-forward="false" selection-start-line="102" selection-start-column="80" selection-end-line="102" selection-end-column="80" />
+            <state relative-caret-position="433">
+              <caret line="97" column="22" lean-forward="false" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -1020,8 +1020,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TestModel/testIntermediateResult.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="102" column="80" lean-forward="false" selection-start-line="102" selection-start-column="80" selection-end-line="102" selection-end-column="80" />
+        <state relative-caret-position="433">
+          <caret line="97" column="22" lean-forward="false" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
           <folding />
         </state>
       </provider>

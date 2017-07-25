@@ -2,6 +2,8 @@ data = '../../Data/TinyData/image_url'
 import urllib
 import cv2
 import numpy as np
+from PIL import Image
+
 
 import csv
 
@@ -13,6 +15,7 @@ with open(data) as csvfile:
         resp = urllib.urlopen(url)
         image = np.asarray(bytearray(resp.read()), dtype="uint8")
         image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-        image.resize()
+        img = Image.fromarray(data, 'RGB')
+        img.show()
         print image.shape
         break

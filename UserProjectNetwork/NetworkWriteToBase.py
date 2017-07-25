@@ -62,6 +62,7 @@ class NetworkUtilities(object):
     extract neighbors in user network and uids set which involved in the network built 
     '''
     def extract_neighbors_from_users_network(self, sc, output_dir):
+
         '''
         in_threshold = 5
         n_iters = 30
@@ -90,7 +91,9 @@ class NetworkUtilities(object):
         set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
 
         print set1 == set2
+
         '''
+
         self.uid_set = set(sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
         uid_set_broad = sc.broadcast(self.uid_set)
         rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(',')) \
@@ -185,8 +188,8 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
 
     def run(self, sc):
-        shell_file = os.path.join(C.SHELL_DIR, 'createIntermediateDateDirHdfs.sh')
-        call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
+        #shell_file = os.path.join(C.SHELL_DIR, 'createIntermediateDateDirHdfs.sh')
+        #call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
         output_dir = os.path.join(C.INTERMEDIATE_RESULT_DIR, 'base')
         self.extract_neighbors_from_users_network(sc,  output_dir)
         self.handle_uid_pid(sc, self.base_date, output_dir)

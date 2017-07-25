@@ -46,17 +46,6 @@ class PageRank():
 
     def run(self, sc):
 
-        def print_rdd_to_file(rdd, output_file, output_format):
-            def to_string(x):
-                if not x:
-                    return " "
-                return ",".join([str(y) for y in x])
-
-            if os.system("hadoop fs -test -d {0}".format(output_file)) == 0:
-                call('hdfs dfs -rm -r {}'.format(output_file))
-
-            rdd.map(lambda x: to_string(x)).saveAsTextFile(output_file)
-
         dif_array = []
         def compute_contribs(urls, rank):
             # Calculates URL contributions to the rank of other URLs.

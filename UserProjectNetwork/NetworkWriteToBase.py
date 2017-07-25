@@ -187,7 +187,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
-    network_utilities = NetworkUtilities()
+    network_utilities = NetworkUtilities("2016-12-30")
     network_utilities.run(sc)
     sc.stop()
 

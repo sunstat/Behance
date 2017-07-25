@@ -123,9 +123,9 @@ class Model():
     '''
     rdd_ranks [pid, score] already split
     '''
-    def generate_feature_response(self, sc, rdd_data, view_feature= False):
-        def sparse_label_points(field_index_vec, view_feature, score, num_fields, popularity, view_feature_on):
-            if view_feature_on:
+    def generate_feature_response(self, sc, rdd_data, feature_type):
+        def sparse_label_points(field_index_vec, view_feature, score, num_fields, popularity, feature_type):
+            if feature_type == 'view_feature':
                 N = num_fields+1+len(view_feature)
                 print "N is {}".format(N)
                 index = sorted(field_index_vec)
@@ -136,7 +136,7 @@ class Model():
                 values.append(score)
 
                 feature = SparseVector(N, index, values)
-            else:
+            elif feature_type == 'basic':
                 N = num_fields + 1
                 index = sorted(field_index_vec)
                 values = [1.] * len(index)
@@ -161,7 +161,7 @@ class Model():
         '''
 
         rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0][:], x[1][1][:],
-                                                                     x[1][2], num_fields, x[1][3], view_feature))
+                                                                     x[1][2], num_fields, x[1][3], feature_type))
         return rdd_label_data
 
     def train_model(self, sc, model_name, num_iter, pid_training_set):

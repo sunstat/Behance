@@ -92,9 +92,9 @@ class NetworkHelpFunctions():
         result = 0
         gaps = [365,30,1]
         arr1 = date1.split('-')
-        arr1[0] = int(arr1[0])-2015
-        arr1[1] = int(arr1[1])
-        arr1[2] = int(arr1[2])
+        arr1[0] = int(arr1[0])-2016
+        arr1[1] = 11-int(arr1[1])
+        arr1[2] = 30-int(arr1[2])
         for i in range(3):
             result += gaps[i]*arr1[i]
         return result

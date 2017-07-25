@@ -46,6 +46,8 @@ test popularity
 34164251,116
 '''
 
+
+
 rdd = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(','))
 print 2*rdd.filter(lambda x: x[3] == '15322919' and x[4] == 'A').count()\
       +rdd.filter(lambda x: x[3] == '15322919' and x[4] == 'C').count()
@@ -71,13 +73,15 @@ test pagerank
 '''
 
 
-
+def separate(x):
+    for y in x[1]:
+        yield (x[0], y)
 
 rdd_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))
 rdd_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.spit(','))
-rdd_folllow = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: x.split('#'))
-rdd_pair = rdd_follow.
-
+rdd_follow = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: x.split('#'))
+rdd_pair = rdd_follow.map(lambda x: separate(x))
+print rdd_pair.take(5)
 # test pagerank makes sense or not
 
 

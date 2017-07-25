@@ -23,6 +23,7 @@ from subprocess import Popen
 from NetworkHelpFunctions import NetworkHelpFunctions
 from subprocess import call
 import configuration.constants as C
+import operator
 
 
 '''
@@ -61,7 +62,7 @@ class NetworkUtilities(object):
     extract neighbors in user network and uids set which involved in the network built 
     '''
     def extract_neighbors_from_users_network(self, sc, output_dir):
-
+        '''
         in_threshold = 5
         n_iters = 30
         rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(',')) \
@@ -83,12 +84,21 @@ class NetworkUtilities(object):
         rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(',')) \
             .filter(lambda x: x[4] == 'F') \
             .filter(lambda x: x[1] in uid_set_broad.value and x[2] in uid_set_broad.value) \
-            .map(lambda x: (x[1], x[3]))
+            .map(lambda x: (x[1], x[2]))
 
         set1 = set(rdd_pair.map(lambda x: x[0]).distinct().collect())
         set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
 
-        print len(set1) == len(set2)
+        print set1 == set2
+        '''
+        self.uid_set = set(sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
+        uid_set_broad = sc.broadcast(self.uid_set)
+        rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(',')) \
+            .filter(lambda x: x[4] == 'F') \
+            .filter(lambda x: x[1] in uid_set_broad.value and x[2] in uid_set_broad.value) \
+            .map(lambda x: (x[1], x[2]))
+        rdd_follow = rdd_pair.mapValues(lambda x: [x]).reduceByKey(lambda x, y: x+y)
+        IOutilities.print_rdd_to_file(rdd_follow, C.FOLLOW_MAP_FILE, 'psv')
 
 
 
@@ -179,7 +189,7 @@ class NetworkUtilities(object):
         call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
         output_dir = os.path.join(C.INTERMEDIATE_RESULT_DIR, 'base')
         self.extract_neighbors_from_users_network(sc,  output_dir)
-        #self.handle_uid_pid(sc, self.base_date, output_dir)
+        self.handle_uid_pid(sc, self.base_date, output_dir)
 
 if __name__ == "__main__":
     sc, _ = init_spark('base', 20)

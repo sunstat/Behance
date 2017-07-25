@@ -90,13 +90,19 @@ def test_page_rank():
         .filter(lambda x: x[4] == 'F')\
         .filter(lambda x: x[1] in uid_set_broad.value and x[2] in uid_set_broad.value)\
         .map(lambda x: (x[1],x[3]))
+    print rdd_pair.take(5)
+    uid1 = pid_2_uid_dict['27019717']
+    uid2 = pid_2_uid_dict['38622569']
+    uid3 = pid_2_uid_dict['46419515']
+
+    print uid1 == uid2
 
     set1 = set(rdd_pair.map(lambda x: x[0]).distinct().collect())
     set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
 
+
     print len(set1)
     print len(set2)
-
     print len(set1) == len(set2)
 
     i1 = rdd_pair.filter(lambda x: x[1] == uid1).count()

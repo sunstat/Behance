@@ -125,8 +125,8 @@ class Model():
     '''
     def generate_feature_response(self, sc, rdd_data, view_feature= False):
 
-        def sparse_label_points(field_index_vec, view_feature, score, num_fields, popularity):
-            if view_feature:
+        def sparse_label_points(field_index_vec, view_feature, score, num_fields, popularity, view_feature_on):
+            if view_feature_on:
                 N = num_fields+1+len(view_feature)
                 print "N is {}".format(N)
                 index = sorted(field_index_vec)
@@ -161,12 +161,13 @@ class Model():
                 sys.exit("STOP NOW")
         '''
 
-        rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0][:], x[1][1][:], x[1][2], num_fields, x[1][3]))
+        rdd_label_data =  rdd_data.map(lambda x: sparse_label_points(x[1][0][:], x[1][1][:],
+                                                                     x[1][2], num_fields, x[1][3], view_feature))
         return rdd_label_data
 
     def train_model(self, sc, model_name, num_iter, pid_training_set):
         rdd_training_data = self.extract_data_rdd(sc, pid_training_set)
-        rdd_training_labeled_data = self.generate_feature_response(sc, rdd_training_data)
+        rdd_training_labeled_data = self.generate_feature_response(sc, rdd_training_data, False)
         mse_array = []
         print rdd_training_labeled_data.take(5)
         linear_model = None

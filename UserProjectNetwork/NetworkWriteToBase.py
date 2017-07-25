@@ -107,7 +107,7 @@ class NetworkUtilities(object):
 
 
 
-    def handle_uid_pid(self, sc, base_date, output_dir):
+    def handle_uid_pid(self, sc, output_dir):
         self.uid_set = set(sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
 
         print(len(self.uid_set))
@@ -118,7 +118,7 @@ class NetworkUtilities(object):
             return uid in uid_set_broad.value
 
         rdd_owners = sc.textFile(C.OWNER_FILE).map(lambda x: x.split(',')) \
-            .filter(lambda x: NetworkHelpFunctions.date_filter("2016-01-01", x[2], base_date)) \
+            .filter(lambda x: NetworkHelpFunctions.date_filter("2016-01-01", x[2], "2016-12-30")) \
             .filter(lambda x: __filter_uid_in_cycle(x[1])).persist()
         print rdd_owners.take(5)
 
@@ -192,7 +192,7 @@ class NetworkUtilities(object):
         #call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
         output_dir = os.path.join(C.INTERMEDIATE_RESULT_DIR, 'base')
         self.extract_neighbors_from_users_network(sc,  output_dir)
-        self.handle_uid_pid(sc, self.base_date, output_dir)
+        self.handle_uid_pid(sc, output_dir)
 
 if __name__ == "__main__":
     sc, _ = init_spark('base', 20)

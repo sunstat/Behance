@@ -76,11 +76,22 @@ class NetworkUtilities(object):
         rdd_uid_index = rdd_pair.flatMap(lambda x: (x[0],x[1])).distinct().zipWithIndex().cache()
         IOutilities.print_rdd_to_file(rdd_uid_index, output_file, 'csv')
         self.uid_set = set(rdd_uid_index.map(lambda x: x[0]).collect())
-
         uid_set_broad = sc.broadcast(self.uid_set)
 
         def __filter_uid_in_cycle(uid):
             return uid in uid_set_broad.value
+
+        rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(',')) \
+            .filter(lambda x: x[4] == 'F') \
+            .filter(lambda x: x[1] in uid_set_broad.value and x[2] in uid_set_broad.value) \
+            .map(lambda x: (x[1], x[3]))
+
+        set1 = set(rdd_pair.map(lambda x: x[0]).distinct().collect())
+        set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
+
+        print len(set1) == len(set2)
+
+
 
 
 

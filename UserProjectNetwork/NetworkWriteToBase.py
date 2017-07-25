@@ -82,8 +82,6 @@ class NetworkUtilities(object):
         def __filter_uid_in_cycle(uid):
             return uid in uid_set_broad.value
 
-        sc.textFile(C.ACTION_VIEW_FILE).filter(lambda x: x[4] == 'V')\
-            .filter(lambda x: __filter_uid_in_cycle(x[1])).map(lambda x: (x[3], x[0]))
 
 
     def handle_uid_pid(self, sc, base_date, output_dir):
@@ -162,26 +160,23 @@ class NetworkUtilities(object):
         IOutilities.print_rdd_to_file(rdd_owners_map, output_file, 'csv')
 
         # print pid_2_index-csv
-
         rdd_pid_index = rdd_owners.map(lambda x: x[0]).distinct().zipWithIndex().cache()
         output_file = os.path.join(output_dir, 'pid_2_index-csv')
         IOutilities.print_rdd_to_file(rdd_pid_index, output_file, 'csv')
-
-
 
     def run(self, sc):
         shell_file = os.path.join(C.SHELL_DIR, 'createIntermediateDateDirHdfs.sh')
         call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
         output_dir = os.path.join(C.INTERMEDIATE_RESULT_DIR, 'base')
         self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
-        self.handle_uid_pid(sc, self.base_date, output_dir)
+        #self.handle_uid_pid(sc, self.base_date, output_dir)
 
 if __name__ == "__main__":
     sc, _ = init_spark('base', 20)
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
-    network_utilities = NetworkUtilities("2016-12-30")
+    network_utilities = NetworkUtilities()
     network_utilities.run(sc)
     sc.stop()
 

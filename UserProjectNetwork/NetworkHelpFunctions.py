@@ -30,11 +30,6 @@ class NetworkHelpFunctions():
 
 
     @staticmethod
-    def degree_filter(rdd_pair, in_coming_degree_threshold):
-        rdd_follow = rdd_pair.map(lambda x: (x[0], [x[1]])).reduceByKey(lambda x, y: x + y).cache()
-        rdd_follow = rdd_follow.firlter(lambda x: len(x[1]) >= in_coming_degree_threshold)
-
-    @staticmethod
     def filter_graph_by_incoming_degree(sc, rdd_pair, in_threshold, n_iters):
         iteration = 0
         prev_size = -1

@@ -82,8 +82,13 @@ def test_page_rank():
     rdd_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))
     rdd_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.spit(','))
     pid_2_uid_dict = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).collectAsMap()
-    rdd_follow = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: x.split('#'))
-    rdd_pair = rdd_follow.flatMap(lambda x: separate(x))
+    uid_set = set(sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
+    uid_set_broad = sc.broadcast(uid_set)
+
+    rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(','))\
+        .filter(lambda x: x[4] == 'F')\
+        .filter(lambda x: x[1] in uid_set_broad.value and x[3] in uid_set_broad.value)\
+        .map(lambda x: (x[1],x[3]))
     print rdd_pair.take(5)
     uid1 = pid_2_uid_dict['27019717']
     uid2 = pid_2_uid_dict['38622569']

@@ -79,9 +79,13 @@ def separate(x):
 
 rdd_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))
 rdd_score = sc.textFile(C.PID_2_SCORE_FILE).map(lambda x: x.spit(','))
+rdd_pid_2_uid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(','))
 rdd_follow = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: x.split('#'))
 rdd_pair = rdd_follow.map(lambda x: separate(x))
 print rdd_pair.take(5)
+
+
+
 # test pagerank makes sense or not
 
 

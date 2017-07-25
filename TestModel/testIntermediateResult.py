@@ -84,6 +84,7 @@ def test_page_rank():
     pid_2_uid_dict = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).collectAsMap()
     uid_set = set(sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
     uid_set_broad = sc.broadcast(uid_set)
+    print len(uid_set)
 
     rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(','))\
         .filter(lambda x: x[4] == 'F')\

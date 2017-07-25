@@ -67,7 +67,7 @@ class NetworkUtilities(object):
             return pid in pid_set_broad.value
 
         rdd_popularity_base = sc.textFile(C.PID_2_INDEX_FILE)\
-            .map(lambda x: x.split(',')) .map(lambda x: (x[0], (0, 0)))
+            .map(lambda x: x.split(',')).map(lambda x: (x[0], (0, 0)))
         print (rdd_popularity_base.take(5))
 
         pid_set_broad = sc.broadcast(self.pid_set)

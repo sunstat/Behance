@@ -45,6 +45,10 @@ class imageModel(object):
         pass
 
     def feature_extraction_per_image(self, image_url):
+        url = "https: // mir - s3 - cdn - cf.behance.net / project_modules / disp / 2
+        a2fd426721707
+        .5635972765
+        b4b.jpg
 
 
 

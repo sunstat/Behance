@@ -53,10 +53,9 @@ class NetworkUtilities(object):
 
     # compare two date strings "2016-12-01"
 
-    def __init__(self, base_date):
+    def __init__(self):
         self.uid_set = None
         self.pid_set = None
-        self.base_date = base_date
 
     '''
     extract neighbors in user network and uids set which involved in the network built 
@@ -179,7 +178,7 @@ class NetworkUtilities(object):
         shell_file = os.path.join(C.SHELL_DIR, 'createIntermediateDateDirHdfs.sh')
         call('./%s %s %s' % (shell_file, C.INTERMEDIATE_RESULT_DIR, 'base',), shell=True)
         output_dir = os.path.join(C.INTERMEDIATE_RESULT_DIR, 'base')
-        self.extract_neighbors_from_users_network(sc, self.base_date, output_dir)
+        self.extract_neighbors_from_users_network(sc,  output_dir)
         #self.handle_uid_pid(sc, self.base_date, output_dir)
 
 if __name__ == "__main__":
@@ -187,7 +186,7 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
-    network_utilities = NetworkUtilities("2016-12-30")
+    network_utilities = NetworkUtilities()
     network_utilities.run(sc)
     sc.stop()
 

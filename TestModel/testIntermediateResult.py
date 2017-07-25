@@ -94,7 +94,7 @@ def test_page_rank():
     set1 = set(rdd_pair.map(lambda x: x[0]).distinct().collect())
     set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
 
-    print set1 == set2
+    print len(set1) == len(set2)
 
     i1 = rdd_pair.filter(lambda x: x[1] == uid1).count()
     o1 = rdd_pair.filter(lambda x: x[0] == uid1).count()

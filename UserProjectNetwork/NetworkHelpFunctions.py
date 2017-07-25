@@ -72,8 +72,8 @@ class NetworkHelpFunctions():
 
             rdd_pair = rdd_pair.filter(filter_set)
 
-            set1 = set(rdd_pair.map(lambda x: x[0]).collect())
-            set2 = set(rdd_pair.map(lambda x: x[1]).collect())
+            set1 = set(rdd_pair.map(lambda x: x[0]).disction().collect())
+            set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
             uid_set1 = set1.intersection(set2)
             intersection_set_broad = sc.broadcast(uid_set1)
             print "first element is {}, second element is {} and intersection is {}".format(len(set1), len(set2), len(uid_set1))

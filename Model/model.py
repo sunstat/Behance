@@ -124,7 +124,6 @@ class Model():
     rdd_ranks [pid, score] already split
     '''
     def generate_feature_response(self, sc, rdd_data, view_feature= False):
-
         def sparse_label_points(field_index_vec, view_feature, score, num_fields, popularity, view_feature_on):
             if view_feature_on:
                 N = num_fields+1+len(view_feature)

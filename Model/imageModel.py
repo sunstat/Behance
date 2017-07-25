@@ -1,4 +1,3 @@
-
 import sys
 
 sys.path.append('/home/yiming/Behance')
@@ -9,6 +8,13 @@ sys.path.append('/home/yiming/Behance/UserProjectNetwork')
 import configuration.constants as C
 
 
+
+from keras.applications.vgg16 import VGG16
+from keras.preprocessing import image
+from keras.applications.vgg16 import preprocess_input
+import numpy as np
+import urllib
+import cv2
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 import pyspark.sql.functions as F
@@ -38,8 +44,9 @@ class imageModel(object):
     def __init__(self):
         pass
 
-    def feature_extraction(self, sc):
-        rdd_image = sc.textFile(C.IMAGE_TRIMMED_FILE)
+    def feature_extraction_per_image(self, image_url):
+
+
 
 
 

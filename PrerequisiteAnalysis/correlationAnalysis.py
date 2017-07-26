@@ -56,7 +56,7 @@ def correlation_page_rank():
     '''
     plt.xlabel('page_rank_score')
     plt.ylabel('popularity')
-    plt.scatter(data[0],data[1], "o")
+    plt.scatter(data[0],data[1])
     plt.savefig(os.path.join('../Graph/', 'cor_page_rank_popularity.png'))
     plt.close()
 

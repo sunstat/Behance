@@ -119,12 +119,12 @@ def correlation_incoming_popularity():
     plt.close()
 
 def correlation_outcoming_popularity():
-    pid_2_view = sc.textFile(C.ACTION_VIEW_FILE).map(lambda x: x.split(',')).filter(lambda x: x[2] in pid_set_broad.value)\
-        .filter(lambda x: x[3] == 'V')\
-        .map(lambda x: (x[2],[x[3]])).reduceByKey(lambda x,y: x+y).mapValues(lambda x: len(x))
-    print pid_2_view.take(5)
+    rdd_outcoming = sc.textFile(C.FOLLOW_MAP_FILE).mapValues(lambda x: len(x))
+    rdd_uid_2_pid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).map(lambda x: (x[1],x[0]))
+    rdd_pid_2_outcoming = rdd_uid_2_pid.join(rdd_outcoming).map(lambda x: x[1])
     pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
-    data = pid_2_view.join(pid_2_popularity).map(lambda x: x[1]).collect()
+    data = rdd_pid_2_outcoming.join(pid_2_popularity).collect()
+    print data.take(5)
     data = zip(*data)
     print len(data)
     print len(data[0])
@@ -138,12 +138,12 @@ def correlation_outcoming_popularity():
     '''
     print data[0][1:100]
     print data[1][1:100]
-    plt.xlabel('view_amount')
+    plt.xlabel('out_coming')
     plt.ylabel('popularity')
     plt.scatter(data[0],data[1])
-    plt.savefig(os.path.join('../Graph/', 'view_amount_popularity.png'))
+    plt.savefig(os.path.join('../Graph/', 'outcoming_popularity.png'))
     plt.close()
 
 if __name__ == "__main__":
     #correlation_page_rank()
-    correlation_view_popularity()
+    correlation_outcoming_popularity()

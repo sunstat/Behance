@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PrerequisiteAnalysis/correlationAnalysis.py" afterPath="$PROJECT_DIR$/PrerequisiteAnalysis/correlationAnalysis.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py" afterPath="$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,8 +27,8 @@
       <file leaf-file-name="correlationAnalysis.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PrerequisiteAnalysis/correlationAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="104" column="29" lean-forward="false" selection-start-line="104" selection-start-column="29" selection-end-line="104" selection-end-column="29" />
+            <state relative-caret-position="261">
+              <caret line="106" column="33" lean-forward="false" selection-start-line="106" selection-start-column="29" selection-end-line="106" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -1082,8 +1081,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PrerequisiteAnalysis/correlationAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="104" column="29" lean-forward="false" selection-start-line="104" selection-start-column="29" selection-end-line="104" selection-end-column="29" />
+        <state relative-caret-position="261">
+          <caret line="106" column="33" lean-forward="false" selection-start-line="106" selection-start-column="29" selection-end-line="106" selection-end-column="33" />
           <folding />
         </state>
       </provider>

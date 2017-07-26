@@ -102,7 +102,6 @@ def correlation_incoming_popularity():
     rdd_pair = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: x.split('#')) \
         .mapValues(lambda x: x.split(',')).map(lambda x: separate(x)).map(lambda x: (x[1],[x[0]]))
     rdd_incoming = rdd_pair.reduceByKey(lambda x,y: x+y).mapValues(lambda x: len(x))
-    print rdd_incoming.take(5)
     rdd_uid_2_pid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).map(lambda x: (x[1], x[0]))
     rdd_pid_2_incoming = rdd_uid_2_pid.join(rdd_incoming).map(lambda x: x[1])
     print rdd_pid_2_incoming.take(5)

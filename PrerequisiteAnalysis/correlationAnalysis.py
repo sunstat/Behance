@@ -151,7 +151,8 @@ def correlation_outcoming_popularity():
     plt.close()
 
 def born_date_hist():
-    dates = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(',')).map(lambda x: NetworkHelpFunctions.date_2_value(x[1]))
+    dates = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(','))\
+        .map(lambda x: NetworkHelpFunctions.date_2_value(x[1])).collect()
     plt.figure()
     '''
     fig, ax_arr = plt.subplots(1)

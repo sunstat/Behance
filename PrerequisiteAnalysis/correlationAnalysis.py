@@ -44,6 +44,7 @@ def correlation_page_rank():
     pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
     data = pid_2_score.join(pid_2_popularity).map(lambda x: x[1]).collect()
     data = zip(*data)
+    print data[0]
     plt.figure()
     fig, ax_arr = plt.subplots(1)
     ax_arr.set_xscale("symlog")

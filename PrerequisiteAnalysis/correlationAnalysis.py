@@ -54,9 +54,11 @@ def correlation_page_rank():
     ax_arr.set_xlabel("page_rank_score")
     ax_arr.set_ylabel("popularity")
     '''
+    print data[0][1:100]
+    print data[1][1:100]
     plt.xlabel('page_rank_score')
     plt.ylabel('popularity')
-    plt.scatter(data[0],data[1])
+    plt.scatter(data[0][1:100],data[1][1:100])
     plt.savefig(os.path.join('../Graph/', 'cor_page_rank_popularity.png'))
     plt.close()
 

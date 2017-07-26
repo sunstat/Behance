@@ -1,5 +1,16 @@
 import os, sys
 
+
+from keras.layers.normalization import BatchNormalization
+from keras.layers import Input, Dense, Dropout
+from keras.models import load_model
+from keras.losses import mean_absolute_error
+from keras.callbacks import TensorBoard
+from keras.backend import clear_session
+from keras.optimizers import Adam
+
+import keras.models
+
 sys.path.append('/home/yiming/Behance')
 sys.path.append('/home/yiming/Behance/configuration')
 sys.path.append('/home/yiming/Behance/UserProjectNetwork')
@@ -57,20 +68,6 @@ def testPopularity():
 test pagerank
 '''
 
-'''
-27019717,24.4312360806
-38622569,24.4312360806
-26998883,24.4312360806
-26991685,24.4312360806
-37192277,24.4312360806
-35440053,24.4312360806
-35446603,24.4312360806
-37401579,0.176481458946
-46419515,0.253337390282
-42666453,0.253337390282
-41448777,0.253337390282
-33952470,0.253337390282
-'''
 
 # test pagerank makes sense or not
 
@@ -88,19 +85,24 @@ def test_page_rank():
     uid_set_broad = sc.broadcast(uid_set)
     print len(uid_set)
 
+    '''
+    35145491,0.235518550181
+    33407727,9.44813133033
+    35699141,9.44813133033
+    34978429,9.44813133033
+    '''
+
     rdd_pair = rdd_follow.map(lambda x: separate(x))
     print rdd_pair.take(5)
-    uid1 = pid_2_uid_dict['27019717']
-    uid2 = pid_2_uid_dict['38622569']
-    uid3 = pid_2_uid_dict['46419515']
+    uid1 = pid_2_uid_dict['35145491']
+    uid2 = pid_2_uid_dict['33407727']
+    uid3 = pid_2_uid_dict['34978429']
 
-    print uid1 == uid2
+    print uid2 == uid3
 
     set1 = set(rdd_pair.map(lambda x: x[0]).distinct().collect())
     set2 = set(rdd_pair.map(lambda x: x[1]).distinct().collect())
 
-    print len(set1)
-    print len(set2)
     print set1 == set2
 
     i1 = rdd_pair.filter(lambda x: x[1] == uid1).count()
@@ -120,6 +122,7 @@ def test_view_feature():
     rdd = sc.textFile(C.OWNER_FILE).map(lambda x: x.split(','))
     print rdd.filter(lambda x: x[0] == '42982845').take(5)
     print rdd.filter(lambda x: x[0] == '33192963').take(5)
+
 
 if __name__ == "__main__":
     #test_page_rank()

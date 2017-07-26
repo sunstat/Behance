@@ -4,7 +4,6 @@
     <list default="true" id="223d0e8c-6af5-4704-8784-73de546b37b2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/testImage.py" afterPath="$PROJECT_DIR$/Test/testImage.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestModel/testIntermediateResult.py" afterPath="$PROJECT_DIR$/TestModel/testIntermediateResult.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserProjectNetwork/pageRank.py" afterPath="$PROJECT_DIR$/UserProjectNetwork/pageRank.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,24 +15,42 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="testImageUrlFile.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test/testImageUrlFile.py">
+      <file leaf-file-name="testImage.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/testImage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+            <state relative-caret-position="221">
+              <caret line="13" column="57" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="13" selection-end-column="57" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testImage.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test/testImage.py">
+      <file leaf-file-name="training.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/miniconda2/lib/python2.7/site-packages/keras/engine/training.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-              <folding>
-                <element signature="e#39#52#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="194">
+              <caret line="1566" column="0" lean-forward="false" selection-start-line="1566" selection-start-column="0" selection-end-line="1566" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vgg16.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/miniconda2/lib/python2.7/site-packages/keras/applications/vgg16.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="168" column="0" lean-forward="false" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="topology.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/miniconda2/lib/python2.7/site-packages/keras/engine/topology.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="2530" column="0" lean-forward="false" selection-start-line="2530" selection-start-column="0" selection-end-line="2530" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -51,8 +68,20 @@
       <file leaf-file-name="testIntermediateResult.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TestModel/testIntermediateResult.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="125" column="23" lean-forward="false" selection-start-line="125" selection-start-column="23" selection-end-line="125" selection-end-column="23" />
+            <state relative-caret-position="125">
+              <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="prerequiteAnalysis.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1463">
+              <caret line="19" column="21" lean-forward="false" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -68,34 +97,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testLinearLocally.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test/testLinearLocally.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="pageRank.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/pageRank.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="55" column="15" lean-forward="true" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
+              <caret line="55" column="15" lean-forward="false" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
               <folding>
                 <element signature="e#79#89#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="imageModel.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/imageModel.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="50" selection-end-column="15" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -104,17 +113,7 @@
         <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
-              <caret line="177" column="62" lean-forward="true" selection-start-line="177" selection-start-column="62" selection-end-line="177" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="constants.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/configuration/constants.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="48" column="20" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <caret line="177" column="62" lean-forward="false" selection-start-line="177" selection-start-column="62" selection-end-line="177" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -221,8 +220,8 @@
         <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkHelpFunctions.py" />
         <option value="$PROJECT_DIR$/Model/imageModel.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py" />
-        <option value="$PROJECT_DIR$/Test/testImage.py" />
         <option value="$PROJECT_DIR$/UserProjectNetwork/pageRank.py" />
+        <option value="$PROJECT_DIR$/Test/testImage.py" />
         <option value="$PROJECT_DIR$/TestModel/testIntermediateResult.py" />
       </list>
     </option>
@@ -683,9 +682,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteForEachMonth.py" />
-    <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkUtilities.py" />
-    <entry file="file://$PROJECT_DIR$/PrerequisiteAnalysis/networkHelpFunctions.py" />
     <entry file="file://$PROJECT_DIR$/IntermediateDir/2016-06-30/data">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -725,13 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="19" column="21" lean-forward="true" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1022,7 +1011,7 @@
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/NetworkWriteToBase.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="177" column="62" lean-forward="true" selection-start-line="177" selection-start-column="62" selection-end-line="177" selection-end-column="62" />
+          <caret line="177" column="62" lean-forward="false" selection-start-line="177" selection-start-column="62" selection-end-line="177" selection-end-column="62" />
           <folding />
         </state>
       </provider>
@@ -1035,31 +1024,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test/testImage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding>
-            <element signature="e#39#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UserProjectNetwork/pageRank.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="55" column="15" lean-forward="true" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
+          <caret line="55" column="15" lean-forward="false" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
           <folding>
             <element signature="e#79#89#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PrerequisiteAnalysis/prerequiteAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1463">
+          <caret line="19" column="21" lean-forward="false" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/miniconda2/lib/python2.7/site-packages/keras/applications/vgg16.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="168" column="0" lean-forward="false" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/miniconda2/lib/python2.7/site-packages/keras/engine/topology.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="2530" column="0" lean-forward="false" selection-start-line="2530" selection-start-column="0" selection-end-line="2530" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/miniconda2/lib/python2.7/site-packages/keras/engine/training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="1566" column="0" lean-forward="false" selection-start-line="1566" selection-start-column="0" selection-end-line="1566" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/testImage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="57" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="13" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/TestModel/testIntermediateResult.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="125" column="23" lean-forward="false" selection-start-line="125" selection-start-column="23" selection-end-line="125" selection-end-column="23" />
-          <folding />
+        <state relative-caret-position="125">
+          <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

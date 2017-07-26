@@ -1,28 +1,45 @@
 data = '../../Data/TinyData/image_url'
 import urllib
+import cStringIO
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from PIL import Image
+import h5py
+from keras.models import Model
 
+
+
+from keras.layers.normalization import BatchNormalization
+from keras.layers import Input, Dense, Dropout
+from keras.models import load_model
+from keras.losses import mean_absolute_error
+from keras.callbacks import TensorBoard
+from keras.backend import clear_session
+from keras.optimizers import Adam
+
+import keras.models
 
 import csv
+COL_SIZE = 224
+ROW_SIZE = 224
+
+
+dataw = np.zeros([ROW_SIZE,COL_SIZE,3,2])
 
 with open(data) as csvfile:
     row_num = 1
     readCSV = csv.reader(csvfile, delimiter=',')
     for row in readCSV:
         url = row[2]
-        resp = urllib.urlopen(url)
-        image = np.asarray(bytearray(resp.read()), dtype="uint8")
-        image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-        im = Image.fromarray(image, 'RGB')
-        im = im.resize([244,244], Image.ANTIALIAS)
-        print im
-        plt.imshow(im)
-        image.resize()
-        plt.pause(5)
-
-        print image.shape
+        file = cStringIO.StringIO(urllib.urlopen(url).read())
+        data1 = np.asarray(Image.open(file).resize((ROW_SIZE, COL_SIZE), Image.ANTIALIAS))
+        data1 = np.expand_dims(data1, axis=0)
+        Input(shape=(3, 200, 200), name='image_input')
+        model = keras.applications.vgg16.VGG16(include_top=True, weights='imagenet', input_tensor=None,input_shape=None)
+        feature = model.predict(data1)
+        model_extractfeatures = Model(input=model.input, output=model.get_layer('fc2').output)
+        feature = model_extractfeatures.predict(data1)
+        print feature[0,1:100]
         break

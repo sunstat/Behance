@@ -80,7 +80,7 @@ def test_page_rank():
     35699141,9.44813133033
     34978429,9.44813133033
     '''
-
+    print rdd_follow.take(5)
     rdd_pair = rdd_follow.map(lambda x: separate(x))
     print rdd_pair.take(5)
     uid1 = pid_2_uid_dict['35145491']

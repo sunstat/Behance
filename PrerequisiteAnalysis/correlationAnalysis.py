@@ -52,7 +52,7 @@ def correlation_page_rank():
     ax_arr.set_title("correlation between page_rank Score and Popularity")
     ax_arr.set_xlabel("page_rank_score")
     ax_arr.set_ylabel("popularity")
-    plt.savefig(os.path.join('../Graph/', 'originalDegreeTailDistribution.png'))
+    plt.savefig(os.path.join('../Graph/', 'cor_page_rank_popularity.png'))
     plt.close()
 
 if __name__ == "__main__":

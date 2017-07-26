@@ -168,5 +168,5 @@ def born_date_hist():
 if __name__ == "__main__":
     #correlation_page_rank()
     correlation_outcoming_popularity()
-    #correlation_incoming_popularity()
+    correlation_incoming_popularity()
     born_date_hist()

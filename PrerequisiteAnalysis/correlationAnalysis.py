@@ -135,6 +135,7 @@ def correlation_outcoming_popularity():
     print rdd_pid_2_outcoming.take(5)
     pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
     data = rdd_pid_2_outcoming.join(pid_2_popularity).collect()
+    print data[1:100]
     data = zip(*data)
 
     plt.figure()
@@ -169,5 +170,5 @@ def born_date_hist():
 if __name__ == "__main__":
     #correlation_page_rank()
     correlation_outcoming_popularity()
-    correlation_incoming_popularity()
+    #correlation_incoming_popularity()
     born_date_hist()

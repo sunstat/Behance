@@ -126,7 +126,6 @@ def correlation_outcoming_popularity():
     print rdd_pid_2_outcoming.take(5)
     pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
     data = rdd_pid_2_outcoming.join(pid_2_popularity).collect()
-    print data.take(5)
     data = zip(*data)
     print len(data)
     print len(data[0])

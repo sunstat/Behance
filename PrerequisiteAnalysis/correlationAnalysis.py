@@ -119,7 +119,8 @@ def correlation_incoming_popularity():
     plt.close()
 
 def correlation_outcoming_popularity():
-    rdd_outcoming = sc.textFile(C.FOLLOW_MAP_FILE).mapValues(lambda x: len(x))
+    rdd_outcoming = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x:x.split('#'))\
+        .mapValues(lambda x: x.split(',')).mapValues(lambda x: len(x))
     rdd_uid_2_pid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).map(lambda x: (x[1],x[0]))
     rdd_pid_2_outcoming = rdd_uid_2_pid.join(rdd_outcoming).map(lambda x: x[1])
     print rdd_pid_2_outcoming.take(5)

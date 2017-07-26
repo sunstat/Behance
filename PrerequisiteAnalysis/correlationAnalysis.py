@@ -44,6 +44,7 @@ def correlation_page_rank():
     pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
     data = pid_2_score.join(pid_2_popularity).map(lambda x: x[1]).collect()
     data = zip(*data)
+    print len(data)
     print len(data[0])
     plt.figure()
     '''
@@ -53,6 +54,8 @@ def correlation_page_rank():
     ax_arr.set_xlabel("page_rank_score")
     ax_arr.set_ylabel("popularity")
     '''
+    plt.xlabel('page_rank_score')
+    plt.ylabel('popularity')
     plt.plot(data[0],data[1])
     plt.savefig(os.path.join('../Graph/', 'cor_page_rank_popularity.png'))
     plt.close()

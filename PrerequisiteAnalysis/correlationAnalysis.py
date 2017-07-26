@@ -165,6 +165,28 @@ def born_date_hist():
     plt.savefig(os.path.join('../Graph/', 'creation_date_hist.png'))
     plt.close()
 
+def date_popularity():
+    rdd_pid_2_dates = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(',')) \
+        .mapValues(lambda x: NetworkHelpFunctions.date_2_value(x))
+    pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
+    data = rdd_pid_2_dates.join(pid_2_popularity).map(lambda x:x[1]).collect()
+    data = zip(*data)
+    plt.figure()
+    '''
+    fig, ax_arr = plt.subplots(1)
+    ax_arr.plot(data[0],data[1])
+    ax_arr.set_title("correlation between page_rank Score and Popularity")
+    ax_arr.set_xlabel("page_rank_score")
+    ax_arr.set_ylabel("popularity")
+    '''
+    plt.xlabel('left_days')
+    plt.ylabel('popularity')
+    plt.scatter(data[0], data[1])
+    plt.savefig(os.path.join('../Graph/', 'date_popularity.png'))
+    plt.close()
+
+
+
 
 if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/NetworkHelpFunctions.py')
@@ -172,5 +194,6 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     #correlation_page_rank()
     #correlation_outcoming_popularity()
-    correlation_incoming_popularity()
+    #correlation_incoming_popularity()
     #born_date_hist()
+    date_popularity()

@@ -118,11 +118,9 @@ class NetworkHelpFunctions():
         initial_day_views = len([x for x in date_array if x == create_date])
         feature.append(initial_day_views)
 
-        def month_filter(cur_date, month):
-            arr = cur_date.split("-")
-            return int(arr[1]) == month
 
-        feature.append(len([x for x in date_array if month_filter(x, month)]))
+        feature.append(len([x for x in date_array
+                            if NetworkHelpFunctions.date_filter("0000-00-00",x, NetworkHelpFunctions.next_month(create_date))))
 
         return feature
 

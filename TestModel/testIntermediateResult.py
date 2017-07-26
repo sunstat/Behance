@@ -125,8 +125,8 @@ def test_view_feature():
 
 
 if __name__ == "__main__":
-    #test_page_rank()
-    test_view_feature()
+    test_page_rank()
+    #test_view_feature()
     sc.stop()
 
 

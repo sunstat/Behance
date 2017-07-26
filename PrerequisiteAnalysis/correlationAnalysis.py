@@ -170,6 +170,6 @@ if __name__ == "__main__":
     sc.addFile('/home/yiming/Behance/UserProjectNetwork/IOutilities.py')
     sc.addFile('/home/yiming/Behance/configuration/constants.py')
     #correlation_page_rank()
-    correlation_outcoming_popularity()
+    #correlation_outcoming_popularity()
     correlation_incoming_popularity()
     #born_date_hist()

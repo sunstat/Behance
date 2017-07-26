@@ -136,8 +136,7 @@ def correlation_outcoming_popularity():
     pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
     data = rdd_pid_2_outcoming.join(pid_2_popularity).collect()
     data = zip(*data)
-    print len(data)
-    print len(data[0])
+
     plt.figure()
     '''
     fig, ax_arr = plt.subplots(1)
@@ -146,8 +145,6 @@ def correlation_outcoming_popularity():
     ax_arr.set_xlabel("page_rank_score")
     ax_arr.set_ylabel("popularity")
     '''
-    print data[0][1:100]
-    print data[1][1:100]
     plt.xlabel('out_coming')
     plt.ylabel('popularity')
     plt.scatter(data[0],data[1])
@@ -172,3 +169,5 @@ def born_date_hist():
 if __name__ == "__main__":
     #correlation_page_rank()
     correlation_outcoming_popularity()
+    correlation_incoming_popularity()
+    born_date_hist()

@@ -21,9 +21,10 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import configuration.constants as C
+from NetworkHelpFunctions import NetworkHelpFunctions
+
 
 # import spark
-import NetworkHelpFunctions
 
 def init_spark(name, max_excutors):
     conf = (SparkConf().setAppName(name)
@@ -93,12 +94,20 @@ def correlation_view_popularity():
 
 
 def correlation_incoming_popularity():
-    pid_2_view = sc.textFile(C.ACTION_VIEW_FILE).map(lambda x: x.split(',')).filter(lambda x: x[2] in pid_set_broad.value)\
-        .filter(lambda x: x[3] == 'V')\
-        .map(lambda x: (x[2],[x[3]])).reduceByKey(lambda x,y: x+y).mapValues(lambda x: len(x))
-    print pid_2_view.take(5)
+
+    def separate(x):
+        for y in x[1]:
+            yield (x[0], y)
+
+    rdd_pair = sc.textFile(C.FOLLOW_MAP_FILE).map(lambda x: x.split('#')) \
+        .mapValues(lambda x: x.split(',')).map(lambda x: separate(x)).map(lambda x: (x[1],[x[0]]))
+    rdd_incoming = rdd_pair.reduceByKey(lambda x,y: x+y).mapValues(lambda x: len(x))
+
+    rdd_uid_2_pid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).map(lambda x: (x[1], x[0]))
+    rdd_pid_2_incoming = rdd_uid_2_pid.join(rdd_incoming).map(lambda x: x[1])
+    print rdd_pid_2_incoming.take(5)
     pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
-    data = pid_2_view.join(pid_2_popularity).map(lambda x: x[1]).collect()
+    data = rdd_pid_2_incoming.join(pid_2_popularity).collect()
     data = zip(*data)
     print len(data)
     print len(data[0])
@@ -112,10 +121,10 @@ def correlation_incoming_popularity():
     '''
     print data[0][1:100]
     print data[1][1:100]
-    plt.xlabel('view_amount')
+    plt.xlabel('in_coming')
     plt.ylabel('popularity')
-    plt.scatter(data[0],data[1])
-    plt.savefig(os.path.join('../Graph/', 'view_amount_popularity.png'))
+    plt.scatter(data[0], data[1])
+    plt.savefig(os.path.join('../Graph/', 'incoming_popularity.png'))
     plt.close()
 
 def correlation_outcoming_popularity():
@@ -144,6 +153,21 @@ def correlation_outcoming_popularity():
     plt.scatter(data[0],data[1])
     plt.savefig(os.path.join('../Graph/', 'outcoming_popularity.png'))
     plt.close()
+
+def born_date_hist():
+    dates = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(',')).map(lambda x: NetworkHelpFunctions.date_2_value(x[1]))
+    plt.figure()
+    '''
+    fig, ax_arr = plt.subplots(1)
+    ax_arr.plot(data[0],data[1])
+    ax_arr.set_title("correlation between page_rank Score and Popularity")
+    ax_arr.set_xlabel("page_rank_score")
+    ax_arr.set_ylabel("popularity")
+    '''
+    plt.hist(dates)
+    plt.savefig(os.path.join('../Graph/', 'creation_date_hist.png'))
+    plt.close()
+
 
 if __name__ == "__main__":
     #correlation_page_rank()

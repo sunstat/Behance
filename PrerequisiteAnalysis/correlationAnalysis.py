@@ -62,5 +62,31 @@ def correlation_page_rank():
     plt.savefig(os.path.join('../Graph/', 'cor_page_rank_popularity.png'))
     plt.close()
 
+
+def correlation_view_popularity():
+    pid_2_view = sc.textFile(C.ACTION_VIEW_FILE).map(lambda x: x.split(',')).filter(lambda x: x[3] == 'V')\
+        .map(lambda x: (x[2],[x[3]])).reduceByKey(lambda x,y: x+y).mapValues(lambda x: len(x))
+    pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
+    data = pid_2_view.join(pid_2_popularity).map(lambda x: x[1]).collect()
+    data = zip(*data)
+    print len(data)
+    print len(data[0])
+    plt.figure()
+    '''
+    fig, ax_arr = plt.subplots(1)
+    ax_arr.plot(data[0],data[1])
+    ax_arr.set_title("correlation between page_rank Score and Popularity")
+    ax_arr.set_xlabel("page_rank_score")
+    ax_arr.set_ylabel("popularity")
+    '''
+    print data[0][1:100]
+    print data[1][1:100]
+    plt.xlabel('page_rank_score')
+    plt.ylabel('popularity')
+    plt.scatter(data[0],data[1])
+    plt.savefig(os.path.join('../Graph/', 'cor_page_rank_popularity.png'))
+    plt.close()
+
 if __name__ == "__main__":
     correlation_page_rank()
+    correlation_view_popularity()

@@ -1,16 +1,5 @@
 import os, sys
 
-
-from keras.layers.normalization import BatchNormalization
-from keras.layers import Input, Dense, Dropout
-from keras.models import load_model
-from keras.losses import mean_absolute_error
-from keras.callbacks import TensorBoard
-from keras.backend import clear_session
-from keras.optimizers import Adam
-
-import keras.models
-
 sys.path.append('/home/yiming/Behance')
 sys.path.append('/home/yiming/Behance/configuration')
 sys.path.append('/home/yiming/Behance/UserProjectNetwork')

@@ -119,7 +119,6 @@ def correlation_incoming_popularity():
     plt.close()
 
 def correlation_outcoming_popularity():
-    rdd_outcoming =
     pid_2_view = sc.textFile(C.ACTION_VIEW_FILE).map(lambda x: x.split(',')).filter(lambda x: x[2] in pid_set_broad.value)\
         .filter(lambda x: x[3] == 'V')\
         .map(lambda x: (x[2],[x[3]])).reduceByKey(lambda x,y: x+y).mapValues(lambda x: len(x))

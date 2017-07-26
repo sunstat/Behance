@@ -46,12 +46,14 @@ def correlation_page_rank():
     data = zip(*data)
     print len(data[0])
     plt.figure()
+    '''
     fig, ax_arr = plt.subplots(1)
-    ax_arr.set_xscale("symlog")
     ax_arr.plot(data[0],data[1])
     ax_arr.set_title("correlation between page_rank Score and Popularity")
     ax_arr.set_xlabel("page_rank_score")
     ax_arr.set_ylabel("popularity")
+    '''
+    plt.plot(data[0],data[1])
     plt.savefig(os.path.join('../Graph/', 'cor_page_rank_popularity.png'))
     plt.close()
 

@@ -88,5 +88,5 @@ def correlation_view_popularity():
     plt.close()
 
 if __name__ == "__main__":
-    correlation_page_rank()
+    #correlation_page_rank()
     correlation_view_popularity()

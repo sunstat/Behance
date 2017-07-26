@@ -63,7 +63,7 @@ class NetworkUtilities(object):
     '''
     def extract_neighbors_from_users_network(self, sc, output_dir):
 
-        '''
+
         in_threshold = 5
         n_iters = 30
         rdd_pair = sc.textFile(C.ACTION_FILE).map(lambda x: x.split(',')) \
@@ -92,7 +92,7 @@ class NetworkUtilities(object):
 
         print set1 == set2
 
-        '''
+
 
         self.uid_set = set(sc.textFile(C.UID_2_INDEX_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
         uid_set_broad = sc.broadcast(self.uid_set)

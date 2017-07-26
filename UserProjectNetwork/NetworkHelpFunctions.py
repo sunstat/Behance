@@ -101,6 +101,17 @@ class NetworkHelpFunctions():
 
 
     @staticmethod
+    def next_month(date):
+        year, month, day = date.split('-')
+        if int(month) == 12:
+            day = '30'
+        else:
+            month = str(int(month)+1)
+        return ','.join([year, month, day])
+
+
+
+    @staticmethod
     def extract_feature(create_date, date_array):
         feature = []
         feature.append(NetworkHelpFunctions.date_2_value(create_date))
@@ -111,8 +122,7 @@ class NetworkHelpFunctions():
             arr = cur_date.split("-")
             return int(arr[1]) == month
 
-        for month in range(1, 13):
-            feature.append(len([x for x in date_array if month_filter(x, month)]))
+        feature.append(len([x for x in date_array if month_filter(x, month)]))
 
         return feature
 

@@ -54,6 +54,8 @@ class NetworkUtilities(object):
         pid_2_date = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(',')).mapValues(lambda x: string_2_date(x))
         print pid_2_date.take(5)
 
+    def run(self,sc):
+        self.truncate_last_project(sc)
 
 
 if __name__ == "__main__":

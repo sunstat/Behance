@@ -17,7 +17,7 @@ from pyspark.sql.types import StructField, StructType, StringType, LongType, Dou
 import os, sys
 import operator
 from scipy.sparse import coo_matrix, csr_matrix
-import configuration.constants1 as C1
+import configuration.constant1 as C1
 import configuration.constants as C
 from Utilities import Utilities
 from datetime import date

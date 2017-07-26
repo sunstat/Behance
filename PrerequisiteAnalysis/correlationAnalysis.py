@@ -107,7 +107,7 @@ def correlation_incoming_popularity():
     rdd_pid_2_incoming = rdd_uid_2_pid.join(rdd_incoming).map(lambda x: x[1])
     print rdd_pid_2_incoming.take(5)
     pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
-    data = rdd_pid_2_incoming.join(pid_2_popularity).collect()
+    data = rdd_pid_2_incoming.join(pid_2_popularity).map(lambda x:x[1]).collect()
     data = zip(*data)
     print len(data)
     print len(data[0])
@@ -134,10 +134,8 @@ def correlation_outcoming_popularity():
     rdd_pid_2_outcoming = rdd_uid_2_pid.join(rdd_outcoming).map(lambda x: x[1])
     print rdd_pid_2_outcoming.take(5)
     pid_2_popularity = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(',')).mapValues(lambda x: float(x))
-    data = rdd_pid_2_outcoming.join(pid_2_popularity).collect()
-    print data[1:100]
+    data = rdd_pid_2_outcoming.join(pid_2_popularity).map(lambda x:x[1]).collect()
     data = zip(*data)
-
     plt.figure()
     '''
     fig, ax_arr = plt.subplots(1)

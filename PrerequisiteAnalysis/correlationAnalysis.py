@@ -53,3 +53,6 @@ def correlation_page_rank():
     ax_arr.set_ylabel("popularity")
     plt.savefig(os.path.join('../Graph/', 'originalDegreeTailDistribution.png'))
     plt.close()
+
+if __name__ == "__main__":
+    correlation_page_rank()

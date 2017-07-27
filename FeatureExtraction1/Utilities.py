@@ -18,7 +18,6 @@ from scipy.sparse import coo_matrix, csr_matrix
 from datetime import *
 import operator
 from subprocess import call
-import configuration.constants as C
 
 
 class Utilities(object):

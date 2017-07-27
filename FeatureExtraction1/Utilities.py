@@ -71,6 +71,7 @@ class Utilities(object):
         return date(int(year), int(month), int(day))
 
     # list of tuples of (pid, date)
+    @staticmethod
     def extract_last_date(ls):
         ls_sorted = sorted(ls, key=lambda x: x[1])
         pids, _ = zip(*ls_sorted)

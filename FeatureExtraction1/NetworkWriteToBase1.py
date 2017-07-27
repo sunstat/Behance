@@ -55,7 +55,7 @@ class WriteToBase1(object):
 
         pid_set = set(pid_2_date.map(lambda x: x[0]).distinct().collect())
         pid_set_broad = sc.broadcast(pid_set)
-        pid_2_uid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).filter(lambda x: x[0] in pid_set_broad)
+        pid_2_uid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).filter(lambda x: x[0] in pid_set_broad.value)
         rdd = pid_2_uid.join(pid_2_date).flatMap(lambda x: separate(x))
 
         #.mapValues(lambda x: [x]).reduceByKey(lambda x,y: x+y)
@@ -81,14 +81,14 @@ class WriteToBase1(object):
         print len(pid_set)
         pid_set_broadcast = sc.broadcast(pid_set)
         pid_2_creation_date = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(','))\
-            .filter(lambda x: x[0] in pid_set_broadcast).mapValues(lambda x: Utilities.string_2_date(x))
+            .filter(lambda x: x[0] in pid_set_broadcast.value).mapValues(lambda x: Utilities.string_2_date(x))
         pid_2_view_dates = sc.textFile(C.ACTION_VIEW_FILE).map(lambda x: x.split(','))\
-            .filter(lambda x: x[3] in pid_set_broadcast)\
+            .filter(lambda x: x[3] in pid_set_broadcast.value)\
             .filter(lambda x: x[4] == 'V').map(lambda x: [x[3], x[0]]).mapValues(lambda x: [Utilities.string_2_date(x)])\
             .reduceByKey(lambda x, y: x+y)
         pid_2_view_feature = pid_2_creation_date.join(pid_2_view_dates).mapValues(lambda x: extraction_view_feature_help(x))
         print pid_2_view_feature.take(5)
-        Utilities.print_rdd_to_file(pid_2_view_feature , C1.PID_2_VIEWS_FEATURE_FILE, 'psv')
+        Utilities.print_rdd_to_file(pid_2_view_feature, C1.PID_2_VIEWS_FEATURE_FILE, 'psv')
 
     def co_owner_popularity(self, sc):
         pid_2_popularity_dict = sc.textFile(C.PID_2_POPULARITY_FILE).map(lambda x: x.split(','))\

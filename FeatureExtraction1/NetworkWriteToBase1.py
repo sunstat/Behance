@@ -44,6 +44,7 @@ class NetworkUtilities(object):
         pass
 
     def truncate_last_project(self, sc):
+
         def string_2_date(my_date):
             year,month,day = my_date.split('-')
             return date(int(year), int(month), int(day))
@@ -58,6 +59,7 @@ class NetworkUtilities(object):
 
 
 if __name__ == "__main__":
+    print "feature extraction"
     sc, _ = init_spark('base', 20)
     sc.addFile('/home/yiming/Behance/FeatureExtraction1/Utilities.py')
     network_utilities = NetworkUtilities()

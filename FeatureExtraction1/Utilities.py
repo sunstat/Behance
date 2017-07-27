@@ -17,7 +17,6 @@ from pyspark.sql.types import StructField, StructType, StringType, LongType, Dou
 import os, sys
 import operator
 from scipy.sparse import coo_matrix, csr_matrix
-from Utilities import Utilities
 from datetime import *
 import operator
 from subprocess import call

@@ -6,11 +6,9 @@ import sys
 sys.path.append('/home/yiming/Behance')
 sys.path.append('/home/yiming/Behance/configuration')
 sys.path.append('/home/yiming/Behance/FeatureExtraction1')
-sys.path.append('/home/yiming/Behance/FeatureExtraction1/')
 
 
 # sys.path.append('/home/yiming/Behance/configuration/constants.py')
-import configuration.constants as C
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
@@ -66,7 +64,6 @@ class WriteToBase1(object):
         Utilities.print_rdd_to_file(rdd_pid_neighbors, C1.PID_2_CO_OWNERS_FILE, 'psv')
 
     def view_feature_extraction(self, sc):
-
         def creation_day_view_amount(x):
             return len([y for y in x[1] if y == x[0]])
 
@@ -86,6 +83,7 @@ class WriteToBase1(object):
             .filter(lambda x: x[4] == 'V').map(lambda x: [x[3], x[0]]).mapValues(lambda x: [Utilities.string_2_date(x)])\
             .reduceByKey(lambda x, y: x+y)
         pid_2_view_feature = pid_2_creation_date.join(pid_2_view_dates).mapValues(lambda x: extraction_view_feature_help(x))
+        print pid_2_view_feature.take(5)
         Utilities.print_rdd_to_file(pid_2_view_feature , C1.PID_2_VIEWS_FEATURE_FILE, 'psv')
 
 

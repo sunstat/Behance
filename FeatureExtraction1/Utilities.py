@@ -8,7 +8,7 @@ sys.path.append('/home/yiming/Behance/configuration')
 sys.path.append('/home/yiming/Behance/FeatureExtraction1')
 
 # sys.path.append('/home/yiming/Behance/configuration/constants.py')
-import configuration.constants as C
+import constants as C
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext

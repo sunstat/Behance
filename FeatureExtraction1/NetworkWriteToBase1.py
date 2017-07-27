@@ -113,8 +113,6 @@ class WriteToBase1(object):
         pid_2_view_feature = sc.textFile(C1.PID_2_VIEWS_FEATURE_FILE).map(lambda x:x.split('#'))\
             .mapValues(lambda x: x.split(','))
 
-
-
     def run(self, sc):
         self.truncate_last_project(sc)
 

@@ -46,7 +46,7 @@ class WriteToBase1(object):
     def truncate_last_project(self, sc):
         #uid : (pid, date)
         def separate(x):
-            yield (x[1][0], (x[1][1], x[0]))
+            yield (x[1][0], (x[0],x[1][1]))
 
         pid_2_date = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(',')).mapValues(lambda x: Utilities.string_2_date(x))
         print pid_2_date.count()

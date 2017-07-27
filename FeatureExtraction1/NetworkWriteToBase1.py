@@ -53,8 +53,6 @@ class NetworkUtilities(object):
         pid_2_date = pid_2_date.filter(lambda x: x[1]<=date(2016,11,30))
         print pid_2_date.count()
 
-
-
     def run(self,sc):
         self.truncate_last_project(sc)
 

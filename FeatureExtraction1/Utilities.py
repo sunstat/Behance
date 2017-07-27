@@ -7,8 +7,6 @@ sys.path.append('/home/yiming/Behance')
 sys.path.append('/home/yiming/Behance/configuration')
 sys.path.append('/home/yiming/Behance/FeatureExtraction1')
 
-# sys.path.append('/home/yiming/Behance/configuration/constants.py')
-import constants as C
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
@@ -20,6 +18,7 @@ from scipy.sparse import coo_matrix, csr_matrix
 from datetime import *
 import operator
 from subprocess import call
+import configuration.constants as C
 
 
 class Utilities(object):

@@ -1,23 +1,26 @@
+#!/usr/bin/env python
+# extract all user information from owners and actions:
+
 import sys
 
 sys.path.append('/home/yiming/Behance')
 sys.path.append('/home/yiming/Behance/configuration')
-#sys.path.append('/home/yiming/Behance/configuration/constants.py')
+sys.path.append('/home/yiming/Behance/FeatureExtraction1')
+
+# sys.path.append('/home/yiming/Behance/configuration/constants.py')
+import configuration.constants as C
 
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import HiveContext
 import pyspark.sql.functions as F
-from pyspark.sql.types import StructField, StructType, StringType, LongType, DoubleType, IntegerType
+from pyspark.sql.types import StructField, StructType, StringType, LongType, DoubleType, IntegerType, BooleanType
 import os, sys
 import operator
 from scipy.sparse import coo_matrix, csr_matrix
-from subprocess import Popen
-from subprocess import call
-from subprocess import check_call
-import configuration.constants as C
+from Utilities import Utilities
 from datetime import *
-
-import time
+import operator
+from subprocess import call
 
 
 class Utilities(object):

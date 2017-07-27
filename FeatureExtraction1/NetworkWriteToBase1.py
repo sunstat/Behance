@@ -48,7 +48,10 @@ class WriteToBase1(object):
         def separate(x):
             yield (x[1][0], (x[1][1], x[0]))
 
-        pid_2_date = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(',')).mapValues(lambda x: Utilities.string_2_date(x))
+        pid_2_date = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(','))
+        print pid_2_date.take(5)
+
+            #.mapValues(lambda x: Utilities.string_2_date(x))
         print pid_2_date.count()
         pid_2_date = pid_2_date.filter(lambda x: x[1]<=date(2016,11,30))
         print pid_2_date.count()

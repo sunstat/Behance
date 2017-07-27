@@ -21,7 +21,7 @@ import configuration.constants1 as C1
 import configuration.constants as C
 from Utilities import Utilities
 from datetime import *
-import operator
+from operator import add
 
 '''
 write pid_2_index, uid_2_index, field_2_index, pid_2_field_index, pid_2_uid to the base directory

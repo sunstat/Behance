@@ -6,6 +6,8 @@ import sys
 sys.path.append('/home/yiming/Behance')
 sys.path.append('/home/yiming/Behance/configuration')
 sys.path.append('/home/yiming/Behance/FeatureExtraction1')
+sys.path.append('/home/yiming/Behance/FeatureExtraction1/')
+
 
 # sys.path.append('/home/yiming/Behance/configuration/constants.py')
 import configuration.constants as C

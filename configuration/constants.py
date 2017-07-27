@@ -40,8 +40,8 @@ TEST_PID_SET_FILE = os.path.join(BASE_DIR, 'pid_test')
 TRAIN_PID_SAMPLE_SET_FILE = os.path.join(BASE_DIR, 'pid_sample_train')
 VALID_PID_SAMPLE_SET_FILE = os.path.join(BASE_DIR, 'pid_sample_valid')
 TEST_PID_SAMPLE_SET_FILE = os.path.join(BASE_DIR, 'pid_sample_test')
-
 PID_2_DATE_FILE = os.path.join(BASE_DIR, 'pid_2_date-csv')
+PID_2_VIEWS_FEATURE_FILE = os.path.join(BASE_DIR, 'pid_2_view_feature-psv')
 
 '''
 utilities path

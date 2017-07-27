@@ -28,6 +28,27 @@ class Utilities(object):
         pass
 
     @staticmethod
+    def _join_pair_rdds(rdd1, rdd2):
+        rdd = rdd1.join(rdd2)
+
+        def f(x):
+            if isinstance(x[0], tuple) and isinstance(x[1], tuple):
+                return x[0] + x[1]
+            elif isinstance(x[0], tuple) and (not isinstance(x[1], tuple)):
+                return x[0] + (x[1],)
+            else:
+                return (x[0],) + (x[1],)
+
+        return rdd.mapValues(f)
+
+    @staticmethod
+    def _join_list_rdds(ls_rdds):
+        rdd = ls_rdds[0]
+        for i in range(1, len(ls_rdds)):
+            rdd = Utilities._join_pair_rdds(rdd, ls_rdds[i])
+        return rdd
+
+    @staticmethod
     def print_rdd_to_file(rdd, output_file, output_format):
         def to_string(x):
             if not x:
@@ -43,5 +64,17 @@ class Utilities(object):
             rdd.map(lambda x: to_string(x)).saveAsTextFile(output_file)
         elif output_format == 'psv':
             rdd.map(lambda x: str(x[0]) + "#" + (to_string(x[1]))).saveAsTextFile(output_file)
+
+    @staticmethod
+    def string_2_date(my_date):
+        year, month, day = my_date.split('-')
+        return date(int(year), int(month), int(day))
+
+    # list of tuples of (pid, date)
+    def extract_last_date(ls):
+        ls_sorted = sorted(ls, key=lambda x: x[1])
+        pids, _ = zip(*ls_sorted)
+        return pids
+
 
 

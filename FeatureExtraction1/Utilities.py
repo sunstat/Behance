@@ -56,9 +56,8 @@ class Utilities(object):
                 return " "
             return ",".join([str(y) for y in x])
 
-        delete_shell_azure = os.path.join(C.SHELL_DIR, 'delete.sh')
         if os.system("hadoop fs -test -d {0}".format(output_file)) == 0:
-            call('{} {} {}'.format("/usr/bin/env bash", delete_shell_azure, output_file), shell=True)
+            call('hdfs dfs -rm -rm -r {}'.format(output_file), shell=True)
 
         # time.sleep(1)
         if output_format == 'csv':

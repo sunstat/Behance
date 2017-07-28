@@ -51,7 +51,12 @@ ls = ['34826315','34825983','34826703','40433195', '40433291', '40448357', '4043
 for pid in ls:
     print "uid: {}, date:{}".format(pid_2_uid_dict[pid], pid_2_date_dict[pid])
 
-print sc.textFile(C.IMAGE_TRIMMED_FILE).map(lambda x: x.split(',')).take(2)
+set1 =  set(sc.textFile(C.IMAGE_TRIMMED_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
+
+print len(set1)
+print len(pid_2_uid_dict)
+
+
 
 
 print sc.textFile(C.IMAGE_TRIMMED_FILE).map(lambda x: x.split(',')).filter(lambda x: x[0] == '34826315').take(2)

@@ -55,9 +55,10 @@ class WriteToBase1(object):
 
         pid_set = set(pid_2_date.map(lambda x: x[0]).distinct().collect())
         pid_set_broad = sc.broadcast(pid_set)
+        print len(pid_set_broad.value)
         pid_2_uid = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).filter(lambda x: x[0] in pid_set_broad.value)
         rdd = pid_2_uid.join(pid_2_date).flatMap(lambda x: separate(x)).mapValues(lambda x: [x]).reduceByKey(lambda x,y: x+y)
-        print rdd.take(5)
+        print rdd.count()
 
         rdd_pid_neighbors = rdd.mapValues(lambda x: Utilities.extract_last_date(x)).map(lambda x: x[1])\
             .map(lambda x: (x[0], x[1:]))

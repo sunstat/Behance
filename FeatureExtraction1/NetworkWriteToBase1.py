@@ -115,6 +115,7 @@ class WriteToBase1(object):
 
     def run(self, sc):
         self.truncate_last_project(sc)
+        self.view_feature_extraction(sc)
 
 if __name__ == "__main__":
     print "feature extraction"

@@ -45,7 +45,7 @@ sc, _ = init_spark('test', 10)
 '''
 
 
-set1 = sc.textFile(C1.PID_2_UID_FILE).map(lambda x: x.split(',')).map(lambda x: x[0])
+set1 = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).map(lambda x: x[0])
 set2 = sc.textFile(C.IMAGE_TRIMMED_FILE).map(lambda x: x.split(',')).map(lambda x: x[0])
 
 print set1.count()

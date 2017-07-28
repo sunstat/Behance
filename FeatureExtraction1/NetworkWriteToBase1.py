@@ -61,9 +61,8 @@ class WriteToBase1(object):
 
         rdd_pid_neighbors = rdd.mapValues(lambda x: Utilities.extract_last_date(x)).map(lambda x: x[1])\
             .map(lambda x: (x[0], x[1:]))
-        print rdd_pid_neighbors.take(5)
+        print rdd_pid_neighbors.count()
         Utilities.print_rdd_to_file(rdd_pid_neighbors, C1.PID_2_CO_OWNERS_FILE, 'psv')
-
 
     def view_feature_extraction(self, sc):
         def creation_day_view_amount(x):

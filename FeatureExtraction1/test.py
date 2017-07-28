@@ -51,3 +51,8 @@ ls = ['34826315','34825983','34826703','40433195', '40433291', '40448357', '4043
 for pid in ls:
     print "uid: {}, date:{}".format(pid_2_uid_dict[pid], pid_2_date_dict[pid])
 
+pid_2_url_dict = sc.textFile(C.IMAGE_TRIMMED_FILE).map(lambda x: x.split(',')).collectAsMap()
+pid_2_url_dict['34826315']
+pid_2_url_dict['34825983']
+
+

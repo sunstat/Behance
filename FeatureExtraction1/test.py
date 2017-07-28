@@ -56,6 +56,7 @@ set1 =  set(sc.textFile(C.IMAGE_TRIMMED_FILE).map(lambda x: x.split(',')).map(la
 print len(set1)
 print len(pid_2_uid_dict)
 
+print '34826315' in set1
 
 
 

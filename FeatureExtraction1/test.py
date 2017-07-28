@@ -47,7 +47,7 @@ sc, _ = init_spark('test', 10)
 pid_2_uid_dict = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).collectAsMap()
 pid_2_date_dict = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(',')).collectAsMap()
 
-ls = (34826315', u'34825983', u'34826703', u'40433195', u'40433291', u'40448357', u'40433985', u'41448993', u'41448259', u'42971677', u'44197921', u'44198001')
+ls = (34826315', '34825983', '34826703', '40433195', '40433291', '40448357', '40433985', '41448993', '41448259', '42971677', '44197921', '44198001')
 for pid in ls:
     print "uid: {}, date:{}".format(pid_2_uid_dict[pid], pid_2_date_dict[pid])
 

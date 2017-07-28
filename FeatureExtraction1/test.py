@@ -40,7 +40,14 @@ def init_spark(name, max_excutors):
 
 
 sc, _ = init_spark('test', 10)
+'''
+(u'34826315', (u'34825983', u'34826703', u'40433195', u'40433291', u'40448357', u'40433985', u'41448993', u'41448259', u'42971677', u'44197921', u'44198001')
+'''
 
-rdd = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).filter(lambda x: x[1] == '34826315')
-rdd2 = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(','))
-print rdd.join(rdd2).take(10)
+pid_2_uid_dict = sc.textFile(C.PID_2_UID_FILE).map(lambda x: x.split(',')).collectAsMap()
+pid_2_date_dict = sc.textFile(C.PID_2_DATE_FILE).map(lambda x: x.split(',')).collectAsMap()
+
+ls = (34826315', u'34825983', u'34826703', u'40433195', u'40433291', u'40448357', u'40433985', u'41448993', u'41448259', u'42971677', u'44197921', u'44198001')
+for pid in ls:
+    print "uid: {}, date:{}".format(pid_2_uid_dict[pid], pid_2_date_dict[pid])
+

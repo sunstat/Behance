@@ -52,7 +52,15 @@ for pid in ls:
     print "uid: {}, date:{}".format(pid_2_uid_dict[pid], pid_2_date_dict[pid])
 
 set1 =  set(sc.textFile(C.IMAGE_TRIMMED_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
-#set2 = set(sc.textFile(C.IMAGE_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
+
+print sc.textFile(C.IMAGE_FILE).map(lambda x: x.split(',')).filter(lambda x: x[0] == '34826315').take(5)
+
+print sc.textFile(C.IMAGE_FILE).map(lambda x: x.split(',')).filter(lambda x: x[0] == '34825983').take(5)
+
+
+print sc.textFile(C.IMAGE_FILE).map(lambda x: x.split(',')).filter(lambda x: x[1] == '34826315').take(5)
+
+print sc.textFile(C.IMAGE_FILE).map(lambda x: x.split(',')).filter(lambda x: x[1] == '34825983').take(5)
 
 print len(set1)
 print len(pid_2_uid_dict)

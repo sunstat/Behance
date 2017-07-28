@@ -45,10 +45,11 @@ sc, _ = init_spark('test', 10)
 '''
 
 
-set1 =  set(sc.textFile(C.OWNER_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
-set2 =  set(sc.textFile(C.IMAGE_TRIMMED_FILE).map(lambda x: x.split(',')).map(lambda x: x[0]).collect())
+set1 =  sc.textFile(C.OWNER_FILE).map(lambda x: x.split(',')).map(lambda x: x[0])
+set2 =  sc.textFile(C.IMAGE_TRIMMED_FILE).map(lambda x: x.split(',')).map(lambda x: x[0])
 
-print len(set1)
+print set1.count()
 
 set3 = set1.intersection(set2)
-print len(set3)
+
+print set3.count()

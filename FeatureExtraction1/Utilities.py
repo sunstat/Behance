@@ -57,7 +57,7 @@ class Utilities(object):
             return ",".join([str(y) for y in x])
 
         if os.system("hadoop fs -test -d {0}".format(output_file)) == 0:
-            call('hdfs dfs -rm -rm -r {}'.format(output_file), shell=True)
+            call('hdfs dfs -rm  -r {}'.format(output_file), shell=True)
 
         # time.sleep(1)
         if output_format == 'csv':
